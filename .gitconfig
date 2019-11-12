@@ -6,7 +6,7 @@
 [core]
   trustctime = true
   autocrlf = false #true
-  editor = nvim
+  editor = vim
   excludesfile = ~/.gitignore_global
 
 [color]
