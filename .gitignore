@@ -1,0 +1,36 @@
+# ignore everything
+*
+
+# don't ignore
+!.*
+!.*/
+!.config/**/*
+!.vim/**/*
+
+# ingored file endings
+*.swo
+*.swp
+
+# ignored directories
+.aspell/
+.cache/
+.dlv/.*
+.gnugp/
+.gnupg/
+.gnupg_pre_2.1/
+.node-gyp/
+.npm/
+.ssh/
+.wireshark/
+
+# ignored files
+.CFUserTextEncoding
+.DS_Store
+.bash_history
+.dockercfg
+.lesshst
+.npmrc
+.rnd
+.sh_history
+.viminfo
+
