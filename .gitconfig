@@ -1,0 +1,67 @@
+[user]
+  name = Fredrick Myrvoll
+  email = fredrick.myrvoll@evry.com
+  signingkey = ""
+
+[core]
+  trustctime = true
+  autocrlf = false #true
+  editor = nvim
+  excludesfile = ~/.gitignore_global
+
+[color]
+  ui = true
+  branch = auto
+  diff = auto
+  status = auto
+
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red
+  new = cyan
+
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+
+[credential]
+  helper = cache --timeout=3600
+
+[push]
+  default = simple
+
+[alias]
+  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+  s = status
+  c = commit -vS
+  p = add -p
+  co = checkout
+  br = branch
+
+  amend = commit -vS --amend
+  conflicts = diff --name-only --diff-filter=U
+  last = log -1 HEAD
+  pull = pull --ff-only
+  rebase = rebase -vS
+  staged = diff --staged
+  supdate = submodule foreach git pull -f origin master
+  undo = reset --soft HEAD~
+  unstage = reset HEAD --
+  feature = "!bash -c \"git fetch; git checkout -b $1 ${2:-'origin/master'}\" -"
+  publish = "!bash -c \"git push -u origin $(git rev-parse --abbrev-ref HEAD) 2>&1 >/dev/null | awk '/pull request/{getline; print \\$2; fflush()}' | xargs open -a ${1:-'Firefox Developer Edition'}\" -"
+  unpublish = "!sh -c 'git push --delete origin $(git rev-parse --abbrev-ref HEAD --)' -"
+  whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+
+[merge]
+  conflictstyle = diff3
+
+[help]
+  autocorrect = 1
+
