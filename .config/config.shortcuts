@@ -1,0 +1,48 @@
+#!/usr/bin/fish
+
+# Basic shortcuts
+alias l="ls"
+
+switch (uname)
+  case Darwin
+    alias ls="ls -lG"
+  case '*'
+    alias ls="ls -l --group-directories-first --color=always"
+end
+
+alias mv="mv -v"
+alias cp="cp -v"
+alias rm="rm -v"
+alias ssh="ssh -v"
+alias cal="cal -m"
+
+# Docker
+alias d="docker"
+alias dc="docker-compose"
+alias dm="docker-machine"
+alias ds="docker-swarm"
+alias dsh="docker run -it --rm --entrypoint /bin/sh -v (pwd):/root/src -w /root/src"
+alias dbash="docker run -it --rm --entrypoint /bin/bash -v (pwd):/root/src -w /root/src"
+
+# Docker Compose Run
+alias dr="docker-compose run --rm"
+
+# Docker Hygiene
+alias dclean="docker rm (docker ps -aqf status=exited)"
+alias dcrmf="docker-compose stop -t 0; docker-compose rm -f"
+
+# NPM / Node
+alias yarn="docker-compose run --rm node yarn"
+alias npm="docker-compose run --rm node npm"
+alias node="docker-compose run --rm node node"
+
+# Kubernetes
+alias k="kubectl"
+alias kpo="kubectl get pods"
+alias kpow="kubectl get pods -w"
+alias ksvc="kubectl get services"
+alias king="kubectl get ingress"
+
+# Developer Tools
+alias tf="terraform"
+alias shellcheck="docker run --rm -it -v (pwd):/mnt nlknguyen/alpine-shellcheck"
