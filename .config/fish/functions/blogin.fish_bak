@@ -2,11 +2,22 @@
 
 function blogin -d "GCP login bulder-edition"
   set -gx ENVIRONMENT $argv[1]
+  set -gx BW_CHECK (bw login --check)
 
-  # Unlock Bitwarden vault, retry on wrong password.
-  while test -z "$BW_SESSION"; or string match -q 'Invalid master password.' -- "$BW_SESSION";
-    set -gx BW_SESSION (bw unlock | grep "export" | awk -F'"' '{ print $2 }')
+  while bw unlock --check | grep "You are not logged in." >/dev/null;
+    set -x BW_LOGIN (bw login)
+    set -gx BW_SESSION (echo $BW_LOGIN | grep "export" | awk -F'"' '{ print $2 }')
+    set -gx BW_CHECK (bw login --check)
   end
+
+  while test -z "$BW_SESSION"; or string match -q 'Invalid master password.' -- "$BW_SESSION";
+    printf "Master password: [input is hidden] "
+    set -gx BW_SESSION (bw unlock --raw | sed -n '1!p')
+    echo $BW_SESSION
+  end
+
+  # Syncing bitwarden vault to avoid outdated credentials
+  echo (bw sync --session $BW_SESSION) > /dev/null 2>&1
 
   # Fetching Cloud Credentials from bw attachment, store cloud token to /tmp
   set -gx ITEM_ID (bw list items --search bulder-$ENVIRONMENT --session $BW_SESSION --pretty | grep "id" | sed -n '1p' | awk -F'"' '{ print $4 }')
@@ -18,7 +29,6 @@ function blogin -d "GCP login bulder-edition"
   set -gx GOOGLE_PROJECT bulder-$ENVIRONMENT
   set -gx TERRAFORM_ENVIRONMENT $ENVIRONMENT
   set -gx TERRAFORM_STATE_GCP_BUCKET bulder-$ENVIRONMENT-tf-state
-  terraform workspace select $ENVIRONMENT
   
   if test $ENVIRONMENT = "prod"
     
@@ -77,13 +87,13 @@ function blogin -d "GCP login bulder-edition"
     if read_confirm "Do ye wish to run init?"
       terraform init -reconfigure -upgrade -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET"
       echo ""
-      echo "Initialized Terraform!"
+      terraform workspace select $ENVIRONMENT
+      echo ""
     end
 
     if read_confirm "Do ye wish to run refresh?"
       terraform refresh -var-file=env/$ENVIRONMENT/(/bin/ls env/$ENVIRONMENT)
       echo ""
-      echo "Refreshed Terraform!"
     end
   end
 
