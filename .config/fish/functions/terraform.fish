@@ -13,6 +13,7 @@ function terraform -d "Run terraform command"
     -v /tmp:/tmp \
     -v (pwd):$mnt \
     -v /Users/fredrick/.config/gcloud:/gcloud \
+    -v /Users/fredrick/Desktop:/Users/fredrick/Desktop \
     -v ~/.helm:/root/.helm \
     -v ~/.kube:/root/.kube \
     -w /$mnt \
