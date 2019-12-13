@@ -1,12 +1,3 @@
-# ignore everything
-*
-
-# don't ignore
-!.*
-!.*/
-!.config/**/*
-!.vim/**/*
-
 # ingored file endings
 *.swo
 *.swp
@@ -18,10 +9,7 @@
 .gnugp/
 .gnupg/
 .gnupg_pre_2.1/
-.node-gyp/
-.npm/
-.ssh/
-.wireshark/
+.config/gcloud/
 
 # ignored files
 .CFUserTextEncoding
@@ -33,4 +21,3 @@
 .rnd
 .sh_history
 .viminfo
-

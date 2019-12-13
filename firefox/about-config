@@ -1,0 +1,12 @@
+toolkit.cosmeticAnimations.enabled = false
+extensions.pocket.enabled = false
+findbar.modalHighlight = true
+security.insecure_connection_text.enabled = true
+security.insecure_connection_icon.enabled = false
+geo.enabled = false
+extensions.screenshots.disabled = true
+full-screen-api.transition-duration.enter = 0 0
+full-screen-api.transition-duration.leave = 0 0
+browser.urlbar.maxRichResults = 5
+security.dialog_enable_delay = 0
+toolkit.legacyUserProfileCustomizations.stylesheets = true

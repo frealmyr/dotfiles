@@ -1,7 +1,7 @@
 [user]
   name = Fredrick Myrvoll
   email = fredrick.myrvoll@evry.com
-  signingkey = ""
+  signingkey = "2BD68E35"
 
 [core]
   trustctime = true
