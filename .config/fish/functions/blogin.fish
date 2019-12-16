@@ -103,7 +103,7 @@ function blogin -d "GCP login bulder-edition"
     if read_confirm "Do ye wish to run init?"
       terraform workspace select $ENVIRONMENT
       echo ""
-      terraform init -reconfigure -upgrade -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET"
+      terraform init -reconfigure -upgrade -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET" -lock=false
       echo ""
     end
 

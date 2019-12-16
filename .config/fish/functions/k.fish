@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
-function gke -d "Run Google Kubernetes Engine commands"
-  set cmd gke
+function k -d "Run Google Kubernetes Engine commands"
+  set cmd k
 
   if not test -n $DOCKER_RAND_ID
     set -gx DOCKER_RAND_ID id(random)
