@@ -69,6 +69,9 @@ function blogin -d "GCP login bulder-edition"
   else if test $PROJECT = "bulder-shared"
 
     set -gx ENVIRONMENT "shared"
+    set -gx TERRAFORM_ENVIRONMENT "shared"
+    terraform workspace select shared
+
     gcloud beta container clusters get-credentials vault --region europe-north1 --project $PROJECT
     
     echo "Fetching hashicorp outputs for this project..."
