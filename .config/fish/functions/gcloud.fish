@@ -9,3 +9,4 @@ function gcloud -d "Run Google Cloud commands"
     -v $HOME/.kube:/root/.kube \
     frealmyr/cloud-sdk-editors:latest gcloud $argv
 end
+

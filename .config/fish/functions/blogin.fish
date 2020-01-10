@@ -84,10 +84,10 @@ function blogin -d "GCP login bulder-edition"
     # Remove encryption key if it is set by another project
     set -ge GOOGLE_ENCRYPTION_KEY
 
-  else if test $PROJECT = "bulder-prod-data"
+  else if test $PROJECT = "bulder-prod-datavault"
     set -gx ENVIRONMENT "prod"
 
-  else if test $PROJECT = "bulder-test-data"
+  else if test $PROJECT = "bulder-test-datavault"
     set -gx ENVIRONMENT "test"
 
   end

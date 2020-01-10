@@ -17,6 +17,7 @@ function terraform -d "Run terraform command"
     -v ~/.helm:/root/.helm \
     -v ~/.kube:/root/.kube \
     -w /$mnt \
+    -e TF_LOG \
     -e TF_VAR_app_alertmanager_opsgenie_api_key \
     -e TF_VAR_app_alertmanager_slack_url \
     -e GOOGLE_APPLICATION_CREDENTIALS \

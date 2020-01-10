@@ -9,3 +9,4 @@ function gsutil -d "Run Google Storage commands"
     -v $HOME/.kube:/root/.kube \
     frealmyr/cloud-sdk-editors:latest gsutil $argv
 end
+

@@ -3,7 +3,7 @@
 */
 
 tab-item.active {
-  background-color: rgba(14, 201, 230, 0.50)
+  background-color: rgba(120, 50, 120, 0.9);
 }
 tab-item.active .label-content {
   font-weight: bold;
@@ -64,8 +64,8 @@ tab-item {
 */
 
 tab-item tab-twisty {
-  margin-right: -1.5em;
-  opacity: 0;
+  margin-right: -1em;
+  opacity: 0 !important;
   position: relative;
   z-index: 10000;
 }
@@ -99,3 +99,4 @@ tab-item.discarded {
 tab-item.discarded .label-content {
   color: grey;
 }
+
