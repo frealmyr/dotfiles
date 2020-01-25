@@ -10,6 +10,8 @@
 .gnupg/
 .gnupg_pre_2.1/
 .config/gcloud/
+.vscode/
+.idea/
 
 # ignored files
 .CFUserTextEncoding
@@ -21,3 +23,4 @@
 .rnd
 .sh_history
 .viminfo
+crash.log
