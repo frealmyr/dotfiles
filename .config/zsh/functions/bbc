@@ -1,0 +1,16 @@
+#!/usr/local/bin/zsh
+
+# Run BulderBank CLI commands using docker
+
+function bbc() {
+
+if [[ -z "$DOCKER_RAND_ID" ]]; then
+  DOCKER_RAND_ID=$RANDOM
+fi
+
+docker run --name "$DOCKER_RAND_ID" --rm -it  \
+  -v ~/.kube:/root/.kube \
+  -v ~/.config/gcloud:/root/.config/gcloud \
+  -e GOOGLE_APPLICATION_CREDENTIALS=/root/.config/gcloud/application_default_credentials.json \
+  bulder-cli_bulder_cli:latest ./bulder $argv
+}

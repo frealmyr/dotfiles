@@ -1,0 +1,86 @@
+#!/usr/local/bin/zsh
+
+#
+#  Watch deployments for changes
+#
+function kdow() {
+: ${1?"Append refresh rate in SECONDS"}
+
+if [[ -z "$DOCKER_RAND_ID" ]]; then
+  DOCKER_RAND_ID=$RANDOM
+fi
+
+watch -c -t -n $argv[1] docker run --name "$DOCKER_RAND_ID" --rm -t \
+  -e KUBE_EDITOR=vim \
+  -v $HOME/.kube/config:/root/.kube/config \
+  -v $HOME/.config/gcloud:/root/.config/gcloud \
+  frealmyr/cloud-sdk-editors:latest kubectl $kns get deployment
+}
+
+#
+#  Watch pods for changes
+#
+function kpow() {
+: ${1?"Append refresh rate in SECONDS"}
+
+if [[ -z "$DOCKER_RAND_ID" ]]; then
+  DOCKER_RAND_ID=$RANDOM
+fi
+
+watch -c -t -n $argv[1] docker run --name "$DOCKER_RAND_ID" --rm -t \
+  -e KUBE_EDITOR=vim \
+  -v $HOME/.kube/config:/root/.kube/config \
+  -v $HOME/.config/gcloud:/root/.config/gcloud \
+  frealmyr/cloud-sdk-editors:latest kubectl $kns get pods
+}
+
+#
+#  Watch ingresses for changes
+#
+function kiow() {
+: ${1?"Append refresh rate in SECONDS"}
+
+if [[ -z "$DOCKER_RAND_ID" ]]; then
+  DOCKER_RAND_ID=$RANDOM
+fi
+
+watch -c -t -n $argv[1] docker run --name "$DOCKER_RAND_ID" --rm -t \
+  -e KUBE_EDITOR=vim \
+  -v $HOME/.kube/config:/root/.kube/config \
+  -v $HOME/.config/gcloud:/root/.config/gcloud \
+  frealmyr/cloud-sdk-editors:latest kubectl $kns get ingress
+}
+
+#
+#  Watch services for changes
+#
+function ksow() {
+: ${1?"Append refresh rate in SECONDS"}
+
+if [[ -z "$DOCKER_RAND_ID" ]]; then
+  DOCKER_RAND_ID=$RANDOM
+fi
+
+watch -c -t -n $argv[1] docker run --name "$DOCKER_RAND_ID" --rm -t \
+  -e KUBE_EDITOR=vim \
+  -v $HOME/.kube/config:/root/.kube/config \
+  -v $HOME/.config/gcloud:/root/.config/gcloud \
+  frealmyr/cloud-sdk-editors:latest kubectl $kns get svc
+}
+
+#
+#  Watch certificates for changes
+#
+function kcow() {
+: ${1?"Append refresh rate in SECONDS"}
+
+if [[ -z "$DOCKER_RAND_ID" ]]; then
+  DOCKER_RAND_ID=$RANDOM
+fi
+
+watch -c -t -n $argv[1] docker run --name "$DOCKER_RAND_ID" --rm -t \
+  -e KUBE_EDITOR=vim \
+  -v $HOME/.kube/config:/root/.kube/config \
+  -v $HOME/.config/gcloud:/root/.config/gcloud \
+  frealmyr/cloud-sdk-editors:latest kubectl $kns get certificate
+}

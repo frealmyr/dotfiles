@@ -1,0 +1,8 @@
+#!/usr/local/bin/zsh
+
+# Flush DNS cache from MacOS, useful when debugging networking headaches
+
+function flushdns() {
+sudo dscacheutil -flushcache
+sudo killall -HUP mDNSResponder
+}

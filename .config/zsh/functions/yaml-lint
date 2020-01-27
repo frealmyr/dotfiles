@@ -1,0 +1,12 @@
+#!/usr/local/bin/zsh
+
+# Run yaml-link in dir using docker
+
+function yaml-lint() {
+mnt="/usr/src/app"
+
+docker run -it --rm \
+  -v $(pwd):$mnt \
+  -w /$mnt \
+  sdesbure/yamllint:latest yamllint .
+}

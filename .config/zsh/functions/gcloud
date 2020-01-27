@@ -1,0 +1,49 @@
+#!/usr/local/bin/zsh
+
+#
+# Run gcloud commands
+#
+function gcloud() {
+
+if [[ -z "$DOCKER_RAND_ID" ]]; then
+  DOCKER_RAND_ID=$RANDOM
+fi
+
+docker run --name "$DOCKER_RAND_ID" --rm -ti \
+  -v $(pwd):$(pwd) \
+  -v "$HOME"/.config/gcloud:/root/.config/gcloud \
+  -v "$HOME"/.kube:/root/.kube \
+  frealmyr/cloud-sdk-editors:latest gcloud $argv
+}
+
+#
+# Run gcloud gcurl commands
+#
+function gcurl() {
+
+if [[ -z "$DOCKER_RAND_ID" ]]; then
+  DOCKER_RAND_ID=$RANDOM
+fi
+
+docker run --name "$DOCKER_RAND_ID" --rm -ti \
+  -v $(pwd):$(pwd) \
+  -v "$HOME"/.config/gcloud:/root/.config/gcloud \
+  -w $(pwd) \
+  frealmyr/cloud-sdk-editors:latest gcurl $argv
+}
+
+#
+# Run gsutil commands
+#
+function gsutil() {
+
+if [[ -z "$DOCKER_RAND_ID" ]]; then
+  DOCKER_RAND_ID=$RANDOM
+fi
+
+docker run --name "$DOCKER_RAND_ID" --rm -ti \
+  -v $(pwd):$(pwd) \
+  -v "$HOME"/.kube:/root/.kube \
+  -v "$HOME"/.config/gcloud:/root/.config/gcloud \
+  frealmyr/cloud-sdk-editors:latest gsutil $argv
+}

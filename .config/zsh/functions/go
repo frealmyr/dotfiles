@@ -1,0 +1,15 @@
+#!/usr/local/bin/zsh
+
+# Run golang commands in Docker
+
+function go() {
+
+if [[ -z "$GO_VERSION" ]]; then
+  GO_VERSION=1.13
+fi
+
+docker run --rm -ti \
+  -v $(pwd):$(pwd) \
+  -w $(pwd) \
+  golang:"$GO_VERSION" go $argv
+}
