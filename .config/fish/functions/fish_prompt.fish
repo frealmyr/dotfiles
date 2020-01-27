@@ -76,11 +76,11 @@ function fish_prompt --description 'Write out the prompt'
             set suffix '$'
     end
 
+
     # PWD
     set_color $color_cwd
     echo -n (prompt_pwd)
     set_color normal
-
     printf '%s ' (__fish_vcs_prompt)
 
     if not test $last_status -eq 0
