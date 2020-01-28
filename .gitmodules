@@ -1,0 +1,15 @@
+[submodule ".config/tmux/plugins/tmux-sensible"]
+	path = .config/tmux/plugins/tmux-sensible
+	url = https://github.com/tmux-plugins/tmux-sensible.git
+[submodule ".config/tmux/plugins/tpm"]
+	path = .config/tmux/plugins/tpm
+	url = https://github.com/tmux-plugins/tpm.git
+[submodule ".config/tmux/plugins/tmux-online-status"]
+	path = .config/tmux/plugins/tmux-online-status
+	url = https://github.com/tmux-plugins/tmux-online-status.git
+[submodule ".config/tmux/plugins/tmux-cpu"]
+	path = .config/tmux/plugins/tmux-cpu
+	url = https://github.com/tmux-plugins/tmux-cpu.git
+[submodule ".config/tmux/plugins/tmux-battery"]
+	path = .config/tmux/plugins/tmux-battery
+	url = https://github.com/tmux-plugins/tmux-battery.git
