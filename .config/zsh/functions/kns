@@ -1,0 +1,13 @@
+#!/usr/local/bin/zsh
+
+#
+# Sets namespace by using a local variable with --namespace=argv, this enables seperate namespaces in sessions
+#
+function kns() {
+
+if [[ -z $argv[1] ]]; then
+  unset kns
+else
+  kns=--namespace=$argv[1]
+fi
+}

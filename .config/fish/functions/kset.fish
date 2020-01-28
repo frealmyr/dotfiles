@@ -1,7 +1,7 @@
 #!/usr/bin/env fish
 
-function kset -d 'Change GKE cluster to run commands in'
-  set cmd kset
+function kpull -d 'Change GKE cluster to run commands in'
+  set cmd kpull
 
   docker run --rm -ti \
     -v $HOME/.config/gcloud:/root/.config/gcloud \

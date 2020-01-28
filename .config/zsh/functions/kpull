@@ -1,0 +1,16 @@
+#!/usr/local/bin/zsh
+
+#
+# GKE, pull k8s credentials from google cloud.
+#
+function kpull() {
+
+if [[ -z "$DOCKER_RAND_ID" ]]; then
+  DOCKER_RAND_ID=$RANDOM
+fi
+
+docker run --name "$DOCKER_RAND_ID" --rm -ti \
+  -v $HOME/.kube:/root/.kube \
+  -v $HOME/.config/gcloud:/root/.config/gcloud \
+  frealmyr/cloud-sdk-editors:latest gcloud beta container clusters get-credentials $argv[1] --region europe-north1 --project $argv[2]
+}

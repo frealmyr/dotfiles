@@ -1,9 +1,9 @@
 #!/usr/local/bin/zsh
 
 #
-# Run gcloud commands
+# Run gcloud gcurl commands
 #
-function gcloud() {
+function gcurl() {
 
 if [[ -z "$DOCKER_RAND_ID" ]]; then
   DOCKER_RAND_ID=$RANDOM
@@ -12,6 +12,6 @@ fi
 docker run --name "$DOCKER_RAND_ID" --rm -ti \
   -v $(pwd):$(pwd) \
   -v "$HOME"/.config/gcloud:/root/.config/gcloud \
-  -v "$HOME"/.kube:/root/.kube \
-  frealmyr/cloud-sdk-editors:latest gcloud $argv
+  -w $(pwd) \
+  frealmyr/cloud-sdk-editors:latest gcurl $argv
 }
