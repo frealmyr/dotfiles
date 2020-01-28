@@ -15,5 +15,5 @@ fi
 
 docker run --name "$DOCKER_RAND_ID" --rm -ti \
   -v $HOME/.kube/:/.kube/ \
-  bitnami/kubectl:$K8S_VERSION config view --current
+  bitnami/kubectl:$K8S_VERSION config current-context
 }

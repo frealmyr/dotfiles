@@ -10,7 +10,7 @@ if [[ -z "$DOCKER_RAND_ID" ]]; then
 fi
 
 if [[ -z "$TERRAFORM_VERSION" ]]; then
-  TERRAFORM_VERSION=0.12.16
+  TERRAFORM_VERSION=v0.12.16
 fi
 
 docker run --name "$DOCKER_RAND_ID" -it --rm \
@@ -22,6 +22,8 @@ docker run --name "$DOCKER_RAND_ID" -it --rm \
   -e GOOGLE_ENCRYPTION_KEY \
   -v $HOME/.kube:/root/.kube \
   -e GOOGLE_APPLICATION_CREDENTIALS \
-  -e $(env | grep TF_ | cut -f1 -d= | sed 's/^/-e /') \
-  hashicorp/terraform:"$TERRAFORM_VERSION" $argv
+  frealmyr/gcp-terraform:$TERRAFORM_VERSION $kns $argv[*]
 }
+
+#  -e $(env | grep TF_ | cut -f1 -d= | sed 's/^/-e /') \
+# This one is buggy, needs improvement

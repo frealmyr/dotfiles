@@ -9,11 +9,10 @@ if [[ -z "$DOCKER_RAND_ID" ]]; then
 fi
 
 docker run --name "$DOCKER_RAND_ID" --rm -ti \
-  -e KUBE_EDITOR=vim \ 
+  -e KUBE_EDITOR=vim \
   -v $(pwd):$(pwd) \
   -w $(pwd) \
-  -v "$HOME"/.kube:/root/.kube \
-  -v "$HOME"/.config/gcloud:/root/.config/gcloud \
-  frealmyr/cloud-sdk-editors:latest helm $argv
+  -v $HOME/.kube/config:/root/.kube/config \
+  -v $HOME/.config/gcloud:/root/.config/gcloud \
+  frealmyr/gke-helm:v2.16.1 $argv
 }
-
