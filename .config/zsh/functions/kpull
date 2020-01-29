@@ -4,6 +4,7 @@
 # GKE, pull k8s credentials from google cloud.
 #
 function kpull() {
+: ${1?"kpull CLUSTER_NAME PROJECT_ID"}
 
 if [[ -z "$DOCKER_RAND_ID" ]]; then
   DOCKER_RAND_ID=$RANDOM

@@ -4,7 +4,7 @@
 #  Watch pods for changes
 #
 function kpow() {
-: ${1?"Append refresh rate in SECONDS"}
+: ${1?"kpow SECONDS"}
 
 if [[ -z "$DOCKER_RAND_ID" ]]; then
   DOCKER_RAND_ID=$RANDOM

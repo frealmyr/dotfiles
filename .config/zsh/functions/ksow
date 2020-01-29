@@ -4,7 +4,7 @@
 #  Watch services for changes
 #
 function ksow() {
-: ${1?"Append refresh rate in SECONDS"}
+: ${1?"ksow SECONDS"}
 
 if [[ -z "$DOCKER_RAND_ID" ]]; then
   DOCKER_RAND_ID=$RANDOM

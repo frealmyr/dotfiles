@@ -10,7 +10,7 @@ export EDITOR=vim
 
 # Path to your zsh functions
 fpath=(~/.config/zsh/functions $fpath)
-autoload -Uz bbc bw flushdns gcloud gcurl go gsutil helm k kcc kcls kcow kcrename kdow kiow kns kpow kpull kset ksow printcolors terraform yaml-lint
+autoload -Uz bbc bw flushdns gcloud gcurl go gsutil helm k kcc kcls kcow kcrename kdow kiow kns knsd kpow kpull kset ksow printcolors terraform yaml-lint
 
 # Folder for custom files
 ZSH_CUSTOM=$HOME/.oh-my-custom/

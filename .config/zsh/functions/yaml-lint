@@ -3,10 +3,9 @@
 # Run yaml-link in dir using docker
 
 function yaml-lint() {
-mnt="/usr/src/app"
 
 docker run -it --rm \
-  -v $(pwd):$mnt \
-  -w /$mnt \
+  -v $(pwd):$(pwd) \
+  -w /$(pwd) \
   sdesbure/yamllint:latest yamllint .
 }

@@ -1,10 +1,10 @@
 #!/usr/local/bin/zsh
 
 #
-# Rename the active kubectl context
+# Set the default namespace
 #
-function kcrename() {
-: ${1?"kcrename new_context_name"}
+function knsd() {
+: ${1?"knsd DEFAULT_NAMESPACE"}
 
 if [[ -z "$DOCKER_RAND_ID" ]]; then
   DOCKER_RAND_ID=$RANDOM
@@ -16,5 +16,5 @@ fi
 
 docker run --name "$DOCKER_RAND_ID" --rm -ti \
   -v $HOME/.kube/:/.kube/ \
-  bitnami/kubectl:$K8S_VERSION config rename-context $(kcc config current-context | tr -d '\r') $argv[1]
+  bitnami/kubectl:$K8S_VERSION config set-context --current --namespace=$argv[1]
 }

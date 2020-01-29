@@ -4,6 +4,7 @@
 # Set the active kubectl context
 #
 function kset() {
+: ${1?"kns KUBE_CONTEXT"}
 
 if [[ -z "$DOCKER_RAND_ID" ]]; then
   DOCKER_RAND_ID=$RANDOM

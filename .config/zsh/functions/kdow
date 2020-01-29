@@ -4,7 +4,7 @@
 #  Watch deployments for changes
 #
 function kdow() {
-: ${1?"Append refresh rate in SECONDS"}
+: ${1?"kdow SECONDS"}
 
 if [[ -z "$DOCKER_RAND_ID" ]]; then
   DOCKER_RAND_ID=$RANDOM
