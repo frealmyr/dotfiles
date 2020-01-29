@@ -2,33 +2,32 @@
 set -g status-interval 7
 
 # Basic status bar colors
-set -g status-style bg='#2C2E38',fg='#bd93f9'
+set -g status-style bg='#2C2E38',fg=cyan
 
 # Left side of status bar
-set -g status-left-style bg=colour233,fg=colour243
-set -g status-left-length 45
-set -g status-left "#[fg=colour0,bg=colour4,bold] ❄︎#(cat ~/.kube/config | grep current-context | cut -d ":" -f2-) #[fg=colour0,bg=colour2] #(cd #{pane_current_path}; git rev-parse --abbrev-ref HEAD) #[fg=colour0,bg=colour1]#(cd #{pane_current_path}; git stash list)#[fg=colour6,bg=colour235] #I:#P "
+set -g status-left ""
+set -g status-right-length 0
 
 # Right side of status bar
 set -g status-right-style bg=colour123,fg=colour243
-set -g status-right-length 35
-set -g status-right "#[fg=colour6,bg=colour235] %d-%b-%y #[fg=colour0,bg=colour5,bold]⚡️#(pmset -g batt | tail -1 | awk '{print $3}' | tr -d ';')(#(pmset -g batt | tail -1 | awk '{print $5}' | tr -d ';' | tr -d '%')h) #[fg=colour0,bg=colour4,bold] %H:%M "
+set -g status-right-length 80
+set -g status-right "#[fg=colour0,bg=colour5] #(cd #{pane_current_path}; git rev-parse --abbrev-ref HEAD) #[fg=colour6,bg=colour235] #I:#P #[fg=colour0,bg=colour14] ❄︎#(cat ~/.kube/config | grep current-context | cut -d ":" -f2-) #[fg=colour0,bg=colour2]⚡️#(pmset -g batt | tail -1 | awk '{print $3}' | tr -d ';')(#(pmset -g batt | tail -1 | awk '{print $5}' | tr -d ';' | tr -d '%')h) #[fg=colour0,bg=colour3] %H:%M "
 
 # Window status
 set -g window-status-format " #I:#W#F "
 set -g window-status-current-format " #I:#W#F "
 
 # Current window status
-set -g window-status-current-style fg='#bd93f9',bg=default
+setw -g window-status-current-style fg=black,bg=cyan
 
 # Window with activity status
-set -g window-status-activity-style fg='#ff79c6',bg='#282a36'
+set -g window-status-activity-style fg=cyan
 
 # Window separator
 set -g window-status-separator ""
 
 # Window status alignment
-set -g status-justify centre
+set -g status-justify left
 
 # Pane border
 set -g pane-border-style fg='#6272a4'
