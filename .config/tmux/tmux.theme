@@ -1,0 +1,50 @@
+# Status update interval
+set -g status-interval 7
+
+# Basic status bar colors
+set -g status-style bg='#2C2E38',fg='#bd93f9'
+
+# Left side of status bar
+set -g status-left-style bg=colour233,fg=colour243
+set -g status-left-length 45
+set -g status-left "#[fg=colour0,bg=colour4,bold] ❄︎#(cat ~/.kube/config | grep current-context | cut -d ":" -f2-) #[fg=colour0,bg=colour2] #(cd #{pane_current_path}; git rev-parse --abbrev-ref HEAD) #[fg=colour0,bg=colour1]#(cd #{pane_current_path}; git stash list)#[fg=colour6,bg=colour235] #I:#P "
+
+# Right side of status bar
+set -g status-right-style bg=colour123,fg=colour243
+set -g status-right-length 35
+set -g status-right "#[fg=colour6,bg=colour235] %d-%b-%y #[fg=colour0,bg=colour5,bold]⚡️#(pmset -g batt | tail -1 | awk '{print $3}' | tr -d ';')(#(pmset -g batt | tail -1 | awk '{print $5}' | tr -d ';' | tr -d '%')h) #[fg=colour0,bg=colour4,bold] %H:%M "
+
+# Window status
+set -g window-status-format " #I:#W#F "
+set -g window-status-current-format " #I:#W#F "
+
+# Current window status
+set -g window-status-current-style fg='#bd93f9',bg=default
+
+# Window with activity status
+set -g window-status-activity-style fg='#ff79c6',bg='#282a36'
+
+# Window separator
+set -g window-status-separator ""
+
+# Window status alignment
+set -g status-justify centre
+
+# Pane border
+set -g pane-border-style fg='#6272a4'
+
+# Active pane border
+set -g pane-active-border-style fg='#ff79c6'
+
+# Pane number indicator
+set -g display-panes-colour colour240
+set -g display-panes-active-colour colour4
+
+# Message
+set -g message-style bg='#44475a',fg='#8be9fd'
+
+# Command message
+set -g message-command-style bg=colour233,fg=white
+
+# Mode
+set -g mode-style bg=colour125,fg=colour231
