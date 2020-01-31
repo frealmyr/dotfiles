@@ -1,5 +1,7 @@
 ## Fresh install guide
 
+![Alt text](example.png?raw=true "Terminal example")
+
 #### zsh, oh-my-zsh, git, vim and tmux
 1. Clone repo to a permanent location, as we need to set up some syslinks. (I prefer ${HOME}/Repositories/frealmyr/)
 2. Run the `fresh-install.sh` script to setup zsh and tmux.
@@ -23,5 +25,4 @@ Firefox is configuration is mostly manual, see image under `./firefox` for refer
 #### Git work folders
 I found manually cloning every repositories for each customers a real PITA, so i created a script for fetching all repositories from an organization without any content to my local machine.
 
-Checkout the script in `./scripts/git-gra-repo-folders.sh`. Add a github token with full `repo` scope and enter a desired organization to fetch repos from. 
-
+Checkout the script in `./scripts/git-grab-repo-folders.sh`. Add a github token with full `repo` scope and enter a desired organization to fetch repos from. 
