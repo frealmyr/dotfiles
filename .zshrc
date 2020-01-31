@@ -27,6 +27,6 @@ ZSH_THEME="sardine"
 plugins=(git docker osx common-aliases brew extract tmux vagrant you-should-use zsh-syntax-highlighting zsh-autosuggestions)
 
 # Source alias files
-source ${HOME}/.config/zsh/aliases
+source ${HOME}/.config/zsh/aliases/git
 
 source $ZSH/oh-my-zsh.sh
