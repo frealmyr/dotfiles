@@ -13,7 +13,7 @@
 4. Under Encodings, de-select everything expect UTF-8
 
 #### Firefox Beta
-Firefox is configuration is mostly manual, see image under `./firefox` for reference
+Firefox is configuration is mostly manual, [see this image for reference](https://github.com/frealmyr/dotfiles/blob/master/firefox/firefox_screenshot.png)
 
 1. Navigate to `Library/Application Support/Firefox/Profiles` and enter a folder with a random-id containing `beta` in it's name.
 2. Use `pwd | pbcopy` to copy the Firefox profile location.
