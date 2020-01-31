@@ -1,5 +1,4 @@
 ## Fresh install guide
-
 ![Alt text](example.png?raw=true "Terminal example")
 
 #### zsh, oh-my-zsh, git, vim and tmux
@@ -16,9 +15,9 @@
 #### Firefox Beta
 Firefox is configuration is mostly manual, see image under `./firefox` for reference
 
-1. Navigate to `Library/Application Support/Firefox/Profiles` and enter a folder with a random-id containing `beta in it's name.
+1. Navigate to `Library/Application Support/Firefox/Profiles` and enter a folder with a random-id containing `beta` in it's name.
 2. Use `pwd | pbcopy` to copy the Firefox profile location.
-3. Add a syslink for the custom stylesheet (this disables top tabs) to the profile folder, using `ln -s '$(pbpaste)' ${HOME}/Repositories/frealmyr/chrome`
+3. Add a syslink for the custom stylesheet (this disables top tabs) to the profile folder, using `ln -s '$(pbpaste)' ${HOME}/Repositories/frealmyr/firefox/chrome`
 4. Download the TreeStyleTab plugin for firefox, select the dark theme. Under the plugin's advanced settings paste the content from `./firefox/treeStyleTab.css`
 5. Enter the url `about:config` and confirm the risk. Edit the variables and values from `./firefox/about-config`
 
