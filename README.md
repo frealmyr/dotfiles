@@ -19,7 +19,7 @@ Firefox is configuration is mostly manual, [see this image for reference](https:
 2. Use `pwd | pbcopy` to copy the Firefox profile location.
 3. Add a syslink for the custom stylesheet (this disables top tabs) to the profile folder, using `ln -s '$(pbpaste)' ${HOME}/Repositories/frealmyr/firefox/chrome`
 4. Download the TreeStyleTab plugin for firefox, select the dark theme. Under the plugin's advanced settings paste the content from `./firefox/treeStyleTab.css`
-5. Enter the url `about:config` and confirm the risk. Edit the variables and values from `./firefox/about-config`
+5. Enter the url `about:config`, edit the variables and values from `./firefox/about-config`
 
 #### Git work folders
 I found manually cloning every repositories for each customers a real PITA, so i created a script for fetching all repositories from an organization without any content to my local machine.
