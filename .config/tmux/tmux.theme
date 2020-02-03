@@ -47,7 +47,7 @@ set -g display-panes-active-colour colour6
 set -g message-style bg='#44475a',fg='#8be9fd'
 
 # Command message
-set -g message-command-style bg=colour0,fg=color2
+set -g message-command-style bg=colour0,fg=colour2
 
 # Mode
 set -g mode-style bg=colour0,fg=colour6
