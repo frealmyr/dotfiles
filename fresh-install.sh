@@ -17,6 +17,9 @@ if [ "$RESP" == "y" ]; then
 
   echo "brew: installing tmux..."
   brew install tmux
+  
+  echo "misc: creating ~/.config if it does not exist..."
+  mkdir ${HOME}/.config
 
   echo "zsh: installing oh-my-zsh..."
   sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
@@ -29,9 +32,6 @@ if [ "$RESP" == "y" ]; then
 
   echo "zsh: removing .zshrc if it exsists..."
   rm ${HOME}/.zshrc
-
-  echo "misc: creating ~/.config if it does not exist..."
-  mkdir ${HOME}/.config
 
   echo "zsh: adding syslinks for configs..."
   ln -s ${PWD}/.zshrc ${HOME}/.zshrc
@@ -47,7 +47,7 @@ if [ "$RESP" == "y" ]; then
   ln -s ${PWD}/.config/tmux/tmux.theme ${HOME}/.config/tmux/tmux.theme
   ln -s ${PWD}/.config/tmux/scripts/ ${HOME}/.config/tmux
 
-  echo "tmux: set scripts as executeables..."
+  echo "tmux: mark scripts as executables..."
   chmod +x ${HOME}/.config/tmux/scripts/*
 
   echo "vim: removing .vim if it exsists..."
