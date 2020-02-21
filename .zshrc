@@ -15,7 +15,7 @@ ZSH_TMUX_AUTOSTART=true
 
 # Path to your zsh functions
 fpath=(~/.config/zsh/functions $fpath)
-autoload -Uz bbc bw flushdns gcloud gcurl go gsutil helm k kcc kcls kcow kcrename kdow kiow know kns knsd kpow kpull kset ksow printcolors terraform yaml-lint
+autoload -Uz bbc tflogin bw flushdns gcloud gcurl go gsutil helm k kcc kcls kcow kcrename kdow kiow know kns knsd kpow kpull kset ksow printcolors sshome terraform yaml-lint
 
 # Folder for custom files
 ZSH_CUSTOM=$HOME/.oh-my-custom/
@@ -24,9 +24,11 @@ ZSH_CUSTOM=$HOME/.oh-my-custom/
 ZSH_THEME="sardine"
 
 # Plugins to load
-plugins=(git docker osx common-aliases brew extract tmux vagrant you-should-use zsh-syntax-highlighting zsh-autosuggestions)
+plugins=(docker osx brew extract tmux you-should-use zsh-syntax-highlighting zsh-autosuggestions)
 
 # Source alias files
 source ${HOME}/.config/zsh/aliases/git
+source ${HOME}/.config/zsh/aliases/casual
+source ${HOME}/.config/zsh/aliases/spotify
 
 source $ZSH/oh-my-zsh.sh

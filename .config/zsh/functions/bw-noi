@@ -1,0 +1,14 @@
+#!/usr/local/bin/zsh
+
+# Run Bitwarden CLI commands using Docker
+
+# Bitwarden volume contains basic connection information,
+# without this you would need to enter email everytime.
+
+function bw-noi() {
+
+docker run --rm  \
+  -v /tmp:/tmp \
+  -v bitwarden:/root/.config/ \
+  frealmyr/bitwarden-cli-docker:latest bw $argv
+}

@@ -10,3 +10,5 @@ full-screen-api.transition-duration.leave = 0 0
 browser.urlbar.maxRichResults = 5
 security.dialog_enable_delay = 0
 toolkit.legacyUserProfileCustomizations.stylesheets = true
+gfx.compositor.glcontext.opaque = true
+browser.tabs.20FpsThrobber = true

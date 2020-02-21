@@ -60,6 +60,9 @@ if [ "$RESP" == "y" ]; then
   ln -s ${PWD}/.gitconfig ${HOME}/.gitconfig
   ln -s ${PWD}/.gitignore ${HOME}/.gitignore
 
+  echo "macos: removing non-breaking space (option+space) keybinding..."
+  mkdir ~/Library/KeyBindings && echo "ewoifiAiID0gKCJpbnNlcnRUZXh0OiIsICIgIik7Cn0=" | base64 --decode > ${HOME}/Library/KeyBindings/DefaultKeyBinding.dict
+
   echo "All done!"
   echo "You can now set /usr/local/bin/tmux as your default terminal shell"
 else

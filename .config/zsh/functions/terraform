@@ -10,7 +10,7 @@ if [[ -z "$DOCKER_RAND_ID" ]]; then
 fi
 
 if [[ -z "$TERRAFORM_VERSION" ]]; then
-  TERRAFORM_VERSION=v0.12.16
+  TERRAFORM_VERSION=v0.12.20
 fi
 
 docker run --name "$DOCKER_RAND_ID" -it --rm \
@@ -18,10 +18,11 @@ docker run --name "$DOCKER_RAND_ID" -it --rm \
   -v $(pwd):$mnt \
   -w /$mnt \
   -e TF_LOG \
-  -e GOOGLE_CREDENTIALS \
-  -e GOOGLE_ENCRYPTION_KEY \
+  -e GOOGLE_CREDENTIALS=$GOOGLE_CREDENTIALS \
+  -e GOOGLE_ENCRYPTION_KEY=$GOOGLE_ENCRYPTION_KEY \
+  -e TERRAFORM_ENVIRONMENT=$TERRAFORM_ENVIRONMENT \
   -v $HOME/.kube:/root/.kube \
-  -e GOOGLE_APPLICATION_CREDENTIALS \
+  -e GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS \
   frealmyr/gcp-terraform:$TERRAFORM_VERSION $kns $argv[*]
 }
 

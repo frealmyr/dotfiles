@@ -12,7 +12,10 @@ docker run --name "$DOCKER_RAND_ID" --rm -ti \
   -e KUBE_EDITOR=vim \
   -v $(pwd):$(pwd) \
   -w $(pwd) \
-  -v $HOME/.helm:/root/.helm \
+  -v $HOME/.helm/repository:/root/.helm/repository \
+  -v $HOME/.helm/cache:/root/.cache/helm \
+  -v $HOME/.helm/config:/root/.config/helm \
+  -v $HOME/.helm/data:/root/.local/share/helm \
   -v $HOME/.kube/config:/root/.kube/config \
   -v $HOME/.config/gcloud:/root/.config/gcloud \
   frealmyr/gke-helm:v2.16.1 $argv
