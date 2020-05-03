@@ -47,6 +47,7 @@
 
   amend = commit -vS --amend
   conflicts = diff --name-only --diff-filter=U
+  commit = commit -vS
   last = log -1 HEAD
   pull = pull --ff-only
   rebase = rebase -vS

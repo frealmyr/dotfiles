@@ -17,14 +17,19 @@ docker run --name "$DOCKER_RAND_ID" -it --rm \
   -v /tmp:/tmp \
   -v $(pwd):$mnt \
   -w /$mnt \
-  -e TF_LOG \
+  -v $HOME/.kube:/root/.kube \
+  -e TF_LOG=$TF_LOG \
   -e GOOGLE_CREDENTIALS=$GOOGLE_CREDENTIALS \
   -e GOOGLE_ENCRYPTION_KEY=$GOOGLE_ENCRYPTION_KEY \
   -e TERRAFORM_ENVIRONMENT=$TERRAFORM_ENVIRONMENT \
-  -v $HOME/.kube:/root/.kube \
   -e GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS \
-  frealmyr/gcp-terraform:$TERRAFORM_VERSION $kns $argv[*]
+  -e TF_VAR_snyk_token_integrationId=$TF_VAR_snyk_token_integrationId \
+  -e TF_VAR_snyk_token_docker_credentials=$TF_VAR_snyk_token_docker_credentials \
+  -e TF_VAR_app_alertmanager_opsgenie_api_key=$TF_VAR_app_alertmanager_opsgenie_api_key \
+  -e TF_VAR_app_alertmanager_slack_url=$TF_VAR_app_alertmanager_slack_url_experimental \
+  -e TF_VAR_app_alertmanager_slack_url_main=$TF_VAR_app_alertmanager_slack_url_main \
+  -e TF_VAR_app_alertmanager_slack_url_experimental=$TF_VAR_app_alertmanager_slack_url_experimental \
+  frealmyr/gcp-terraform:$TERRAFORM_VERSION $argv[*]
 }
 
-#  -e $(env | grep TF_ | cut -f1 -d= | sed 's/^/-e /') \
-# This one is buggy, needs improvement
+#$(compgen -v | grep TF_ | awk '{print $1}' | cut -f1 -d= | sed 's/^/  -e /' | tr -d '\n') \

@@ -1,0 +1,8 @@
+#!/usr/local/bin/zsh
+
+#
+# Runs terraform validate every 3 seconds in the current folder
+#
+function tfvalidate () {
+  watch -b -c -n 10 'zsh -c "source ${HOME}/.config/zsh/functions/terraform; terraform validate"'
+}

@@ -14,6 +14,8 @@ fi
 #fi
 
 docker run --name "$DOCKER_RAND_ID" --rm -ti \
+  -v $(pwd):$(pwd) \
+  -w $(pwd) \
   -e KUBE_EDITOR=vim \
   -v $HOME/.kube/config:/root/.kube/config \
   -v $HOME/.config/gcloud:/root/.config/gcloud \

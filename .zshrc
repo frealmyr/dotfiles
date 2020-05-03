@@ -15,7 +15,7 @@ ZSH_TMUX_AUTOSTART=true
 
 # Path to your zsh functions
 fpath=(~/.config/zsh/functions $fpath)
-autoload -Uz bbc tflogin bw flushdns gcloud gcurl go gsutil helm k kcc kcls kcow kcrename kdow kiow know kns knsd kpow kpull kset ksow printcolors sshome terraform yaml-lint
+autoload -Uz bbc tflogin bw bw-noi flushdns gcloud gcurl go gsutil helm k kcc kcdelete kcls kcow kcrename kdow kiow know kns knsd kpow kpull kset ksow printcolors sshome terraform tfvalidate yaml-lint
 
 # Folder for custom files
 ZSH_CUSTOM=$HOME/.oh-my-custom/

@@ -11,7 +11,7 @@ fi
 
 docker run --name "$DOCKER_RAND_ID" --rm -ti \
   -v $(pwd):$(pwd) \
-  -v "$HOME"/.kube:/root/.kube \
-  -v "$HOME"/.config/gcloud:/root/.config/gcloud \
+  -v "$HOME"/.kube:/root/.kube:cached \
+  -v "$HOME"/.config/gcloud:/root/.config/gcloud:cached \
   frealmyr/cloud-sdk-editors:latest gsutil $argv
 }

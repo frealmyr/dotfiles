@@ -1,0 +1,46 @@
+#!/usr/local/bin/zsh
+
+#
+# Run kubectl commands, GKE requires gcloud for helpers
+#
+function kpdelete() {
+
+# if [[ -z "$DOCKER_RAND_ID" ]]; then
+#   DOCKER_RAND_ID=$RANDOM
+# fi
+
+# #if [[ -z "$K8S_VERSION" ]]; then
+# #  K8S_VERSION="1.14"
+# #fi
+
+# docker run --name "$DOCKER_RAND_ID" --rm -ti \
+#   -v $(pwd):$(pwd) \
+#   -w $(pwd) \
+#   -e KUBE_EDITOR=vim \
+#   -v $HOME/.kube/config:/root/.kube/config \
+#   -v $HOME/.config/gcloud:/root/.config/gcloud \
+#   frealmyr/cloud-sdk-editors:latest kubectl $kns $argv[*]
+
+# Dynamic Menu Function
+createmenu () {
+    select selected_option; do # in "$@" is the default
+        if [ 1 -le "$REPLY" ] && [ "$REPLY" -le $(($#)) ]; then
+            break;
+        else
+            echo "Please make a vaild selection (1-$#)."
+        fi
+    done
+}
+
+declare -a drives=();
+# Load Menu by Line of Returned Command
+drives < <(echo $(k get pods));
+# Display Menu and Prompt for Input
+echo "Available Drives (Please select one):";
+createmenu "${drives[@]}"
+# Split Selected Option into Array and Display
+drive=($(echo "${selected_option}"));
+echo "Drive Id: ${drive[0]}";
+echo "Serial Number: ${drive[1]}";
+
+}

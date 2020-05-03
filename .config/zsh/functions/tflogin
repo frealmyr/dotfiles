@@ -27,6 +27,7 @@ function tflogin() {
 
   printf "\nbitwarden: fetching credentials..."
   ITEM_ID=$(bw list items --search $PROJECT --session $BW_SESSION --pretty | grep "id" | sed -n '1p' | awk -F'"' '{ print $4 }')
+  sleep 2
   printf "\nbitwarden: saved credentials as " && bw get attachment $PROJECT.json --output /tmp/$PROJECT.json --raw  --itemid $ITEM_ID --session $BW_SESSION
 
   printf "\ngcloud: setting google project...\n"

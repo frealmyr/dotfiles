@@ -11,7 +11,7 @@ fi
 
 docker run --name "$DOCKER_RAND_ID" --rm -ti \
   -v $(pwd):$(pwd) \
-  -v "$HOME"/.config/gcloud:/root/.config/gcloud \
+  -v "$HOME"/.config/gcloud:/root/.config/gcloud:cached \
   -w $(pwd) \
   frealmyr/cloud-sdk-editors:latest gcurl $argv
 }

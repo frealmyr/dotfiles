@@ -10,5 +10,5 @@ function bw() {
 docker run --rm -it  \
   -v /tmp:/tmp \
   -v bitwarden:/root/.config/ \
-  frealmyr/bitwarden-cli-docker:latest bw $argv
+  frealmyr/bitwarden-cli-docker:latest $argv
 }
