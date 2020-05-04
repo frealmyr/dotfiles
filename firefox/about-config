@@ -12,3 +12,4 @@ security.dialog_enable_delay = 0
 toolkit.legacyUserProfileCustomizations.stylesheets = true
 gfx.compositor.glcontext.opaque = true
 browser.tabs.20FpsThrobber = true
+dom.ipc.processCount = -1 # Use all the RAM
