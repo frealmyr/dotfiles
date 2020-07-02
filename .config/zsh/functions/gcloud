@@ -11,8 +11,6 @@ fi
 
 docker run --name "$DOCKER_RAND_ID" --rm -ti \
   -v $(pwd):$(pwd) \
-  -v "$HOME"/Desktop/gogocredentials:/root/.docker:cached \
-  -v "$HOME"/.config/gcloud:/root/.config/gcloud:cached \
-  -v "$HOME"/.kube:/root/.kube:cached \
-  frealmyr/cloud-sdk-editors:latest gcloud $argv
+  -v "$HOME"/.config/gcloud:/root/.config/gcloud \
+  frealmyr/zsh-docker-gcp-gcloud:latest $argv
 }

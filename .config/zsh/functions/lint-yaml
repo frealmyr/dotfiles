@@ -2,7 +2,7 @@
 
 # Run yaml-link in dir using docker
 
-function yaml-lint() {
+function lint-yaml() {
 
 docker run -it --rm \
   -v $(pwd):$(pwd) \

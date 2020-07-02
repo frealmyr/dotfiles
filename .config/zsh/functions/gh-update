@@ -1,0 +1,18 @@
+#!/usr/local/bin/zsh
+
+#
+# Update Github CLI
+#
+function gh-update() {
+
+  echo "Now updating: gh-cli.."
+  curl -s https://api.github.com/repos/cli/cli/releases/latest \
+  | grep "browser_download_url.*macOS_amd64.tar.gz" \
+  | cut -d : -f 2,3 \
+  | tr -d '"' \
+  | xargs curl -vOL
+
+  tar -xjf gh*.tar.gz --strip-components=2 '*gh'
+  sudo mv ./gh /usr/local/bin/
+  rm gh*
+}

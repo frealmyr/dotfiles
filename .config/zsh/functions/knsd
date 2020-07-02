@@ -11,7 +11,7 @@ if [[ -z "$DOCKER_RAND_ID" ]]; then
 fi
 
 if [[ -z "$K8S_VERSION" ]]; then
-  K8S_VERSION="1.14"
+  K8S_VERSION="1.16"
 fi
 
 docker run --name "$DOCKER_RAND_ID" --rm -ti \

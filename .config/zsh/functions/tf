@@ -2,7 +2,7 @@
 
 # Run Terraform commands with docker
 
-function terraform() {
+function tf() {
 mnt="/root/terraform"
 
 if [[ -z "$DOCKER_RAND_ID" ]]; then

@@ -32,12 +32,12 @@ createmenu () {
     done
 }
 
-declare -a drives=();
+# declare -a drives=();
 # Load Menu by Line of Returned Command
-drives < <(echo $(k get pods));
+# drives < <(echo );
 # Display Menu and Prompt for Input
-echo "Available Drives (Please select one):";
-createmenu "${drives[@]}"
+# echo "Available Drives (Please select one):";
+createmenu "$(source ${HOME}/.config/zsh/functions/tf; k get pods -n apps-test  --no-headers -o custom-columns=":metadata.name")"
 # Split Selected Option into Array and Display
 drive=($(echo "${selected_option}"));
 echo "Drive Id: ${drive[0]}";

@@ -2,104 +2,97 @@
 
 function tflogin() {
   PROJECT=$argv[1]
-  BW_CHECK=$(bw login --check)
 
-  printf "\nbitwarden: checking if you are logged in...\n"
-  while [[ $BW_CHECK != *"[92mYou are logged in![39m"* ]];
-  do
-    printf '\e[1;33m%-6s\e[m\n' "bitwarden: not logged in, let's fix that:"
-    bw login
-    BW_CHECK=$(bw login --check)
-  done
-
-  printf '\e[1;32m%-6s\e[m' "bitwarden: you are logged in."
-
-  # Loop if variable is not set or if it contains a string value with space.
-  while [[ -z "$BW_SESSION" || $BW_SESSION == *" "* ]];
-  do
-    printf "%b" "\nbitwarden: enter master password to unlock vault: \e[1;33m[input is hidden]\e[0m "
-    BW_SESSION=$(bw unlock --raw | sed -n '1!p')
-  done
-
-  printf '\n\e[1;32m%-6s\e[m\n' "bitwarden: session initiated!"
-  printf "bitwarden: syncing bitwarden vault...\n"
-  echo $(bw sync --session $BW_SESSION)
-
-  printf "\nbitwarden: fetching credentials..."
-  ITEM_ID=$(bw list items --search $PROJECT --session $BW_SESSION --pretty | grep "id" | sed -n '1p' | awk -F'"' '{ print $4 }')
-  sleep 2
-  printf "\nbitwarden: saved credentials as " && bw get attachment $PROJECT.json --output /tmp/$PROJECT.json --raw  --itemid $ITEM_ID --session $BW_SESSION
-
-  printf "\ngcloud: setting google project...\n"
-  gcloud config set project $PROJECT
-
-  printf "\nzsh: populating shared environment variables...\n"
-  TERRAFORM_STATE_GCP_BUCKET=$PROJECT-tf-state
-  GOOGLE_APPLICATION_CREDENTIALS=/tmp/$PROJECT.json
-
-  printf "zsh: populating $PROJECT specific environment variables...\n"
-  bw get item $ITEM_ID --session $BW_SESSION --pretty | grep "fileName" | awk -F'"' '{ print $4 }' |
-  {
-  while read line
-  do
-    if [ $line != "$PROJECT.json" ]; then
-      echo "zsh: creating environment variable for $line"
-      bw-noi get attachment $line --output /tmp/$line --raw --itemid $ITEM_ID --session $BW_SESSION > /dev/null 2>&1
-      echo "TF_VAR_$line=$(cat /tmp/$line)" >> /tmp/attachment_variables
-    fi
-  done
-  }
-  source /tmp/attachment_variables
-  rm -f /tmp/attachment_variables
-
-  echo ""
-  read "REPLY?Do ye wish to run init? [y/N] "
-  if [[ "$REPLY" =~ ^[Yy]$ ]]
+  printf "Selected project: \e[1;33m$PROJECT\e[0m\n"
+  read "START_SCRIPT?Do ye wish to prepare Terraform for the project above? [y/N] "
+  if [[ "$START_SCRIPT" =~ ^[Yy]$ ]]
   then
-    terraform init -reconfigure -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET" -lock=false
+    if [[ $(pwd | awk -F / '{print $NF}') == "cloud-setup" ]]
+    then
+      printf "\n\e[1;34mtflogin: \e[0msetting project specific environment variables.. \n"
+      echo "setting gcloud config to $PROJECT for GCP Secret Manager cli.."
+      gcloud config set project $PROJECT
+      echo "exporting GCLOUD_PROJECT.."
+      GCLOUD_PROJECT=$PROJECT
+      echo "exporting GOOGLE_CREDENTIALS.."
+      GOOGLE_CREDENTIALS=$(gcloud secrets versions access latest --secret="cloud-sa-terraform-admin")
+      echo "exporting TERRAFORM_STATE_GCP_BUCKET.."
+      TERRAFORM_STATE_GCP_BUCKET=$PROJECT-tf-state
+      printf "\e[1;34mtflogin: \e[0mproject specific environment variables set! \n"
+
+      printf "\n\e[1;34mtflogin: \e[0msetting the shared secrets between env.. \n"
+      echo "exporting app_alertmanager_opsgenie_api_key.."
+      TF_VAR_app_alertmanager_opsgenie_api_key=$(gcloud secrets versions access latest --secret="cloud-terraform-api-key-opsgenie")
+      echo "exporting app_alertmanager_slack_url.."
+      TF_VAR_app_alertmanager_slack_url=$(gcloud secrets versions access latest --secret="cloud-terraform-api-key-slack")
+      echo "exporting snyk_token_docker_credentials"
+      TF_VAR_snyk_token_docker_credentials=$(gcloud secrets versions access latest --secret="cloud-sa-snyk-docker-credentials")
+      echo "exporting snyk_token_integrationId"
+      TF_VAR_snyk_token_integrationId=$(gcloud secrets versions access latest --secret="cloud-terraform-api-key-snyk")
+      printf "\e[1;34mtflogin: \e[0mshared secrets set! \n"
+
+      printf "\n\e[1;34mtflogin: \e[0msetting environment spesific variables.. \n"
       if [[ $PROJECT == *"prod"* ]]; then
+        echo "changing the k8s context to $PROJECT.."
         kset $PROJECT
+        echo "setting the generic ENVIRONMENT variable.."
         ENVIRONMENT=prod
+        echo "setting the terraform environment variable.."
         TERRAFORM_ENVIRONMENT=prod
-        GOOGLE_ENCRYPTION_KEY=$(bw get password $ITEM_ID --session $BW_SESSION | base64 --decode)
-        terraform workspace select prod
+        echo "setting the GOOGLE_ENCRYPTION_KEY for $PROJECT.."
+        GOOGLE_ENCRYPTION_KEY=$(gcloud secrets versions access latest --secret="cloud-terraform-bucket-encryption-key")
+        echo "changing the terraform workspace to prod.."
+        tf workspace select prod
       elif [[ $PROJECT == *"test"* ]]; then
+        echo "changing the k8s context to $PROJECT.."
         kset $PROJECT
+        echo "setting the generic ENVIRONMENT variable.."
         ENVIRONMENT=test
+        echo "setting the terraform environment variable.."
         TERRAFORM_ENVIRONMENT=test
+        echo "setting the GOOGLE_ENCRYPTION_KEY for $PROJECT.."
         GOOGLE_ENCRYPTION_KEY=""
-        terraform workspace select test
+        echo "changing the terraform workspace to test.."
+        tf workspace select test
       elif [[ $PROJECT == *"shared"* ]]; then
+        echo "setting the generic ENVIRONMENT variable.."
         ENVIRONMENT=shared
+        echo "setting the terraform environment variable.."
         TERRAFORM_ENVIRONMENT=shared
+        echo "setting the GOOGLE_ENCRYPTION_KEY for $PROJECT.."
         GOOGLE_ENCRYPTION_KEY=""
-        terraform workspace select shared
-        # HashiCrop Vault spesifics
-        terraform init -reconfigure -upgrade -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET"
-        VAULT_ADDR="$(printf 'https://'$(terraform output address | tr -d '\r\n' ))"
-        VAULT_TOKEN=$(terraform output root_token_decrypt_command | bash)
-        terraform output vault-cert-self-signed-pem > /tmp/ca.cert
-        VAULT_CAPATH=/tmp/ca.cert
+        echo "changing the terraform workspace to test.."
+        tf workspace select shared
       fi
+
+      echo ""
+      read "INIT_REPLY?Do ye wish to run init? [y/N] "
+      if [[ "$INIT_REPLY" =~ ^[Yy]$ ]]
+      then
+        tf init -reconfigure -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET" -lock=false
+      fi
+
+      read "REFRESH_REPLY?Do ye wish to run refresh? [y/N] "
+      if [[ "$REFRESH_REPLY" =~ ^[Yy]$ ]]
+      then
+        tf refresh -parallelism=25 $(for filename in env/$ENVIRONMENT/*.tfvars; do printf "-var-file=$filename " ; done)
+      fi
+
+      printf "%b" "\nTerraform environment is ready for: \e[1;32m$PROJECT\e[0m\n"
+
+      echo ""
+      echo "  (\.   \      ,/)"
+      echo "   \(   |\     )/    Yer done!"
+      echo "   //\  | \   /\\"
+      echo "  (/ /\_#oo#_/\ \)   Happy Terraforming!"
+      echo "   \/\  ####  /\/"
+      echo "        '##'"
+      echo ""
+    else
+      printf "\nScript failed: \e[1;31mYou need to be in the cloud-setup folder for this script to work! 🙊\e[0m\n"
+      printf "Current directory: $(pwd)\n"
+    fi
+  else
+    printf "\e[1;32mTask failed successfully: \e[0mUser aborted the script~ \n"
   fi
-
-  read "REPLY?Do ye wish to run refresh? [y/N] "
-  if [[ "$REPLY" =~ ^[Yy]$ ]]
-  then
-    terraform refresh $(for filename in env/$ENVIRONMENT/*.tfvars; do printf "-var-file=$filename " ; done)
-  fi
-
-  printf "\nbitwarden: closing session...\n"
-  unset BW_SESSION
-
-  printf "%b" "\nTerraform environment is ready for: \e[1;32m$PROJECT\e[0m\n"
-
-  echo ""
-  echo "  (\.   \      ,/)"
-  echo "   \(   |\     )/    Yer done!"
-  echo "   //\  | \   /\\"
-  echo "  (/ /\_#oo#_/\ \)   Happy Terraforming!"
-  echo "   \/\  ####  /\/"
-  echo "        '##'"
-  echo ""
 }
