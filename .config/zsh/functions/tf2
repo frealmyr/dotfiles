@@ -11,15 +11,16 @@ if [[ -z "$DOCKER_RAND_ID" ]]; then
 fi
 
 ENV_VARS_TF=$(compgen -v | grep TF_ | awk '{print $1}' | cut -f1 -d= | sed 's \(.*\) \1=$\1 ' | sed 's/^/ -e / ' | sed 's/$/ \\ / ')
-ENV_VARS_GCP=$(compgen -v | grep GOOGLE_ | awk '{print $1}' | cut -f1 -d= | sed 's \(.*\) \1=$\1 ' | sed 's/^/ -e / ' | sed 's/$/ \\ / ')
-ENV_VARS+="$ENV_VARS_TF $ENV_VARS_GCP"
+#$(compgen -v | grep GOOGLE_ | awk '{print $1}' | cut -f1 -d= | sed 's/^/  -e / ')
+#$(compgen -v | grep TF_ | awk '{print $1}' | cut -f1 -d= | sed 's/^/  -e / ')
+
+echo $TF_VARS
 
 docker run --name "$DOCKER_RAND_ID" -it --rm \
   -v /tmp:/tmp \
   -v $(pwd):$mnt \
   -w /$mnt \
   -v $HOME/.kube:/root/.kube \
-  $(echo $ENV_VARS_TF) \
-  $(echo $ENV_VARS_GCP) \
+  $ENV_VARS_TF \
   bulderbank/gcp-tools:latest terraform $argv[*]
 }

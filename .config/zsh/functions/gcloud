@@ -12,5 +12,5 @@ fi
 docker run --name "$DOCKER_RAND_ID" --rm -ti \
   -v $(pwd):$(pwd) \
   -v "$HOME"/.config/gcloud:/root/.config/gcloud \
-  frealmyr/zsh-docker-gcp-gcloud:latest $argv
+  173c9e2fd374 gcloud $argv
 }

@@ -12,6 +12,6 @@ alias sshare="spotify share uri | awk '{print $3}' | pbcopy"
 alias splay="spotify play uri $(pbpaste)"
 
 # Pre-progmmed playlists
-alias bossfight="spotify play list 'boss fight music'"
+alias bossfight="spotify play uri spotify:playlist:3m89UuWHKUDlinSBokeiJq"
 alias hackermode="spotify play 'Fuck me Im Famous'"
-
+alias powercode="spotify play uri spotify:playlist:41Cd3KyEshyN1JduIfSJsc"

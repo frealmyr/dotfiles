@@ -1,0 +1,35 @@
+#!/usr/local/bin/zsh
+
+# Run Terraform commands with docker
+
+function tf() {
+mnt="/root/terraform"
+
+if [[ -z "$DOCKER_RAND_ID" ]]; then
+  DOCKER_RAND_ID=$RANDOM
+fi
+
+if [[ -z "$TERRAFORM_VERSION" ]]; then
+  TERRAFORM_VERSION=v0.12.28
+fi
+
+docker run --name "$DOCKER_RAND_ID" -it --rm \
+  -v /tmp:/tmp \
+  -v $(pwd):$mnt \
+  -w /$mnt \
+  -v $HOME/.kube:/root/.kube \
+  -e TF_LOG=$TF_LOG \
+  -e GOOGLE_CREDENTIALS=$GOOGLE_CREDENTIALS \
+  -e GOOGLE_ENCRYPTION_KEY=$GOOGLE_ENCRYPTION_KEY \
+  -e TERRAFORM_ENVIRONMENT=$TERRAFORM_ENVIRONMENT \
+  -e GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS \
+  -e TF_VAR_snyk_token_integrationId=$TF_VAR_snyk_token_integrationId \
+  -e TF_VAR_snyk_token_docker_credentials=$TF_VAR_snyk_token_docker_credentials \
+  -e TF_VAR_app_alertmanager_opsgenie_api_key=$TF_VAR_app_alertmanager_opsgenie_api_key \
+  -e TF_VAR_app_alertmanager_slack_url=$TF_VAR_app_alertmanager_slack_url_experimental \
+  -e TF_VAR_app_alertmanager_slack_url_main=$TF_VAR_app_alertmanager_slack_url_main \
+  -e TF_VAR_app_alertmanager_slack_url_experimental=$TF_VAR_app_alertmanager_slack_url_experimental \
+  frealmyr/gcp-terraform:$TERRAFORM_VERSION $argv[*]
+}
+
+#$(compgen -v | grep TF_ | awk '{print $1}' | cut -f1 -d= | sed 's/^/  -e /' | tr -d '\n') \

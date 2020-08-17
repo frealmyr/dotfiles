@@ -1,0 +1,10 @@
+#!/usr/local/bin/zsh
+
+# Run yaml-link in dir using docker
+
+function lint-yaml2() {
+
+docker run -it --rm \
+  -v $(pwd):/work \
+  tmknom/prettier:latest --write --parser=yaml 'user.yaml' 
+}

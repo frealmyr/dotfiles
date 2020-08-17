@@ -24,7 +24,9 @@ function tflogin() {
       echo "exporting app_alertmanager_opsgenie_api_key.."
       TF_VAR_app_alertmanager_opsgenie_api_key=$(gcloud secrets versions access latest --secret="cloud-terraform-api-key-opsgenie")
       echo "exporting app_alertmanager_slack_url.."
-      TF_VAR_app_alertmanager_slack_url=$(gcloud secrets versions access latest --secret="cloud-terraform-api-key-slack")
+      TF_VAR_app_alertmanager_slack_url_main=$(gcloud secrets versions access latest --secret="cloud-terraform-api-key-slack")
+      echo "exporting app_alertmanager_slack_url_experimental..."
+      TF_VAR_app_alertmanager_slack_url_experimental=$(gcloud secrets versions access latest --secret="cloud-terraform-api-key-slack-experimental")
       echo "exporting snyk_token_docker_credentials"
       TF_VAR_snyk_token_docker_credentials=$(gcloud secrets versions access latest --secret="cloud-sa-snyk-docker-credentials")
       echo "exporting snyk_token_integrationId"
@@ -41,8 +43,11 @@ function tflogin() {
         TERRAFORM_ENVIRONMENT=prod
         echo "setting the GOOGLE_ENCRYPTION_KEY for $PROJECT.."
         GOOGLE_ENCRYPTION_KEY=$(gcloud secrets versions access latest --secret="cloud-terraform-bucket-encryption-key")
+        echo "running terraform init..."
+        tf init -reconfigure -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET" -lock=false
         echo "changing the terraform workspace to prod.."
         tf workspace select prod
+        tf workspace list
       elif [[ $PROJECT == *"test"* ]]; then
         echo "changing the k8s context to $PROJECT.."
         kset $PROJECT
@@ -52,8 +57,11 @@ function tflogin() {
         TERRAFORM_ENVIRONMENT=test
         echo "setting the GOOGLE_ENCRYPTION_KEY for $PROJECT.."
         GOOGLE_ENCRYPTION_KEY=""
+        echo "running terraform init..."
+        tf init -reconfigure -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET" -lock=false
         echo "changing the terraform workspace to test.."
         tf workspace select test
+        tf workspace list
       elif [[ $PROJECT == *"shared"* ]]; then
         echo "setting the generic ENVIRONMENT variable.."
         ENVIRONMENT=shared
@@ -61,15 +69,11 @@ function tflogin() {
         TERRAFORM_ENVIRONMENT=shared
         echo "setting the GOOGLE_ENCRYPTION_KEY for $PROJECT.."
         GOOGLE_ENCRYPTION_KEY=""
+        echo "running terraform init..."
+        tf init -reconfigure -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET" -lock=false
         echo "changing the terraform workspace to test.."
         tf workspace select shared
-      fi
-
-      echo ""
-      read "INIT_REPLY?Do ye wish to run init? [y/N] "
-      if [[ "$INIT_REPLY" =~ ^[Yy]$ ]]
-      then
-        tf init -reconfigure -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET" -lock=false
+        tf workspace list
       fi
 
       read "REFRESH_REPLY?Do ye wish to run refresh? [y/N] "
