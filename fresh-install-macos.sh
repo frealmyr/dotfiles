@@ -42,6 +42,7 @@ read -p "Are ye alright with this? (y/n) " RESP
 
   echo "tmux: removing .tmux.conf if it exists..."
   rm ${HOME}/.tmux.conf
+  mkdir ${HOME}/.config/tmux
 
   echo "tmux: adding syslinks for configs..."
   ln -s ${PWD}/.tmux.conf ${HOME}/.tmux.conf
@@ -49,7 +50,8 @@ read -p "Are ye alright with this? (y/n) " RESP
   ln -s ${PWD}/.config/tmux/scripts/ ${HOME}/.config/tmux
 
   echo "tmux: mark scripts as executables..."
-  chmod +x ${HOME}/.config/tmux/scripts/*
+  chmod +x ${HOME}/.config/tmux/scripts/git-changes.sh
+  chmod +x ${HOME}/.config/tmux/scripts/git-stash.sh
 
   echo "vim: removing .vim if it exsists..."
   rm ${HOME}/.vim

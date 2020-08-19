@@ -11,7 +11,9 @@ set -g status-right-length 0
 # Right side of status bar
 set -g status-right-style bg=colour123,fg=colour243
 set -g status-right-length 80
-set -g status-right "#[fg=colour0,bg=colour4] #(cd #{pane_current_path}; ${HOME}/.config/tmux/scripts/git-changes.sh ) #[fg=colour0,bg=colour5] #(cd #{pane_current_path}; git rev-parse --abbrev-ref HEAD) #[fg=colour6,bg=colour235] #I:#P #[fg=colour0,bg=colour14] ❄︎#(cat ~/.kube/config | grep current-context | cut -d ":" -f2-) #[fg=colour0,bg=colour2]"
+set -g status-right "#[fg=colour0,bg=colour4] #(cd #{pane_current_path}; ${HOME}/.config/tmux/scripts/git-changes.sh ) #[fg=colour0,bg=colour5] #(cd #{pane_current_path}; git rev-parse --abbrev-ref HEAD)"
+
+# #[fg=colour0,bg=colour14] ❄︎#(cat ~/.kube/config | grep current-context | cut -d ":" -f2-) #[fg=colour0,bg=colour2]
 
 # Disabled status bar items
 # #[fg=colour0,bg=colour3] %H:%M

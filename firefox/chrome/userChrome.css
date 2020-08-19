@@ -10,3 +10,8 @@
 #sidebar-header {
   visibility: collapse !important;
 } 
+
+/* hides back/forward buttons */
+#back-button, #forward-button { 
+  display:none!important; 
+}

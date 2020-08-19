@@ -18,7 +18,7 @@ fpath=(~/.config/zsh/functions $fpath)
 autoload -Uz bbc bw bw-noi flushdns gcloud gcurl gsutil helm helm3 k kcc kcdelete kcls kcow kcrename kdow kiow know kns knsd kpow kpull kset ksow printcolors sshome tf tfapply tflogin tfplan tfvalidate yaml-lint
 
 # Folder for custom files
-ZSH_CUSTOM=$HOME/.oh-my-custom/
+ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
 
 # Theme to load from ~/.oh-my-zsh/themes/
 ZSH_THEME="sardine"
