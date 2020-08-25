@@ -3,13 +3,13 @@
 #
 # Run kubectl commands, GKE requires gcloud for helpers
 #
-function k() {
+function k-noi() {
 
-if [[ -z "$DOCKER_RAND_ID" ]]; then
-  DOCKER_RAND_ID=$RANDOM
+if [[ -z "2$DOCKER_RAND_ID" ]]; then
+  DOCKER_RAND_ID=2$RANDOM
 fi
 
-docker run --name "$DOCKER_RAND_ID" --rm -ti \
+docker run --name "2$DOCKER_RAND_ID" --rm \
   -u 1000:1000 \
   -v $(pwd):$(pwd) \
   -w $(pwd) \
@@ -18,3 +18,4 @@ docker run --name "$DOCKER_RAND_ID" --rm -ti \
   -v $HOME/.config/gcloud:/home/clitools/.config/gcloud \
   docker.pkg.github.com/bulderbank/cloud-cli-tools/cli-tools:latest kubectl $kns $argv[*]
 }
+

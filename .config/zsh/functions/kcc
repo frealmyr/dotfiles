@@ -9,11 +9,8 @@ if [[ -z "$DOCKER_RAND_ID" ]]; then
   DOCKER_RAND_ID=$RANDOM
 fi
 
-if [[ -z "$K8S_VERSION" ]]; then
-  K8S_VERSION="1.14"
-fi
-
 docker run --name "$DOCKER_RAND_ID" --rm -ti \
-  -v $HOME/.kube/:/.kube/ \
-  bitnami/kubectl:$K8S_VERSION config current-context
+  -u 1000:1000 \
+  -v $HOME/.kube/config:/home/clitools/.kube/config \
+  docker.pkg.github.com/bulderbank/cloud-cli-tools/cli-tools:latest kubectl config current-context
 }

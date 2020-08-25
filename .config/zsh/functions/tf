@@ -4,22 +4,27 @@
 
 function tf() {
 
-mnt="/root/terraform"
-
 if [[ -z "$DOCKER_RAND_ID" ]]; then
   DOCKER_RAND_ID=$RANDOM
 fi
 
-ENV_VARS_TF=$(compgen -v | grep TF_ | awk '{print $1}' | cut -f1 -d= | sed 's \(.*\) \1=$\1 ' | sed 's/^/ -e / ' | sed 's/$/ \\ / ')
-ENV_VARS_GCP=$(compgen -v | grep GOOGLE_ | awk '{print $1}' | cut -f1 -d= | sed 's \(.*\) \1=$\1 ' | sed 's/^/ -e / ' | sed 's/$/ \\ / ')
-ENV_VARS+="$ENV_VARS_TF $ENV_VARS_GCP"
-
 docker run --name "$DOCKER_RAND_ID" -it --rm \
   -v /tmp:/tmp \
-  -v $(pwd):$mnt \
-  -w /$mnt \
+  -v $(pwd):$(pwd) \
+  -w $(pwd) \
   -v $HOME/.kube:/root/.kube \
-  $(echo $ENV_VARS_TF) \
-  $(echo $ENV_VARS_GCP) \
-  bulderbank/gcp-tools:latest terraform $argv[*]
+  -e TF_LOG=$TF_LOG \
+  -e GOOGLE_CREDENTIALS=$GOOGLE_CREDENTIALS \
+  -e GOOGLE_ENCRYPTION_KEY=$GOOGLE_ENCRYPTION_KEY \
+  -e TERRAFORM_ENVIRONMENT=$TERRAFORM_ENVIRONMENT \
+  -e GOOGLE_APPLICATION_CREDENTIALS=$GOOGLE_APPLICATION_CREDENTIALS \
+  -e TF_VAR_snyk_token_integrationId=$TF_VAR_snyk_token_integrationId \
+  -e TF_VAR_snyk_token_docker_credentials=$TF_VAR_snyk_token_docker_credentials \
+  -e TF_VAR_app_alertmanager_opsgenie_api_key=$TF_VAR_app_alertmanager_opsgenie_api_key \
+  -e TF_VAR_app_alertmanager_slack_url=$TF_VAR_app_alertmanager_slack_url_experimental \
+  -e TF_VAR_app_alertmanager_slack_url_main=$TF_VAR_app_alertmanager_slack_url_main \
+  -e TF_VAR_app_alertmanager_slack_url_experimental=$TF_VAR_app_alertmanager_slack_url_experimental \
+  docker.pkg.github.com/bulderbank/cloud-cli-tools/cli-tools:latest terraform $argv[*]
 }
+
+#$(compgen -v | grep TF_ | awk '{print $1}' | cut -f1 -d= | sed 's/^/  -e /' | tr -d '\n') \

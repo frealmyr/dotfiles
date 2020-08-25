@@ -5,7 +5,8 @@
 function lint-yaml() {
 
 docker run -it --rm \
+  -u 1000:1000 \
   -v $(pwd):$(pwd) \
   -w /$(pwd) \
-  sdesbure/yamllint:latest yamllint -d "{extends: default, rules: {document-start: disable, brackets: disable, braces: disable, line-length: {max: 200}}}" .
+  docker.pkg.github.com/bulderbank/cloud-cli-tools/cli-tools:latest yamllint -d "{extends: default, rules: {document-start: disable, brackets: disable, braces: disable, line-length: {max: 200}}}" . | grep -vwE "syntax error: expected the node content, but found '-'"
 }

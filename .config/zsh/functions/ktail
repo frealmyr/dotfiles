@@ -1,9 +1,9 @@
 #!/usr/local/bin/zsh
 
 #
-# Run kubectl commands, GKE requires gcloud for helpers
+# Use stern to tail multiple k8s resources
 #
-function k() {
+function ktail() {
 
 if [[ -z "$DOCKER_RAND_ID" ]]; then
   DOCKER_RAND_ID=$RANDOM
@@ -13,8 +13,7 @@ docker run --name "$DOCKER_RAND_ID" --rm -ti \
   -u 1000:1000 \
   -v $(pwd):$(pwd) \
   -w $(pwd) \
-  -e KUBE_EDITOR=vim \
   -v $HOME/.kube/config:/home/clitools/.kube/config \
   -v $HOME/.config/gcloud:/home/clitools/.config/gcloud \
-  docker.pkg.github.com/bulderbank/cloud-cli-tools/cli-tools:latest kubectl $kns $argv[*]
+  docker.pkg.github.com/bulderbank/cloud-cli-tools/cli-tools:latest stern $kns $argv[*]
 }

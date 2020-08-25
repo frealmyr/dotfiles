@@ -3,16 +3,35 @@
 echo "checking and installing latest updates..."
 sudo apt update && sudo apt full-upgrade -y
 
-echo "installing zsh, tmux and vim..."
-sudo apt install -y zsh tmux vim
+echo "apps: installing apt applications.."
+sudo apt install -y htop zsh tmux vim grub-customizer
 
-echo "installing slack, bitwarden, spotify and vscode..."
+echo "apps: installing slack, bitwarden, spotify and vscode..."
 sudo snap install slack --classic \
     && sudo snap install bitwarden \
     && sudo snap install spotify \
     && sudo snap install code --classic
 
-echo "installing latest docker..."
+echo "system: installing gtk and icon theme..."
+sudo add-apt-repository ppa:papirus/papirus
+sudo apt install -y arc-theme papirus-icon-theme
+
+echo "apps: install flatpak..."
+sudo mkdir -p /etc/portage/repos.conf
+sudo bash -c "cat >/etc/portage/repos.conf/flatpak-overlay.conf <<EOL
+[flatpak-overlay]
+priority = 50
+location = /usr/local/portage/flatpak-overlay
+sync-type = git
+sync-uri = git://github.com/fosero/flatpak-overlay.git
+auto-sync = Yes
+EOL"
+
+echo "apps: install newsflash.."
+sudo flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+sudo flatpak install flathub com.gitlab.newsflash
+
+echo "docker: installing latest docker..."
 sudo apt-get install -y \
     apt-transport-https \
     ca-certificates \
@@ -20,10 +39,10 @@ sudo apt-get install -y \
     gnupg-agent \
     software-properties-common
 
-echo "adding signing key"
+echo "docker: adding signing key"
 curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo apt-key add -
 
-echo "adding the docker repository"
+echo "docker: adding the docker repository"
 sudo add-apt-repository \
     "deb [arch=amd64] https://download.docker.com/linux/ubuntu \
     $(lsb_release -cs) \
@@ -31,6 +50,9 @@ sudo add-apt-repository \
 
 echo "docker: installing docker from apt.."
 sudo apt update && sudo apt install -y docker-ce docker-ce-cli containerd.io
+
+echo "docker: add current user to docker group..."
+sudo usermod -aG docker ${USER}
 
 echo "docker: installing gpg and pass as this is a dependency for secure docker storage..."
 sudo apt update && sudo apt install -y gpg pass
@@ -130,3 +152,23 @@ ln -s ${PWD}/.vim ${HOME}/.vim
 echo "git: adding syslinks for git configs..."
 ln -s ${PWD}/.gitconfig ${HOME}/.gitconfig
 ln -s ${PWD}/.gitignore ${HOME}/.gitignore
+
+echo "zsh: add xclip for simulating pbpaste..."
+sudo apt update && sudo apt install -y xclip
+
+echo "system: do not swap unless neccecary..."
+sudo sh -c "echo 'vm.swappiness=1' >> /etc/sysctl.conf"
+
+echo "terminal: add nord colorscheme..."
+mkdir -p ~/.local/share/xfce4/terminal/colorschemes
+cat >~/.local/share/xfce4/terminal/colorschemes/nord.theme <<EOL
+[Scheme]
+Name=Nord
+ColorCursor=#D8DEE9
+ColorForeground=#D8DEE9
+ColorBackground=#2E3440
+TabActivityColor=#88C0D0
+ColorPalette=#3B4252;#BF616A;#A3BE8C;#EBCB8B;#81A1C1;#B48EAD;#88C0D0;#E5E9F0;#4C566A;#BF616A;#A3BE8C;#EBCB8B;#81A1C1;#B48EAD;#8FBCBB;#ECEFF4
+ColorBold=#D8DEE9
+ColorBoldUseDefault=FALSE
+EOL

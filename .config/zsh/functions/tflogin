@@ -92,6 +92,76 @@ function tflogin() {
       echo "   \/\  ####  /\/"
       echo "        '##'"
       echo ""
+    elif [[ $(pwd | awk -F / '{print $NF}') == "cloud-access" ]]
+      then
+
+      printf "\n\e[1;34mtflogin: \e[0msetting environment spesific variables.. \n"
+
+      if [[ $PROJECT == *"prod"* ]]; then
+
+        printf "\n\e[1;34mtflogin: \e[0msetting project specific environment variables.. \n"
+
+        echo "setting gcloud config to bulder-prod for GCP Secret Manager cli.."
+        gcloud config set project bulder-prod
+        echo "exporting GCLOUD_PROJECT.."
+        GCLOUD_PROJECT=$PROJECT
+
+        echo "exporting GOOGLE_CREDENTIALS.."
+        GOOGLE_CREDENTIALS=$(gcloud secrets versions access latest --secret="cloud-sa-terraform-admin")
+
+        echo "exporting TERRAFORM_STATE_GCP_BUCKET.."
+        TERRAFORM_STATE_GCP_BUCKET=$PROJECT-tf-state
+
+        printf "\e[1;34mtflogin: \e[0mproject specific environment variables set! \n"
+
+        echo "setting the generic ENVIRONMENT variable.."
+        ENVIRONMENT=prod
+
+        echo "setting the terraform environment variable.."
+        TERRAFORM_ENVIRONMENT=prod
+
+        #echo "setting the GOOGLE_ENCRYPTION_KEY for $PROJECT.."
+        #GOOGLE_ENCRYPTION_KEY=$(gcloud secrets versions access latest --secret="cloud-terraform-bucket-encryption-key")
+        echo "running terraform init..."
+        tf init -reconfigure -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET" -lock=false
+
+        echo "changing the terraform workspace to prod.."
+        tf workspace select prod
+        tf workspace list
+
+      elif [[ $PROJECT == *"test"* ]]; then
+
+        printf "\n\e[1;34mtflogin: \e[0msetting project specific environment variables.. \n"
+
+        echo "setting gcloud config to bulder-prod for GCP Secret Manager cli.."
+        gcloud config set project bulder-test
+
+        echo "exporting GCLOUD_PROJECT.."
+        GCLOUD_PROJECT=$PROJECT
+
+        echo "exporting GOOGLE_CREDENTIALS.."
+        GOOGLE_CREDENTIALS=$(gcloud secrets versions access latest --secret="cloud-sa-terraform-admin")
+
+        echo "exporting TERRAFORM_STATE_GCP_BUCKET.."
+        TERRAFORM_STATE_GCP_BUCKET=$PROJECT-tf-state
+
+        echo "setting the generic ENVIRONMENT variable.."
+        ENVIRONMENT=test
+
+        echo "setting the terraform environment variable.."
+        TERRAFORM_ENVIRONMENT=test
+
+        #echo "setting the GOOGLE_ENCRYPTION_KEY for $PROJECT.."
+        #GOOGLE_ENCRYPTION_KEY=""
+
+        echo "running terraform init..."
+        tf init -reconfigure -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET" -lock=false
+
+        echo "changing the terraform workspace to test.."
+        tf workspace select test
+        tf workspace list
+
+      fi
     else
       printf "\nScript failed: \e[1;31mYou need to be in the cloud-setup folder for this script to work! 🙊\e[0m\n"
       printf "Current directory: $(pwd)\n"

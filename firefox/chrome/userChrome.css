@@ -9,9 +9,27 @@
 
 #sidebar-header {
   visibility: collapse !important;
-} 
+}
 
-/* hides back/forward buttons */
-#back-button, #forward-button { 
-  display:none!important; 
+#back-button, #forward-button {
+  display:none!important;
+}
+
+/* Arc/Nord theme stuff */
+
+menubar, toolbar, nav-bar, #TabsToolbar > *{
+  background-color: #383c4a !important;
+}
+
+#urlbar {
+  background-color: #4b5162 !important;
+}
+
+#urlbar-background {
+  background: #4b5162 !important;
+}
+
+/* Hide splitter, when using Tree Style Tab.  */
+#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] + #sidebar-splitter {
+  display: none !important;
 }

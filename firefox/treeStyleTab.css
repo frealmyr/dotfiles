@@ -1,13 +1,24 @@
+:root,
+#background {
+  background-color: #20242c;
+}
+
+tab-item {
+  background-color: #383c4a;
+}
+
 /*
-   Active tab styling
+  Active tab styling
 */
 
 tab-item.active {
-  background-color: rgba(120, 50, 120, 0.9);
+  background-color: #CC575D;
 }
+
 tab-item.active .label-content {
   font-weight: bold;
 }
+
 tab-item.active tab-twisty,
 tab-item.active .label-content,
 tab-item.active tab-counter {
@@ -15,11 +26,21 @@ tab-item.active tab-counter {
 }
 
 /*
-   Hover tab styling
+  Hover tab styling
 */
 
 tab-item:hover {
-  background-color: rgba(14, 201, 230, 0.25);
+  background: #5294E2 !important;
+  opacity: 1;
+}
+
+/*
+  Change tab height
+*/
+
+tab-item {
+  --tab-size: 32px !important;
+  height: var(--tab-size);
 }
 
 /*
@@ -27,10 +48,10 @@ tab-item:hover {
 */
 
 .contextual-identity-marker {
-  width: 0.30em !important;
+  width: 0.25em !important;
 }
 
-/* 
+/*
   Tab numbering and counting when collapsed
 */
 
@@ -52,15 +73,15 @@ tab-item {
 }
 
 
-/* Less visible tab dividers. 
+/* Less visible tab dividers.
    A black border with a very low alpha slightly darkens any color. */
 
 tab-item {
-  border: solid 1px #00000012; 
+  border: solid 1px #00000012;
 }
 
 /*
-   Hide twisty and collapse/expand tree by clicking on tab's icon
+  Hide twisty and collapse/expand tree by clicking on tab's icon
 */
 
 tab-item tab-twisty {
@@ -71,7 +92,7 @@ tab-item tab-twisty {
 }
 
 /*
-   Only show tab close button on hover 
+  Only show tab close button on hover
 */
 
 tab-item:not(:hover) tab-closebox {
@@ -80,7 +101,7 @@ tab-item:not(:hover) tab-closebox {
 
 
 /*
-   Show title of unread tabs in italic
+  Show title of unread tabs in italic
 */
 
 tab-item.unread .label-content {
@@ -88,15 +109,23 @@ tab-item.unread .label-content {
 }
 
 /*
-   Change styling of pending (unloaded) tabs
+  Change styling of pending (unloaded) tabs
 */
 
 /* Change styling of pending (unloaded) tabs */
 tab-item.discarded {
+  opacity: 0.50;
+}
+
+tab-item.discarded:hover {
   opacity: 0.75;
 }
 
 tab-item.discarded .label-content {
-  color: grey;
+  color:grey;
+}
+
+tab-item.discarded:hover .label-content {
+  color:white;
 }
 

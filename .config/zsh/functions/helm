@@ -8,17 +8,19 @@ if [[ -z "$DOCKER_RAND_ID" ]]; then
   DOCKER_RAND_ID=$RANDOM
 fi
 
+if [ ! -d "$HOME/.helm" ]; then
+  mkdir -p $HOME/.helm
+fi
+
 docker run --name "$DOCKER_RAND_ID" --rm -ti \
+  -u 1000:1000 \
   -e KUBE_EDITOR=vim \
   -v $(pwd):$(pwd) \
   -w $(pwd) \
-  -v $HOME/.helm/config:/root/.config/helm:cached \
-  -v $HOME/.kube/config:/root/.kube/config:cached \
-  -v $HOME/.config/gcloud:/root/.config/gcloud:cached \
-  173c9e2fd374 helm $argv
+  -v $HOME/.kube/config:/home/clitools/.kube/config \
+  -v $HOME/.helm/config:/home/clitools/.config/helm \
+  -v $HOME/.config/gcloud:/home/clitools/.config/gcloud:cached \
+  docker.pkg.github.com/bulderbank/cloud-cli-tools/cli-tools:latest helm $argv
 }
-
-
-#-v $HOME/.helm/repository:/root/.helm/repository:cached \
-#-v $HOME/.helm/cache:/root/.cache/helm:cached \
-# -v $HOME/.helm/data:/root/.local/share/helm:cached \
+#  -v $HOME/.helm/repository:/home/clitools/.helm/repository \
+# -v $HOME/.helm/config:/home/clitools/.config/helm \

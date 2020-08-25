@@ -9,8 +9,14 @@ if [[ -z "$DOCKER_RAND_ID" ]]; then
   DOCKER_RAND_ID=$RANDOM
 fi
 
+if [ ! -d "$HOME/.config/gcloud" ]; then
+  mkdir -p $HOME/.config/gcloud
+fi
+
 docker run --name "$DOCKER_RAND_ID" --rm -ti \
+  -u 1000:1000 \
+  -w $(pwd) \
   -v $(pwd):$(pwd) \
-  -v "$HOME"/.config/gcloud:/root/.config/gcloud \
-  173c9e2fd374 gcloud $argv
+  -v "$HOME"/.config/gcloud:/home/clitools/.config/gcloud \
+  docker.pkg.github.com/bulderbank/cloud-cli-tools/cli-tools:latest gcloud $argv
 }

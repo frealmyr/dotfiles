@@ -4,3 +4,6 @@
 
 alias forgetti="find ${HOME}/.config/zsh/aliases/ -type f -exec cat {} \; && echo '#################' && echo '## Git aliases ##' && echo '#################' && echo && git config --get-regexp ^alias\. | sed -e s/^alias\.// -e s/\ /\ =\ /"
 
+# Simulate pbcopy and pbpaste from MacOS
+alias pbcopy='xclip -selection clipboard'
+alias pbpaste='xclip -selection clipboard -o'

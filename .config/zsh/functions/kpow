@@ -11,8 +11,8 @@ if [[ -z "$DOCKER_RAND_ID" ]]; then
 fi
 
 watch -c -t -n $argv[1] docker run --name "$DOCKER_RAND_ID" --rm -t \
-  -e KUBE_EDITOR=vim \
-  -v $HOME/.kube/config:/root/.kube/config \
-  -v $HOME/.config/gcloud:/root/.config/gcloud \
-  frealmyr/cloud-sdk-editors:latest kubectl $kns get pods
+  -u 1000:1000 \
+  -v $HOME/.kube/config:/home/clitools/.kube/config \
+  -v $HOME/.config/gcloud:/home/clitools/.config/gcloud \
+  docker.pkg.github.com/bulderbank/cloud-cli-tools/cli-tools:latest kubectl $kns get pods
 }
