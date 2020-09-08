@@ -1,0 +1,9 @@
+{
+    "workbench.colorTheme": "Dracula",
+    "editor.tabSize": 2,
+    "editor.minimap.enabled": false,
+    "terminal.integrated.shell.linux": "/usr/bin/tmux",
+    "terminal.integrated.shellArgs.linux": [
+        "new-session"
+    ]
+}

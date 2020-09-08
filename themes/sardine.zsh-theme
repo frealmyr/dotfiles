@@ -9,5 +9,9 @@ _fishy_collapsed_wd() {
 ')
 }
 
-local user_color='green';
-PROMPT='%{$fg[$user_color]%}$(_fishy_collapsed_wd)%{$reset_color%} '
+## Disabled directory as i placed the script in tmux instead
+# local user_color='green';
+# PROMPT='%{$fg[$user_color]%}$(_fishy_collapsed_wd)%{$reset_color%} '
+
+local user_color='magenta';
+PROMPT='%{$fg[$user_color]%}~%{$reset_color%} '

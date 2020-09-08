@@ -9,10 +9,11 @@ if [[ -z "$DOCKER_RAND_ID" ]]; then
 fi
 
 docker run --name "$DOCKER_RAND_ID" -it --rm \
+  -u 1000:1000 \
   -v /tmp:/tmp \
   -v $(pwd):$(pwd) \
   -w $(pwd) \
-  -v $HOME/.kube:/root/.kube \
+  -v $HOME/.config/kube:/home/clitools/.kube \
   -e TF_LOG=$TF_LOG \
   -e GOOGLE_CREDENTIALS=$GOOGLE_CREDENTIALS \
   -e GOOGLE_ENCRYPTION_KEY=$GOOGLE_ENCRYPTION_KEY \

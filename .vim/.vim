@@ -1,1 +1,0 @@
-/home/fredrick/Repositories/frealmyr/dotfiles/.vim

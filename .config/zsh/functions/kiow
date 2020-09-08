@@ -12,7 +12,7 @@ fi
 
 watch -c -t -n $argv[1] docker run --name "$DOCKER_RAND_ID" --rm -t \
   -u 1000:1000 \
-  -v $HOME/.kube/config:/home/clitools/.kube/config \
+  -v $HOME/.config/kube:/home/clitools/.kube \
   -v $HOME/.config/gcloud:/home/clitools/.config/gcloud \
   docker.pkg.github.com/bulderbank/cloud-cli-tools/cli-tools:latest kubectl $kns get ingress
 }

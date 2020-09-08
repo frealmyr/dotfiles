@@ -8,56 +8,52 @@ echo "   \/\  ####  /\/    preferences. This script will replace existing config
 echo ""
 
 read -p "Are ye alright with this? (y/n) " RESP
-#if [ "$RESP" == "y" ]; then
-#  echo "brew: installing homebrew..."
-#  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
+if [ "$RESP" == "y" ]; then
+  echo "brew: installing homebrew..."
+  /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
-  echo "brew: installing zsh..."
-#  brew install zsh
+  echo "brew: installing zsh and tmux..."
+  brew install zsh tmux
 
-  echo "brew: installing tmux..."
-#  brew install tmux
-  
   echo "misc: creating ~/.config if it does not exist..."
   mkdir ${HOME}/.config
 
   echo "zsh: installing oh-my-zsh..."
-#  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
+  sh -c "$(curl -fsSL https://raw.githubusercontent.com/robbyrussell/oh-my-zsh/master/tools/install.sh)"
 
   echo "zsh: adding plugins..."
-#  git clone https://github.com/MichaelAquilina/zsh-you-should-use.git $ZSH_CUSTOM/plugins/you-should-use
-#  git clone https://github.com/zsh-users/zsh-docker.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-docker
-#  git clone https://github.com/zsh-users/zsh-autosuggestions ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-autosuggestions
-#  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting
+  git clone https://github.com/MichaelAquilina/zsh-you-should-use.git ${HOME}/.oh-my-zsh/custom/plugins/you-should-use
+  git clone https://github.com/zsh-users/zsh-docker.git ${HOME}/.oh-my-zsh/custom/plugins/zsh-docker
+  git clone https://github.com/zsh-users/zsh-autosuggestions ${HOME}/.oh-my-zsh/custom/plugins/zsh-autosuggestions
+  git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${HOME}/.oh-my-zsh/custom/plugins/zsh-syntax-highlighting
 
   echo "zsh: removing .zshrc if it exsists..."
+  rm -rf ${HOME}/.config/zsh
   rm ${HOME}/.zshrc
 
   echo "zsh: adding syslinks for configs..."
   mkdir ${HOME}/.config/zsh
   ln -s ${PWD}/.zshrc ${HOME}/.zshrc
-  ln -s ${PWD}/.config/zsh/aliases ${HOME}/.config/zsh/aliases
-  ln -s ${PWD}/.config/zsh/functions ${HOME}/.config/zsh/functions
+  ln -s ${PWD}/.config/zsh ${HOME}/.config/zsh
   ln -s ${PWD}/themes/sardine.zsh-theme ${HOME}/.oh-my-zsh/themes/sardine.zsh-theme
 
   echo "tmux: removing .tmux.conf if it exists..."
+  rm -rf ${HOME}/.config/tmux
   rm ${HOME}/.tmux.conf
-  mkdir ${HOME}/.config/tmux
 
   echo "tmux: adding syslinks for configs..."
+  mkdir ${HOME}/.config/tmux
   ln -s ${PWD}/.tmux.conf ${HOME}/.tmux.conf
-  ln -s ${PWD}/.config/tmux/tmux.theme ${HOME}/.config/tmux/tmux.theme
-  ln -s ${PWD}/.config/tmux/scripts/ ${HOME}/.config/tmux
-
-  echo "tmux: mark scripts as executables..."
-  chmod +x ${HOME}/.config/tmux/scripts/git-changes.sh
-  chmod +x ${HOME}/.config/tmux/scripts/git-stash.sh
+  ln -s ${PWD}/.config/tmux ${HOME}/.config/tmux
 
   echo "vim: removing .vim if it exsists..."
-  rm ${HOME}/.vim
+  rm -rf ${HOME}/.vim
 
   echo "vim: adding syslinks for configs..."
   ln -s ${PWD}/.vim ${HOME}/.vim
+
+  echo "git: remove configuration if it exists..."
+  rm ${HOME}/.gitconfig ${HOME}/.gitignore
 
   echo "git: adding syslinks for git configs..."
   ln -s ${PWD}/.gitconfig ${HOME}/.gitconfig

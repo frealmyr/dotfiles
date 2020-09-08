@@ -10,4 +10,4 @@ read -p "Github Personal Token: " token
 stty echo
 echo ""
 
-echo $token | docker login https://docker.pkg.github.com -u "$username" --password-stdin 
+echo $token | docker login https://docker.pkg.github.com -u "$username" --password-stdin
