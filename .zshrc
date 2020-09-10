@@ -1,6 +1,9 @@
 # Disable "Insecure completion-dependent" warning on MacOS
 # https://github.com/ohmyzsh/ohmyzsh/issues/6835#issuecomment-390216875
-ZSH_DISABLE_COMPFIX="true"
+# ZSH_DISABLE_COMPFIX="true"
+# use `compaudit | xargs chmod g-w` instead!
+# https://stackoverflow.com/a/22753363
+
 
 # Add additional directories to PATH
 export PATH=$HOME/bin:/usr/local/bin:/opt/local/bin:$PATH
@@ -18,6 +21,10 @@ export EDITOR=vim
 # Autostart tmux
 ZSH_TMUX_AUTOSTART=true
 
+# Inline completions
+zstyle ':completion:*:*:git:*' script ~/.config/zsh/functions/completion-git.zsh
+zstyle ':completion:*:*:k:*' script ~/.config/zsh/functions/completion-k.zsh
+
 # Path and list of ZSH functions to load
 fpath=(~/.config/zsh/functions $fpath)
 autoload -Uz \
@@ -27,6 +34,7 @@ autoload -Uz \
   kcrename kdow kiow know kns knsd \
   kpow kpull kset ksow ktail lint-tf \
   lint-yaml printcolors tf tflogin tfvalidate \
+  compinit && compinit
 
 # Folder for custom files
 ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
@@ -35,7 +43,7 @@ ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
 ZSH_THEME="sardine"
 
 # Plugins to automatically load
-plugins=(docker osx brew extract tmux you-should-use zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(docker kubectl osx brew extract tmux you-should-use zsh-autosuggestions zsh-syntax-highlighting)
 
 # Source alias files
 source ${HOME}/.config/zsh/aliases/git

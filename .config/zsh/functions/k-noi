@@ -7,11 +7,11 @@
 function k-noi() {
 
 # Add a random id to the docker container, so that we can run multiple instances
-if [[ -z "2$DOCKER_RAND_ID" ]]; then
-  DOCKER_RAND_ID=2$RANDOM
+if [[ -z "$DOCKER_RAND_ID" ]]; then
+  DOCKER_RAND_ID="$RANDOM"
 fi
 
-docker run --name "2$DOCKER_RAND_ID" --rm \
+  docker run --name "$DOCKER_RAND_ID" --rm \
   -u 1000:1000 \
   -v $(pwd):$(pwd) \
   -w $(pwd) \
