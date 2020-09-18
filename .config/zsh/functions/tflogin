@@ -20,21 +20,20 @@ function tflogin() {
       TERRAFORM_STATE_GCP_BUCKET=$PROJECT-tf-state
       printf "\e[1;34mtflogin: \e[0mproject specific environment variables set! \n"
 
-      printf "\n\e[1;34mtflogin: \e[0msetting the shared secrets between env.. \n"
-      echo "exporting app_alertmanager_opsgenie_api_key.."
-      TF_VAR_app_alertmanager_opsgenie_api_key=$(gcloud secrets versions access latest --secret="cloud-terraform-api-key-opsgenie")
-      echo "exporting app_alertmanager_slack_url.."
-      TF_VAR_app_alertmanager_slack_url_main=$(gcloud secrets versions access latest --secret="cloud-terraform-api-key-slack")
-      echo "exporting app_alertmanager_slack_url_experimental..."
-      TF_VAR_app_alertmanager_slack_url_experimental=$(gcloud secrets versions access latest --secret="cloud-terraform-api-key-slack-experimental")
-      echo "exporting snyk_token_docker_credentials"
-      TF_VAR_snyk_token_docker_credentials=$(gcloud secrets versions access latest --secret="cloud-sa-snyk-docker-credentials")
-      echo "exporting snyk_token_integrationId"
-      TF_VAR_snyk_token_integrationId=$(gcloud secrets versions access latest --secret="cloud-terraform-api-key-snyk")
-      printf "\e[1;34mtflogin: \e[0mshared secrets set! \n"
-
       printf "\n\e[1;34mtflogin: \e[0msetting environment spesific variables.. \n"
       if [[ $PROJECT == *"prod"* ]]; then
+        printf "\n\e[1;34mtflogin: \e[0msetting the shared secrets between env.. \n"
+        echo "exporting app_alertmanager_opsgenie_api_key.."
+        TF_VAR_app_alertmanager_opsgenie_api_key=$(gcloud secrets versions access latest --secret="cloud-terraform-api-key-opsgenie")
+        echo "exporting app_alertmanager_slack_url.."
+        TF_VAR_app_alertmanager_slack_url_main=$(gcloud secrets versions access latest --secret="cloud-terraform-api-key-slack")
+        echo "exporting app_alertmanager_slack_url_experimental..."
+        TF_VAR_app_alertmanager_slack_url_experimental=$(gcloud secrets versions access latest --secret="cloud-terraform-api-key-slack-experimental")
+        echo "exporting snyk_token_docker_credentials"
+        TF_VAR_snyk_token_docker_credentials=$(gcloud secrets versions access latest --secret="cloud-sa-snyk-docker-credentials")
+        echo "exporting snyk_token_integrationId"
+        TF_VAR_snyk_token_integrationId=$(gcloud secrets versions access latest --secret="cloud-terraform-api-key-snyk")
+        printf "\e[1;34mtflogin: \e[0mshared secrets set! \n"
         echo "changing the k8s context to $PROJECT.."
         kset $PROJECT
         echo "setting the generic ENVIRONMENT variable.."
@@ -49,6 +48,18 @@ function tflogin() {
         tf workspace select prod
         tf workspace list
       elif [[ $PROJECT == *"test"* ]]; then
+        printf "\n\e[1;34mtflogin: \e[0msetting the shared secrets between env.. \n"
+        echo "exporting app_alertmanager_opsgenie_api_key.."
+        TF_VAR_app_alertmanager_opsgenie_api_key=$(gcloud secrets versions access latest --secret="cloud-terraform-api-key-opsgenie")
+        echo "exporting app_alertmanager_slack_url.."
+        TF_VAR_app_alertmanager_slack_url_main=$(gcloud secrets versions access latest --secret="cloud-terraform-api-key-slack")
+        echo "exporting app_alertmanager_slack_url_experimental..."
+        TF_VAR_app_alertmanager_slack_url_experimental=$(gcloud secrets versions access latest --secret="cloud-terraform-api-key-slack-experimental")
+        echo "exporting snyk_token_docker_credentials"
+        TF_VAR_snyk_token_docker_credentials=$(gcloud secrets versions access latest --secret="cloud-sa-snyk-docker-credentials")
+        echo "exporting snyk_token_integrationId"
+        TF_VAR_snyk_token_integrationId=$(gcloud secrets versions access latest --secret="cloud-terraform-api-key-snyk")
+        printf "\e[1;34mtflogin: \e[0mshared secrets set! \n"
         echo "changing the k8s context to $PROJECT.."
         kset $PROJECT
         echo "setting the generic ENVIRONMENT variable.."
