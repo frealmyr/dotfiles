@@ -3,7 +3,7 @@
 #
 # Use stern to tail multiple k8s resources
 #
-function ktail() {
+function stern() {
 
 if [[ -z "$DOCKER_RAND_ID" ]]; then
   DOCKER_RAND_ID=$RANDOM
