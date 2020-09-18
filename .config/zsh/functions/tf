@@ -8,7 +8,7 @@ if [[ -z "$DOCKER_RAND_ID" ]]; then
   DOCKER_RAND_ID=$RANDOM
 fi
 
-docker run --name "$DOCKER_RAND_ID" -it --rm \
+docker run --ulimit memlock=-1 --name "$DOCKER_RAND_ID" -it --rm \
   -u 1000:1000 \
   -v /tmp:/tmp \
   -v $(pwd):$(pwd) \
