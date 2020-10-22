@@ -8,7 +8,7 @@ sudo apt update && sudo apt full-upgrade -y
 echo ""
 echo "---"
 echo "apps: installing apt applications.."
-sudo apt install -y htop zsh tmux vim grub-customizer
+sudo apt install -y htop zsh tmux vim grub-customizer firefox thunderbird
 
 echo ""
 echo "---"
@@ -160,7 +160,7 @@ echo "---"
 echo "zsh: adding syslinks for configs..."
 mkdir ${HOME}/.config/zsh
 ln -s ${PWD}/.zshrc ${HOME}/.zshrc
-ln -s ${PWD}/.config/zsh ${HOME}/.config/zsh
+ln -s ${PWD}/.config/zsh ${HOME}/.config
 ln -s ${PWD}/themes/sardine.zsh-theme ${HOME}/.oh-my-zsh/themes/sardine.zsh-theme
 
 echo ""
@@ -175,7 +175,7 @@ echo "---"
 echo "tmux: adding syslinks for configs..."
 mkdir ${HOME}/.config/tmux
 ln -s ${PWD}/.tmux.conf ${HOME}/.tmux.conf
-ln -s ${PWD}/.config/tmux ${HOME}/.config/tmux
+ln -s ${PWD}/.config/tmux ${HOME}/.config
 
 echo ""
 echo "---"
@@ -208,18 +208,18 @@ echo "---"
 echo "system: do not swap unless neccecary..."
 sudo sh -c "echo 'vm.swappiness=1' >> /etc/sysctl.conf"
 
-echo ""
-echo "---"
-echo "terminal: add nord colorscheme..."
-mkdir -p ~/.local/share/xfce4/terminal/colorschemes
-cat >~/.local/share/xfce4/terminal/colorschemes/nord.theme <<EOL
-[Scheme]
-Name=Nord
-ColorCursor=#D8DEE9
-ColorForeground=#D8DEE9
-ColorBackground=#2E3440
-TabActivityColor=#88C0D0
-ColorPalette=#3B4252;#BF616A;#A3BE8C;#EBCB8B;#81A1C1;#B48EAD;#88C0D0;#E5E9F0;#4C566A;#BF616A;#A3BE8C;#EBCB8B;#81A1C1;#B48EAD;#8FBCBB;#ECEFF4
-ColorBold=#D8DEE9
-ColorBoldUseDefault=FALSE
-EOL
+#echo ""
+#echo "---"
+#echo "terminal: add nord colorscheme..."
+#mkdir -p ~/.local/share/xfce4/terminal/colorschemes
+#cat >~/.local/share/xfce4/terminal/colorschemes/nord.theme <<EOL
+#[Scheme]
+#Name=Nord
+#ColorCursor=#D8DEE9
+#ColorForeground=#D8DEE9
+#ColorBackground=#2E3440
+#TabActivityColor=#88C0D0
+#ColorPalette=#3B4252;#BF616A;#A3BE8C;#EBCB8B;#81A1C1;#B48EAD;#88C0D0;#E5E9F0;#4C566A;#BF616A;#A3BE8C;#EBCB8B;#81A1C1;#B48EAD;#8FBCBB;#ECEFF4
+#ColorBold=#D8DEE9
+#ColorBoldUseDefault=FALSE
+#EOL

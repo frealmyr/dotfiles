@@ -16,13 +16,13 @@
 }
 
 /* Hide sidebar splitter when using Tree Style Tab.  */
-#sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] + #sidebar-splitter {
+/* #sidebar-box[sidebarcommand="treestyletab_piro_sakura_ne_jp-sidebar-action"] + #sidebar-splitter {
   display: none !important;
-}
+} */
 
 /* Arc/Nord theme stuff, looks good on Ubuntu */
 
-/* menubar, toolbar, nav-bar, #TabsToolbar > *{
+menubar, toolbar, nav-bar, #TabsToolbar > *{
   background-color: #383c4a !important;
 }
 
@@ -32,5 +32,5 @@
 
 #urlbar-background {
   background: #4b5162 !important;
-} */
+}
 

@@ -25,6 +25,7 @@ docker run --ulimit memlock=-1 --name "$DOCKER_RAND_ID" -it --rm \
   -e TF_VAR_app_alertmanager_slack_url=$TF_VAR_app_alertmanager_slack_url_experimental \
   -e TF_VAR_app_alertmanager_slack_url_main=$TF_VAR_app_alertmanager_slack_url_main \
   -e TF_VAR_app_alertmanager_slack_url_experimental=$TF_VAR_app_alertmanager_slack_url_experimental \
+  -e TF_VAR_github_token=$TF_VAR_github_token \
   docker.pkg.github.com/bulderbank/cloud-cli-tools/cli-tools:latest terraform $argv[*]
 }
 

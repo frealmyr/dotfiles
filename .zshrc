@@ -43,7 +43,7 @@ ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
 ZSH_THEME="sardine"
 
 # Plugins to automatically load
-plugins=(docker kubectl osx brew extract tmux you-should-use zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(docker osx brew extract tmux you-should-use zsh-autosuggestions zsh-syntax-highlighting)
 
 # Source alias files
 source ${HOME}/.config/zsh/aliases/git
