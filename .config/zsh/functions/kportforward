@@ -1,0 +1,18 @@
+#!/usr/local/bin/zsh
+
+#
+# Run kubectl commands, GKE requires gcloud for helpers
+#
+function kportforward() {
+
+# Add a random id to the docker container, so that we can run multiple instances
+if [[ -z "$DOCKER_RAND_ID" ]]; then
+  DOCKER_RAND_ID=$RANDOM
+fi
+
+docker run --net=host --name "$DOCKER_RAND_ID" --rm -ti \
+  -u 1000:1000 \
+  -v $HOME/.config/kube:/home/clitools/.kube \
+  -v $HOME/.config/gcloud:/home/clitools/.config/gcloud \
+  docker.pkg.github.com/bulderbank/cloud-cli-tools/cli-tools:latest kubectl $kns port-forward $argv[1] $argv[2]
+
