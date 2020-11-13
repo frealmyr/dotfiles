@@ -1,0 +1,23 @@
+#!/usr/local/bin/zsh
+
+#
+# Run kubectl commands, GKE requires gcloud for helpers.
+# Without interactive mode on the container, for some odd use-cases.
+#
+function kscore() {
+
+# Add a random id to the docker container, so that we can run multiple instances
+if [[ -z "$DOCKER_RAND_ID" ]]; then
+  DOCKER_RAND_ID="$RANDOM"
+fi
+
+  docker run --name "2$DOCKER_RAND_ID" --rm \
+  -u 1000:1000 \
+  -v $(pwd):/home/clitools/yolo \
+  -w /home/clitools/yolo \
+  -e KUBE_EDITOR=vim \
+  -v $HOME/.config/kube:/home/clitools/.kube \
+  -v $HOME/.config/gcloud:/home/clitools/.config/gcloud \
+  docker.pkg.github.com/bulderbank/cloud-cli-tools/cli-tools:latest kubectl-score score $argv[*]
+}
+
