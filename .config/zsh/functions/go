@@ -1,0 +1,15 @@
+function go() {
+
+  if [[ -z "$GO_VERSION" ]]; then
+    GO_VERSION=1.14-alpine
+  fi
+
+  docker run --rm -ti \
+    -e GOFLAGS=-mod=vendor \
+    -e GO111MODULE=on \
+    -v localdata:/usr/local/go \
+    -v data:/go/src \
+    -v $(pwd):$(pwd) \
+    -w $(pwd) \
+    golang:"$GO_VERSION" go $argv
+}

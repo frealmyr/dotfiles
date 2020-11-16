@@ -1,7 +1,0 @@
-#!/usr/local/bin/zsh
-
-# Run terraform lint -recursive in dir and sub-dirs using docker
-
-function lint-tf() {
-  tf fmt -recursive
-}

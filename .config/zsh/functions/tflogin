@@ -1,5 +1,3 @@
-#!/usr/local/bin/zsh
-
 function tflogin() {
   PROJECT=$argv[1]
 
@@ -49,6 +47,7 @@ function tflogin() {
         echo "changing the terraform workspace to prod.."
         tf workspace select prod
         tf workspace list
+
       elif [[ $PROJECT == *"test"* ]]; then
         printf "\n\e[1;34mtflogin: \e[0msetting the shared secrets between env.. \n"
         echo "exporting app_alertmanager_opsgenie_api_key.."
@@ -77,6 +76,7 @@ function tflogin() {
         echo "changing the terraform workspace to test.."
         tf workspace select test
         tf workspace list
+
       elif [[ $PROJECT == *"shared"* ]]; then
         echo "setting the generic ENVIRONMENT variable.."
         ENVIRONMENT=shared
@@ -107,6 +107,7 @@ function tflogin() {
       echo "   \/\  ####  /\/"
       echo "        '##'"
       echo ""
+
     elif [[ $(pwd | awk -F / '{print $NF}') == "cloud-access" ]]
       then
 

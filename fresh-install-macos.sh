@@ -13,7 +13,21 @@ if [ "$RESP" == "y" ]; then
   /usr/bin/ruby -e "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 
   echo "brew: installing zsh and tmux..."
-  brew install zsh tmux
+  brew install zsh tmux bat bash-completion
+
+  echo "brew: install google-cloud-sdk"
+  brew cask install google-cloud-sdk
+
+  echo "kubectl: install latest kubectl.."
+  curl -LO "https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/darwin/amd64/kubectl" \
+    && chmod +x ./kubectl \
+    && mv ./kubectl /usr/local/bin/kubectl
+
+  echo "kubectl: install brew..."
+  curl -LO "https://github.com/kubernetes-sigs/krew/releases/latest/download/krew.tar.gz"
+  && tar -xvf krew.tar.gz krew-darwin_amd64
+  && ./krew-darwin_amd64 install krew
+  && rm krew.tar.gz krew-darwin_amd64
 
   echo "misc: creating ~/.config if it does not exist..."
   mkdir ${HOME}/.config

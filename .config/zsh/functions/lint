@@ -1,0 +1,8 @@
+function lint() {
+  TYPE=argv[1]
+  if [[ $TYPE = "helm" ]]; then
+    yamllint -d "{extends: default, rules: {document-start: disable, brackets: disable, braces: disable, line-length: {max: 200}}}" . | grep -vwE "syntax error: expected the node content, but found '-'"
+  elif [[ $TYPE = "tf" ]]; then
+    tf fmt -recursive
+  fi
+}
