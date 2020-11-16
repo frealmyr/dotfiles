@@ -1,17 +1,4 @@
-#!/usr/local/bin/zsh
-
-#
-# Rename the active kubectl context
-#
 function kcrename() {
 : ${1?"kcrename new_context_name"}
-
-if [[ -z "$DOCKER_RAND_ID" ]]; then
-  DOCKER_RAND_ID=$RANDOM
-fi
-
-docker run --name "$DOCKER_RAND_ID" --rm -ti \
-  -u 1000:1000 \
-  -v $HOME/.config/kube:/home/clitools/.kube \
-  docker.pkg.github.com/bulderbank/cloud-cli-tools/cli-tools:latest kubectl config rename-context $(kcc config current-context | tr -d '\r') $argv[1]
+  kubectl config rename-context $(kcc config current-context | tr -d '\r') $argv[1]
 }

@@ -1,54 +1,40 @@
-# Disable "Insecure completion-dependent" warning on MacOS
-# https://github.com/ohmyzsh/ohmyzsh/issues/6835#issuecomment-390216875
-# ZSH_DISABLE_COMPFIX="true"
-# use `compaudit | xargs chmod g-w` instead!
-# https://stackoverflow.com/a/22753363
-
-
-# Add additional directories to PATH
-export PATH=$HOME/bin:/usr/local/bin:/opt/local/bin:$PATH
-
-# Path to oh-my-zsh installation
+export PATH=$HOME/bin:/usr/local/bin:/opt/local/bin:${KREW_ROOT:-$HOME/.krew}/bin:$PATH
 export ZSH="$HOME/.oh-my-zsh"
-
-# Ensure UTF-8 is set as character encoding
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-
-# Set default text editor
 export EDITOR=vim
 
-# Autostart tmux
 ZSH_TMUX_AUTOSTART=true
 
-# Inline completions
-zstyle ':completion:*:*:git:*' script ~/.config/zsh/functions/completion-git.zsh
-zstyle ':completion:*:*:k:*' script ~/.config/zsh/functions/completion-k.zsh
+ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
+ZSH_THEME="sardine"
+
+plugins=(docker osx brew extract git history tmux you-should-use zsh-autosuggestions zsh-syntax-highlighting)
 
 # Path and list of ZSH functions to load
 fpath=(~/.config/zsh/functions $fpath)
 autoload -Uz \
-  bbc bw bw-noi flushdns gcloud \
-  gcurl gh-update gsutil helm \
-  k k-noi kcc kcdelete kcls kcow \
-  kcrename kdow kiow know kns knsd \
-  kpow kpull kset ksow ktail lint-tf \
-  lint-yaml printcolors tf tflogin tfvalidate \
-  compinit && compinit
-
-# Folder for custom files
-ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
-
-# Theme to load from ~/.oh-my-zsh/themes/
-ZSH_THEME="sardine"
-
-# Plugins to automatically load
-plugins=(docker osx brew extract tmux you-should-use zsh-autosuggestions zsh-syntax-highlighting)
+  flushdns forgetti go kcdelete kcrename \
+  kgenocide kns kpull kwatch lint printcolors \
+  tfa tflogin tfp tfw update
 
 # Source alias files
-source ${HOME}/.config/zsh/aliases/git
 source ${HOME}/.config/zsh/aliases/casual
-source ${HOME}/.config/zsh/aliases/spotify
+source ${HOME}/.config/zsh/aliases/k8s
+source ${HOME}/.config/zsh/aliases/terraform
 
 # Oh-My-ZSH related things
 source $ZSH/oh-my-zsh.sh
+
+# Set cloudsdk location and enable zsh autocomplete
+export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/libexec/bin/python"
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+
+# Enable kubectl autocompletion
+source <(kubectl completion zsh)
+complete -F __start_kubectl k
+
+# Enable stern autocompletion
+source <(stern --completion=zsh)
+complete -F __start_stern ktail

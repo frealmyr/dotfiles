@@ -1,0 +1,11 @@
+function forgetti() {
+  if [[ $argv[1] == "casual" ]]; then
+    bat --theme="Dracula" --style="header" -l bash ${HOME}/.config/zsh/aliases/casual
+  elif [[ $argv[1] == "k8s" ]]; then
+    bat --theme="Dracula" --style="header" -l bash ${HOME}/.config/zsh/aliases/k8s
+  elif [[ $argv[1] == "terraform" ]]; then
+    bat --theme="Dracula" --style="header" -l bash ${HOME}/.config/zsh/aliases/terraform
+  elif [[ $argv[1] == "git" ]]; then
+    git config --get-regexp ^alias\. | sed -e s/^alias\.// -e s/\ /\ =\ / | bat --theme="Dracula" --style="header" -l bash
+  fi
+}

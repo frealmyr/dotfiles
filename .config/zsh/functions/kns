@@ -1,8 +1,3 @@
-#!/usr/local/bin/zsh
-
-#
-# Sets namespace by using a local variable with --namespace=argv, this enables seperate namespaces in sessions
-#
 function kns() {
 : ${1?"kns NAMESPACE"}
 
