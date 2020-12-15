@@ -15,7 +15,7 @@ plugins=(docker osx brew extract git history tmux you-should-use zsh-autosuggest
 fpath=(~/.config/zsh/functions $fpath)
 autoload -Uz \
   flushdns forgetti go kcdelete kcrename \
-  kgenocide kns kpull kwatch lint printcolors \
+  kcrusade kns kpull kwatch lint printcolors \
   tfa tflogin tfp tfw update
 
 # Source alias files

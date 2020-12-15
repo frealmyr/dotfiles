@@ -7,5 +7,7 @@ function forgetti() {
     bat --theme="Dracula" --style="header" -l bash ${HOME}/.config/zsh/aliases/terraform
   elif [[ $argv[1] == "git" ]]; then
     git config --get-regexp ^alias\. | sed -e s/^alias\.// -e s/\ /\ =\ / | bat --theme="Dracula" --style="header" -l bash
+  else
+    echo "casual k8s terraform git"
   fi
 }
