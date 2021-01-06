@@ -1,4 +1,4 @@
 function kwatch() {
 : ${1?"kwatch SECONDS whatever after here tbh"}
-  watch -t -n $argv[1] -c -x zsh -c "source $HOME/.config/zsh/functions/k; k $argv[2] $argv[3] $argv[4] $argv[5] $argv[6]"
+  watch -t -n $argv[1] -c -x zsh -c "kubectl $kns $argv[2] $argv[3] $argv[4] $argv[5] $argv[6]"
 }

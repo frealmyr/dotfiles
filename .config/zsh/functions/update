@@ -2,48 +2,61 @@ function update() {
   APP=$argv[1]
   VERSION=$argv[2]
 
-  if [[ $(uname -a) == *"Darwin"* ]]; then
+  if [[ -z $APP ]]; then
+    echo "Available commands:"
+    echo ""
+    echo "update kubectl 1.2.3"
+    echo "update helm 1.2.3"
+    echo "update krew"
+    echo "update stern"
+    echo "update gh"
+  fi
+
+  # This script is split into MacOS and Ubuntu,
+  # because it was too much of a PITA to make something dynamic for each app download..
+
+  if [[ $(uname -a) == *"linux"* ]]; then
     if [[ $APP = "kubectl" ]]; then
-      if [[ $(curl -LI https://storage.googleapis.com/kubernetes-release/release/v${VERSION}/bin/darwin/amd64/kubectl -o /dev/null -w '%{http_code}\n' -s) == "200" ]]; then
-        curl -LO "https://storage.googleapis.com/kubernetes-release/release/v${VERSION}/bin/darwin/amd64/kubectl" \
+      if [[ $(curl -LI https://storage.googleapis.com/kubernetes-release/release/v${VERSION}/bin/linux/amd64/kubectl -o /dev/null -w '%{http_code}\n' -s) == "200" ]]; then
+        curl -LO "https://storage.googleapis.com/kubernetes-release/release/v${VERSION}/bin/linux/amd64/kubectl" \
           && chmod +x ./kubectl \
-          && mv ./kubectl /usr/local/bin/kubectl darwin-amd64
+          && mv ./kubectl /usr/local/bin/kubectl
         echo "Kubectl v${VERSION} installed!"
       else
         echo "Error: kubectl version not found"
         echo "Visit https://github.com/kubernetes/kubectl/releases for release versions.."
       fi
 
-    elif [[ $APP = "krew" ]]; then
-      if [[ $(curl -LI https://github.com/kubernetes-sigs/krew/releases/v${VERSION}/download/krew.tar.gz -o /dev/null -w '%{http_code}\n' -s) == "200" ]]; then
-        curl -LO "https://github.com/kubernetes-sigs/krew/releases/v${VERSION}/download/krew.tar.gz" \
-          && tar -xvf krew.tar.gz krew-darwin_amd64 \
-          && ./krew-darwin_amd64 install krew \
-          && rm krew.tar.gz krew-darwin_amd64
-        echo "Krew v${VERSION} installed!"
-      else
-        echo "Error: krew version not found"
-        echo "Visit https://github.com/ubernetes-sigs/krew/releases for release versions.."
-      fi
-
     elif [[ $APP = "helm" ]]; then
-      if curl --output /dev/null --silent --head --fail "https://get.helm.sh/helm-v${VERSION}-darwin-amd64.tar.gz"; then
-        curl -LO "https://get.helm.sh/helm-v${VERSION}-darwin-amd64.tar.gz" \
-          && tar -xvf helm-v${VERSION}-darwin-amd64.tar.gz darwin-amd64/helm \
-          && mv darwin-amd64/helm /usr/local/bin/helm \
-          && rm -r helm-v${VERSION}-darwin-amd64.tar.gz darwin-amd64
+      if curl --output /dev/null --silent --head --fail "https://get.helm.sh/helm-v${VERSION}-linux-amd64.tar.gz"; then
+        curl -LO "https://get.helm.sh/helm-v${VERSION}-linux-amd64.tar.gz" \
+          && tar -xvf helm-v${VERSION}-linux-amd64.tar.gz linux-amd64/helm \
+          && mv linux-amd64/helm /usr/local/bin/helm \
+          && rm -r helm-v${VERSION}-linux-amd64.tar.gz linux-amd64
         echo "Helm v${VERSION} installed!"
       else
         echo "Error: helm version not found"
         echo "Visit https://github.com/helm/helm/releases for release versions.."
       fi
 
+    elif [[ $APP = "krew" ]]; then
+      if [[ $(curl -LI https://github.com/kubernetes-sigs/krew/releases/v${VERSION}/download/krew.tar.gz -o /dev/null -w '%{http_code}\n' -s) == "200" ]]; then
+        curl -LO "https://github.com/kubernetes-sigs/krew/releases/v${VERSION}/download/krew.tar.gz" \
+          && tar -xvf krew.tar.gz krew-linux_amd64 \
+          && ./krew-linux_amd64 install krew \
+          && rm krew.tar.gz krew-linux_amd64
+        echo "Krew v${VERSION} installed!"
+      else
+        echo "Error: krew version not found"
+        echo "Visit https://github.com/ubernetes-sigs/krew/releases for release versions.."
+      fi
+
     elif [[ $APP = "stern" ]]; then
-      if curl --output /dev/null --silent --head --fail "https://github.com/stern/stern/releases/download/v${VERSION}/stern_${VERSION}_darwin_amd64.tar.gz"; then
-        curl -LO "https://github.com/stern/stern/releases/download/v${VERSION}/stern_${VERSION}_darwin_amd64.tar.gz" \
-          && tar -xvf stern_${VERSION}_darwin_amd64.tar.gz stern_${VERSION}_darwin_amd64/stern \
-          && mv stern_${VERSION}_darwin_amd64/stern /usr/local/bin/stern \
-          && rm -r stern_${VERSION}_darwin_amd64*
+      if curl --output /dev/null --silent --head --fail "https://github.com/stern/stern/releases/download/v${VERSION}/stern_${VERSION}_linux_amd64.tar.gz"; then
+        curl -LO "https://github.com/stern/stern/releases/download/v${VERSION}/stern_${VERSION}_linux_amd64.tar.gz" \
+          && tar -xvf stern_${VERSION}_linux_amd64.tar.gz stern_${VERSION}_linux_amd64/stern \
+          && mv stern_${VERSION}_linux_amd64/stern /usr/local/bin/stern \
+          && rm -r stern_${VERSION}_linux_amd64*
         echo "Stern v${VERSION} installed!"
       else
         echo "Error: stern version not found"
@@ -65,6 +78,68 @@ function update() {
     fi
 
   elif [[ $(uname -a) == *"Ubuntu"* ]]; then
-    echo "Haven't done Ubuntu yet, check back later!"
+    if [[ $APP = "kubectl" ]]; then
+      if [[ $(curl -LI https://storage.googleapis.com/kubernetes-release/release/v${VERSION}/bin/linux/amd64/kubectl -o /dev/null -w '%{http_code}\n' -s) == "200" ]]; then
+        curl -LO "https://storage.googleapis.com/kubernetes-release/release/v${VERSION}/bin/linux/amd64/kubectl" \
+          && chmod +x ./kubectl \
+          && sudo mv ./kubectl /usr/local/bin/kubectl
+        echo "Kubectl v${VERSION} installed!"
+      else
+        echo "Error: kubectl version not found"
+        echo "Visit https://github.com/kubernetes/kubectl/releases for release versions.."
+      fi
+
+    elif [[ $APP = "helm" ]]; then
+      if curl --output /dev/null --silent --head --fail "https://get.helm.sh/helm-v${VERSION}-linux-amd64.tar.gz"; then
+        curl -LO "https://get.helm.sh/helm-v${VERSION}-linux-amd64.tar.gz" \
+          && tar -xvf helm-v${VERSION}-linux-amd64.tar.gz linux-amd64/helm \
+          && sudo mv linux-amd64/helm /usr/local/bin/helm \
+          && rm -r helm-v${VERSION}-linux-amd64.tar.gz linux-amd64
+        echo "Helm v${VERSION} installed!"
+      else
+        echo "Error: helm version not found"
+        echo "Visit https://github.com/helm/helm/releases for release versions.."
+      fi
+
+    elif [[ $APP = "krew" ]]; then
+      echo "updating krew.."
+      curl -s https://api.github.com/repos/kubernetes-sigs/krew/releases/latest \
+        | grep "browser_download_url.*krew.tar.gz" \
+        | cut -d : -f 2,3 \
+        | tr -d \" \
+        | wget -qi -
+      tar -xvf krew.tar.gz \
+        && ./krew-linux_amd64 install krew \
+        && rm krew* LICENSE
+      echo "Krew Updated!"
+
+    elif [[ $APP = "stern" ]]; then
+      echo "updating stern.."
+      curl -s https://api.github.com/repos/stern/stern/releases/latest \
+        | grep "browser_download_url.*linux_amd64.tar.gz" \
+        | cut -d : -f 2,3 \
+        | tr -d \" \
+        | wget -qi -
+      tar -xf stern*
+      sudo mv stern*/stern /usr/local/bin/stern
+      rm -r stern*
+      echo "Stern updated!"
+
+    elif [[ $APP = "gh" ]]; then
+      echo "Now updating: gh-cli.."
+      curl -s https://api.github.com/repos/cli/cli/releases/latest \
+        | grep "browser_download_url.*linux_amd64.tar.gz" \
+        | cut -d : -f 2,3 \
+        | tr -d \" \
+        | wget -qi -
+      tar -xf gh*
+      sudo mv ./gh*/bin/gh /usr/local/bin/gh
+      rm -r gh*
+      echo "Github CLI updated!"
+    fi
+
+  else
+    echo "Error: Could not figure out if you are running Linux or MacOS.."
   fi
+
 }

@@ -1,35 +1,38 @@
-export PATH=$HOME/bin:/usr/local/bin:/opt/local/bin:${KREW_ROOT:-$HOME/.krew}/bin:$PATH
+# Path to oh-my-zsh installation
 export ZSH="$HOME/.oh-my-zsh"
+
+# Update shell PATH with custom locations
+export PATH=$HOME/bin:/usr/local/bin:/opt/local/bin:${KREW_ROOT:-$HOME/.krew}/bin:$PATH
+
+# Ensure that UTF-8 is used
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+
+# Autoload tmux and use vim as default editor
+ZSH_TMUX_AUTOSTART=true
 export EDITOR=vim
 
-ZSH_TMUX_AUTOSTART=true
+# Load zsh plugins
+plugins=(docker extract git history history-substring-search tmux you-should-use zsh-autosuggestions zsh-syntax-highlighting)
 
-ZSH_CUSTOM=$HOME/.oh-my-zsh/custom
-ZSH_THEME="sardine"
-
-plugins=(docker osx brew extract git history tmux you-should-use zsh-autosuggestions zsh-syntax-highlighting)
-
-# Path and list of ZSH functions to load
+# Load zsh functions and aliases
 fpath=(~/.config/zsh/functions $fpath)
-autoload -Uz \
-  flushdns forgetti go kcdelete kcrename \
-  kgenocide kns kpull kwatch lint printcolors \
-  tfa tflogin tfp tfw update
-
-# Source alias files
-source ${HOME}/.config/zsh/aliases/casual
-source ${HOME}/.config/zsh/aliases/k8s
-source ${HOME}/.config/zsh/aliases/terraform
+autoload -U $fpath[1]/*(.:t)
+for file in ~/.config/zsh/aliases/*; do source $file; done
 
 # Oh-My-ZSH related things
+ZSH_THEME="sardine"
 source $ZSH/oh-my-zsh.sh
 
-# Set cloudsdk location and enable zsh autocomplete
-export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/libexec/bin/python"
-source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+# Set cloudsdk installation and enable zsh autocomplete
+if [[ $(uname -a) == *"linux"* ]]; then
+  export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/libexec/bin/python"
+  source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
+  source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
+elif [[ $(uname -a) == *"Ubuntu"* ]]; then
+  source "/snap/google-cloud-sdk/current/path.zsh.inc"
+  source "/snap/google-cloud-sdk/current/completion.zsh.inc"
+fi
 
 # Enable kubectl autocompletion
 source <(kubectl completion zsh)

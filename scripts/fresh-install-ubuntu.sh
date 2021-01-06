@@ -45,6 +45,11 @@ sudo flatpak install flathub com.gitlab.newsflash
 
 echo ""
 echo "---"
+echo "apps: install google-cloud-sdk.."
+sudo snap install google-cloud-sdk --classic
+
+echo ""
+echo "---"
 echo "docker: installing latest docker..."
 sudo apt-get install -y \
     apt-transport-https \
@@ -159,9 +164,9 @@ echo ""
 echo "---"
 echo "zsh: adding syslinks for configs..."
 mkdir ${HOME}/.config/zsh
-ln -s ${PWD}/.zshrc ${HOME}/.zshrc
-ln -s ${PWD}/.config/zsh ${HOME}/.config
-ln -s ${PWD}/themes/sardine.zsh-theme ${HOME}/.oh-my-zsh/themes/sardine.zsh-theme
+ln -s ${PWD}/../.zshrc ${HOME}/.zshrc
+ln -s ${PWD}/../.config/zsh ${HOME}/.config
+ln -s ${PWD}/../themes/sardine.zsh-theme ${HOME}/.oh-my-zsh/themes/sardine.zsh-theme
 
 echo ""
 echo "---"
@@ -174,8 +179,8 @@ echo ""
 echo "---"
 echo "tmux: adding syslinks for configs..."
 mkdir ${HOME}/.config/tmux
-ln -s ${PWD}/.tmux.conf ${HOME}/.tmux.conf
-ln -s ${PWD}/.config/tmux ${HOME}/.config
+ln -s ${PWD}/../.tmux.conf ${HOME}/.tmux.conf
+ln -s ${PWD}/../.config/tmux ${HOME}/.config
 
 echo ""
 echo "---"
@@ -185,7 +190,7 @@ rm -rf ${HOME}/.vim
 echo ""
 echo "---"
 echo "vim: adding syslinks for configs..."
-ln -s ${PWD}/.vim ${HOME}/.vim
+ln -s ${PWD}/../.vim ${HOME}/.vim
 
 echo ""
 echo "---"
@@ -195,8 +200,8 @@ rm ${HOME}/.gitconfig ${HOME}/.gitignore
 echo ""
 echo "---"
 echo "git: adding syslinks for git configs..."
-ln -s ${PWD}/.gitconfig ${HOME}/.gitconfig
-ln -s ${PWD}/.gitignore ${HOME}/.gitignore
+ln -s ${PWD}/../.gitconfig ${HOME}/.gitconfig
+ln -s ${PWD}/../.gitignore ${HOME}/.gitignore
 
 echo ""
 echo "---"

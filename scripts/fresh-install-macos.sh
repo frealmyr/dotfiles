@@ -47,9 +47,9 @@ if [ "$RESP" == "y" ]; then
 
   echo "zsh: adding syslinks for configs..."
   mkdir ${HOME}/.config/zsh
-  ln -s ${PWD}/.zshrc ${HOME}/.zshrc
-  ln -s ${PWD}/.config/zsh ${HOME}/.config/zsh
-  ln -s ${PWD}/themes/sardine.zsh-theme ${HOME}/.oh-my-zsh/themes/sardine.zsh-theme
+  ln -s ${PWD}/../.zshrc ${HOME}/.zshrc
+  ln -s ${PWD}/../.config/zsh ${HOME}/.config/zsh
+  ln -s ${PWD}/../themes/sardine.zsh-theme ${HOME}/.oh-my-zsh/themes/sardine.zsh-theme
 
   echo "tmux: removing .tmux.conf if it exists..."
   rm -rf ${HOME}/.config/tmux
@@ -57,21 +57,21 @@ if [ "$RESP" == "y" ]; then
 
   echo "tmux: adding syslinks for configs..."
   mkdir ${HOME}/.config/tmux
-  ln -s ${PWD}/.tmux.conf ${HOME}/.tmux.conf
-  ln -s ${PWD}/.config/tmux ${HOME}/.config/tmux
+  ln -s ${PWD}/../.tmux.conf ${HOME}/.tmux.conf
+  ln -s ${PWD}/../.config/tmux ${HOME}/.config/tmux
 
   echo "vim: removing .vim if it exsists..."
   rm -rf ${HOME}/.vim
 
   echo "vim: adding syslinks for configs..."
-  ln -s ${PWD}/.vim ${HOME}/.vim
+  ln -s ${PWD}/../.vim ${HOME}/.vim
 
   echo "git: remove configuration if it exists..."
   rm ${HOME}/.gitconfig ${HOME}/.gitignore
 
   echo "git: adding syslinks for git configs..."
-  ln -s ${PWD}/.gitconfig ${HOME}/.gitconfig
-  ln -s ${PWD}/.gitignore ${HOME}/.gitignore
+  ln -s ${PWD}/../.gitconfig ${HOME}/.gitconfig
+  ln -s ${PWD}/../.gitignore ${HOME}/.gitignore
 
   echo "macos: removing non-breaking space (option+space) keybinding..."
   mkdir ~/Library/KeyBindings && echo "ewoifiAiID0gKCJpbnNlcnRUZXh0OiIsICIgIik7Cn0=" | base64 --decode > ${HOME}/Library/KeyBindings/DefaultKeyBinding.dict

@@ -7,3 +7,4 @@ fi
 
 # Quality of life improvements
 alias ls='ls -1'
+alias bat='batcat --theme="Monokai Extended Bright"'
