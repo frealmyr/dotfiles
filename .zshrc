@@ -1,5 +1,6 @@
 # Path to oh-my-zsh installation
 export ZSH="$HOME/.oh-my-zsh"
+export ZSH_CUSTOM="$ZSH/custom"
 
 # Update shell PATH with custom locations
 export PATH=$HOME/bin:/usr/local/bin:/opt/local/bin:${KREW_ROOT:-$HOME/.krew}/bin:$PATH
@@ -8,24 +9,18 @@ export PATH=$HOME/bin:/usr/local/bin:/opt/local/bin:${KREW_ROOT:-$HOME/.krew}/bi
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-# Autoload tmux and use vim as default editor
+# Autoload tmux
 ZSH_TMUX_AUTOSTART=true
-export EDITOR=vim
 
 # Load zsh plugins
 plugins=(docker extract git history history-substring-search tmux you-should-use zsh-autosuggestions zsh-syntax-highlighting)
-
-# Load zsh functions and aliases
-fpath=(~/.config/zsh/functions $fpath)
-autoload -U $fpath[1]/*(.:t)
-for file in ~/.config/zsh/aliases/*; do source $file; done
 
 # Oh-My-ZSH related things
 ZSH_THEME="sardine"
 source $ZSH/oh-my-zsh.sh
 
 # Set cloudsdk installation and enable zsh autocomplete
-if [[ $(uname -a) == *"linux"* ]]; then
+if [[ $(uname -a) == *"Darwin"* ]]; then
   export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/libexec/bin/python"
   source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
   source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
@@ -41,3 +36,18 @@ complete -F __start_kubectl k
 # Enable stern autocompletion
 source <(stern --completion=zsh)
 complete -F __start_stern ktail
+
+# Git ssh config
+git config --global url."git@github.com:".insteadOf "https://github.com/"
+
+# Golang
+export GOROOT=/usr/local/go
+export GOPROXY=direct
+export GO111MODULE=on
+export GOSUMDB=off
+export PATH=$GOROOT/bin:$PATH
+
+# Load zsh functions and aliases
+fpath=(~/.config/zsh/functions $fpath)
+autoload -U $fpath[1]/*(.:t)
+for file in ~/.config/zsh/aliases/*; do source $file; done

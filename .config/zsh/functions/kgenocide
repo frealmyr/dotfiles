@@ -1,4 +1,5 @@
 function kgenocide() {
+: ${1?"kgenocide k8s_resource_type text_to_grep"}
   TYPE=$argv[1]
   NAME=$argv[2]
 

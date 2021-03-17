@@ -43,10 +43,10 @@ function tflogin() {
         echo "setting the GOOGLE_ENCRYPTION_KEY for $PROJECT.."
         GOOGLE_ENCRYPTION_KEY=$(gcloud secrets versions access latest --secret="cloud-terraform-bucket-encryption-key")
         echo "running terraform init..."
-        tf init -reconfigure -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET" -lock=false
+        terraform init -reconfigure -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET" -lock=false
         echo "changing the terraform workspace to prod.."
-        tf workspace select prod
-        tf workspace list
+        terraform workspace select prod
+        terraform workspace list
 
       elif [[ $PROJECT == *"test"* ]]; then
         printf "\n\e[1;34mtflogin: \e[0msetting the shared secrets between env.. \n"
@@ -72,10 +72,10 @@ function tflogin() {
         echo "setting the GOOGLE_ENCRYPTION_KEY for $PROJECT.."
         GOOGLE_ENCRYPTION_KEY=""
         echo "running terraform init..."
-        tf init -reconfigure -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET" -lock=false
+        terraform init -reconfigure -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET" -lock=false
         echo "changing the terraform workspace to test.."
-        tf workspace select test
-        tf workspace list
+        terraform workspace select test
+        terraform workspace list
 
       elif [[ $PROJECT == *"shared"* ]]; then
         echo "setting the generic ENVIRONMENT variable.."
@@ -85,16 +85,16 @@ function tflogin() {
         echo "setting the GOOGLE_ENCRYPTION_KEY for $PROJECT.."
         GOOGLE_ENCRYPTION_KEY=""
         echo "running terraform init..."
-        tf init -reconfigure -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET" -lock=false
+        terraform init -reconfigure -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET" -lock=false
         echo "changing the terraform workspace to test.."
-        tf workspace select shared
-        tf workspace list
+        terraform workspace select shared
+        terraform workspace list
       fi
 
       read "REFRESH_REPLY?Do ye wish to run refresh? [y/N] "
       if [[ "$REFRESH_REPLY" =~ ^[Yy]$ ]]
       then
-        tf refresh -parallelism=25 $(for filename in env/$ENVIRONMENT/*.tfvars; do printf "-var-file=$filename " ; done)
+        terraform refresh -parallelism=25 $(for filename in env/$ENVIRONMENT/*.tfvars; do printf "-var-file=$filename " ; done)
       fi
 
       printf "%b" "\nTerraform environment is ready for: \e[1;32m$PROJECT\e[0m\n"
@@ -139,11 +139,11 @@ function tflogin() {
         #echo "setting the GOOGLE_ENCRYPTION_KEY for $PROJECT.."
         #GOOGLE_ENCRYPTION_KEY=$(gcloud secrets versions access latest --secret="cloud-terraform-bucket-encryption-key")
         echo "running terraform init..."
-        tf init -reconfigure -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET" -lock=false
+        terraform init -reconfigure -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET" -lock=false
 
         echo "changing the terraform workspace to prod.."
-        tf workspace select prod
-        tf workspace list
+        terraform workspace select prod
+        terraform workspace list
 
       elif [[ $PROJECT == *"test"* ]]; then
 
@@ -171,11 +171,11 @@ function tflogin() {
         #GOOGLE_ENCRYPTION_KEY=""
 
         echo "running terraform init..."
-        tf init -reconfigure -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET" -lock=false
+        terraform init -reconfigure -backend-config="bucket=$TERRAFORM_STATE_GCP_BUCKET" -lock=false
 
         echo "changing the terraform workspace to test.."
-        tf workspace select test
-        tf workspace list
+        terraform workspace select test
+        terraform workspace list
 
       fi
     else
