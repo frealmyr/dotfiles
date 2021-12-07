@@ -1,0 +1,6 @@
+---
+collections:
+- name: community.general
+- name: ansible-role-firefox
+  src: https://github.com/unrblt/ansible-role-firefox.git
+  scm: git

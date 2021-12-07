@@ -12,6 +12,7 @@
 .config/gcloud/
 .vscode/
 .idea/
+.roles/
 
 # ignored files
 .CFUserTextEncoding
@@ -24,3 +25,4 @@
 .sh_history
 .viminfo
 crash.log
+/roles
