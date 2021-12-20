@@ -1,0 +1,14 @@
+function kresize() {
+: ${1?"kresize k8s_resource_type text_to_grep num_pods"}
+  TYPE=$argv[1]
+  NAME=$argv[2]
+  NUM_PODS=$argv[3]
+
+  printf "\nScale targets: \e[1;35m$TYPE\e[0m \e[1;33m$NAME\e[0m \e[1;36m$NUM_PODS\e[0m \n"
+  read "EXCECUTE_EXCECUTION?Do ye wish to scale all $TYPE with this name? [y/N] "
+  if [[ "$EXCECUTE_EXCECUTION" =~ ^[Yy]$ ]]
+  then
+    printf "\n\e[0;32mᕕ( ᐛ ) ᕗ Righto, scaling stuff! \e[0m\n"
+    kubectl $kns scale --replicas=$NUM_PODS $TYPE $(k $kns get $TYPE | grep $NAME | awk '{print $1}')
+  fi
+}

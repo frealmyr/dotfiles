@@ -1,0 +1,19 @@
+# Ignore everything
+*
+
+# Except files
+!.gitignore
+!.zshrc
+!.tmux.conf
+!.gitconfig
+
+# Except folders
+!.config/
+
+!.config/tmux
+!.config/tmux/*
+!.config/tmux/*/*
+
+!.config/zsh
+!.config/zsh/*
+!.config/zsh/*/*
