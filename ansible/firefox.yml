@@ -13,6 +13,11 @@
     failed_when:
       - firefox_kill_result.rc == 1 or firefox_kill_result.rc == 2
 
+  - name: Wait until profiles.ini is present before continuing
+    wait_for:
+      path: ~/.mozilla/firefox/profiles.ini
+      delay: 3
+
   - name: find default firefox user id
     shell: cat "$HOME/.mozilla/firefox/profiles.ini" | sed -n -e 's/^.*Path=//p' | head -n 1 | cut -d "." -f1
     register: firefox_id
@@ -32,44 +37,32 @@
   - name: replace profile default name with work
     lineinfile:
       path: ~/.mozilla/firefox/profiles.ini
-      regexp: 'Name=.*default'
-      line: 'Name=work'
-      backrefs: yes
+      regexp: 'Name=default$'
+      line: Name=work
 
   - name: replace profile default path with work
     lineinfile:
       path: ~/.mozilla/firefox/profiles.ini
-      regexp: 'Path=.*default'
-      line: 'Path={{ firefox_id.stdout }}.work'
-      backrefs: yes
+      regexp: 'Path=.*default$'
+      line: Path={{ firefox_id.stdout }}.work
 
   - name: replace profile default-release name with home
     lineinfile:
       path: ~/.mozilla/firefox/profiles.ini
-      regexp: 'Name=.*default-release'
-      line: 'Name=home'
-      backrefs: yes
+      regexp: 'Name=default-release$'
+      line: Name=home
 
   - name: replace profile default-release path with home
     lineinfile:
       path: ~/.mozilla/firefox/profiles.ini
-      regexp: 'Path=.*default-release'
+      regexp: 'Path=.*default-release$'
       line: 'Path={{ firefox_id.stdout }}.home'
-      backrefs: yes
-
-  - name: set work as default profile
-    lineinfile:
-      path: ~/.mozilla/firefox/profiles.ini
-      regexp: 'Default=.*'
-      line: 'Default={{ firefox_id.stdout }}.work'
-      backrefs: yes
 
   - name: disable start last profile
     lineinfile:
       path: ~/.mozilla/firefox/profiles.ini
-      regexp: 'StartWithLastProfile=.*'
-      line: 'StartWithLastProfile=0'
-      backrefs: yes
+      regexp: '^StartWithLastProfile=.*'
+      line: StartWithLastProfile=0
 
   - name: delete unused default folders
     args:
