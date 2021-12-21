@@ -1,0 +1,14 @@
+---
+- hosts: localhost
+  become: yes
+  become_user: fredrick
+
+  tasks:
+  - name: git fetch configs to homefolder
+    args:
+      chdir: "~/"
+    shell: |
+      git init
+      git remote add origin https://github.com/frealmyr/dotfiles-configs.git
+      git fetch origin
+      git checkout -b main --track origin/main

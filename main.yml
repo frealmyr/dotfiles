@@ -1,0 +1,17 @@
+---
+- hosts: localhost
+  become: yes
+  # pre_tasks:
+  #   - name: Get required roles with ansible galaxy
+  #     raw: ansible-galaxy install -r ansible/roles/requirements.yml -p ansible/roles/.tmp
+
+- name: install packages
+  import_playbook: ansible/packages.yml
+- name: apply eyecandy
+  import_playbook: ansible/eyecandy.yml
+- name: install asdf and plugins
+  import_playbook: ansible/asdf.yml
+- name: download config files
+  import_playbook: ansible/configs.yml
+- name: configure firefox
+  import_playbook: ansible/firefox.yml

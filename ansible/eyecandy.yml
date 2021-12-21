@@ -1,0 +1,12 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: set regolith theme to dracula 
+      command: regolith-look set dracula
+
+    - name: refresh theme
+      command: regolith-look refresh
+
+# mkdir -p ~/.config/regolith/picom
+# cp /etc/regolith/picom/config ~/.config/regolith/picom

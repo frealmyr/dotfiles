@@ -1,0 +1,84 @@
+---
+- hosts: localhost
+  become: yes
+  become_user: fredrick
+
+  tasks:
+  - name: find default firefox user id
+    shell: cat "$HOME/.mozilla/firefox/profiles.ini" | sed -n -e 's/^.*Path=//p' | head -n 1 | cut -d "." -f1
+    register: firefox_id
+
+  - name: find default firefox user path
+    shell: cat "$HOME/.mozilla/firefox/profiles.ini" | sed -n -e 's/^.*Path=//p' | head -n 1
+    register: firefox_path
+
+  - name: duplicate default profile folder
+    args:
+      chdir: "~/.mozilla/firefox"
+    command: cp -r {{ firefox_path.stdout }}/ {{ firefox_id.stdout }}.{{ item }}
+    with_items:
+      - work
+      - home
+
+  - name: replace profile default name with work
+    lineinfile: 
+      path: ~/.mozilla/firefox/profiles.ini
+      regexp: 'Name=.*default' 
+      line: 'Name=work'
+      backrefs: yes
+
+  - name: replace profile default path with work
+    lineinfile: 
+      path: ~/.mozilla/firefox/profiles.ini
+      regexp: 'Path=.*default' 
+      line: 'Path={{ firefox_id.stdout }}.work'
+      backrefs: yes
+
+  - name: replace profile default-release name with home
+    lineinfile: 
+      path: ~/.mozilla/firefox/profiles.ini
+      regexp: 'Name=.*default-release' 
+      line: 'Name=home'
+      backrefs: yes
+
+  - name: replace profile default-release path with home
+    lineinfile: 
+      path: ~/.mozilla/firefox/profiles.ini
+      regexp: 'Path=.*default-release' 
+      line: 'Path={{ firefox_id.stdout }}.home'
+      backrefs: yes
+
+  - name: set work as default profile
+    lineinfile: 
+      path: ~/.mozilla/firefox/profiles.ini
+      regexp: 'Default=.*' 
+      line: 'Default={{ firefox_id.stdout }}.work'
+      backrefs: yes
+
+  - name: disable start last profile
+    lineinfile: 
+      path: ~/.mozilla/firefox/profiles.ini
+      regexp: 'StartWithLastProfile=.*' 
+      line: 'StartWithLastProfile=0'
+      backrefs: yes
+
+  - name: delete unused default folders
+    args:
+      chdir: "~/.mozilla/firefox"
+    shell: |
+      default_folders=`ls | grep default`
+      rm -rf $default_folders
+
+  - name: create chrome folder in profiles
+    command: mkdir ~/.mozilla/firefox/{{ firefox_id.stdout }}.{{ item }}/chrome
+    with_items:
+      - work
+      - home
+
+  - name: copy files to profiles
+    copy: src={{ item.src }} dest={{ item.dest }}
+    with_items:
+      - { src: './files/firefox/userChrome.css', dest: '~/.mozilla/firefox/{{ firefox_id.stdout }}.work/chrome/userChrome.css' }
+      - { src: './files/firefox/userChrome.css', dest: '~/.mozilla/firefox/{{ firefox_id.stdout }}.home/chrome/userChrome.css' }
+      - { src: './files/firefox/user.js', dest: '~/.mozilla/firefox/{{ firefox_id.stdout }}.work/user.js' }
+      - { src: './files/firefox/user.js', dest: '~/.mozilla/firefox/{{ firefox_id.stdout }}.home/user.js' }

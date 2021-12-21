@@ -1,0 +1,94 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: update & upgrade apt packages
+      apt:
+        upgrade: full
+        update_cache: yes
+        cache_valid_time: 3600
+
+    - name: install apt packages
+      apt:
+        pkg:
+        - bat
+        - curl
+        - git
+        - firefox
+        - htop
+        - mc
+        - python3-pip
+        - regolith-look-dracula
+        - snapd
+        - tmux
+        - zsh
+
+    - name: install apt no-recommends
+      apt:
+        install_recommends: no
+        pkg:
+          - libreoffice-calc
+          - libreoffice-gtk3
+
+    - name: clean & remove apt packages
+      apt:
+        autoclean: yes
+        autoremove: yes
+
+    - name: install snap packages
+      community.general.snap:
+        name:
+          - beekeeper-studio
+          - bitwarden
+          - discord
+          - spotify
+          - newsflash
+          - teams
+
+    - name: install snap classic packages
+      community.general.snap:
+        classic: yes
+        name:
+          - code
+          - google-cloud-sdk
+          - slack
+
+    - name: clone asdf repository
+      git:
+        repo: https://github.com/asdf-vm/asdf.git
+        dest: "~/.asdf"
+        version: v0.8.1
+        update: no
+      become_user: fredrick
+
+    - name: add asdf to bashrc
+      blockinfile:
+        path: "~/.bashrc"
+        block: ". $HOME/.asdf/asdf.sh"
+        marker: '# {mark} ANSIBLE MANAGED BLOCK - asdf'
+      become_user: fredrick
+
+    - name: add asdf plugins
+      shell: $HOME/.asdf/bin/asdf plugin add "{{ item }}"
+      loop:
+        - terraform
+        - github-cli
+        - helm
+        - istioctl
+        - kompose
+        - krew
+      register: asdf_add_result
+      failed_when: 
+        - asdf_add_result.rc == 1 or asdf_add_result.rc == 2 and not "'already added' in asdf_add_result.stderr" # Already added plugin should be rc0..
+      become_user: fredrick
+
+    - name: install asdf plugins
+      shell: $HOME/.asdf/bin/asdf install "{{ item }}" latest
+      loop:
+        - terraform
+        - github-cli
+        - helm
+        - istioctl
+        - kompose
+        - krew
+      become_user: fredrick
