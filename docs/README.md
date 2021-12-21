@@ -18,7 +18,8 @@ ansible-pull -U https://github.com/frealmyr/dotfiles.git main.yml
 - Apply eyecandy
 	- set regolith theme to dracula
 - Download config files
-	- fetch seperate [git repo](https://github.com/frealmyr/dotfiles-configs) to home folder 
+	- fetch seperate [git repo](https://github.com/frealmyr/dotfiles-configs) to home folder
+	- set zsh as default shell for user
 - Configure firefox
 	- create work and home profiles
 	- disable open last profile, gain promt to choose profile when opening firefox
