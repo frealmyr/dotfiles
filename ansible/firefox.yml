@@ -1,5 +1,5 @@
 ---
-- hosts: all
+- hosts: localhost
   become: yes
   become_user: fredrick
 
@@ -21,44 +21,44 @@
       - home
 
   - name: replace profile default name with work
-    lineinfile: 
+    lineinfile:
       path: ~/.mozilla/firefox/profiles.ini
-      regexp: 'Name=.*default' 
+      regexp: 'Name=.*default'
       line: 'Name=work'
       backrefs: yes
 
   - name: replace profile default path with work
-    lineinfile: 
+    lineinfile:
       path: ~/.mozilla/firefox/profiles.ini
-      regexp: 'Path=.*default' 
+      regexp: 'Path=.*default'
       line: 'Path={{ firefox_id.stdout }}.work'
       backrefs: yes
 
   - name: replace profile default-release name with home
-    lineinfile: 
+    lineinfile:
       path: ~/.mozilla/firefox/profiles.ini
-      regexp: 'Name=.*default-release' 
+      regexp: 'Name=.*default-release'
       line: 'Name=home'
       backrefs: yes
 
   - name: replace profile default-release path with home
-    lineinfile: 
+    lineinfile:
       path: ~/.mozilla/firefox/profiles.ini
-      regexp: 'Path=.*default-release' 
+      regexp: 'Path=.*default-release'
       line: 'Path={{ firefox_id.stdout }}.home'
       backrefs: yes
 
   - name: set work as default profile
-    lineinfile: 
+    lineinfile:
       path: ~/.mozilla/firefox/profiles.ini
-      regexp: 'Default=.*' 
+      regexp: 'Default=.*'
       line: 'Default={{ firefox_id.stdout }}.work'
       backrefs: yes
 
   - name: disable start last profile
-    lineinfile: 
+    lineinfile:
       path: ~/.mozilla/firefox/profiles.ini
-      regexp: 'StartWithLastProfile=.*' 
+      regexp: 'StartWithLastProfile=.*'
       line: 'StartWithLastProfile=0'
       backrefs: yes
 

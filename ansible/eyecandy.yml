@@ -1,8 +1,8 @@
 ---
-- hosts: all
+- hosts: localhost
   become: yes
   tasks:
-    - name: set regolith theme to dracula 
+    - name: set regolith theme to dracula
       command: regolith-look set dracula
 
     - name: refresh theme
