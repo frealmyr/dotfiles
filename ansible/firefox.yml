@@ -6,7 +6,8 @@
   tasks:
   - name: open and kill firefox to generate profiles
     shell: |
-      firefox >/dev/null 2>&1 &
+      firefox &
+      sleep 3
       pkill -f firefox
     register: firefox_kill_result
     failed_when:
