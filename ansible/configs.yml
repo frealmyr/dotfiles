@@ -15,3 +15,6 @@
     register: configs_result
     failed_when:
       - configs_result.rc == 1 or configs_result.rc == 128 and not "'already exists' in configs_result.stderr"
+
+  - name: set zsh as default shell
+    shell: chsh -s $(which zsh)
