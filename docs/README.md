@@ -1,6 +1,7 @@
-To configure a new ubuntu distro, install `ansible` and run:
+To configure a new ubuntu distro, install `ansible` and `git`, then run:
 
 ```bash
+ansible-galaxy collection install community.general
 ansible-pull -U https://github.com/frealmyr/dotfiles.git main.yml
 ```
 

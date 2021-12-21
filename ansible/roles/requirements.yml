@@ -1,9 +1,8 @@
-
+---
 collections:
 - name: community.snap
 
-roles:
-- name: ansible-role-firefox
-  src: https://github.com/unrblt/ansible-role-firefox.git
-  scm: git
-  
+# roles:
+# - name: ansible-role-firefox
+#   src: https://github.com/unrblt/ansible-role-firefox.git
+#   scm: git

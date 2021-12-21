@@ -1,9 +1,10 @@
 ---
-- hosts: localhost
+- hosts: all
   become: yes
-  pre_tasks:
-    - name: Get required roles with ansible galaxy
-      raw: ansible-galaxy install -r ansible/roles/requirements.yml -p ansible/roles/.tmp
+  ## Ansible is uanble to provision collections/roles before running, requires a seperate ansible-galaxy command..
+  # pre_tasks:
+  #   - name: Get required roles with ansible galaxy
+  #     raw: ansible-galaxy install -r ansible/roles/requirements.yml -p ansible/roles/.tmp
 
 - name: install packages
   import_playbook: ansible/packages.yml
