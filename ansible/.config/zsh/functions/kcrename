@@ -1,4 +1,0 @@
-function kcrename() {
-: ${1?"kcrename new_context_name"}
-  kubectl config rename-context $(kubectl config current-context | tr -d '\r') $argv[1]
-}

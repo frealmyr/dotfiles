@@ -1,8 +1,0 @@
-function tfp () {
-  if [[ -n $(echo *.tf) ]]
-  then
-    tf plan -parallelism=25 $(for filename in env/$ENVIRONMENT/*.tfvars; do printf "-var-file=$filename " ; done)
-  else
-    echo "There are no Terraform files in this folder, aborting.."
-  fi
-}

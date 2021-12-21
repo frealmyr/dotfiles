@@ -1,4 +1,0 @@
-function kcdelete() {
-: ${1?"kcdelete context_to_delete"}
-  kubectl config unset contexts.$argv[1]
-}
