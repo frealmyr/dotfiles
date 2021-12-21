@@ -4,6 +4,14 @@
   become_user: fredrick
 
   tasks:
+  - name: open and kill firefox to generate profiles
+    shell: |
+      firefox >/dev/null 2>&1 &
+      pkill -f firefox
+    register: firefox_kill_result
+    failed_when:
+      - firefox_kill_result.rc == 1 or firefox_kill_result.rc == 2
+
   - name: find default firefox user id
     shell: cat "$HOME/.mozilla/firefox/profiles.ini" | sed -n -e 's/^.*Path=//p' | head -n 1 | cut -d "." -f1
     register: firefox_id
