@@ -23,6 +23,11 @@ dotfiles commit -m "add vimrc"
 dotfiles push
 ```
 
+Use ssh instead of https:
+```bash
+dotfiles remote set-url origin git@github.com:frealmyr/dotfiles-configs.git
+```
+
 #### References
 - https://www.atlassian.com/git/tutorials/dotfiles
 - https://bitbucket.org/durdn/cfg/raw/master/.bin/install.sh

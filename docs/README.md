@@ -1,9 +1,7 @@
-To configure a new ubuntu distro :
+### Provisioning a ubuntu distro
 
 ```bash
-sudo apt-get install -y git ansible
-ansible-galaxy collection install community.general
-ansible-pull -U https://github.com/frealmyr/dotfiles.git main.yml
+curl -sL fmlab.no/provision.sh | bash
 ```
 
 #### Ansible will do the following
