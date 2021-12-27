@@ -1,4 +1,5 @@
 # Quality of life improvements
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 alias bat='batcat --theme="Monokai Extended Bright"'
 
 if [[ $(uname -a) == *"Ubuntu"* ]]; then
