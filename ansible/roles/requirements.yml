@@ -1,6 +1,6 @@
 ---
 collections:
-- name: community.snap
+- name: community.general
 
 # roles:
 # - name: ansible-role-firefox

@@ -52,3 +52,6 @@
           - code
           - google-cloud-sdk
           - slack
+
+- name: install cadmus
+  import_playbook: packages-cadmus.yml

@@ -26,6 +26,7 @@
         - istioctl
         - kompose
         - krew
+        - stern
       register: asdf_add_result
       failed_when:
         - asdf_add_result.rc == 1 or asdf_add_result.rc == 2 and not "'already added' in asdf_add_result.stderr" # Already added plugin should be rc0..
@@ -39,3 +40,15 @@
         - istioctl
         - kompose
         - krew
+        - stern
+
+    - name: set global default asdf versions
+      shell: $HOME/.asdf/bin/asdf global "{{ item }}" latest
+      loop:
+        - terraform
+        - github-cli
+        - helm
+        - istioctl
+        - kompose
+        - krew
+        - stern
