@@ -30,4 +30,4 @@ ansible-pull -U https://github.com/frealmyr/dotfiles.git main.yml
 
 #### Updating configs
 
-Config files are stored in a seperate [git repo](https://github.com/frealmyr/dotfiles-configs), see [dotfiles.md](docs/dotfiles.md) for more details
+Config files are stored in a seperate [git repo](https://github.com/frealmyr/dotfiles-configs), see [dotfiles.md](dotfiles.md) for more details
