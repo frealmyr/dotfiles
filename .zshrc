@@ -9,25 +9,20 @@ export PATH=$HOME/bin:/usr/local/bin:/opt/local/bin:${KREW_ROOT:-$HOME/.krew}/bi
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
-# Autoload tmux
-ZSH_TMUX_AUTOSTART=true
+# Zsh settings
+DISABLE_AUTO_UPDATE="true"
+COMPLETION_WAITING_DOTS="true"
 
 # Load zsh plugins
-plugins=(docker extract git history history-substring-search tmux you-should-use zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(asdf docker extract git history history-substring-search tmux you-should-use zsh-autosuggestions zsh-syntax-highlighting)
 
 # Oh-My-ZSH related things
-ZSH_THEME="sardine"
+ZSH_THEME="freddy"
 source $ZSH/oh-my-zsh.sh
 
 # Set cloudsdk installation and enable zsh autocomplete
-if [[ $(uname -a) == *"Darwin"* ]]; then
-  export CLOUDSDK_PYTHON="/usr/local/opt/python@3.8/libexec/bin/python"
-  source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/path.zsh.inc"
-  source "/usr/local/Caskroom/google-cloud-sdk/latest/google-cloud-sdk/completion.zsh.inc"
-elif [[ $(uname -a) == *"Ubuntu"* ]]; then
-  source "/snap/google-cloud-sdk/current/path.zsh.inc"
-  source "/snap/google-cloud-sdk/current/completion.zsh.inc"
-fi
+source "/snap/google-cloud-sdk/current/path.zsh.inc"
+source "/snap/google-cloud-sdk/current/completion.zsh.inc"
 
 # Enable kubectl autocompletion
 source <(kubectl completion zsh)
@@ -51,3 +46,8 @@ export PATH=$GOROOT/bin:$PATH
 fpath=(~/.config/zsh/functions $fpath)
 autoload -U $fpath[1]/*(.:t)
 for file in ~/.config/zsh/aliases/*; do source $file; done
+
+# Start a new tmux session when opening a new shell
+if [ -z $TMUX ]; then
+  tmux new -s session_$RANDOM;
+fi
