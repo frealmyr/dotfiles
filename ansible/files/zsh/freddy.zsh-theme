@@ -18,8 +18,7 @@ ${ZSH_THEME_GIT_PROMPT_PREFIX}${branch}${ZSH_THEME_GIT_PROMPT_SUFFIX}"
 kubectl_custom_status() {
   local kubectl_context=$(cat ~/.kube/config | grep current-context | awk '{print $2}')
   [[ -n "$kubectl_context" ]] || return 0
-  echo "%{${fg[blue]}%} ❄︎[${kubectl_context}]%{$reset_color%}"
-
+  echo "%{${fg[cyan]}%}[${kubectl_context}]%{$reset_color%}"
 }
 
 # RVM component of prompt
