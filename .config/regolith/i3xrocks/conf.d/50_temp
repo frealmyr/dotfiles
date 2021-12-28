@@ -1,0 +1,8 @@
+# temp
+#
+# Displays temp data
+[temp]
+interval=30
+color=#8be9fd
+label_color=#8be9fd
+icon_color=#8be9fd
