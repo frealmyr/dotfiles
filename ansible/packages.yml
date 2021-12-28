@@ -13,6 +13,7 @@
         pkg:
         - bat
         - curl
+        - dunst
         - git
         - firefox
         - htop
@@ -22,6 +23,12 @@
         - snapd
         - tmux
         - zsh
+
+    - name: remove package regolith-rofication
+      apt:
+        name: regolith-rofication
+        state: absent
+        purge: yes
 
     - name: install apt no-recommends
       apt:
