@@ -1,4 +1,4 @@
 function kpull() {
-: ${1?"kpull CLUSTER_NAME PROJECT_ID"}
-  gcloud container clusters get-credentials $argv[1] --region europe-north1 --project $argv[2]
+: ${1?"kpull CLUSTER_NAME PROJECT_ID REGION"}
+  gcloud container clusters get-credentials $argv[1] --region $argv[3] --project $argv[2]
 }

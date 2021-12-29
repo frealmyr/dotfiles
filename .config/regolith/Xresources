@@ -1,4 +1,4 @@
-gnome.wallpaper:	/home/fredrick/Pictures/wallpaper.jpg
+gnome.wallpaper:	/home/fredrick/Pictures/wallpapers/current.jpg
 
 St.font:	JetBrains Mono:pixelsize=10:antialias=true:autohint=true
 gnome.terminal.font:	JetBrains Mono 10
@@ -7,8 +7,10 @@ i3-wm.font:	pango:JetBrains Mono Medium 10
 i3xrocks.value.font:	JetBrains Mono Medium 10
 rofi.font:	JetBrains Mono Medium 12
 
-i3-wm.workspace.01.name:	1:<span font_desc='JetBrains Mono Medium 13'> code </span>
-i3-wm.workspace.02.name:	2:<span font_desc='JetBrains Mono Medium 13'> chat </span>
-i3-wm.workspace.03.name:	3:<span font_desc='JetBrains Mono Medium 13'> term </span>
-i3-wm.workspace.04.name:	4:<span font_desc='JetBrains Mono Medium 13'> music </span>
-i3-wm.workspace.05.name:	5:<span font_desc='JetBrains Mono Medium 13'> chill </span>
+i3-wm.workspace.01.name:	1:<span font_desc='JetBrains Mono Medium 10'> code </span>
+i3-wm.workspace.02.name:	2:<span font_desc='JetBrains Mono Medium 10'> chat </span>
+i3-wm.workspace.03.name:	3:<span font_desc='JetBrains Mono Medium 10'> term </span>
+i3-wm.workspace.04.name:	4:<span font_desc='JetBrains Mono Medium 10'> music </span>
+i3-wm.workspace.05.name:	5:<span font_desc='JetBrains Mono Medium 10'> chill </span>
+
+i3-wm.client.focused.color.child_border: #ff79c6
