@@ -14,21 +14,22 @@
         - bat
         - curl
         - dunst
-        - git
         - firefox
+        - git
         - htop
         - mc
         - python3-pip
         - regolith-look-dracula
         - snapd
         - tmux
+        - xclip
         - zsh
 
     - name: remove package regolith-rofication
       apt:
         name:
-          - regolith-rofication
           - i3xrocks-rofication
+          - regolith-rofication
         state: absent
         purge: yes
 
@@ -77,3 +78,6 @@
 
 - name: install cadmus
   import_playbook: packages-cadmus.yml
+
+- name: install docker
+  import_playbook: packages-docker.yml
