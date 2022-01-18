@@ -17,3 +17,4 @@ user_pref("media.autoplay.enabled", false);
 user_pref("browser:urlbar:trimURLS", false);
 user_pref("browser.urlbar.formatting.enabled", false);
 user_pref("browser.urlbar.clickSelectsAll", false);
+user_pref("browser.fullscreen.autohide", false);
