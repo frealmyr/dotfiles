@@ -1,0 +1,28 @@
+---
+- hosts: localhost
+  roles:
+    - ansible-modules-bitwarden
+  tasks:
+    # - name: Get PASSWORD from Bitwarden
+    #   command: "bw get attachment --itemid {{ itemid }} {{ attachment }} --raw"
+    #   vars:
+    #     itemid: 04b938f4-0034-4986-bce1-ae23015bab3c
+    #     attachment: public.pgp
+    #   register: gpg_publickey
+
+    # - name: import public key
+    #   command: "echo '{{ gpg_publickey.stdout }}' | | gpg --import -"
+
+    - name: Get PASSWORD from Bitwarden
+      command: "bw get attachment --itemid {{ itemid }} {{ attachment }} --raw"
+      vars:
+        itemid: 04b938f4-0034-4986-bce1-ae23015bab3c
+        attachment: private.pgp
+      register: gpg_privatekey
+
+    - name: import public key
+      command: echo '{{ gpg_privatekey.stdout }}' | | gpg --armor --import -
+      register: importjob
+
+    - debug:
+        msg: "{{ importjob }}"

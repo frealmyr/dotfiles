@@ -8,6 +8,17 @@
         update_cache: yes
         cache_valid_time: 3600
 
+    - name: add apt repositories
+      ansible.builtin.apt_repository:
+        repo: {{ item }}
+        state: present
+      with_items:
+        - deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+
+    - name: update apt cache
+      apt:
+        update_cache: yes
+
     - name: install apt packages
       apt:
         pkg:
@@ -24,6 +35,10 @@
         - tmux
         - xclip
         - zsh
+        - tlp
+        - tlp-rdw
+        - intel-media-va-driver-non-free # Intel Gen 8+ VAAPI
+        - fprintd # Fingerprint reader
 
     - name: remove package regolith-rofication
       apt:
@@ -54,6 +69,7 @@
           - spotify
           - newsflash
           - teams
+          - geforcenow-electron
 
     - name: install snap classic packages
       community.general.snap:

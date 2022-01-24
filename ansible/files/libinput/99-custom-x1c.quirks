@@ -1,0 +1,8 @@
+[Lenovo X1 Carbon 9th Trackpoint]
+MatchUdevType=pointingstick
+MatchName=*TPPS/2 Elan TrackPoint*
+AttrTrackpointMultiplier=10
+
+[Lenovo X1 Carbon 9th Touchpad]                                                                                                                                                                        
+MatchName=Elan Touchpad                                                                                                                                                                                                                                                                                                                    
+ModelLenovoT490sTouchpad=1

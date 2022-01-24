@@ -18,3 +18,5 @@ user_pref("browser:urlbar:trimURLS", false);
 user_pref("browser.urlbar.formatting.enabled", false);
 user_pref("browser.urlbar.clickSelectsAll", false);
 user_pref("browser.fullscreen.autohide", false);
+user_pref("media.ffmpeg.vaapi.enabled", true);
+user_pref("media.ffmpeg.vaapi-drm-display.enabled", true);
