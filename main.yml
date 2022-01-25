@@ -26,3 +26,6 @@
 
 - name: configure firefox
   import_playbook: ansible/firefox.yml
+
+- name: configure firewall
+  import_playbook: ansible/firewall.yml
