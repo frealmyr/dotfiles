@@ -58,3 +58,11 @@
       /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME reset --hard
       /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull
       /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config status.showUntrackedFiles no
+
+  - name: copy thinkpad x1 carbon gen9 configs
+    copy: src={{ item.src }} dest={{ item.dest }}
+    with_items:
+      - { src: './files/tlp/99-x1c.conf', dest: '/etc/tlp.d/99-x1c.conf' }
+      - { src: './files/udev/99-trackpoint.rules', dest: '/etc/udev/rules.d/99-trackpoint.rules' }
+      - { src: './files/libinput/99-custom-x1c.quirks', dest: '/usr/share/libinput/99-custom-x1c.quirks' }
+    become_user: root

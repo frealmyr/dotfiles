@@ -33,6 +33,7 @@
         state: present
       with_items:
         - "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+        - "ppa:linrunner/tlp"
         - "ppa:peek-developers/stable"
         - "ppa:yubico/stable"
 
@@ -55,9 +56,15 @@
         - fprintd # Fingerprint reader
         - git
         - gnupg-agent
+        - gpg
         - htop
         - intel-media-va-driver-non-free # Intel Gen 8+ VAAPI
+        - inxi
+        - linux-tools-common
+        - linux-tools-generic
         - mc
+        - mpv
+        - neofetch
         - pass
         - peek
         - python3-pip
@@ -65,8 +72,11 @@
         - snapd
         - software-properties-common
         - tlp
+        - tlp
+        - tlp-rdw
         - tlp-rdw
         - tmux
+        - transmission
         - ubuntu-restricted-extras
         - xclip
         - xz-utils # Required for ansible extract deb package

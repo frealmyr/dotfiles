@@ -5,12 +5,6 @@
     itemid: 04b938f4-0034-4986-bce1-ae23015bab3c # Bitwarden item id for GPG secret
 
   tasks:
-    - name: install gpg apt package
-      apt:
-        update_cache: yes
-        pkg:
-        - gpg
-
     # Fetch from bitwarden
     - name: Check if Bitwarden vault is unlocked
       command: bw status
