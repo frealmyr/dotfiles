@@ -58,9 +58,3 @@
       /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME reset --hard
       /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME pull
       /usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME config status.showUntrackedFiles no
-
-  - name: generate ssh key pair
-    openssh_keypair:
-      path: "~/.ssh"
-      comment: "FM-X1C"
-      size: 2048

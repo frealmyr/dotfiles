@@ -2,53 +2,79 @@
 - hosts: localhost
   become: yes
   tasks:
+    ##################
+    ## APT Packages ##
+    ##################
+
+    - name: remove packages
+      apt:
+        name:
+          - i3xrocks-rofication # Replaced with dunst
+          - regolith-rofication # Replaced with dunst
+        state: absent
+        purge: yes
+
     - name: update & upgrade apt packages
       apt:
         upgrade: full
         update_cache: yes
         cache_valid_time: 3600
 
-    - name: add apt repositories
-      ansible.builtin.apt_repository:
-        repo: {{ item }}
+    - name: add apt signing keys
+      ansible.builtin.apt_key:
+        url: "{{ item }}"
         state: present
       with_items:
-        - deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable
+        - "https://download.docker.com/linux/ubuntu/gpg"
 
-    - name: update apt cache
-      apt:
-        update_cache: yes
+    - name: add apt repositories
+      ansible.builtin.apt_repository:
+        repo: "{{ item }}"
+        state: present
+      with_items:
+        - "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+        - "ppa:peek-developers/stable"
+        - "ppa:yubico/stable"
 
     - name: install apt packages
       apt:
+        update_cache: yes
+        cache_valid_time: 3600
         pkg:
+        - apt-transport-https
         - bat
+        - ca-certificates
+        - containerd.io
         - curl
+        - curl
+        - docker-ce
+        - docker-ce-cli
+        - docker-compose
         - dunst
         - firefox
+        - fprintd # Fingerprint reader
         - git
+        - gnupg-agent
         - htop
+        - intel-media-va-driver-non-free # Intel Gen 8+ VAAPI
         - mc
+        - pass
+        - peek
         - python3-pip
         - regolith-look-dracula
         - snapd
-        - tmux
-        - xclip
-        - zsh
+        - software-properties-common
         - tlp
         - tlp-rdw
-        - intel-media-va-driver-non-free # Intel Gen 8+ VAAPI
-        - fprintd # Fingerprint reader
+        - tmux
+        - ubuntu-restricted-extras
+        - xclip
+        - xz-utils # Required for ansible extract deb package
+        - yubikey-manager
+        - yubikey-personalization-gui
+        - zsh
 
-    - name: remove package regolith-rofication
-      apt:
-        name:
-          - i3xrocks-rofication
-          - regolith-rofication
-        state: absent
-        purge: yes
-
-    - name: install apt no-recommends
+    - name: install apt with --no-recommends
       apt:
         install_recommends: no
         pkg:
@@ -60,16 +86,20 @@
         autoclean: yes
         autoremove: yes
 
+    ###################
+    ## Snap Packages ##
+    ###################
+
     - name: install snap packages
       community.general.snap:
         name:
           - beekeeper-studio
           - bitwarden
           - discord
-          - spotify
-          - newsflash
-          - teams
           - geforcenow-electron
+          - newsflash
+          - spotify
+          - teams
 
     - name: install snap classic packages
       community.general.snap:
@@ -92,8 +122,40 @@
         - i3xrocks-volume
         - i3xrocks-wifi
 
-- name: install cadmus
-  import_playbook: packages-cadmus.yml
+    ##################
+    ## DEB Packages ##
+    ##################
 
-- name: install docker
-  import_playbook: packages-docker.yml
+    - name: install deb packages
+      apt:
+        deb: "{{ item }}"
+      with_items:
+        - https://github.com/josh-richardson/cadmus/releases/latest/download/cadmus.deb
+
+    ##############
+    ## Binaries ##
+    ##############
+
+    - name: check docker-credential-helpers version
+      command: /usr/local/bin/docker-credential-pass version
+      ignore_errors: yes # First time binary does not exist
+      no_log: True # Hide the error log when binary is missing
+      register: dch_version
+      changed_when: False # Either ok or failed, where is no changed
+      failed_when: dch_version.rc == 1 or "0.6.4" not in dch_version.stdout
+
+    - name: download docker-credential-helpers
+      get_url:
+        url="https://github.com/docker/docker-credential-helpers/releases/download/v0.6.4/docker-credential-pass-v0.6.4-amd64.tar.gz"
+        dest="/tmp/docker-credential-pass-v0.6.4-amd64.tar.gz"
+      when: dch_version is failed
+
+    - name: extract docker-credential-pass into /usr/local/bin
+      ansible.builtin.unarchive:
+        src: /tmp/docker-credential-pass-v0.6.4-amd64.tar.gz
+        dest: /usr/local/bin
+      when: dch_version is failed
+
+    - name: change perm of "/usr/local/bin/docker-credential-pass", adding "+x"
+      file: dest=/usr/local/bin/docker-credential-pass mode=a+x
+      when: dch_version is failed

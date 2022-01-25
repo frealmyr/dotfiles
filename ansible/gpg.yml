@@ -1,28 +1,53 @@
 ---
 - hosts: localhost
-  roles:
-    - ansible-modules-bitwarden
+  become_user: fredrick
+  vars:
+    itemid: 04b938f4-0034-4986-bce1-ae23015bab3c # Bitwarden item id for GPG secret
+
   tasks:
-    # - name: Get PASSWORD from Bitwarden
-    #   command: "bw get attachment --itemid {{ itemid }} {{ attachment }} --raw"
-    #   vars:
-    #     itemid: 04b938f4-0034-4986-bce1-ae23015bab3c
-    #     attachment: public.pgp
-    #   register: gpg_publickey
+    - name: install gpg apt package
+      apt:
+        update_cache: yes
+        pkg:
+        - gpg
 
-    # - name: import public key
-    #   command: "echo '{{ gpg_publickey.stdout }}' | | gpg --import -"
+    # Fetch from bitwarden
+    - name: Check if Bitwarden vault is unlocked
+      command: bw status
+      register: bw_status
+      failed_when: '"unlocked" not in bw_status.stdout'
 
-    - name: Get PASSWORD from Bitwarden
+    - name: Get password from Bitwarden
+      command: "bw get password {{ itemid }} {{ attachment }} --raw"
+      vars:
+        attachment: private.pgp
+      register: gpg_password
+    - name: Get privatekey from Bitwarden
       command: "bw get attachment --itemid {{ itemid }} {{ attachment }} --raw"
       vars:
-        itemid: 04b938f4-0034-4986-bce1-ae23015bab3c
         attachment: private.pgp
-      register: gpg_privatekey
+      register: gpg_key_private
+    - name: Get publickey from Bitwarden
+      command: "bw get attachment --itemid {{ itemid }} {{ attachment }} --raw"
+      vars:
+        attachment: public.pgp
+      register: gpg_key_public
+    - name: Get ownertrust from Bitwarden
+      command: "bw get attachment --itemid {{ itemid }} {{ attachment }} --raw"
+      vars:
+        attachment: ownertrust.txt
+      register: gpg_ownertrust
 
+    # Import to GPG
+    - name: import private key
+      args:
+        stdin: "{{ gpg_key_private.stdout }}"
+      command: gpg --passphrase {{ gpg_password.stdout }} --pinentry-mode loopback --import -
     - name: import public key
-      command: echo '{{ gpg_privatekey.stdout }}' | | gpg --armor --import -
-      register: importjob
-
-    - debug:
-        msg: "{{ importjob }}"
+      args:
+        stdin: "{{ gpg_key_public.stdout }}"
+      command: gpg --import -
+    - name: import ownertrust
+      args:
+        stdin: "{{ gpg_ownertrust.stdout }}"
+      command: gpg --import-ownertrust -

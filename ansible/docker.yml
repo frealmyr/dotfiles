@@ -1,0 +1,39 @@
+---
+- hosts: localhost
+  become: yes
+  tasks:
+    - name: add user to docker group
+      user: name=fredrick
+            groups=docker
+            append=yes
+
+    - name: Check if Bitwarden vault is unlocked
+      become_user: fredrick
+      command: bw status
+      register: bw_status
+      failed_when: '"unlocked" not in bw_status.stdout'
+
+    - name: Get gpg fingerprint from Bitwarden
+      become_user: fredrick
+      command: "bw get uri {{ bw_itemid }} --raw"
+      vars:
+        bw_itemid: 04b938f4-0034-4986-bce1-ae23015bab3c # Bitwarden item id for GPG secret
+      register: gpg_fingerprint
+
+    # WARNING: i dont use pass for anything else, bitwarden rules
+    - name: deleting existing pass configuration
+      ansible.builtin.file:
+        path: ~/.password-store/.gpg-id
+        state: absent
+      become_user: fredrick
+
+    - name: initializing pass with gpg public key
+      command: pass init {{ gpg_fingerprint.stdout }}
+      become_user: fredrick
+
+    - name: enable pass backend in docker credsStore
+      ansible.builtin.lineinfile:
+        path: ~/.docker/config.json
+        line: "{ 'credsStore': 'pass' }"
+        create: yes
+      become_user: fredrick
