@@ -1,18 +1,31 @@
+regolith.look:    dracula
+gnome.gtk.theme:  Dracula
+gnome.icon.theme: Moka
+
+
 gnome.wallpaper:	/home/fredrick/Pictures/wallpapers/current.jpg
 
-St.font:	Ubuntu:pixelsize=10:antialias=true:autohint=true
-gnome.terminal.font:	Ubuntu Mono 12
-i3-wm.bar.font:	pango:Ubuntu Medium 10, Material Design Icons 10
-i3-wm.font:	pango:Ubuntu Medium 10
-i3xrocks.value.font:	Ubuntu Medium 10
-rofi.font:	Ubuntu Medium 12
+Xft.antialias:  1
+Xft.dpi:        96
+Xft.hinting:    1
+Xft.hintstyle:  full
+Xft.rgba:       rgb
 
-i3-wm.workspace.01.name:	1:<span font_desc='Ubuntu Medium 10'> code </span>
-i3-wm.workspace.02.name:	2:<span font_desc='Ubuntu Medium 10'> chat </span>
-i3-wm.workspace.03.name:	3:<span font_desc='Ubuntu Medium 10'> term </span>
-i3-wm.workspace.04.name:	4:<span font_desc='Ubuntu Medium 10'> music </span>
-i3-wm.workspace.05.name:	5:<span font_desc='Ubuntu Medium 10'> chill </span>
+St.font:              JetBrains Mono:pixelsize=14:antialias=true:autohint=true
+gnome.terminal.font:	JetBrains Mono 12
+i3-wm.bar.font:       pango:JetBrains Mono Medium 13, Material Design Icons 13
+i3-wm.font:	          pango:JetBrains Mono Medium 13
+i3xrocks.value.font:	JetBrains Mono Medium 13
+rofi.font:	          JetBrains Mono 12
 
-i3-wm.client.focused.color.child_border: #ff79c6
+i3-wm.workspace.01.name:	1:<span font_desc='JetBrains Mono 12'> code </span>
+i3-wm.workspace.02.name:	2:<span font_desc='JetBrains Mono 12'> chat </span>
+i3-wm.workspace.03.name:	3:<span font_desc='JetBrains Mono 12'> term </span>
+i3-wm.workspace.04.name:	4:<span font_desc='JetBrains Mono 12'> music </span>
+i3-wm.workspace.05.name:	5:<span font_desc='JetBrains Mono 12'> chill </span>
+
+i3-wm.window.border.size:                 3
+i3-wm.floatingwindow.border.size:         3
+i3-wm.client.focused.color.child_border:  #ff79c6
 
 gsettings set org.gnome.desktop.input-sources xkb-options "['caps:super']"

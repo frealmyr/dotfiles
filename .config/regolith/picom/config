@@ -33,7 +33,7 @@ glx-copy-from-front = false;
 # My tests on nouveau shows a 200% performance boost when only 1/4 of the screen is updated.
 # May break VSync and is not available on some drivers.
 # Overrides --glx-copy-from-front.
-# glx-use-copysubbuffermesa = true;
+glx-use-copysubbuffermesa = true;
 
 # GLX backend: Avoid rebinding pixmap on window damage.
 # Probably could improve performance on rapid window content changes, but is known to break things on some drivers (LLVMpipe).
@@ -42,7 +42,7 @@ glx-no-rebind-pixmap = true;
 
 use-damage = true;
 
-# Additionally use X Sync fence to sync clients' draw calls. 
+# Additionally use X Sync fence to sync clients' draw calls.
 # Needed on nvidia-drivers with GLX backend for some users.
 xrender-sync-fence = true;
 
@@ -53,7 +53,7 @@ xrender-sync-fence = true;
 #################################
 
 # Enabled client-side shadows on windows.
-shadow = true;
+shadow = false;
 # The blur radius for shadows. (default 12)
 shadow-radius = 7;
 # The left offset for shadows. (default -15)
@@ -108,7 +108,7 @@ frame-opacity = 1;
 inactive-opacity-override = false;
 
 # Dim inactive windows. (0.0 - 1.0)
-inactive-dim = 0.1;
+inactive-dim = 0.35;
 # Do not let dimness adjust based on window opacity.
 inactive-dim-fixed = true;
 # Blur background of transparent windows. Bad performance with X Render backend. GLX backend is preferred.
@@ -217,13 +217,13 @@ wintypes:
     };
     dock = { shadow = true; }
     dnd = { shadow = false; }
-    popup_menu = { 
-        opacity = 1.0; 
+    popup_menu = {
+        opacity = 1.0;
         shadow = false;
         fade = false;
     }
-    dropdown_menu = { 
-        opacity = 1.0; 
+    dropdown_menu = {
+        opacity = 1.0;
         fade = false;
     }
 };
