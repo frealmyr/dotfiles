@@ -1,0 +1,7 @@
+function kns() {
+  if [[ -z $argv[1] ]]; then
+    unset kns
+  else
+    kns=--namespace=$argv[1]
+  fi
+}

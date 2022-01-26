@@ -1,0 +1,7 @@
+# Memory
+[memory]
+interval=10
+percentage=true
+color=#ffb86c
+label_color=#ffb86c
+icon_color=#ffb86c

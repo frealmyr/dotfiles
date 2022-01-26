@@ -1,0 +1,55 @@
+# status update interval
+set -g status-interval 3
+
+# Basic status bar colors
+set -g status-style bg='#2C2E38',fg=cyan
+
+# Left side of status bar
+set -g status-left ""
+
+# Right side of status bar
+#set -g status-right-style bg=colour123,fg=colour243
+#set -g status-right-length 80
+#set -g status-right "#[fg=colour0,bg=colour4] #(cd #{pane_current_path}; ${HOME}/.config/tmux/scripts/git-changes.sh ) #[fg=colour0,bg=colour5] #(cd #{pane_current_path}; git rev-parse --abbrev-ref HEAD) #[fg=colour0,bg=colour14] ❄︎ #(cat ~/.kube/config | grep current-context | awk '{print $2}') #[fg=colour0,bg=colour3] #(cd #{pane_current_path}; ${HOME}/.config/tmux/scripts/current-dir.sh ) "
+set -g status-right ""
+set -g status-right-length 0
+
+# Disabled status bar items
+# #[fg=colour226,bg=colour236] #(cd #{pane_current_path}; ${HOME}/.config/tmux/scripts/git-stash.sh )
+# #[fg=colour0,bg=colour3] %H:%M
+# ⚡️#(pmset -g batt | tail -1 | awk '{print $3}' | tr -d ';')(#(pmset -g batt | tail -1 | awk '{print $5}' | tr -d ';' | tr -d '%')h)
+
+# Window status
+set -g window-status-format " #I:#W#F "
+set -g window-status-current-format " #I:#W#F "
+
+# Current window status
+setw -g window-status-current-style fg=black,bg=cyan
+
+# Window with activity status
+set -g window-status-activity-style fg=cyan
+
+# Window separator
+set -g window-status-separator ""
+
+# Window status alignment
+set -g status-justify left
+
+# Pane border
+set -g pane-border-style fg='#6272a4'
+
+# Active pane border
+set -g pane-active-border-style fg='#ff79c6'
+
+# Pane number indicator
+set -g display-panes-colour colour5
+set -g display-panes-active-colour colour6
+
+# Message
+set -g message-style bg='#44475a',fg='#8be9fd'
+
+# Command message
+set -g message-command-style bg=colour0,fg=colour2
+
+# Mode
+set -g mode-style bg=colour0,fg=colour6

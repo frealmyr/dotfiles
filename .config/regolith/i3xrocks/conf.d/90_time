@@ -1,0 +1,4 @@
+# Date Time
+[time]
+interval=xresource:i3xrocks.time.interval 10
+date.format2=w%U %d-%m-%Y %h:%M %p

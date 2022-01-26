@@ -1,0 +1,4 @@
+function tfvw () {
+: ${1?"tfvw SECONDS"}
+  watch -b -c -n $argv[1] 'zsh -c "tf fmt -recursive"'
+}
