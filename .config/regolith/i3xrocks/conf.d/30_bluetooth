@@ -1,0 +1,8 @@
+# Media Player
+#
+# Displays media controls
+[bluetooth]
+interval=20
+color=#8be9fd
+label_color=#8be9fd
+icon_color=#8be9fd
