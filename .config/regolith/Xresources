@@ -18,12 +18,6 @@ i3-wm.font:	          pango:JetBrains Mono 11
 i3xrocks.value.font:	JetBrains Mono Medium 10
 rofi.font:	          JetBrains Mono 12
 
-i3-wm.workspace.01.name:	1:<span font_desc='JetBrains Mono Bold 10'> code </span>
-i3-wm.workspace.02.name:	2:<span font_desc='JetBrains Mono Bold 10'> chat </span>
-i3-wm.workspace.03.name:	3:<span font_desc='JetBrains Mono Bold 10'> term </span>
-i3-wm.workspace.04.name:	4:<span font_desc='JetBrains Mono Bold 10'> music </span>
-i3-wm.workspace.05.name:	5:<span font_desc='JetBrains Mono Bold 10'> chill </span>
-
 i3-wm.window.border.size:                 3
 i3-wm.floatingwindow.border.size:         3
 i3-wm.client.focused.color.child_border:  #ff79c6
