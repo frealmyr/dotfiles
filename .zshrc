@@ -21,8 +21,8 @@ ZSH_THEME="freddy"
 source $ZSH/oh-my-zsh.sh
 
 # Set cloudsdk installation and enable zsh autocomplete
-source "/snap/google-cloud-sdk/current/path.zsh.inc"
-source "/snap/google-cloud-sdk/current/completion.zsh.inc"
+source "$(asdf where gcloud)/completion.zsh.inc"
+source "$(asdf where gcloud)/path.zsh.inc"
 
 # Enable kubectl autocompletion
 source <(kubectl completion zsh)
@@ -31,6 +31,11 @@ complete -F __start_kubectl k
 # Enable stern autocompletion
 source <(stern --completion=zsh)
 complete -F __start_stern ktail
+
+#source <(gh completion -s zsh)
+#complete -K _gh gh
+
+complete -o nospace -C "$(asdf where terraform)/bin/terraform" terraform
 
 # Git ssh config
 git config --global url."git@github.com:".insteadOf "https://github.com/"

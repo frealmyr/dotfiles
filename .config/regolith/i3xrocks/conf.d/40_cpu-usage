@@ -1,9 +1,0 @@
-# CPU usage
-#
-# The script may be called with -w and -c switches to specify thresholds,
-# see the script for details.
-[cpu-usage]
-interval=5
-color=#ff79c6
-label_color=#ff79c6
-icon_color=#ff79c6

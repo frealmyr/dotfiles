@@ -2,21 +2,22 @@ regolith.look:    dracula
 gnome.gtk.theme:  Dracula
 gnome.icon.theme: Moka
 
-
 gnome.wallpaper:	/home/fredrick/Pictures/wallpapers/current.jpg
 
-Xft.antialias:  1
-Xft.dpi:        96
-Xft.hinting:    1
-Xft.hintstyle:  full
-Xft.rgba:       rgb
+Xft.autohint: 0
+Xft.antialias: 1
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.dpi: 96
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
 
-St.font:              JetBrains Mono:pixelsize=14:antialias=true:autohint=true
-gnome.terminal.font:	JetBrains Mono 12
-i3-wm.bar.font:       pango:JetBrains Mono 11, Material Design Icons 10
-i3-wm.font:	          pango:JetBrains Mono 11
-i3xrocks.value.font:	JetBrains Mono Medium 10
-rofi.font:	          JetBrains Mono 12
+St.font:              Ubuntu Regular 12
+gnome.terminal.font:	Ubuntu Mono 12
+i3-wm.bar.font:       pango:Ubuntu Regular 12, Material Design Icons 10
+i3-wm.font:	          pango:Ubuntu Regular 12
+i3xrocks.value.font:	Ubuntu Medium 10
+rofi.font:	          Ubuntu Regular 12
 
 i3-wm.window.border.size:                 3
 i3-wm.floatingwindow.border.size:         3

@@ -2,4 +2,4 @@
 #
 # Display Wifi AP
 [wifi]
-interval=60
+interval=360

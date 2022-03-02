@@ -4,7 +4,8 @@
 # You can specify the instance by adding:
 # instance=BAT0
 [battery]
-interval=10
+interval=5
 color=#50fa7b
 label_color=#50fa7b
 icon_color=#50fa7b
+command=battery.sh
