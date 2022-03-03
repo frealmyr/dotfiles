@@ -1,0 +1,6 @@
+function flushdns() {
+  if [[ $(uname -a) == *"Darwin"* ]]; then
+    sudo dscacheutil -flushcache
+    sudo killall -HUP mDNSResponder
+  fi
+}

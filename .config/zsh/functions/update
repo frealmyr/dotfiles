@@ -1,0 +1,333 @@
+function update() {
+  APP=$argv[1]
+  VERSION=$argv[2]
+
+  if [[ -z $APP ]]; then
+    echo "Available commands:"
+    echo ""
+    echo "update bulder"
+    echo "update dotfiles"
+    echo "update gh"
+    echo "update helm 1.2.3"
+    echo "update krew"
+    echo "update kubectl 1.2.3"
+    echo "update stern"
+    echo "update terraform 0.13.0"
+  fi
+
+  # This script is split into MacOS and Ubuntu,
+  # because it was too much of a PITA to make something dynamic for each app download..
+
+  if [[ $(uname -a) == *"Darwin"* ]]; then
+
+    if [[ $APP = "kubectl" ]]; then
+      echo ""
+      echo "---"
+      echo "Now updating: kubectl v$VERSION.."
+      echo ""
+      sleep 2
+      if [[ $(curl -LI https://storage.googleapis.com/kubernetes-release/release/v${VERSION}/bin/darwin/amd64/kubectl -o /dev/null -w '%{http_code}\n' -s) == "200" ]]; then
+        curl -LO "https://storage.googleapis.com/kubernetes-release/release/v${VERSION}/bin/darwin/amd64/kubectl" \
+          && chmod +x ./kubectl \
+          && mv ./kubectl /usr/local/bin/kubectl
+        echo "Kubectl v${VERSION} installed!"
+      else
+        echo "Error: kubectl version not found"
+        echo "Visit https://github.com/kubernetes/kubectl/releases for release versions.."
+      fi
+
+    elif [[ $APP = "helm" ]]; then
+      echo ""
+      echo "---"
+      echo "Now updating: helm v$VERSION.."
+      echo ""
+      sleep 2
+      if curl --output /dev/null --silent --head --fail "https://get.helm.sh/helm-v${VERSION}-darwin-amd64.tar.gz"; then
+        curl -LO "https://get.helm.sh/helm-v${VERSION}-darwin-amd64.tar.gz" \
+          && tar -xvf helm-v${VERSION}-darwin-amd64.tar.gz darwin-amd64/helm \
+          && mv darwin-amd64/helm /usr/local/bin/helm \
+          && rm -r helm-v${VERSION}-darwin-amd64.tar.gz darwin-amd64
+        echo "Helm v${VERSION} installed!"
+      else
+        echo "Error: helm version not found"
+        echo "Visit https://github.com/helm/helm/releases for release versions.."
+      fi
+
+    elif [[ $APP = "terraform" ]]; then
+      echo ""
+      echo "---"
+      echo "Now updating: terraform v$VERSION.."
+      echo ""
+      sleep 2
+      if [[ $(curl -LI https://releases.hashicorp.com/terraform/${VERSION}/terraform_${VERSION}_darwin_amd64.zip -o /dev/null -w '%{http_code}\n' -s) == "200" ]]; then
+        curl -LO "https://releases.hashicorp.com/terraform/${VERSION}/terraform_${VERSION}_darwin_amd64.zip" \
+          && sudo mv ./terraform /usr/local/bin/terraform
+        echo "Terraform v${VERSION} installed!"
+      else
+        echo "Error: kubectl version not found"
+        echo "Visit https://releases.hashicorp.com/terraform/ for release versions.."
+      fi
+
+    elif [[ $APP = "terragrunt" ]]; then
+      echo ""
+      echo "---"
+      echo "Now updating: terragrunt.."
+      echo ""
+      sleep 2
+      curl -s https://api.github.com/repos/gruntwork-io/terragrunt/releases/latest \
+        | grep "browser_download_url.*darwin_amd64" \
+        | cut -d : -f 2,3 \
+        | tr -d \" \
+        | wget -qi -
+      chmod +x terragrunt_darwin_amd64
+      sudo mv terragrunt_darwin_amd64 /usr/local/bin/terragrunt
+      echo "Krew Updated!"
+
+    elif [[ $APP = "krew" ]]; then
+      echo ""
+      echo "---"
+      echo "Now updating: krew (kubectl plugin manager).."
+      echo ""
+      sleep 2
+      curl -s https://api.github.com/repos/kubernetes-sigs/krew/releases/latest \
+        | grep "browser_download_url.*krew.tar.gz" \
+        | cut -d : -f 2,3 \
+        | tr -d \" \
+        | wget -qi -
+      tar -xvf krew.tar.gz \
+        && ./krew-darwin_amd64 install krew \
+        && rm krew* LICENSE
+      echo "Krew updated!"
+
+    elif [[ $APP = "stern" ]]; then
+      echo ""
+      echo "---"
+      echo "Now updating: stern (better kubectl log tail).."
+      echo ""
+      sleep 2
+      curl -s https://api.github.com/repos/stern/stern/releases/latest \
+        | grep "browser_download_url.*darwin_amd64.tar.gz" \
+        | cut -d : -f 2,3 \
+        | tr -d \" \
+        | wget -qi -
+      tar -xf stern*
+      sudo mv stern*/stern /usr/local/bin/stern
+      rm -r stern*
+      echo "Stern updated!"
+
+    elif [[ $APP = "gh" ]]; then
+      echo "Now updating: Github CLI.."
+      curl -s https://api.github.com/repos/cli/cli/releases/latest \
+        | grep "browser_download_url.*macOS_amd64.tar.gz" \
+        | cut -d : -f 2,3 \
+        | tr -d '"' \
+        | xargs curl -vOL
+      tar -xjf gh*.tar.gz --strip-components=2 '*gh'
+      mv ./gh /usr/local/bin/
+      rm gh*
+      echo "Github CLI updated!"
+
+    elif [[ $APP = "bulder" ]]; then
+      echo ""
+      echo "---"
+      echo "Now updating: Bulder CLI.."
+      echo ""
+      sleep 2
+
+      ORG_NAME=bulderbank
+      REPO_NAME=bulder-cli
+      TOKEN=$(gcloud secrets versions access latest --project='bulder-test' --secret='cloud-github-bulderbot-token')
+
+      ASSET_ID=$(curl -H "Authorization: token ${TOKEN}" -s https://api.github.com/repos/${ORG_NAME}/${REPO_NAME}/releases/latest | jq '.assets[] | select(.name == "bulder") | .id');
+      curl -H "Authorization: token ${TOKEN}" https://api.github.com/repos/${ORG_NAME}/${REPO_NAME}/releases/assets/${ASSET_ID} -LJOH 'Accept: application/octet-stream'
+      chmod +x ./bulder
+      sudo mv ./bulder /usr/local/bin/bulder
+
+      echo "Bulder CLI updated!"
+
+    elif [[ $APP = "circleci" ]]; then
+      echo "Now updating: CircleCI CLI.."
+      curl -s https://api.github.com/repos/CircleCI-Public/circleci-cli/releases/latest \
+        | grep "browser_download_url.*darwin_amd64.tar.gz" \
+        | cut -d : -f 2,3 \
+        | tr -d '"' \
+        | xargs curl -vOL
+      tar -xjf circleci*.tar.gz --strip-components=2 '*circleci'
+      mv ./circleci /usr/local/bin/circleci
+      rm circleci*
+      echo "CircleCI CLI updated!"
+
+    elif [[ $APP = "dotfiles" ]]; then
+      echo "Now updating: Dotfiles.."
+      zsh -c "cd $HOME/.config/zsh && git checkout main && git pull"
+      echo "Dotfiles updated!"
+
+    else
+      echo ""
+      echo "Error: Could not figure out the app you wanted to update, typo maybe?.."
+    fi
+
+  elif [[ $(uname -a) == *"Ubuntu"* || $(uname -a) == *"microsoft-standard"* ]]; then
+    if [[ $APP = "kubectl" ]]; then
+      echo ""
+      echo "---"
+      echo "Now updating: kubectl v$VERSION.."
+      echo ""
+      sleep 2
+      if [[ $(curl -LI https://storage.googleapis.com/kubernetes-release/release/v${VERSION}/bin/linux/amd64/kubectl -o /dev/null -w '%{http_code}\n' -s) == "200" ]]; then
+        curl -LO "https://storage.googleapis.com/kubernetes-release/release/v${VERSION}/bin/linux/amd64/kubectl" \
+          && chmod +x ./kubectl \
+          && sudo mv ./kubectl /usr/local/bin/kubectl
+        echo "Kubectl v${VERSION} installed!"
+      else
+        echo "Error: kubectl version not found"
+        echo "Visit https://github.com/kubernetes/kubectl/releases for release versions.."
+      fi
+
+    elif [[ $APP = "helm" ]]; then
+      echo ""
+      echo "---"
+      echo "Now updating: helm v$VERSION.."
+      echo ""
+      sleep 2
+      if curl --output /dev/null --silent --head --fail "https://get.helm.sh/helm-v${VERSION}-linux-amd64.tar.gz"; then
+        curl -LO "https://get.helm.sh/helm-v${VERSION}-linux-amd64.tar.gz" \
+          && tar -xvf helm-v${VERSION}-linux-amd64.tar.gz linux-amd64/helm \
+          && sudo mv linux-amd64/helm /usr/local/bin/helm \
+          && rm -r helm-v${VERSION}-linux-amd64.tar.gz linux-amd64
+        echo "Helm v${VERSION} installed!"
+      else
+        echo "Error: helm version not found"
+        echo "Visit https://github.com/helm/helm/releases for release versions.."
+      fi
+
+    elif [[ $APP = "terraform" ]]; then
+      echo ""
+      echo "---"
+      echo "Now updating: terraform v$VERSION.."
+      echo ""
+      sleep 2
+      if [[ $(curl -LI https://releases.hashicorp.com/terraform/${VERSION}/terraform_${VERSION}_linux_amd64.zip -o /dev/null -w '%{http_code}\n' -s) == "200" ]]; then
+        curl -LO "https://releases.hashicorp.com/terraform/${VERSION}/terraform_${VERSION}_linux_amd64.zip" \
+          && unzip terraform_${VERSION}_linux_amd64.zip \
+          && sudo mv ./terraform /usr/local/bin/terraform \
+          && rm terraform_${VERSION}_linux_amd64.zip
+        echo "Terraform v${VERSION} installed!"
+      else
+        echo "Error: kubectl version not found"
+        echo "Visit https://releases.hashicorp.com/terraform/ for release versions.."
+      fi
+
+    elif [[ $APP = "terragrunt" ]]; then
+      echo ""
+      echo "---"
+      echo "Now updating: terragrunt.."
+      echo ""
+      sleep 2
+      curl -s https://api.github.com/repos/gruntwork-io/terragrunt/releases/latest \
+        | grep "browser_download_url.*linux_amd64" \
+        | cut -d : -f 2,3 \
+        | tr -d \" \
+        | wget -qi -
+      chmod +x terragrunt_linux_amd64
+      sudo mv terragrunt_linux_amd64 /usr/local/bin/terragrunt
+      echo "Krew Updated!"
+
+    elif [[ $APP = "krew" ]]; then
+      echo ""
+      echo "---"
+      echo "Now updating: krew (kubectl plugin manager).."
+      echo ""
+      sleep 2
+      curl -s https://api.github.com/repos/kubernetes-sigs/krew/releases/latest \
+        | grep "browser_download_url.*krew.tar.gz" \
+        | cut -d : -f 2,3 \
+        | tr -d \" \
+        | wget -qi -
+      tar -xvf krew.tar.gz \
+        && ./krew-linux_amd64 install krew \
+        && rm krew* LICENSE
+      echo "Krew Updated!"
+
+    elif [[ $APP = "stern" ]]; then
+      echo ""
+      echo "---"
+      echo "Now updating: stern (better kubectl log tail).."
+      echo ""
+      sleep 2
+      curl -s https://api.github.com/repos/stern/stern/releases/latest \
+        | grep "browser_download_url.*linux_amd64.tar.gz" \
+        | cut -d : -f 2,3 \
+        | tr -d \" \
+        | wget -qi -
+      tar -xf stern*
+      sudo mv stern*/stern /usr/local/bin/stern
+      rm -r stern*
+      echo "Stern updated!"
+
+    elif [[ $APP = "gh" ]]; then
+      echo ""
+      echo "---"
+      echo "Now updating: Github CLI.."
+      echo ""
+      sleep 2
+      curl -s https://api.github.com/repos/cli/cli/releases/latest \
+        | grep "browser_download_url.*linux_amd64.tar.gz" \
+        | cut -d : -f 2,3 \
+        | tr -d \" \
+        | wget -qi -
+      tar -xf gh*
+      sudo mv ./gh*/bin/gh /usr/local/bin/gh
+      rm -r gh*
+      echo "Github CLI updated!"
+
+    elif [[ $APP = "bulder" ]]; then
+      echo ""
+      echo "---"
+      echo "Now updating: Bulder CLI.."
+      echo ""
+      sleep 2
+
+      ORG_NAME=bulderbank
+      REPO_NAME=bulder-cli
+      TOKEN=$(gcloud secrets versions access latest --project='bulder-test' --secret='cloud-github-bulderbot-token')
+
+      ASSET_ID=$(curl -H "Authorization: token ${TOKEN}" -s https://api.github.com/repos/${ORG_NAME}/${REPO_NAME}/releases/latest | jq '.assets[] | select(.name == "bulder-linux") | .id');
+      curl -H "Authorization: token ${TOKEN}" https://api.github.com/repos/${ORG_NAME}/${REPO_NAME}/releases/assets/${ASSET_ID} -LJOH 'Accept: application/octet-stream'
+      chmod +x ./bulder-linux
+      sudo mv ./bulder-linux /usr/local/bin/bulder
+
+      echo "Bulder CLI updated!"
+
+    elif [[ $APP = "circleci" ]]; then
+      echo ""
+      echo "---"
+      echo "Now updating: CircleCI CLI.."
+      echo ""
+      sleep 2
+      curl -s https://api.github.com/repos/CircleCI-Public/circleci-cli/releases/latest \
+        | grep "browser_download_url.*linux_amd64.tar.gz" \
+        | cut -d : -f 2,3 \
+        | tr -d \" \
+        | wget -qi -
+      tar -xf circleci*
+      sudo mv ./circleci*/circleci /usr/local/bin/circleci
+      rm -r circleci*
+      echo "CircleCi CLI updated!"
+
+    elif [[ $APP = "dotfiles" ]]; then
+      echo "Now updating: Dotfiles.."
+      zsh -c "cd $HOME/.config/zsh && git checkout main && git pull"
+      echo "Dotfiles updated!"
+
+    else
+      echo ""
+      echo "Error: Could not figure out the app you wanted to update, typo maybe?.."
+    fi
+
+  else
+    echo ""
+    echo "Error: Could not figure out if you are running MacOS or Ubuntu.."
+  fi
+
+}
