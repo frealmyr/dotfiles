@@ -20,11 +20,15 @@ font pango:monospace 8
 
 
 # Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +10% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -10% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+bindsym XF86MonBrightnessUp exec light -S "$(light -G | awk '{ print int(($1 + .72) * 1.4) }')"
+bindsym XF86MonBrightnessDown exec light -S "$(light -G | awk '{ print int($1 / 1.4) }')"
+bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5%
+bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5%
+bindsym  XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle
+bindsym  XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle
+bindsym XF86AudioPlay exec playerctl play-pause
+bindsym XF86AudioNext exec playerctl next
+bindsym XF86AudioPrev exec playerctl previous
 
 #############################
 ## Workspace Configuration ##
@@ -292,6 +296,9 @@ bindsym $mod+Shift+n /usr/bin/thunar --new-window
 ## Autostart programs
 # run `dex -ad` to check programs
 exec --no-startup-id dex --autostart --environment i3
+
+## Picom x11 Compositor
+exec --no-startup-id picom -b
 
 #############################
 ## Appearance and Behavior ##
