@@ -1,0 +1,18 @@
+gnome.gtk.theme:  Dracula
+gnome.icon.theme: Moka
+
+Xft.autohint: 0
+Xft.antialias: 1
+Xft.hinting: true
+Xft.hintstyle: hintslight
+Xft.dpi: 96
+Xft.rgba: rgb
+Xft.lcdfilter: lcddefault
+
+St.font:              Ubuntu Regular 12
+gnome.terminal.font:	Ubuntu Mono 12
+i3-wm.bar.font:       pango:Ubuntu Regular 12, Material Design Icons 10
+i3-wm.font:	          pango:Ubuntu Regular 12
+i3xrocks.value.font:	Ubuntu Medium 10
+rofi.font:	          Ubuntu Regular 12
+
