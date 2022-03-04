@@ -276,7 +276,7 @@ bindsym $mod+Escape exec light-locker-command -l
 ##################
 
 ## Terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec alacritty
 
 ## Browser
 bindsym $mod+Shift+Return exec gtk-launch $(xdg-settings get default-web-browser)
