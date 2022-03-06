@@ -7,6 +7,31 @@
 # Template
 # https://github.com/alacritty/alacritty/blob/master/alacritty.yml
 
+options:
+  normal:
+    family: JetBrainsMono Nerd Font
+    style: Regular
+
+  bold:
+    family: JetBrainsMono Nerd Font
+    style: Bold
+
+  italic:
+    family: JetBrainsMono Nerd Font
+    style: Italic
+
+  size: 11.0
+
+  offset:
+    x: 0.0
+    y: 0.0
+
+  glyph_offset:
+    x: 0.0
+    y: 0.0
+
+  use_thin_strokes: false
+
 colors:
   primary:
     background: '#282a36'

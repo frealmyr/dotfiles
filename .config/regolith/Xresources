@@ -12,12 +12,12 @@ Xft.dpi: 96
 Xft.rgba: rgb
 Xft.lcdfilter: lcddefault
 
-St.font:              Ubuntu Regular 12
-gnome.terminal.font:	Ubuntu Mono 12
-i3-wm.bar.font:       pango:Ubuntu Regular 12, Material Design Icons 10
-i3-wm.font:	          pango:Ubuntu Regular 12
-i3xrocks.value.font:	Ubuntu Medium 10
-rofi.font:	          Ubuntu Regular 12
+St.font:              Ubuntu Nerd Font Regular 12
+gnome.terminal.font:	JegBrainsMono Nerd Font Regular 12
+i3-wm.bar.font:       pango:Ubuntu Nerd Font Regular 12, Material Design Icons 10
+i3-wm.font:	          pango:Ubuntu Nerd Font Regular 12
+i3xrocks.value.font:	Ubuntu Nerd Font Medium 10
+rofi.font:	          Ubuntu Ubuntu Nerd Font Regular 12
 
 i3-wm.window.border.size:                 3
 i3-wm.floatingwindow.border.size:         3
