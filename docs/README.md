@@ -6,7 +6,7 @@ This repository is cloned as a bare repository into a sub-directory in your home
 mkdir ~/.dotfiles
 cd ~/.dotfiles
 git clone --bare https://github.com/frealmyr/dotfiles.git
-
+```
 
 To add changes made your dotfiles, you need to run git commands with some arguments for pointing the `.dotfiles` as the git repository folder and your home folder as the working tree.
 
