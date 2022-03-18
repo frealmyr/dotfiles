@@ -37,9 +37,6 @@ complete -F __start_stern ktail
 
 complete -o nospace -C "$(asdf where terraform)/bin/terraform" terraform
 
-# Git ssh config
-git config --global url."git@github.com:".insteadOf "https://github.com/"
-
 # Golang
 export GOROOT=/usr/local/go
 export GOPROXY=direct

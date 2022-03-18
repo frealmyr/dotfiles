@@ -9,14 +9,10 @@
  */
 
 configuration {
-  modi: "combi,window,drun,ssh";
-  Combi-modi: "drun,window";
+  modi: "window,drun";
   show-icons: true;
-  combi-hide-mode-prefix: true;
-  display-drun: "🔎 Run";
-  display-window: "🪟 Window";
-  display-combi: "🌎 Combi";
-  display-ssh: "📡 ssh";
+  display-drun: "Run";
+  display-window: "Window";
   drun-show-actions: true;
   drun-display-format: "{name}";
   disable-history: false;
@@ -34,11 +30,12 @@ configuration {
   blue:       #51afef;
   magenta:    #c678dd;
   cyan:       #8be9fd;
+  purple:     #bd93f9;
   emphasis:   #2257a0;
   text:       #bbc2cf;
   text-alt:   #6272a4;
   fg:         #f8f8f2;
-  bg:         #282a36dd;
+  bg:         #282a36;
 
   input-bg: #44475a;
   input-bg-alt: #3f444a;
@@ -47,12 +44,13 @@ configuration {
 }
 
 window {
+  width: 750px;
   transparency: "real";
   background-color: @bg;
   text-color: @text;
   border: 0px;
   border-color: @red;
-  border-radius: 0px;
+  border-radius: 5px;
 }
 
 mainbox {
@@ -61,7 +59,7 @@ mainbox {
 }
 
 inputbar {
-  margin: 0px 0px 10px 0px;
+  margin: 0px 0px 0px 0px;
   padding: 0.5%;
   expand: false;
   border: 0% 0% 0% 0%;
@@ -72,9 +70,7 @@ inputbar {
 
 prompt {
   enabled: true;
-  text-color: @red;
-  border: 0 1px 0 0;
-  padding: 0% 0% 0% 1%;
+  text-color: @purple;
 }
 
 textbox-prompt-colon {
@@ -84,8 +80,7 @@ textbox-prompt-colon {
 }
 
 entry {
-  margin: 0px 10px;
-  horizontal-align: 0;
+  margin: 0px 0px;
   text-color: @text;
   placeholder: "Search";
   placeholder-color: @text-alt;
@@ -93,7 +88,7 @@ entry {
 }
 
 listview {
-  spacing: 3px;
+  spacing: 2px;
   dynamic: true;
   layout: vertical;
   scrollbar: false;
@@ -102,13 +97,23 @@ listview {
 element {
   padding: 5px;
   text-color: @text-alt;
-  border-radius: 5px;
+  border-radius: 2px;
   orientation: horizontal;
 }
 
-element selected {
-  background-color: @emphasis;
-  text-color: @text;
+#element.normal.normal {
+  background-color: @input-bg;
+  text-color:       @text;
+}
+
+#element.alternate.normal {
+  background-color: @input-bg;
+  text-color:       @text;
+}
+
+#element.selected.normal {
+  background-color: @purple;
+  text-color: @fg;
 }
 
 element urgent, element selected urgent {
