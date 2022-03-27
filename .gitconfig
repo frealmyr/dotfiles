@@ -1,13 +1,19 @@
 [user]
   name = Fredrick Myrvoll
   email = fredrickmyrvoll@gmail.com
-  signingkey = "84DEFF6B"
+  signingkey = "12C860312C1574A4"
+
+[gpg]
+  program = gpg
 
 [core]
   trustctime = true
   autocrlf = false #true
   editor = vim
   excludesfile = ~/.gitignore_global
+  
+[commit]
+  gpgsign = true
 
 [color]
   ui = true
@@ -65,6 +71,3 @@
 
 [help]
   autocorrect = 1
-
-[url "git@github.com:"]
-	insteadOf = https://github.com/
