@@ -44,7 +44,8 @@ gpg-connect-agent /bye
 export GPG_TTY=$TTY
 
 # Golang
-export GOROOT=/usr/local/go
+#export GOROOT=/usr/local/go
+export GOROOT=$(asdf where golang)/go
 export GOPROXY=direct
 export GO111MODULE=on
 export GOSUMDB=off
@@ -56,6 +57,6 @@ autoload -U $fpath[1]/*(.:t)
 for file in ~/.config/zsh/aliases/*; do source $file; done
 
 # Start a new tmux session when opening a new shell
-if [ -z $TMUX ]; then
+if [ -z $TMUX ] && [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]; then
   tmux new -s session_$RANDOM;
 fi
