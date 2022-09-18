@@ -1,3 +1,0 @@
-[wifi2]
-command=/home/fredrick/.local/scripts/wifi.sh
-interval=300

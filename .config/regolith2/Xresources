@@ -2,8 +2,6 @@ regolith.look:    dracula
 gnome.gtk.theme:  Dracula
 gnome.icon.theme: Moka
 
-gnome.wallpaper:	/home/fredrick/Pictures/wallpapers/current.jpg
-
 Xft.autohint: 0
 Xft.antialias: 1
 Xft.hinting: true

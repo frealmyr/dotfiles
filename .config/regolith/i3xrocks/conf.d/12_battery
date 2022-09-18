@@ -1,3 +1,0 @@
-[battery]
-command=/home/fredrick/.local/scripts/battery.sh
-interval=300
