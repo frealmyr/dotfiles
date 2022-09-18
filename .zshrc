@@ -57,6 +57,6 @@ autoload -U $fpath[1]/*(.:t)
 for file in ~/.config/zsh/aliases/*; do source $file; done
 
 # Start a new tmux session when opening a new shell
-if [ -z $TMUX ] && [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]; then
-  tmux new -s session_$RANDOM;
-fi
+# if [ -z $TMUX ] && [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]; then
+#   tmux new -s session_$RANDOM;
+# fi
