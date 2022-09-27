@@ -3,7 +3,7 @@ export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$ZSH/custom"
 
 # Update shell PATH with custom locations
-export PATH=$HOME/bin:/usr/local/bin:/opt/local/bin:${KREW_ROOT:-$HOME/.krew}/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/opt/local/bin:$HOME/.asdf/installs/krew/0.4.3/bin:$HOME/.local/bin::$PATH
 
 # Ensure that UTF-8 is used
 export LC_ALL=en_US.UTF-8
