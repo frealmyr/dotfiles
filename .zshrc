@@ -9,6 +9,9 @@ export PATH=$HOME/bin:/usr/local/bin:/opt/local/bin:$HOME/.asdf/installs/krew/0.
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 
+# Set libva driver
+export LIBVA_DRIVER_NAME=iHD
+
 # Zsh settings
 DISABLE_AUTO_UPDATE="true"
 COMPLETION_WAITING_DOTS="true"
