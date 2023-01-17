@@ -8,6 +8,6 @@ function kgenocide() {
   if [[ "$EXCECUTE_EXCECUTION" =~ ^[Yy]$ ]]
   then
     printf "\n\e[0;32mᕕ( ᐛ ) ᕗ Commencing genocide! \e[0m\n"
-    kubectl $kns delete $TYPE $(k $kns get pods | grep $NAME | awk '{print $1}')
+    kubectl $kns delete $TYPE $(k $kns get $TYPE | grep $NAME | awk '{print $1}')
   fi
 }
