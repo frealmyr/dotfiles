@@ -1,13 +1,19 @@
 [user]
   name = Fredrick Myrvoll
   email = fredrickmyrvoll@gmail.com
-  signingkey = "84DEFF6B"
+  signingkey = "12C860312C1574A4"
+
+[gpg]
+  program = gpg
 
 [core]
   trustctime = true
   autocrlf = false #true
   editor = vim
   excludesfile = ~/.gitignore_global
+  
+#[commit]
+#  gpgsign = true
 
 [color]
   ui = true
@@ -32,7 +38,7 @@
   untracked = cyan
 
 [credential]
-  helper = cache --timeout=3600
+  helper = /usr/libexec/git-core/git-credential-libsecret
 
 [push]
   default = simple
@@ -45,12 +51,12 @@
   co = checkout
   br = branch
 
-  amend = commit -vS --amend
+  amend = commit -v --amend
   conflicts = diff --name-only --diff-filter=U
-  commit = commit -vS
+  commit = commit -v
   last = log -1 HEAD
   pull = pull --ff-only
-  rebase = rebase -vS
+  rebase = rebase -v
   staged = diff --staged
   supdate = submodule foreach git pull -f origin master
   undo = reset --soft HEAD~
@@ -60,11 +66,8 @@
   unpublish = "!sh -c 'git push --delete origin $(git rev-parse --abbrev-ref HEAD --)' -"
   whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
 
-[merge]
-  conflictstyle = diff3
+#[merge]
+#  conflictstyle = diff3
 
 [help]
   autocorrect = 1
-
-[url "git@github.com:"]
-	insteadOf = https://github.com/

@@ -11,6 +11,7 @@ export LANG=en_US.UTF-8
 
 # Set libva driver
 export LIBVA_DRIVER_NAME=iHD
+
 export TERM=xterm-256color # Alacritty will mess up SSH client input
 
 # Zsh settings

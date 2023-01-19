@@ -1,20 +1,16 @@
 function cheat() {
-  if [[ $(uname -a) == *"Darwin"* ]]; then
-    CMD=bat
-  elif [[ $(uname -a) == *"Ubuntu"* ]]; then
-    CMD=batcat
-  fi
+  CMD=bat
 
   if [[ $argv[1] == "casual" ]]; then
-    $CMD --theme="Monokai Extended Bright" --style="header" -l bash ${HOME}/.config/zsh/aliases/casual.zsh
+    $CMD  --style="header" -l bash ${HOME}/.config/zsh/aliases/casual.zsh
   elif [[ $argv[1] == "k8s" ]]; then
-    $CMD --theme="Monokai Extended Bright" --style="header" -l bash ${HOME}/.config/zsh/aliases/k8s.zsh
+    $CMD  --style="header" -l bash ${HOME}/.config/zsh/aliases/k8s.zsh
   elif [[ $argv[1] == "helm" ]]; then
-    $CMD --theme="Monokai Extended Bright" --style="header" -l bash ${HOME}/.config/zsh/aliases/helm.zsh
+    $CMD  --style="header" -l bash ${HOME}/.config/zsh/aliases/helm.zsh
   elif [[ $argv[1] == "terraform" ]]; then
-    $CMD --theme="Monokai Extended Bright" --style="header" -l bash ${HOME}/.config/zsh/aliases/terraform.zsh
+    $CMD  --style="header" -l bash ${HOME}/.config/zsh/aliases/terraform.zsh
   elif [[ $argv[1] == "git" ]]; then
-    git config --get-regexp ^alias\. | sed -e s/^alias\.// -e s/\ /\ =\ / | $CMD --theme="Monokai Extended Bright" --style="header" -l bash
+    git config --get-regexp ^alias\. | sed -e s/^alias\.// -e s/\ /\ =\ / | $CMD  --style="header" -l bash
   else
     printf "\n\e[1;33mRun one of the following commands:\e[0m\n"
     echo "cheat casual"

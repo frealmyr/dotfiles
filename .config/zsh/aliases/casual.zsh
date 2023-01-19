@@ -1,7 +1,7 @@
 # Quality of life improvements
-alias code="flatpak run com.visualstudio.code"
+alias idea="flatpak run --command=idea com.jetbrains.IntelliJ-IDEA-Ultimate -e > /dev/null 2>&1 &"
 alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-alias bat='batcat --theme="Monokai Extended Bright"'
+alias bat='bat --theme="Dracula"'
 
 if [[ $(uname -a) == *"Ubuntu"* ]]; then
   alias ls='ls -1 --color=tty'
