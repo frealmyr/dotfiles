@@ -1,26 +1,17 @@
-# Start sway
-if [ "$(tty)" = "/dev/tty1" ] ; then
-  # Your environment variables
-  export QT_QPA_PLATFORM=wayland
-  export MOZ_ENABLE_WAYLAND=1
-  export MOZ_WEBRENDER=1
-  export GDK_BACKEND=wayland
-  export CLUTTER_BACKEND=wayland
-  export XDG_SESSION_TYPE=wayland
-  export XDG_CURRENT_DESKTOP=sway
-  exec sway
-fi
-
 # Path to oh-my-zsh installation
 export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$ZSH/custom"
 
 # Update shell PATH with custom locations
-export PATH=$HOME/bin:/usr/local/bin:/opt/local/bin:${KREW_ROOT:-$HOME/.krew}/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/opt/local/bin:$HOME/.asdf/installs/krew/0.4.3/bin:$HOME/.local/bin:$PATH
 
 # Ensure that UTF-8 is used
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
+
+# Set libva driver
+export LIBVA_DRIVER_NAME=iHD
+export TERM=xterm-256color # Alacritty will mess up SSH client input
 
 # Zsh settings
 DISABLE_AUTO_UPDATE="true"
@@ -50,11 +41,15 @@ complete -F __start_stern ktail
 
 complete -o nospace -C "$(asdf where terraform)/bin/terraform" terraform
 
-# Git ssh config
-git config --global url."git@github.com:".insteadOf "https://github.com/"
+# GPG
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+gpgconf --launch gpg-agent
+gpg-connect-agent /bye
+export GPG_TTY=$TTY
 
 # Golang
-export GOROOT=/usr/local/go
+#export GOROOT=/usr/local/go
+export GOROOT=$(asdf where golang)/go
 export GOPROXY=direct
 export GO111MODULE=on
 export GOSUMDB=off
@@ -66,6 +61,6 @@ autoload -U $fpath[1]/*(.:t)
 for file in ~/.config/zsh/aliases/*; do source $file; done
 
 # Start a new tmux session when opening a new shell
-if [ -z $TMUX ]; then
-  tmux new -s session_$RANDOM;
-fi
+# if [ -z $TMUX ] && [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]; then
+#   tmux new -s session_$RANDOM;
+# fi

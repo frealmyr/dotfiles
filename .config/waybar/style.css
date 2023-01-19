@@ -15,7 +15,8 @@
 * {
   transition: none;
   box-shadow: none;
-  font-family: Roboto, "Font Awesome 5 Pro Solid", "Font Awesome 5 Brands";
+  font-family: 'Ubuntu';
+  font-weight: 400;
 }
 
 #waybar {
@@ -38,7 +39,7 @@
 
 #workspaces button.focused {
   border-radius: 4px;
-  background-color: #ff79c6;
+  background-color: #44475a;
 }
 
 #workspaces button.urgent {
@@ -46,13 +47,13 @@
 }
 
 #tray {
-  margin: 4px 16px 4px 4px;
+  margin: 4px 2px;
   border-radius: 4px;
-  background-color: #44475a;
+  background-color: #313342;
 }
 
 #tray * {
-  padding: 0 6px;
+  padding: 0 9px;
   border-left: 1px solid #ff79c6;
 }
 
@@ -63,17 +64,17 @@
 #mode, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-storage, #custom-spotify, #custom-weather, #custom-mail, #clock, #temperature {
   margin: 4px 2px;
   padding: 0 6px;
-  background-color: #44475a;
+  background-color: #313342;
   border-radius: 4px;
   min-width: 20px;
 }
 
 #pulseaudio.muted {
-  color: @base0F;
+  color: #ff5555;
 }
 
 #pulseaudio.bluetooth {
-  color: @base0C;
+  color: #8be9fd;
 }
 
 #clock {
@@ -83,6 +84,6 @@
 }
 
 #temperature.critical {
-  color: @base0F;
+  color: #ff5555;
 }
 

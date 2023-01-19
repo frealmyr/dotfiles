@@ -200,7 +200,7 @@ mode "resize" {
         bindsym k resize grow height 6 px or 6 ppt
         bindsym Right resize grow width 6 px or 6 ppt
         bindsym l resize grow width 6 px or 6 ppt
-        
+
         bindsym Shift+Left resize shrink width 12 px or 12 ppt
         bindsym Shift+h resize shrink width 12 px or 12 ppt
         bindsym Shift+Up resize shrink height 12 px or 12 ppt
@@ -214,7 +214,7 @@ mode "resize" {
         bindsym Shift+minus gaps inner current minus 12
         bindsym plus gaps inner current plus 6
         bindsym Shift+plus gaps inner current plus 12
-        
+
         bindsym Return mode "default"
         bindsym Escape mode "default"
         bindsym $mod+r mode "default"
@@ -263,25 +263,24 @@ bindsym $mod+Escape exec light-locker-command -l
 
 set $screenshot grim ~/Pictures/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
 set $screenclip slurp | grim -g - ~/Pictures/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
-set $lock 'swaylock -f -c 000000'
 
 ## Terminal
 bindsym $mod+Return exec alacritty
 
 ## Browser
-bindsym $mod+Shift+Return exec gtk-launch $(xdg-settings get default-web-browser)
+bindsym $mod+Shift+Return exec firefox -P
 
 ## Notification viewer
 bindsym $mod+n exec /usr/bin/rofication-gui
 
 ## rofi launchers
 bindsym $mod+space exec wofi --show=drun --lines=5 --prompt=""
-bindsym $mod+shift+space exec rofi -show run
-bindsym $mod+ctrl+space exec rofi -show window
-bindsym $mod+$alt+space exec rofi -show filebrowser
+bindsym $mod+shift+space exec wofi --show=run
+bindsym $mod+ctrl+space exec wofi --show=window
+bindsym $mod+$alt+space exec wofi --show=filebrowser
 
 ## File browser
-bindsym $mod+Shift+n /usr/bin/thunar --new-window
+bindsym $mod+Shift+n /usr/bin/thunar
 
 # Exit sway (logs you out of your Wayland session)
 bindsym $mod+Shift+Ctrl+f exec swaynag -t warning -m 'You pressed the exit shortcut. Do you really want to exit sway? This will end your Wayland session.' -b 'Yes, exit sway' 'swaymsg exit'
@@ -305,19 +304,15 @@ bindsym Shift+Print exec $screenclip
 ## Locking ##
 #############
 
+set $lock 'swaylock -f -r -c 282a36 --indicator-idle-visible --ring-color 44475a --inside-clear-color f1fa8c --inside-ver-color 6272a4 --inside-wrong-color ff5555 --inside-caps-lock-color ffb86c --key-hl-color bd93f9'
+
 bindsym $mod+ctrl+l exec $lock
 
-#exec swayidle -w \
-#    	timeout 300 'exec $lock' \
-#    	timeout 600 'swaymsg "output * dpms off"' \
-#    		resume 'swaymsg "output * dpms on"' \
-#    	before-sleep 'exec $lock'
-
 exec swayidle -w \
-         timeout 300 'swaylock -f -c 000000' \
-         timeout 600 'swaymsg "output * dpms off"' \
-              resume 'swaymsg "output * dpms on"' \
-         before-sleep 'swaylock -f -c 000000'
+        timeout 300 'swaylock -f -r -c 282a36 --indicator-idle-visible --ring-color 44475a --inside-clear-color f1fa8c --inside-ver-color 6272a4 --inside-wrong-color ff5555 --inside-caps-lock-color ffb86c --key-hl-color bd93f9' \
+        timeout 600 'swaymsg "output * dpms off"' \
+            resume 'swaymsg "output * dpms on"' \
+        before-sleep 'swaylock -f -r -c 282a36 --indicator-idle-visible --ring-color 44475a --inside-clear-color f1fa8c --inside-ver-color 6272a4 --inside-wrong-color ff5555 --inside-caps-lock-color ffb86c --key-hl-color bd93f9'
 
 #############################
 ## Appearance and Behavior ##
@@ -326,15 +321,15 @@ exec swayidle -w \
 input * {
     xkb_layout "us"
     xkb_variant "altgr-intl"
-    xkb_options "ctrl:nocaps,compose:ralt"
+    xkb_options "caps:super"
 }
 
 # Disable titlebar
-default_border pixel 1
+default_border pixel 2
 default_floating_border pixel 1
 
 # Gaps between windows
-gaps inner 1
+gaps inner 2
 gaps outer 0
 smart_gaps on
 
@@ -348,7 +343,7 @@ focus_follows_mouse no
 ## Color and Fonts ##
 #####################
 # class                 border  bground text    indicator child_border
-client.focused          #6272A4 #6272A4 #F8F8F2 #6272A4   #6272A4
+client.focused          #ff79c6 #6272A4 #F8F8F2 #6272A4   #ff79c6
 client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
 client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
 client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
@@ -360,7 +355,6 @@ font pango:Source Code Pro Medium 13
 
 
 bar {
-    font pango:DejaVu Sans Mono
     position bottom
     swaybar_command waybar
     colors {
@@ -376,7 +370,6 @@ bar {
     }
 }
 
-
 ############
 ## Addons ##
 ############
@@ -388,5 +381,6 @@ exec_always nm-applet --indicator
 ######################
 
 for_window [app_id="pavucontrol"] floating enable
+for_window [title="Firefox - Choose User*"] floating enable
 
 include /etc/sway/config.d/*
