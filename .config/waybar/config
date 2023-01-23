@@ -4,8 +4,8 @@
     "height": 24,
 
     "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["sway/window"],
-    "modules-right": ["idle_inhibitor", "temperature", "memory", "cpu", "backlight", "pulseaudio", "tray", "battery", "clock"],
+    "modules-center": ["clock"],
+    "modules-right": ["custom/notification", "backlight", "idle_inhibitor", "pulseaudio", "tray", "gamemode", "custom/battery"],
     "sway/mode": {
         "format": " {}"
     },
@@ -15,15 +15,22 @@
             "urgent": "",
             "focused": "",
             "default": ""
-        }
+        },
+        "enable-bar-scroll": true,
+        "smooth-scrolling-threshold": 1.0,
+        "disable-scroll-wraparound": true,
+        "disable-scroll": false
     },
     "sway/window": {
         "max-length": 20,
         "tooltip": false
     },
     "clock": {
-        "format": "{:%a  ·  %d.%m.%Y  ·  %H:%M}",
-        "tooltip": true
+        "format": "{:%a · %Y.%m.%d · %H:%M}",
+        "tooltip": false,
+        "interval": 60,
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw"
     },
     "cpu": {
         "interval": 10,
@@ -42,7 +49,7 @@
         "format-alt": "{time} {icon}",
         "format-icons": ["", "", "", "", ""],
         "format-charging": "{capacity}% ",
-        "interval": 30,
+        "interval": 300,
         "states": {
             "warning": 25,
             "critical": 10
@@ -55,27 +62,29 @@
 	"format": "{temperatureC}° "
     },
     "pulseaudio": {
+        "icon-size": 24,
         "format": "{volume}% {icon}",
         "format-bluetooth": "{volume}% {icon}",
-        "format-muted": "",
+        "format-muted": "🔇",
         "format-icons": {
-            "headphone": "",
+            "headphone": "🎧",
             "hands-free": "",
             "headset": "",
-            "phone": "",
+            "phone": "📱",
             "portable": "",
-            "default": ""
+            "default": "📢"
         },
         "scroll-step": 1,
         "on-click": "pavucontrol",
         "tooltip": false
     },
     "backlight": {
+        "interval": 300,
         "device": "intel_backlight",
         "format": "{percent}% {icon}",
         "format-alt": "{percent}% {icon}",
         "format-alt-click": "click-right",
-        "format-icons": ["", ""],
+        "format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"],
         "on-scroll-down": "light -A 1",
         "on-scroll-up": "light -U 1"
     },
@@ -88,6 +97,39 @@
         "tooltip": false
     },
     "tray": {
-        "icon-size": 20
+        "icon-size": 16,
+        "spacing": 5
+    },
+    "custom/battery": {
+        "exec": "~/.local/scripts/battery.sh",
+        "interval": 300
+    },
+    "gamemode": {
+        "format": "{glyph} Gamemode",
+        "format-alt": "{glyph} {count}",
+        "glyph": "",
+        "hide-not-running": true,
+        "use-icon": true,
+        "icon-name": "input-gaming-symbolic",
+        "icon-spacing": 4,
+        "icon-size": 20,
+        "tooltip": true,
+        "tooltip-format": "Games running: {count}"
+    },
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "<span foreground='red'><sup></sup></span>",
+            "none": "",
+            "dnd-notification": "<span foreground='red'><sup></sup></span>",
+            "dnd-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client -swb",
+        "on-click": "swaync-client -t -sw",
+        "on-click-right": "swaync-client -d -sw",
+        "escape": true
     }
 }

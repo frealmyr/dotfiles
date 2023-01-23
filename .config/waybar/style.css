@@ -49,19 +49,15 @@
 #tray {
   margin: 4px 2px;
   border-radius: 4px;
+  padding: 0 6px;
   background-color: #313342;
-}
-
-#tray * {
-  padding: 0 9px;
-  border-left: 1px solid #ff79c6;
 }
 
 #tray *:first-child {
   border-left: none;
 }
 
-#mode, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-storage, #custom-spotify, #custom-weather, #custom-mail, #clock, #temperature {
+#mode, #clock, #custom-notification, #gamemode, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-battery, #clock, #temperature {
   margin: 4px 2px;
   padding: 0 6px;
   background-color: #313342;
@@ -77,13 +73,11 @@
   color: #8be9fd;
 }
 
-#clock {
-  margin-left: 4px;
-  margin-right: 4px;
-  background-color: transparent;
-}
-
 #temperature.critical {
   color: #ff5555;
 }
 
+#gamemode {
+  color:#313342;
+  background-color: #ffb86c;
+}
