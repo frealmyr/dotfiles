@@ -10,6 +10,11 @@ for battery in $batteries; do
 		text="AC"
 		icon="🔌"
 		;;
+	Xpending-charge)
+		delay=$(upower -i $battery | grep "time to full" | awk -F: '{print $2}' | sed -e 's/^\s\+//;')
+		text="AC"
+		icon="🔌"
+		;;
 	Xdischarging)
 		delay=$(upower -i $battery | grep "time to empty" | awk -F: '{print $2}' | sed -e 's/^\s\+//;')
 		text="BAT"
@@ -23,5 +28,5 @@ for battery in $batteries; do
     percent=$(upower -i $battery | grep percent | awk -F: '{print $2}' | tr -d ' \t')
 
 	rate=$(upower -i $battery | grep energy-rate | awk -F: '{print $2}' | tr -d ' \t' )
-	echo "$percent · $rate · $delay $icon"
+	printf '{"text":"%s %s %s","tooltip":"%s\\n%s"}' "$icon" "$percent" "$delay" "$rate" "$state"
 done

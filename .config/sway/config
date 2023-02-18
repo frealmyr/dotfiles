@@ -237,7 +237,7 @@ bindsym $mod+Shift+e exec i3-msg exit
 #bindsym $mod+Shift+b exec /usr/bin/gnome-session-quit --reboot
 #bindsym $mod+Shift+p exec /usr/bin/gnome-session-quit --power-off
 bindsym $mod+Escape exec light-locker-command -l
-#bindsym $mod+Shift+s exec systemctl suspend
+bindsym $mod+Shift+s exec systemctl suspend
 
 ## Settings
 # bindsym $mod+c exec gnome-control-center --class=floating_window
@@ -249,9 +249,6 @@ bindsym $mod+Escape exec light-locker-command -l
 ##################
 ## Applications ##
 ##################
-
-set $screenshot grim ~/Pictures/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
-set $screenclip slurp | grim -g - ~/Pictures/screenshots/scrn-$(date +"%Y-%m-%d-%H-%M-%S").png
 
 ## Terminal
 bindsym $mod+Return exec foot
@@ -287,7 +284,10 @@ bindsym --locked XF86AudioPlay exec playerctl play-pause
 bindsym --locked XF86AudioNext exec playerctl next
 bindsym --locked XF86AudioPrev exec playerctl previous
 
-## Print
+## Print screen
+set $screenshot grim - | wl-copy && wl-paste >  ~/Pictures/Screenshots/screenshot-$(date +"%Y-%m-%d-%H-%M-%S").png
+set $screenclip slurp | grim -g - - | wl-copy && wl-paste > ~/Pictures/Screenshots/screenshot-$(date +"%Y-%m-%d-%H-%M-%S").png
+
 bindsym Print exec $screenshot
 bindsym Shift+Print exec $screenclip
 
@@ -295,23 +295,23 @@ bindsym Shift+Print exec $screenclip
 ## Locking ##
 #############
 
-set $lock 'swaylock -f -r -c 282a36 --indicator-idle-visible --ring-color 44475a --inside-clear-color f1fa8c --inside-ver-color 6272a4 --inside-wrong-color ff5555 --inside-caps-lock-color ffb86c --key-hl-color bd93f9'
-
-bindsym $mod+ctrl+l exec $lock
+set $lock swaylock -c 282a36
 
 exec swayidle -w \
-        timeout 300 'swaylock -f -r -c 282a36 --indicator-idle-visible --ring-color 44475a --inside-clear-color f1fa8c --inside-ver-color 6272a4 --inside-wrong-color ff5555 --inside-caps-lock-color ffb86c --key-hl-color bd93f9' \
-        timeout 600 'swaymsg "output * dpms off"' \
-            resume 'swaymsg "output * dpms on"' \
-        before-sleep 'swaylock -f -r -c 282a36 --indicator-idle-visible --ring-color 44475a --inside-clear-color f1fa8c --inside-ver-color 6272a4 --inside-wrong-color ff5555 --inside-caps-lock-color ffb86c --key-hl-color bd93f9'
+    timeout 600 $lock \
+    timeout 570 'swaymsg "output * dpms off"' \
+    resume 'swaymsg "output * dpms on"' \
+    before-sleep $lock
+
+bindsym $mod+ctrl+l exec $lock
 
 #############################
 ## Appearance and Behavior ##
 #############################
 
 # Disable titlebar
-default_border pixel 2
-default_floating_border pixel 1
+default_border pixel 3
+default_floating_border pixel 2
 
 # Gaps between windows
 gaps inner 2
@@ -328,16 +328,12 @@ focus_follows_mouse no
 ## Color and Fonts ##
 #####################
 # class                 border  bground text    indicator child_border
-client.focused          #ff79c6 #6272A4 #F8F8F2 #6272A4   #ff79c6
+client.focused          #ff79c6 #6272A4 #F8F8F2 #bd93f9   #ff79c6
 client.focused_inactive #44475A #44475A #F8F8F2 #44475A   #44475A
-client.unfocused        #282A36 #282A36 #BFBFBF #282A36   #282A36
+client.unfocused        #282A36 #282A36 #BFBFBF #bd93f9   #282A36
 client.urgent           #44475A #FF5555 #F8F8F2 #FF5555   #FF5555
 client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 client.background       #F8F8F2
-
-# Font for window titles. Will also be used by the bar unless a different font
-# is used in the bar {} block below.
-font pango:DejaVu Sans Mono 8
 
 # Set random wallpaper
 set $wallpapers_path $HOME/Pictures/wallpapers
@@ -364,19 +360,7 @@ exec_always kanshi
 exec_always nm-applet --indicator
 
 bar {
-    position bottom
     swaybar_command waybar
-    colors {
-        background #282A36
-        statusline #F8F8F2
-        separator  #44475A
-
-        focused_workspace  #44475A #44475A #F8F8F2
-        active_workspace   #282A36 #44475A #F8F8F2
-        inactive_workspace #282A36 #282A36 #BFBFBF
-        urgent_workspace   #FF5555 #FF5555 #F8F8F2
-        binding_mode       #FF5555 #FF5555 #F8F8F2
-    }
 }
 
 ######################
@@ -386,6 +370,5 @@ bar {
 for_window [app_id="pavucontrol"] floating enable
 for_window [title="Firefox - Choose User*"] floating enable
 for_window [title="Extension:*"] floating enable
-
 
 include /etc/sway/config.d/*

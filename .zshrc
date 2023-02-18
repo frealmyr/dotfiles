@@ -42,9 +42,9 @@ complete -F __start_stern ktail
 
 complete -o nospace -C "$(asdf where terraform)/bin/terraform" terraform
 
-# GPG
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
-gpgconf --launch gpg-agent
+# SSH / GPG
+export SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
+# gpg-agent --daemon
 gpg-connect-agent /bye
 export GPG_TTY=$TTY
 

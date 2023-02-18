@@ -17,6 +17,8 @@
   box-shadow: none;
   font-family: 'Ubuntu';
   font-weight: 400;
+  border-radius: 0; /* I like it sharp */
+
 }
 
 #waybar {
@@ -25,21 +27,21 @@
 }
 
 #workspaces {
-  margin: 0 4px;
+  margin: 0 0px;
 }
 
 #workspaces button {
-  margin: 4px 0;
-  padding: 0 6px;
+  padding: 0 1px;
   color: #f8f8f2;
 }
 
-#workspaces button.visible {
+#workspaces button.focused {
+  background-color: #bd93f9;
+  color: #ffffff;
 }
 
-#workspaces button.focused {
-  border-radius: 4px;
-  background-color: #44475a;
+#workspaces button.warning {
+  color: #ffd255;
 }
 
 #workspaces button.urgent {
@@ -47,26 +49,47 @@
 }
 
 #tray {
-  margin: 4px 2px;
-  border-radius: 4px;
-  padding: 0 6px;
+  margin: 0;
+  padding: 0;
   background-color: #313342;
+  border-radius: 0;
 }
 
 #tray *:first-child {
   border-left: none;
 }
 
-#mode, #clock, #custom-notification, #gamemode, #battery, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #backlight, #custom-battery, #clock, #temperature {
-  margin: 4px 2px;
-  padding: 0 6px;
+#mode, #custom-notification, #gamemode, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #tray, #backlight, #custom-battery, #temperature {
+  padding: 7px 0 7px 0;
   background-color: #313342;
-  border-radius: 4px;
-  min-width: 20px;
+}
+
+#custom-battery {
+  background-color: #5c7744;
+}
+
+#tray {
+  background-color: #b86a53;
+}
+
+#clock {
+  font-size: 13pt;
+  font-weight: 900;
+  background-color: #9b6491;
+}
+
+#idle_inhibitor {
+  background-color: #5e81ac;
+}
+
+#pulseaudio {
+  background-color: #bf616a;
 }
 
 #pulseaudio.muted {
   color: #ff5555;
+  background-color: transparent;
+  padding-top: 0;
 }
 
 #pulseaudio.bluetooth {
@@ -80,4 +103,8 @@
 #gamemode {
   color:#313342;
   background-color: #ffb86c;
+}
+
+#window {
+  color: gray;
 }

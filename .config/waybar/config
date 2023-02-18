@@ -1,70 +1,25 @@
 {
     "layer": "bottom",
-    "position": "bottom",
-    "height": 24,
-
-    "modules-left": ["sway/workspaces", "sway/mode"],
-    "modules-center": ["clock"],
-    "modules-right": ["custom/notification", "backlight", "idle_inhibitor", "pulseaudio", "tray", "gamemode", "custom/battery"],
+    "position": "left",
+    "spacing": 4,
+    "width": 25,
+    "modules-left": ["sway/workspaces"],
+    "modules-center": ["sway/mode", "sway/window", "gamemode"],
+    "modules-right": ["idle_inhibitor", "backlight", "custom/battery", "pulseaudio", "tray", "clock"],
     "sway/mode": {
         "format": " {}"
     },
-    "sway/workspaces": {
-        "format": "{name}{icon}",
-        "format-icons": {
-            "urgent": "",
-            "focused": "",
-            "default": ""
-        },
-        "enable-bar-scroll": true,
-        "smooth-scrolling-threshold": 1.0,
-        "disable-scroll-wraparound": true,
-        "disable-scroll": false
-    },
-    "sway/window": {
-        "max-length": 20,
-        "tooltip": false
-    },
     "clock": {
-        "format": "{:%a · %Y.%m.%d · %H:%M}",
+        "format": "{:%H\n%M}",
         "tooltip": false,
         "interval": 60,
         "on-click": "swaync-client -t -sw",
-        "on-click-right": "swaync-client -d -sw"
-    },
-    "cpu": {
-        "interval": 10,
-        "format": "{}% ",
-        "max-length": 10
-    },
-    "memory": {
-        "interval": 30,
-        "format": "{used:0.1f}/{total:0.0f}GB ",
-        "max-length": 10,
-        "tooltip": false
-    },
-    "battery": {
-        "bat": "BAT0",
-        "format": "{capacity}% {icon}",
-        "format-alt": "{time} {icon}",
-        "format-icons": ["", "", "", "", ""],
-        "format-charging": "{capacity}% ",
-        "interval": 300,
-        "states": {
-            "warning": 25,
-            "critical": 10
-        },
-        "tooltip": false
-    },
-    "temperature": {
-        "critical-threshold": 70,
-	"format-critical": "{temperatureC}° ",
-	"format": "{temperatureC}° "
+        "on-click-right": "swaync-client -d -sw",
     },
     "pulseaudio": {
         "icon-size": 24,
-        "format": "{volume}% {icon}",
-        "format-bluetooth": "{volume}% {icon}",
+        "format": "{icon} {volume}%",
+        "format-bluetooth": "{icon} {volume}%",
         "format-muted": "🔇",
         "format-icons": {
             "headphone": "🎧",
@@ -72,11 +27,12 @@
             "headset": "",
             "phone": "📱",
             "portable": "",
-            "default": "📢"
+            "default": "🔉"
         },
         "scroll-step": 1,
         "on-click": "pavucontrol",
-        "tooltip": false
+        "tooltip": false,
+        "rotate": 90
     },
     "backlight": {
         "interval": 300,
@@ -86,23 +42,27 @@
         "format-alt-click": "click-right",
         "format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"],
         "on-scroll-down": "light -A 1",
-        "on-scroll-up": "light -U 1"
+        "on-scroll-up": "light -U 1",
+        "rotate": 90
     },
     "idle_inhibitor": {
         "format": "{icon}",
         "format-icons": {
-            "activated": "",
-            "deactivated": ""
+            "activated": "📖",
+            "deactivated": "⌛"
         },
         "tooltip": false
     },
     "tray": {
         "icon-size": 16,
-        "spacing": 5
+        "spacing": 0,
+        "rotate": 90
     },
     "custom/battery": {
         "exec": "~/.local/scripts/battery.sh",
-        "interval": 300
+        "return-type": "json",
+        "interval": 300,
+        "rotate": 90
     },
     "gamemode": {
         "format": "{glyph} Gamemode",
@@ -131,5 +91,27 @@
         "on-click": "swaync-client -t -sw",
         "on-click-right": "swaync-client -d -sw",
         "escape": true
+    },
+    "sway/mode": {
+        "format": " {}",
+        "max-length": 150,
+        "rotate": 90
+    },
+    "sway/workspaces": {
+        "format": "{name}{icon}",
+        "format-icons": {
+            "urgent": "",
+            "focused": "",
+            "default": ""
+        },
+        "enable-bar-scroll": true,
+        "smooth-scrolling-threshold": 1.0,
+        "disable-scroll-wraparound": true,
+        "disable-scroll": false
+    },
+    "sway/window": {
+        "max-length": 150,
+        "tooltip": false,
+        "rotate": 90
     }
 }
