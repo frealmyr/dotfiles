@@ -1,10 +1,10 @@
 # swaymsg -t get_outputs
 
-{
-	output "Goldstar Company Ltd 38GN950 202NTSU89382" mode 3840x1600@74.977Hz position 0,0
-	output 'Unknown 0xD291 0x00000000' disable
+profile {
+	output eDP-1 disable
+	output 'Goldstar Company Ltd 38GN950 202NTSU89382' enable mode 3840x1600@143.998Hz position 0,0
 }
 
-{
-	output 'Unknown 0xD291 0x00000000' mode 1920x1200@60.026Hz position 0,0
+profile {
+	output eDP-1 enable mode 1920x1200@60.026Hz position 0,0
 }

@@ -240,8 +240,8 @@ bindsym $mod+Escape exec light-locker-command -l
 bindsym $mod+Shift+s exec systemctl suspend
 
 ## Settings
-# bindsym $mod+c exec gnome-control-center --class=floating_window
-# bindsym $mod+d exec gnome-control-center --class=floating_window display
+bindsym $mod+c exec gnome-control-center --class=floating_window
+bindsym $mod+d exec wdisplays --class=floating_window
 # bindsym $mod+w exec gnome-control-center --class=floating_window wifi
 # bindsym $mod+b exec gnome-control-center --class=floating_window bluetooth
 # bindsym $mod+s exec gnome-control-center --class=floating_window sound
@@ -295,15 +295,13 @@ bindsym Shift+Print exec $screenclip
 ## Locking ##
 #############
 
-set $lock swaylock -c 282a36
-
 exec swayidle -w \
-    timeout 600 $lock \
-    timeout 570 'swaymsg "output * dpms off"' \
-    resume 'swaymsg "output * dpms on"' \
-    before-sleep $lock
+  timeout 300 'swaylock -f -c 282a36' \
+  timeout 600 'swaymsg "output * dpms off"' \
+      resume 'swaymsg "output * dpms on"' \
+  before-sleep 'swaylock -f -c 282a36'
 
-bindsym $mod+ctrl+l exec $lock
+bindsym $mod+ctrl+l exec swaylock
 
 #############################
 ## Appearance and Behavior ##
@@ -354,10 +352,11 @@ input * {
 ############
 
 # External displays Management
-exec_always kanshi
+exec kanshi
+output * adaptive_sync on
 
 # Network Manager tray applet
-exec_always nm-applet --indicator
+exec nm-applet --indicator
 
 bar {
     swaybar_command waybar

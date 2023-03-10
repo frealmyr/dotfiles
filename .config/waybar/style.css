@@ -68,11 +68,16 @@
   background-color: #5c7744;
 }
 
+#custom-power {
+  background-color: #5c7744;
+}
+
 #tray {
   background-color: #b86a53;
 }
 
 #clock {
+  padding: 7px 0 4px 0;
   font-size: 13pt;
   font-weight: 900;
   background-color: #9b6491;

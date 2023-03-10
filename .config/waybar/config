@@ -3,18 +3,33 @@
     "position": "left",
     "spacing": 4,
     "width": 25,
-    "modules-left": ["sway/workspaces"],
-    "modules-center": ["sway/mode", "sway/window", "gamemode"],
-    "modules-right": ["idle_inhibitor", "backlight", "custom/battery", "pulseaudio", "tray", "clock"],
+    "modules-left": [
+        "sway/workspaces"
+    ],
+    "modules-center": [
+        "sway/mode",
+        "sway/window"
+    ],
+    "modules-right": [
+        "gamemode",
+        "idle_inhibitor",
+        "backlight",
+        "custom/battery",
+        "pulseaudio",
+        "tray",
+        "custom/power",
+        "clock"
+    ],
     "sway/mode": {
         "format": " {}"
     },
     "clock": {
-        "format": "{:%H\n%M}",
+        "format": "{:%H:%M}",
         "tooltip": false,
         "interval": 60,
         "on-click": "swaync-client -t -sw",
         "on-click-right": "swaync-client -d -sw",
+        "rotate": 90
     },
     "pulseaudio": {
         "icon-size": 24,
@@ -40,7 +55,13 @@
         "format": "{percent}% {icon}",
         "format-alt": "{percent}% {icon}",
         "format-alt-click": "click-right",
-        "format-icons": ["🌑", "🌘", "🌗", "🌖", "🌕"],
+        "format-icons": [
+            "🌑",
+            "🌘",
+            "🌗",
+            "🌖",
+            "🌕"
+        ],
         "on-scroll-down": "light -A 1",
         "on-scroll-up": "light -U 1",
         "rotate": 90
@@ -65,16 +86,17 @@
         "rotate": 90
     },
     "gamemode": {
-        "format": "{glyph} Gamemode",
+        "format": "{glyph}",
         "format-alt": "{glyph} {count}",
         "glyph": "",
         "hide-not-running": true,
         "use-icon": true,
         "icon-name": "input-gaming-symbolic",
-        "icon-spacing": 4,
-        "icon-size": 20,
+        "icon-spacing": 0,
+        "icon-size": 14,
         "tooltip": true,
-        "tooltip-format": "Games running: {count}"
+        "tooltip-format": "Games running: {count}",
+        "rotate": 90
     },
     "custom/notification": {
         "tooltip": false,
@@ -113,5 +135,9 @@
         "max-length": 150,
         "tooltip": false,
         "rotate": 90
+    },
+    "custom/power": {
+        "format": "",
+        "on-click": "swaynag -t warning -m 'Power Menu Options' -b 'Logout' 'swaymsg exit' -b 'Suspend' 'swaymsg exec systemctl suspend' -b 'shutdown' 'systemctl shutdown'"
     }
 }
