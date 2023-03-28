@@ -173,6 +173,9 @@ floating_modifier $mod normal
 bindsym $mod+Shift+t focus mode_toggle
 
 ## Window - Modify - Window Layout Mode
+bindsym $mod+s layout stacking
+bindsym $mod+w layout tabbed
+bindsym $mod+e layout toggle split
 bindsym $mod+t layout toggle tabbed splith splitv
 
 #####################
@@ -242,9 +245,6 @@ bindsym $mod+Shift+s exec systemctl suspend
 ## Settings
 bindsym $mod+c exec gnome-control-center --class=floating_window
 bindsym $mod+d exec wdisplays --class=floating_window
-# bindsym $mod+w exec gnome-control-center --class=floating_window wifi
-# bindsym $mod+b exec gnome-control-center --class=floating_window bluetooth
-# bindsym $mod+s exec gnome-control-center --class=floating_window sound
 
 ##################
 ## Applications ##
@@ -257,13 +257,18 @@ bindsym $mod+Return exec foot
 bindsym $mod+Shift+Return exec firefox -P
 
 ## Notification viewer
-exec_always swaync
-bindsym $mod+n exec swaync-client -t -sw
+# exec_always swaync
+# bindsym $mod+n exec swaync-client -t -sw
 # bindsym $mod+n exec /usr/bin/rofication-gui
 
 ## rofi launchers
-bindsym $mod+space exec wofi --show=drun --lines=10 --prompt="" -IGa
-bindsym $mod+shift+space exec wofi --show=run
+set $rofi_cmd rofi \
+        -run-command 'swaymsg -q exec -- {cmd}' \
+        -run-shell-command 'swaymsg -q exec -- {terminal} -e {cmd}' \
+        -terminal '$term'
+set $menu $rofi_cmd -show combi -combi-modes drun#run -modes combi
+bindsym $mod+space exec $menu
+# bindsym $mod+shift+space exec wofi --show=run
 # bindsym $mod+ctrl+space exec wofi --show=window
 # bindsym $mod+$alt+space exec wofi --show=filebrowser
 
@@ -326,7 +331,7 @@ focus_follows_mouse no
 ## Blue-screen filter ##
 ########################
 
-exec --no-startup-id wlsunset -t 3500 -s 19:00 -S 09:00
+exec --no-startup-id wlsunset -t 3500 -s 21:00 -S 08:00
 
 #####################
 ## Color and Fonts ##
@@ -340,8 +345,8 @@ client.placeholder      #282A36 #282A36 #F8F8F2 #282A36   #282A36
 client.background       #F8F8F2
 
 # Set random wallpaper
-set $wallpapers_path $HOME/Pictures/wallpapers
-output * bg `find $wallpapers_path -type f | shuf -n 1` fill
+# set $wallpapers_path $HOME/Pictures/wallpapers
+# output * bg `find $wallpapers_path -type f | shuf -n 1` fill
 
 ##############
 ## Language ##
@@ -358,18 +363,18 @@ input * {
 ############
 
 # Gnome Polkit
-exec /usr/libexec/polkit-gnome-authentication-agent-1
+# exec /usr/libexec/polkit-gnome-authentication-agent-1
 
 # External displays Management
 exec kanshi
 output * adaptive_sync on
 
 # Network Manager tray applet
-exec nm-applet --indicator
+# exec nm-applet --indicator
 
-bar {
-    swaybar_command waybar
-}
+# bar {
+#     swaybar_command waybar
+# }
 
 ######################
 ## Floating Windows ##
@@ -378,5 +383,3 @@ bar {
 for_window [app_id="pavucontrol"] floating enable
 for_window [title="Firefox - Choose User*"] floating enable
 for_window [title="Extension:*"] floating enable
-
-include /etc/sway/config.d/*
