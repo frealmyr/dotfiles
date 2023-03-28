@@ -322,6 +322,12 @@ popup_during_fullscreen smart
 # window focus follows your mouse movements as the mouse crosses window borders
 focus_follows_mouse no
 
+########################
+## Blue-screen filter ##
+########################
+
+exec --no-startup-id wlsunset -t 3500 -s 19:00 -S 09:00
+
 #####################
 ## Color and Fonts ##
 #####################
@@ -350,6 +356,9 @@ input * {
 ############
 ## Addons ##
 ############
+
+# Gnome Polkit
+exec /usr/libexec/polkit-gnome-authentication-agent-1
 
 # External displays Management
 exec kanshi

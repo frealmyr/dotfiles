@@ -45,7 +45,7 @@ complete -o nospace -C "$(asdf where terraform)/bin/terraform" terraform
 # SSH / GPG
 export SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
 # gpg-agent --daemon
-gpg-connect-agent /bye
+gpg-connect-agent -q /bye
 export GPG_TTY=$TTY
 
 # Golang
@@ -65,3 +65,5 @@ for file in ~/.config/zsh/aliases/*; do source $file; done
 # if [ -z $TMUX ] && [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]; then
 #   tmux new -s session_$RANDOM;
 # fi
+
+source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
