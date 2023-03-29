@@ -5,5 +5,5 @@ profile {
 }
 
 profile {
-	output 'LG Electronics 38GN950 202NTSU89382' enable mode 3840x1600@119.982Hz position 0,0
+	output 'LG Electronics 38GN950 202NTSU89382' enable mode 3840x1600@59.994 position 0,0
 }
