@@ -3,14 +3,11 @@ export ZSH="$HOME/.oh-my-zsh"
 export ZSH_CUSTOM="$ZSH/custom"
 
 # Update shell PATH with custom locations
-export PATH=$HOME/bin:/usr/local/bin:/opt/local/bin:$HOME/.asdf/installs/krew/0.4.3/bin:$HOME/.local/bin:$PATH
+export PATH=$HOME/bin:/usr/local/bin:/opt/local/bin:$HOME/.local/bin:$PATH
 
 # Ensure that UTF-8 is used
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-
-# Set libva driver
-export LIBVA_DRIVER_NAME=iHD
 
 export TERM=xterm-256color # Alacritty will mess up SSH client input
 
@@ -29,27 +26,23 @@ source $ZSH/oh-my-zsh.sh
 source "$(asdf where gcloud)/completion.zsh.inc"
 source "$(asdf where gcloud)/path.zsh.inc"
 
-# Enable kubectl autocompletion
+## Auto-completion
 source <(kubectl completion zsh)
 complete -F __start_kubectl k
 
-# Enable stern autocompletion
 source <(stern --completion=zsh)
 complete -F __start_stern ktail
 
-#source <(gh completion -s zsh)
-#complete -K _gh gh
-
+source <(gh completion -s zsh)
+complete -K _gh gh
 complete -o nospace -C "$(asdf where terraform)/bin/terraform" terraform
 
 # SSH / GPG
 export SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
-# gpg-agent --daemon
 gpg-connect-agent -q /bye
 export GPG_TTY=$TTY
 
 # Golang
-#export GOROOT=/usr/local/go
 export GOROOT=$(asdf where golang)/go
 export GOPROXY=direct
 export GO111MODULE=on
@@ -60,10 +53,5 @@ export PATH=$GOROOT/bin:$PATH
 fpath=(~/.config/zsh/functions $fpath)
 autoload -U $fpath[1]/*(.:t)
 for file in ~/.config/zsh/aliases/*; do source $file; done
-
-# Start a new tmux session when opening a new shell
-# if [ -z $TMUX ] && [ "$TERMINAL_EMULATOR" != "JetBrains-JediTerm" ]; then
-#   tmux new -s session_$RANDOM;
-# fi
 
 source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"

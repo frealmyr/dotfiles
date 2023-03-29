@@ -11,7 +11,7 @@
   autocrlf = false #true
   editor = vim
   excludesfile = ~/.gitignore_global
-  
+
 #[commit]
 #  gpgsign = true
 
