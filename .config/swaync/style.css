@@ -3,7 +3,7 @@
  */
 
 @define-color noti-border-color rgba(255, 255, 255, 0.15);
-@define-color noti-bg #44475a;
+@define-color noti-bg #282a36;
 @define-color noti-bg-alt #282a36;
 @define-color noti-fg #E5E9F0;
 @define-color noti-bg-hover #bd93f9 ;
@@ -28,7 +28,7 @@
 }
 
 .notification {
-  border-radius: 12px;
+  border-radius: 0;
   margin: 2px 2px;
   padding: 0;
 }
@@ -37,19 +37,19 @@
 /* .low {
   background: yellow;
   padding: 6px;
-  border-radius: 12px;
+  border-radius: 0;
 }
 
 .normal {
   background: green;
   padding: 6px;
-  border-radius: 12px;
+  border-radius: 0;
 } */
 
 .critical {
   background: @noti-urgent;
   padding: 2px;
-  border-radius: 12px;
+  border-radius: 0;
 }
 
 
@@ -63,7 +63,7 @@
   color: white;
   text-shadow: none;
   padding: 0;
-  border-radius: 100%;
+  border-radius: 0;
   margin-top: 10px;
   margin-right: 16px;
   box-shadow: none;
@@ -96,7 +96,7 @@
 }
 
 .notification-default-action {
-  border-radius: 12px;
+  border-radius: 0;
 }
 
 /* When alternative actions are visible */
@@ -106,7 +106,7 @@
 }
 
 .notification-action {
-  border-radius: 0px;
+  border-radius: 0;
   border-top: none;
   border-right: none;
 }
@@ -125,7 +125,7 @@
 .body-image {
   margin-top: 6px;
   background-color: white;
-  border-radius: 12px;
+  border-radius: 0;
 }
 
 .summary {
@@ -192,7 +192,7 @@
   background: @noti-bg;
   border: 1px solid @noti-border-color;
   box-shadow: none;
-  border-radius: 12px;
+  border-radius: 0;
 }
 
 .widget-title>button:hover {
@@ -207,7 +207,7 @@
 
 .widget-dnd>switch {
   font-size: initial;
-  border-radius: 12px;
+  border-radius: 0;
   background: @noti-bg;
   border: 1px solid @noti-border-color;
   box-shadow: none;
@@ -219,7 +219,7 @@
 
 .widget-dnd>switch slider {
   background: @noti-bg-hover;
-  border-radius: 12px;
+  border-radius: 0;
 }
 
 /* Label widget */

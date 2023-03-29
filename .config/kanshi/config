@@ -1,10 +1,9 @@
 # swaymsg -t get_outputs
 
 profile {
-	output eDP-1 disable
-	output 'Goldstar Company Ltd 38GN950 202NTSU89382' enable mode 3840x1600@143.998Hz position 0,0
+	output eDP-1 enable mode 1920x1200@60.026Hz position 0,0
 }
 
 profile {
-	output eDP-1 enable mode 1920x1200@60.026Hz position 0,0
+	output 'LG Electronics 38GN950 202NTSU89382' enable mode 3840x1600@119.982Hz position 0,0
 }

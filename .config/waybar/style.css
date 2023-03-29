@@ -1,17 +1,3 @@
-/* :root {
-  --color-bg: #282a36;
-  --color-line: #44475a;
-  --color-fg: #f8f8f2;
-  --color-comment: #6272a4;
-  --color-cyan: #8be9fd;
-  --color-green: #50fa7b;
-  --color-orange: #ffb86c;
-  --color-pink: #ff79c6;
-  --color-purple: #bd93f9;
-  --color-red: #ff5555;
-  --color-yellow: #f1fa8c;
-} */
-
 * {
   transition: none;
   box-shadow: none;
@@ -25,6 +11,8 @@
   color: #f8f8f2;
   background: #282a36;
 }
+
+/* Modules - Left */
 
 #workspaces {
   margin: 0 0px;
@@ -48,61 +36,16 @@
   color: #ff5555;
 }
 
-#tray {
-  margin: 0;
-  padding: 0;
-  background-color: #313342;
-  border-radius: 0;
+/* Modules - Center */
+
+#window {
+  color: gray;
 }
 
-#tray *:first-child {
-  border-left: none;
-}
+/* Modules - Right */
 
 #mode, #custom-notification, #gamemode, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #tray, #backlight, #custom-battery, #temperature {
   padding: 7px 0 7px 0;
-  background-color: #313342;
-}
-
-#custom-battery {
-  background-color: #5c7744;
-}
-
-#custom-power {
-  background-color: #5c7744;
-}
-
-#tray {
-  background-color: #b86a53;
-}
-
-#clock {
-  padding: 7px 0 4px 0;
-  font-size: 13pt;
-  font-weight: 900;
-  background-color: #9b6491;
-}
-
-#idle_inhibitor {
-  background-color: #5e81ac;
-}
-
-#pulseaudio {
-  background-color: #bf616a;
-}
-
-#pulseaudio.muted {
-  color: #ff5555;
-  background-color: transparent;
-  padding-top: 0;
-}
-
-#pulseaudio.bluetooth {
-  color: #8be9fd;
-}
-
-#temperature.critical {
-  color: #ff5555;
 }
 
 #gamemode {
@@ -110,6 +53,45 @@
   background-color: #ffb86c;
 }
 
-#window {
-  color: gray;
+#idle_inhibitor {
+  background-color: #8fbcbb;
+}
+
+#custom-battery {
+  background-color: #a3be8c;
+}
+
+#pulseaudio {
+  background-color: #5e81ac;
+}
+
+#pulseaudio.muted {
+  color: #ff5555;
+  padding-top: 7px;
+}
+
+#pulseaudio.bluetooth {
+  color: #8be9fd;
+}
+
+#custom-power {
+  background-color: darkolivegreen;
+}
+
+#tray {
+  margin: 0;
+  border-radius: 0;
+  padding: 5px 0 5px 1px;
+  background-color: darkslategray;
+}
+
+#tray *:first-child {
+  border-left: none;
+}
+
+#clock {
+  padding: 0;
+  font-size: 13pt;
+  font-weight: 900;
+  background-color: transparent;
 }
