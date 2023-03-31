@@ -44,17 +44,22 @@
 
 /* Modules - Right */
 
-#mode, #custom-notification, #gamemode, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #tray, #backlight, #custom-battery, #temperature {
+#mode, #custom-notification, #gamemode, #cpu, #memory, #network, #pulseaudio, #idle_inhibitor, #tray, #backlight, #custom-governor, #custom-battery, #temperature {
   padding: 7px 0 7px 0;
+}
+
+#idle_inhibitor {
+  background-color: darkmagenta;
+}
+
+#backlight {
+  color:#313342;
+  background-color: darksalmon;
 }
 
 #gamemode {
   color:#313342;
   background-color: #ffb86c;
-}
-
-#idle_inhibitor {
-  background-color: #8fbcbb;
 }
 
 #custom-battery {
@@ -74,8 +79,12 @@
   color: #8be9fd;
 }
 
-#custom-power {
+#custom-battery {
   background-color: darkolivegreen;
+}
+
+#custom-governor {
+  background-color: darkslateblue;
 }
 
 #tray {

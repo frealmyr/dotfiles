@@ -15,9 +15,10 @@
         "idle_inhibitor",
         "backlight",
         "custom/battery",
+        "custom/governor",
         "pulseaudio",
-        "custom/power",
         "tray",
+        "custom/power",
         "clock"
     ],
     "sway/mode": {
@@ -118,6 +119,17 @@
         "max-length": 150,
         "rotate": 90
     },
+    "custom/governor": {
+      "tooltip": false,
+      "return-type": "json",
+      "interval": 60,
+      "exec": "~/.local/scripts/waybar-tuned.sh",
+      "on-click": "~/.local/scripts/waybar-tuned.sh trigger ; pkill -SIGRTMIN+8 waybar",
+      "on-click-right": "~/.local/scripts/waybar-tuned.sh trigger ; pkill -SIGRTMIN+8 waybar",
+      "signal": 8,
+
+      "rotate": 90
+  },
     "sway/workspaces": {
         "format": "{name}{icon}",
         "format-icons": {
@@ -133,6 +145,7 @@
     "sway/window": {
         "max-length": 150,
         "tooltip": false,
+        "format": "{shell} - {title}",
         "rotate": 90
     },
     "custom/power": {

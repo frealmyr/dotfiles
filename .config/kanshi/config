@@ -1,0 +1,10 @@
+# swaymsg -t get_outputs
+
+profile laptop {
+	output 'AU Optronics 0xD291 Unknown' enable mode 1920x1200@60.026Hz position 0,0
+}
+
+profile battlestation {
+  output 'AU Optronics 0xD291 Unknown' disable
+	output 'LG Electronics 38GN950 202NTSU89382' enable mode 3840x1600@119.982Hz position 0,0
+}
