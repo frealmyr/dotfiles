@@ -8,3 +8,8 @@ profile battlestation {
   output 'AU Optronics 0xD291 Unknown' disable
 	output 'LG Electronics 38GN950 202NTSU89382' enable mode 3840x1600@119.982Hz position 0,0
 }
+
+profile breidablikk {
+  output 'AU Optronics 0xD291 Unknown' disable
+	output 'Samsung Electric Company LF24T450F HK2RA00375' enable mode 1920x1080@74.973Hz position 0,0
+}

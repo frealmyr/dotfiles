@@ -16,7 +16,7 @@ DISABLE_AUTO_UPDATE="true"
 COMPLETION_WAITING_DOTS="true"
 
 # Load zsh plugins
-plugins=(asdf docker extract git history history-substring-search tmux you-should-use zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(asdf autoupdate direnv docker extract git history history-substring-search tmux you-should-use zsh-autosuggestions zsh-syntax-highlighting)
 
 # Oh-My-ZSH related things
 ZSH_THEME="freddy"
@@ -47,7 +47,13 @@ export GOROOT=$(asdf where golang)/go
 export GOPROXY=direct
 export GO111MODULE=on
 export GOSUMDB=off
-export PATH=$GOROOT/bin:$PATH
+#export PATH=$GOROOT/bin:$PATH
+
+# Terraform / CDKTF
+export TERRAFORM_BINARY_NAME="$(asdf which terraform)"
+
+# direnv
+export DIRENV_LOG_FORMAT=""
 
 # Load zsh functions and aliases
 fpath=(~/.config/zsh/functions $fpath)

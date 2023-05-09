@@ -1,7 +1,7 @@
 [user]
   name = Fredrick Myrvoll
-  email = fredrickmyrvoll@gmail.com
-  signingkey = "12C860312C1574A4"
+  email = fredrick.myrvoll@tv2.no
+#  signingkey = "12C860312C1574A4"
 
 [gpg]
   program = gpg
