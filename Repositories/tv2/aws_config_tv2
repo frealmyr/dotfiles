@@ -1,0 +1,11 @@
+[profile sso]
+sso_start_url = https://tv2norge.awsapps.com/start
+sso_region = eu-north-1
+sso_account_id = 981596498136
+sso_role_name = AdministratorAccess
+region = eu-north-1
+cli_binary_format=raw-in-base64-out
+output = json
+
+[profile ap]
+credential_process = aws2-wrap --process --profile sso

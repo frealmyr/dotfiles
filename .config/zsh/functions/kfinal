@@ -1,0 +1,4 @@
+function kfinal() {
+: ${1?"kfinal resource_type resource_name"}
+  kubectl $kns patch $argv[1] $argv[2] -p '{"metadata":{"finalizers":null}}' --type=merge
+}
