@@ -2,6 +2,8 @@
 DISABLE_AUTO_UPDATE="true"
 COMPLETION_WAITING_DOTS="true"
 
+export PATH=/Users/fredrick/miniforge3/condabin:$PATH
+
 # Load zsh plugins
 plugins=(asdf direnv docker extract git history history-substring-search tmux you-should-use zsh-autosuggestions zsh-syntax-highlighting)
 
@@ -34,13 +36,16 @@ export GOROOT=$(asdf where golang)/go
 export GOPROXY=direct
 export GO111MODULE=on
 export GOSUMDB=off
-#export PATH=$GOROOT/bin:$PATH
+export PATH=$PATH:$GOPATH/bin
 
 # Terraform / CDKTF
 export TERRAFORM_BINARY_NAME="$(asdf which terraform)"
+export KUBECONFIG=~/.kube/config
 
 # direnv
 export DIRENV_LOG_FORMAT=""
+
+export CLOUDSDK_PYTHON=/Users/fredrick/.asdf/installs/python/3.10.11/bin/python
 
 # Load zsh functions and aliases
 fpath=(~/.config/zsh/functions $fpath)
@@ -48,3 +53,13 @@ autoload -U $fpath[1]/*(.:t)
 for file in ~/.config/zsh/aliases/*; do source $file; done
 
 source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
+
+# Use fzf for bash/zsh functions
+# https://github.com/junegunn/fzf?tab=readme-ov-file#fuzzy-completion-for-bash-and-zsh
+source <(fzf --zsh)
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
+
+export PATH="${PATH}:${HOME}/.krew/bin"

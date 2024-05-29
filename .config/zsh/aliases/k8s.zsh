@@ -26,7 +26,7 @@ alias kgp='k get pods'
 alias kgpa='kubectl get pods --all-namespaces'
 alias kgpw='kgp --watch'
 alias kgpwide='kgp -o wide'
-alias kpf="k port-forward"
+alias kpf="k port-forward --address 0.0.0.0"
 
 # k8s service
 alias kds='k describe svc'
