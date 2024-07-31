@@ -1,5 +1,5 @@
 import = [
-    "~/.config/alacritty/themes/dark.toml"
+    "~/.config/alacritty/themes/light.toml"
 ]
 
 [cursor]
@@ -10,7 +10,7 @@ blinking = "Always"
 shape = "Block"
 
 [font]
-size = 14
+size = 12
 
 [font.normal]
 family = "Monaco"

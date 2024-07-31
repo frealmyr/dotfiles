@@ -1,0 +1,5 @@
+#!/bin/sh
+
+# Turn on Wi-Fi & Bluetooth when waking up from sleep
+networksetup -setairportpower en0 on 2>&1 | tee /tmp/sleep_logs
+/opt/homebrew/bin/blueutil -p on 2>&1 | tee /tmp/sleep_logs
