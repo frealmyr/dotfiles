@@ -1,0 +1,104 @@
+{
+  "[go]": {
+    "editor.defaultFormatter": "golang.go",
+    "editor.formatOnSave": true
+  },
+  "[python]": {
+    "editor.formatOnType": true
+  },
+  "editor.bracketPairColorization.enabled": true,
+  "editor.codeActionsOnSave": null,
+  "editor.detectIndentation": false,
+  "editor.fontFamily": "'Fira Code SemiBold'",
+  "editor.fontSize": 12,
+  "editor.guides.bracketPairs": "active",
+  "editor.inlineSuggest.enabled": true,
+  "editor.insertSpaces": true,
+  "editor.minimap.enabled": false,
+  "editor.minimap.renderCharacters": false,
+  "editor.tabSize": 2,
+  "emeraldwalk.runonsave": {
+    "commands": [
+      {
+        "cmd": "terraform fmt ${file}",
+        "match": "\\.tf$"
+      },
+      {
+        "cmd": "terraform fmt ${file}",
+        "match": "\\.hcl$"
+      }
+    ]
+  },
+  "explorer.confirmDelete": false,
+  "explorer.confirmDragAndDrop": false,
+  "files.associations": {
+    "*.schema": "json"
+  },
+  "github.copilot.enable": {
+    "*": true,
+    "markdown": false,
+    "plaintext": true,
+    "scminput": false,
+    "yaml": true
+  },
+  "gopls": {
+    "ui.semanticTokens": true
+  },
+  "indentRainbow.colors": [
+    "rgba(255, 184, 108, 0.25)",
+    "rgba(80, 250, 123, 0.25)",
+    "rgba(241, 250, 140, 0.25)",
+    "rgba(139, 233, 253, 0.25)",
+    "rgba(189, 147, 249, 0.25)",
+    "rgba(255, 121, 198, 0.25)",
+    "rgba(98, 114, 164, 0.20)"
+  ],
+  "indentRainbow.errorColor": "rgba(255,0,0,0.25)",
+  "javascript.suggest.paths": false,
+  "redhat.telemetry.enabled": false,
+  "remote.SSH.remotePlatform": {
+    "10.0.0.21": "linux",
+    "10.7.0.11": "linux",
+    "10.10.0.10": "linux"
+  },
+  "security.workspace.trust.untrustedFiles": "newWindow",
+  "terminal.external.linuxExec": "/usr/bin/flatpak-spawn",
+  "terminal.integrated.defaultProfile.linux": "flatpak",
+  "terminal.integrated.profiles.linux": {
+    "flatpak": {
+      "args": [
+        "--host",
+        "--env=TERM=xterm-256color",
+        "zsh"
+      ],
+      "path": "/usr/bin/flatpak-spawn"
+    }
+  },
+  "typescript.suggest.paths": false,
+  "vs-kubernetes": {
+    "imageBuildTool": "Docker",
+    "logsDisplay": "webview",
+    "vs-kubernetes.crd-code-completion": "disabled",
+    "vs-kubernetes.helm-path": "/home/fredrick/.asdf/shims/helm",
+    "vs-kubernetes.kubectl-path": "/home/fredrick/.asdf/shims/kubectl",
+    "vs-kubernetes.kubectlVersioning": "user-provided",
+    "vs-kubernetes.outputFormat": "yaml"
+  },
+  "vscode-edge-devtools.webhint": false,
+  "window.commandCenter": false,
+  "window.menuBarVisibility": "toggle",
+  "workbench.colorTheme": "Dracula",
+  "workbench.iconTheme": "material-icon-theme",
+  "workbench.layoutControl.enabled": false,
+  "workbench.preferredHighContrastColorTheme": "Catppuccin Mocha",
+  "workbench.preferredHighContrastLightColorTheme": "Catppuccin Mocha",
+  "workbench.statusBar.visible": true,
+  "workbench.tips.enabled": false,
+  "go.toolsManagement.autoUpdate": true,
+  "go.gopath": "/home/fredrick/go",
+  "go.goroot": "/home/fredrick/.asdf/installs/golang/1.19.5/go",
+  "window.autoDetectColorScheme": true,
+  "window.autoDetectHighContrast": false,
+  "workbench.preferredLightColorTheme": "Catppuccin Latte",
+  "workbench.preferredDarkColorTheme": "Catppuccin Mocha",
+}
