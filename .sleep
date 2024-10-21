@@ -1,5 +1,6 @@
 #!/bin/sh
 
+# Used by brew --cask sleepwatcher, as a fix for battery draining overnight
 # Turn off Wi-Fi & Bluetooth when going to sleep
 networksetup -setairportpower en0 off 2>&1 | tee /tmp/sleep_logs
 /opt/homebrew/bin/blueutil -p off 2>&1 | tee /tmp/sleep_logs

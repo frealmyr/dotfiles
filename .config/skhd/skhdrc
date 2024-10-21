@@ -2,9 +2,9 @@
 ## Applications ##
 ##################
 
-alt - return : open -na Alacritty
-alt + shift - space : code --new-window
-alt + shift - return : open -na Firefox
+alt - return : open -na wezterm
+alt + shift - space : open -na 'Visual Studio Code' --args --new-window
+alt + shift - return : open -na firefox
 alt + ctrl + cmd - space : /usr/bin/osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to not dark mode'
 
 ################

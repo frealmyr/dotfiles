@@ -1,62 +1,48 @@
+# # p10k instant prompt
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
+
+# ZSH Configuration
 DISABLE_AUTO_UPDATE="true" # brew handles updates
 COMPLETION_WAITING_DOTS="true"
-
-# export PATH=/Users/fredrick/miniforge3/condabin:$PATH
+ZSH_AUTOSUGGEST_STRATEGY=(history)
 
 # Load zsh plugins
-plugins=(asdf direnv docker extract git history history-substring-search tmux you-should-use zsh-autosuggestions zsh-syntax-highlighting)
+plugins=(aws azure fluxcd gh istioctl jira operator-sdk docker extract git golang gpg-agent helm history-substring-search history kubectl kubectl kubectx man terraform tmux you-should-use)
 
 # Oh-My-ZSH related things
-# ZSH_THEME="freddy"
 source $ZSH/oh-my-zsh.sh
+source "$HOME/.zsh/plugins/powerlevel10k/share/zsh-powerlevel10k/powerlevel10k.zsh-theme"
 
-# Set cloudsdk installation and enable zsh autocomplete
-source "$(asdf where gcloud)/completion.zsh.inc"
-source "$(asdf where gcloud)/path.zsh.inc"
-
-## Auto-completion
-# source <(kubectl completion zsh)
-# complete -F __start_kubectl k
-# export PATH="${PATH}:${HOME}/.krew/bin"
-
-#source <(stern --completion=zsh)
-#complete -F __start_stern ktail
-
-# source <(gh completion -s zsh)
-# complete -K _gh gh
-# complete -o nospace -C "$(asdf where terraform)/bin/terraform" terraform
+# History options should be set in .zshrc and after oh-my-zsh sourcing.
+HISTFILE=~/.zsh_history
+HISTSIZE=10000
+SAVEHIST=10000
+setopt appendhistory
 
 # # SSH / GPG
 # export SSH_AUTH_SOCK=/run/user/1000/keyring/ssh
 # gpg-connect-agent -q /bye
-# export GPG_TTY=$TTY
+GPG_TTY="$(tty)"
+export GPG_TTY
 
-# Golang
-# export GOROOT=$(asdf where golang)/go
-# export GOPROXY=direct
-# export GO111MODULE=on
-# export GOSUMDB=off
-# export PATH=$PATH:$GOPATH/bin
-
-# Terraform / CDKTF
-# export TERRAFORM_BINARY_NAME="$(asdf which terraform)"
-# export KUBECONFIG=~/.kube/config
-
-# direnv
-export DIRENV_LOG_FORMAT=""
-# export CLOUDSDK_PYTHON=/Users/fredrick/.asdf/installs/python/3.10.11/bin/python
+# Environment Variables
+export DIRENV_LOG_FORMAT=$'\033[2mdirenv: %s\033[0m'
+export EDITOR=vi
 
 # Load zsh functions and aliases
 fpath=(~/.config/zsh/functions $fpath)
 autoload -U $fpath[1]/*(.:t)
 for file in ~/.config/zsh/aliases/*; do source $file; done
 
-# source "${XDG_CONFIG_HOME:-$HOME/.config}/asdf-direnv/zshrc"
-
 # Use fzf for bash/zsh functions
 # https://github.com/junegunn/fzf?tab=readme-ov-file#fuzzy-completion-for-bash-and-zsh
-source <(fzf --zsh)
 HISTFILE=~/.zsh_history
 HISTSIZE=10000
 SAVEHIST=10000
 setopt appendhistory
+
+# Souring
+source <(fzf --zsh)
+# source ~/.p10k.zsh
