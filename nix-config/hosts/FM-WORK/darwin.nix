@@ -11,7 +11,7 @@
     export SSL_CERT_FILE=/opt/nix-and-zscaler.crt
   '';
   environment.shellAliases = {
-    nixswitch = "SSL_CERT_FILE=/opt/nix-and-zscaler.crt darwin-rebuild switch --flake ~/.config/nix";
+    nixswitch = "SSL_CERT_FILE=/opt/nix-and-zscaler.crt darwin-rebuild switch --flake ~/nix-config";
   };
 
   environment.systemPackages = with pkgs; [
