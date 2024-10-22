@@ -17,7 +17,7 @@ export LANG=en_US.UTF-8
 export TERM=xterm-256color # Alacritty will mess up SSH client input
 
 # Make direnv output gray for less visual noise
-export DIRENV_LOG_FORMAT=$'\033[2mdirenv: %s\033[0m'
+# export DIRENV_LOG_FORMAT=$'\033[2mdirenv: %s\033[0m'
 
 # Editors
 export EDITOR=nvim

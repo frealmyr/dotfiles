@@ -8,21 +8,13 @@
 
   environment.systemPackages = with pkgs; [
       colima
-      cowsay
       docker
-      fortune
-      kind
       lima
       neofetch
-      neovim
-      pinentry_mac
-      skhd
-      yabai
     ];
 
   homebrew = {
     casks = [
-      "background-music"
       "discord"
       "moonlight"
       "netnewswire"

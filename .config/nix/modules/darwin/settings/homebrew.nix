@@ -13,12 +13,12 @@
     casks = [
       "betterdisplay"
       "firefox"
-      "kitty"
       "visual-studio-code"
+      "wezterm"
     ];
     taps = [
       "homebrew/services"
-      "zackelia/formulae" # provides: bclm
+      # "zackelia/formulae" # provides: bclm
     ];
     brews = [
       # {

@@ -6,6 +6,6 @@
     direnvrcExtra = ''
       echo "loaded direnv!"
     '';
-    # silent = true; # TODO: Verify direnv is working as expected
+    silent = true;
   };
 }

@@ -16,14 +16,8 @@
 
   environment.systemPackages = with pkgs; [
     colima
-    cowsay
     docker
-    fortune
-    kind
     lima
-    neofetch
-    neovim
-    pinentry_mac
   ];
 
   homebrew = {

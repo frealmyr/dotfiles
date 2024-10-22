@@ -18,7 +18,9 @@
     htop
     jq
     less
+    neovim
     parallel
+    pinentry_mac
     tmux
     tree
     vim
