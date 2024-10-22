@@ -77,6 +77,3 @@
 
 [tag]
 	gpgSign = true
-
-[user]
-	signingKey = "9F4D30E1"

@@ -2,8 +2,6 @@
 # Override binaries with GNU tooling
 export PATH="/opt/homebrew/bin:$PATH"
 HOMEBREW_PREFIX=$(brew --prefix)
-for d in ${HOMEBREW_PREFIX}/opt/*/libexec/gnubin; do export PATH=$d:$PATH; done
-for d in ${HOMEBREW_PREFIX}/opt/*/libexec/gnuman; do export MANPATH=$d:$MANPATH; done
 export PATH="$HOME/bin:/usr/local/bin:/opt/local/bin:$HOME/.local/bin:$PATH"
 export PATH="/Applications/Visual Studio Code.app/Contents/Resources/app/bin:$PATH"
 
@@ -17,3 +15,7 @@ export ZSH_CUSTOM="$ZSH/custom"
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
 export TERM=xterm-256color # Alacritty will mess up SSH client input
+# Make direnv output gray for less visual noise
+export DIRENV_LOG_FORMAT=$'\033[2mdirenv: %s\033[0m'
+# Editors
+export EDITOR=nvim
