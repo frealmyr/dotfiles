@@ -1,6 +1,6 @@
 <div align="center">
     <img alt="NixOS" src="https://fmlab.no/assets/images/typing-anime.gif" width="240px"/>
-    <h1></h1>
+    <h1>dotfiles</h1>
 </div>
 
   - Root of this repository is the root of my home directory.
