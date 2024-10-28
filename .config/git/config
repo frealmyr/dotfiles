@@ -49,7 +49,7 @@
 
 [core]
 	editor = "nvim"
-	# pager = "/nix/store/g0fhsklcygf121pzvg9b8ynq7yqnadrv-delta-0.18.2/bin/delta"
+	pager = "bat"
 
 [credential]
 	helper = "osxkeychain"

@@ -27,6 +27,7 @@
       "obsidian"
       "ollama" # Ollama menubar indicator
       "slack"
+      "utm"
     ];
   };
 

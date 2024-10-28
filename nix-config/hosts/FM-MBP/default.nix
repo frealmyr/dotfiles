@@ -22,6 +22,7 @@
       "prusaslicer"
       "steam"
       "tailscale"
+      "utm"
     ];
   };
 
