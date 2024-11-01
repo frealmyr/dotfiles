@@ -8,6 +8,9 @@
     user = {
       agents = {
         ollama-serve = {
+          environment = {
+            OLLAMA_ORIGINS = "app://obsidian.md*";
+          };
           command = "${pkgs.ollama}/bin/ollama serve";
           serviceConfig = {
             KeepAlive = true;

@@ -55,11 +55,11 @@ nix run nix-darwin -- switch --flake ~/nix-config
 Dotfiles can be added to git using a alias:
 
 ```bash
-alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-dotfiles status
-dotfiles add ~/.config/something.conf
-dotfiles commit -m "punny msg"
-dotfiles push -u origin macos
+alias dtf='git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" "$@"'
+dtf status
+dtf add ~/.config/something.conf
+dtf commit -m "punny msg"
+dtf push -u origin macos
 ```
 
 Changes made to Nix-darwin flake, can be rolled out using this command:

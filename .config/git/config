@@ -51,6 +51,9 @@
 	editor = "nvim"
 	pager = "bat"
 
+[init]
+  defaultBranch = main
+
 [credential]
 	helper = "osxkeychain"
 

@@ -18,6 +18,7 @@
     colima
     docker
     lima
+    kubectl
   ];
 
   homebrew = {
