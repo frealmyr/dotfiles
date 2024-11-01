@@ -3,12 +3,12 @@
     <h1>dotfiles</h1>
 </div>
 
-  - Root of this repository is the root of my home directory.
-    - This is done using a [bare git repository](https://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server), which in this case, sets the working directory to the home folder, and git directory to `~/.dotfiles`.
-    - Using `showUntrackedFiles=false`, only tracked files will be visible in git commands for the dotfiles.
-  - A flake for nix-darwin is placed under `~/nix-config`.
-    - This is used for configuring my MacOS system, homebrew and nixpkgs.
-    - [home-manager](https://github.com/nix-community/home-manager) was too blackbox for my taste, as I prefer to edit my dotfiles directly.
+- Root of this repository is the root of my home directory.
+  - This is done using a [bare git repository](https://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server), which sets the working directory to the home folder, and git directory to `~/.dotfiles`.
+  - Using `showUntrackedFiles=false`, only tracked files will be visible in git commands for the dotfiles.
+- A flake for nix-darwin is placed under `~/nix-config`.
+  - This is used for configuring my MacOS system, homebrew and nixpkgs.
+  - [home-manager](https://github.com/nix-community/home-manager) was too blackbox for my taste, as I prefer to edit my dotfiles directly.
 
 <details>
 <summary>Quick Start</summary>
@@ -67,4 +67,5 @@ Changes made to Nix-darwin flake, can be rolled out using this command:
 ```bash
 darwin-rebuild switch --flake ~/nix-config
 ```
+
 </details>
