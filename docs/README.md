@@ -31,11 +31,9 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 ```bash
 git clone --bare https://github.com/frealmyr/dotfiles.git $HOME/.dotfiles/
 
-DOTFILES='--git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
-git $DOTFILES checkout && \
-git $DOTFILES reset --hard && \
-git $DOTFILES pull && \
-git $DOTFILES config status.showUntrackedFiles no
+alias dtf='git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" "$@"'
+dtf config status.showUntrackedFiles no
+dtf status
 ```
 
 4. Build and use the flake for nix-darwin.
