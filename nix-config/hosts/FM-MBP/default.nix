@@ -15,14 +15,17 @@
 
   homebrew = {
     casks = [
+      "actual"
       "discord"
       "moonlight"
       "netnewswire"
       "obs"
+      "obsidian"
       "prusaslicer"
       "steam"
       "tailscale"
       "utm"
+      "synology-drive"
     ];
   };
 

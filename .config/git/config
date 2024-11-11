@@ -70,7 +70,7 @@
 	program = "/run/current-system/sw/bin/gpg"
 
 [help]
-	autocorrect = true
+	autocorrect = 1
 
 # [interactive]
 	# diffFilter = "/nix/store/g0fhsklcygf121pzvg9b8ynq7yqnadrv-delta-0.18.2/bin/delta --color-only"
