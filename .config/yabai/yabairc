@@ -57,9 +57,6 @@ yabai -m rule --add app='IntelliJ IDEA' title='Edit configuration' manage=off
 yabai -m rule --add app='^Calculator$' manage=off
 yabai -m rule --add app='^Calendar$' manage=off
 
-## Music
-yabai -m rule --add app='^Music$' manage=off
-
 ## Misc
 yabai -m rule --add app="^Steam$" manage=off
 
@@ -87,7 +84,4 @@ yabai -m signal --add event=application_terminated action="yabai -m query --wind
 ## Colors ##
 ############
 
-yabai -m config window_border on
-yabai -m config active_window_border_color 0xFF88C0D0
-yabai -m config normal_window_border_color 0x002E3440
 yabai -m config insert_feedback_color 0xFFA3BE8C

@@ -1,5 +1,6 @@
 { self, pkgs, ... }: {
 
+  networking.hostName = "FM-WORK";
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   ## ZScaler Fuckery
@@ -14,11 +15,15 @@
     nixswitch = "SSL_CERT_FILE=/opt/nix-and-zscaler.crt darwin-rebuild switch --flake ~/nix-config";
   };
 
+  # Required for allowing to set substituters for cachix
+  nix.settings.trusted-users = [ "fredrick" ];
+
   environment.systemPackages = with pkgs; [
     colima
     docker
     lima
     kubectl
+    k9s
   ];
 
   homebrew = {
@@ -29,6 +34,8 @@
       "ollama" # Ollama menubar indicator
       "slack"
       "utm"
+      "xbar"
+      "stats"
     ];
   };
 

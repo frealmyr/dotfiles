@@ -2,6 +2,7 @@
 
   environment.systemPackages = with pkgs; [
     bat
+    btop
     coreutils
     curl
     ed
@@ -14,6 +15,7 @@
     gnumake
     gnused
     gnutar
+    gnupg
     htop
     jq
     less

@@ -28,4 +28,13 @@
   services.yabai = {
     enable = true;
   };
+
+  services.jankyborders = {
+    enable = true;
+    hidpi = true;
+    active_color = "0xfff0e68c";
+    inactive_color = "0x00000000";
+    background_color = "0x00000000";
+    width = 6.0;
+  };
 }

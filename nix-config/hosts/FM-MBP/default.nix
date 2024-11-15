@@ -1,10 +1,14 @@
 { pkgs, ... }: {
 
+  networking.hostName = "FM-MBP";
   nixpkgs.hostPlatform = "aarch64-darwin";
 
   environment.shellAliases = {
     nixswitch = "SSL_CERT_FILE=/opt/nix-and-zscaler.crt darwin-rebuild switch --flake ~/nix-config";
   };
+
+  # Required for allowing to set substituters for cachix
+  nix.settings.trusted-users = [ "fredrick" ];
 
   environment.systemPackages = with pkgs; [
       colima

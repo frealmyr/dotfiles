@@ -1,6 +1,6 @@
 # Number of CPUs to be allocated to the virtual machine.
 # Default: 2
-cpu: 8
+cpu: 4
 
 # Size of the disk in GiB to be allocated to the virtual machine.
 # NOTE: value can only be increased after virtual machine has been created.
@@ -10,7 +10,7 @@ disk: 60
 
 # Size of the memory in GiB to be allocated to the virtual machine.
 # Default: 2
-memory: 16
+memory: 8
 
 # Architecture of the virtual machine (x86_64, aarch64, host).
 #
@@ -22,18 +22,18 @@ arch: aarch64
 #
 # NOTE: value cannot be changed after virtual machine is created.
 # Default: docker
-runtime: containerd
+runtime: docker
 
 # Set custom hostname for the virtual machine.
 # Default: colima
 #          colima-profile_name for other profiles
-hostname: k3s-local
+hostname: docker
 
 # Kubernetes configuration for the virtual machine.
 kubernetes:
   # Enable kubernetes.
   # Default: false
-  enabled: true
+  enabled: false
 
   # Kubernetes version to use.
   # This needs to exactly match a k3s version https://github.com/k3s-io/k3s/releases
@@ -43,22 +43,21 @@ kubernetes:
   # Additional args to pass to k3s https://docs.k3s.io/cli/server
   # Default: traefik is disabled
   k3sArgs:
-    []
-    # - --disable=traefik
+    - --disable=traefik
 
 # Auto-activate on the Host for client access.
 # Setting to true does the following on startup
 #  - sets as active Docker context (for Docker runtime).
 #  - sets as active Kubernetes context (if Kubernetes is enabled).
 # Default: true
-autoActivate: false
+autoActivate: true
 
 # Network configurations for the virtual machine.
 network:
   # Assign reachable IP address to the virtual machine.
   # NOTE: this is currently macOS only and ignored on Linux.
   # Default: false
-  address: true
+  address: false
 
   # Custom DNS resolvers for the virtual machine.
   #

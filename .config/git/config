@@ -41,11 +41,11 @@
 	changed = green
 	untracked = cyan
 
-# [commit]
-# 	gpgSign = true
+[commit]
+	gpgSign = true
 
-# [tag]
-# 	gpgSign = true
+[tag]
+	gpgSign = true
 
 [core]
 	editor = "nvim"
@@ -81,5 +81,3 @@
 [push]
 	default = "simple"
 
-[user]
-	signingkey = 9F4D30E1

@@ -1,7 +1,6 @@
 { self, pkgs, ... }: {
 
   nix.settings = {
-    auto-optimise-store = true;
     experimental-features = [
       "nix-command"
       "flakes"
@@ -13,9 +12,11 @@
   nixpkgs.config.allowUnfree = true;
 
   imports = [
+    ./settings/cachix.nix
     ./settings/direnv.nix
     ./settings/environment.nix
     ./settings/fonts.nix
+    ./settings/gc.nix
     ./settings/gnupg.nix
     ./settings/pkgs.nix
     ./settings/vim.nix

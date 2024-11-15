@@ -129,7 +129,7 @@ rosetta: false
 # Enable nested virtualization for the virtual machine (requires m3 mac and vmType `vz`)
 # Also requires MacOS 15+, might work with M2? `sysctl -a | grep VMX`
 # Default: false
-nestedVirtualization: false
+nestedVirtualization: true
 
 # Volume mount driver for the virtual machine (virtiofs, 9p, sshfs).
 #

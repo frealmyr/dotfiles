@@ -1,0 +1,25 @@
+local wezterm = require 'wezterm'
+local config = {}
+
+
+-- Keybindings
+config.keys = {
+  {
+    key = 'r',
+    mods = 'CMD',
+    action = wezterm.action.DisableDefaultAssignment,
+  },
+}
+
+-- GUI
+config.front_end = "WebGpu"
+config.enable_tab_bar = false
+config.window_decorations = "RESIZE"
+config.window_close_confirmation = 'NeverPrompt'
+
+config.font_size = 13.0
+
+config.color_scheme = 'Catppuccin Mocha'
+config.automatically_reload_config = true
+
+return config

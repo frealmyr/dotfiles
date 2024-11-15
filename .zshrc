@@ -52,5 +52,8 @@ for file in ~/.config/zsh/aliases/*; do source $file; done
 # Souring
 source <(fzf --zsh)
 
+# Misc
+export K9S_CONFIG_DIR=~/.config/k9s
+
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
