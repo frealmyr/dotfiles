@@ -1,8 +1,13 @@
 { pkgs, ... }: {
-
   environment.systemPackages = with pkgs; [
     ollama
   ];
+
+  homebrew = {
+    casks = [
+      "ollama"
+    ];
+  };
 
   launchd = {
     user = {

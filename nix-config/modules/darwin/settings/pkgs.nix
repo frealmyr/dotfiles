@@ -1,6 +1,7 @@
 { pkgs, ... }: {
   environment.systemPackages = with pkgs; [
-    pinentry_mac
+    cacert
     osx-cpu-temp
+    pinentry_mac
   ];
 }

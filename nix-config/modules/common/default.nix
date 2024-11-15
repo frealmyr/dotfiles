@@ -1,18 +1,5 @@
 { self, pkgs, ... }: {
-
-  nix.settings = {
-    experimental-features = [
-      "nix-command"
-      "flakes"
-    ];
-  };
-
-  # Nixpkgs
-  nix.package = pkgs.nix;
-  nixpkgs.config.allowUnfree = true;
-
   imports = [
-    ./settings/cachix.nix
     ./settings/direnv.nix
     ./settings/environment.nix
     ./settings/fonts.nix
@@ -22,4 +9,14 @@
     ./settings/vim.nix
     ./settings/zsh.nix
   ];
+
+  # Nix settings, no touchy
+  nix.settings = {
+    experimental-features = [
+      "nix-command"
+      "flakes"
+    ];
+  };
+  nix.package = pkgs.nix;
+  nixpkgs.config.allowUnfree = true;
 }

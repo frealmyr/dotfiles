@@ -1,8 +1,8 @@
 { pkgs, ... }: {
-
   environment.systemPackages = with pkgs; [
     bat
     btop
+    cachix
     coreutils
     curl
     ed
@@ -13,9 +13,9 @@
     git
     gnugrep
     gnumake
+    gnupg
     gnused
     gnutar
-    gnupg
     htop
     jq
     less

@@ -1,14 +1,9 @@
 {
-  description = "Nix superpowers, lets go!";
+  description = "Nix MacOS Workstation Configuration";
 
   nixConfig = {
-    substituters = [
-      "https://cache.nixos.org"
-      "https://nix-community.cachix.org"
-      ];
-    trusted-public-keys = [
-      "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY="
-    ];
+    substituters = ["https://cache.nixos.org" "https://nix-community.cachix.org" ];
+    trusted-public-keys = [ "cache.nixos.org-1:6NCHdD59X431o0gWypbMrAURkbJ16ZPMQFGspcDShjY=" ];
   };
 
   inputs = {
@@ -18,18 +13,20 @@
 
   outputs = inputs@{ self, nixpkgs, darwin }: {
     darwinConfigurations.FM-MBP = darwin.lib.darwinSystem {
+      specialArgs = { inherit self; };
       modules = [
-        ({ pkgs, ... }: import ./modules/common { inherit self inputs pkgs; })
-        ({ pkgs, ... }: import ./modules/darwin { inherit self inputs pkgs; })
-        ({ pkgs, ... }: import ./hosts/FM-MBP { inherit self inputs pkgs; })
+        ./modules/common
+        ./modules/darwin
+        ./hosts/FM-MBP
       ];
     };
 
     darwinConfigurations.FM-WORK = darwin.lib.darwinSystem {
+      specialArgs = { inherit self; };
       modules = [
-        ({ pkgs, ... }: import ./modules/common { inherit self inputs pkgs; })
-        ({ pkgs, ... }: import ./modules/darwin { inherit self inputs pkgs; })
-        ({ pkgs, ... }: import ./hosts/FM-WORK { inherit self inputs pkgs; })
+        ./modules/common
+        ./modules/darwin
+        ./hosts/FM-WORK
       ];
     };
   };

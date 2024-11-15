@@ -1,21 +1,11 @@
 { pkgs, ... }: {
 
-  networking.hostName = "FM-MBP";
-  nixpkgs.hostPlatform = "aarch64-darwin";
-
-  environment.shellAliases = {
-    nixswitch = "SSL_CERT_FILE=/opt/nix-and-zscaler.crt darwin-rebuild switch --flake ~/nix-config";
-  };
-
-  # Required for allowing to set substituters for cachix
-  nix.settings.trusted-users = [ "fredrick" ];
-
   environment.systemPackages = with pkgs; [
-      colima
-      docker
-      lima
-      neofetch
-    ];
+    colima
+    docker
+    lima
+    neofetch
+  ];
 
   homebrew = {
     casks = [
@@ -29,11 +19,15 @@
       "steam"
       "tailscale"
       "utm"
-      "synology-drive"
     ];
   };
 
-  # Used for backwards compatibility, please read the changelog before changing.
-  # $ darwin-rebuild changelog
-  system.stateVersion = 4;
+  environment.shellAliases = {
+    nixswitch = "SSL_CERT_FILE=/opt/nix-and-zscaler.crt darwin-rebuild switch --flake ~/nix-config";
+  };
+
+  # Nix settings
+  nix.settings.trusted-users = [ "fredrick" ]; # Required for allowing to set substituters for cachix
+  nixpkgs.hostPlatform = "aarch64-darwin"; # Set the architecture to aarch64-darwin
+  system.stateVersion = 4; # Read changelog before changing, darwin-rebuild changelog
 }

@@ -1,4 +1,4 @@
-{ config, lib, ... }: {
+{ lib, ... }: {
   nix.gc = {
     automatic = true;
     interval = lib.lists.genList (day: {
@@ -7,8 +7,8 @@
       Day = day + 1;
     }) 7;
     options = "--delete-older-than 14d";
-    
   };
+
   nix.optimise = {
     automatic = true;
     interval = lib.lists.genList (day: {
