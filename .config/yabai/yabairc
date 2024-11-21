@@ -23,14 +23,18 @@ yabai -m config window_placement second_child
 yabai -m config split_ratio 0.50
 yabai -m config auto_balance off
 
-## Padding
-yabai -m config top_padding 3
-yabai -m config bottom_padding 5
-yabai -m config left_padding 5
-yabai -m config right_padding 5
-yabai -m config window_gap 5
+################
+## Appearance ##
+################
 
-## yabai -m config insert_feedback_color 0xff9dd274 # Comment to use insert Overlay instead of border color
+## Padding
+yabai -m config top_padding 5
+yabai -m config bottom_padding 7
+yabai -m config left_padding 7
+yabai -m config right_padding 7
+yabai -m config window_gap 7
+yabai -m config window_shadow off
+yabai -m config insert_feedback_color 0xFFFFDAB9
 
 ######################
 ## Floating Windows ##
@@ -53,7 +57,6 @@ yabai -m rule --add app='IntelliJ IDEA' title='Preferences' manage=off
 yabai -m rule --add app='IntelliJ IDEA' title='Edit configuration' manage=off
 
 ## Office
-# yabai -m rule --add app='^Microsoft Teams$' manage=off
 yabai -m rule --add app='^Calculator$' manage=off
 yabai -m rule --add app='^Calendar$' manage=off
 
@@ -80,8 +83,3 @@ yabai -m signal --add event=window_deminimized action='echo "refresh windows" | 
 yabai -m signal --add event=window_destroyed action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
 yabai -m signal --add event=application_terminated action="yabai -m query --windows --window &> /dev/null || yabai -m window --focus mouse"
 
-############
-## Colors ##
-############
-
-yabai -m config insert_feedback_color 0xFFA3BE8C

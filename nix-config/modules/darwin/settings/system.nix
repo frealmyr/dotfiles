@@ -57,7 +57,9 @@
         "com.apple.sound.beep.volume" = 0.0; # Disables beeps and boops sounds.
         "com.apple.springing.enabled" = true; # Hovering a folder on a folder to drop folder in a folder, dawg.
         "com.apple.springing.delay" = 0.0;
-        AppleFontSmoothing = 0; # Disable subpixed-rendering, more accurate and less bold fonts. Better for "non-retina" external displays.
+        "com.apple.trackpad.forceClick" = false;
+        "com.apple.trackpad.scaling" = 1.50;
+        AppleFontSmoothing = 1;
         AppleKeyboardUIMode = 3; # Enables keyboard control on macos prompts/windows.
         ApplePressAndHoldEnabled = false;
         AppleScrollerPagingBehavior = true; # Enable click to jump on scrollbars.
@@ -76,7 +78,7 @@
         NSAutomaticWindowAnimationsEnabled = false; # Disable open/close animations for windows/popovers.
         NSNavPanelExpandedStateForSaveMode = true;
         NSNavPanelExpandedStateForSaveMode2 = true;
-        NSScrollAnimationEnabled = true;
+        NSScrollAnimationEnabled = false;
         NSTableViewDefaultSizeMode = 1; # Small sidebar icons in finder.
         NSUseAnimatedFocusRing = false;
         NSWindowResizeTime = 0.0; # Speed of window resizing.
@@ -120,7 +122,7 @@
         "com.apple.ImageCapture".disableHotPlug = true; # Prevent photos app start when plugging in devices.
         "com.apple.mail".AddressesIncludeNameOnPasteboard = false; # copy addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>`
         "com.apple.print.PrintingPrefs"."Quit When Finished" = true;
-        "com.apple.screencapture".target = "clipboard";
+        "com.apple.screencapture".target = "clipboard"; # Always default screencapture to clipboard on startup.
         "com.apple.TimeMachine".DoNotOfferNewDisksForBackup = true;
         "com.apple.universalaccess".increaseContrast = true;
 

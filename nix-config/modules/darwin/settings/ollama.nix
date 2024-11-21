@@ -1,5 +1,5 @@
-{ pkgs, ... }: {
-  environment.systemPackages = with pkgs; [
+{ pkgs-unstable, ... }: {
+  environment.systemPackages = with pkgs-unstable; [
     ollama
   ];
 
@@ -16,7 +16,7 @@
           environment = {
             OLLAMA_ORIGINS = "app://obsidian.md*";
           };
-          command = "${pkgs.ollama}/bin/ollama serve";
+          command = "${pkgs-unstable.ollama}/bin/ollama serve";
           serviceConfig = {
             KeepAlive = true;
             RunAtLoad = true;

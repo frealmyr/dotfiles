@@ -42,7 +42,7 @@
 	untracked = cyan
 
 [commit]
-	gpgSign = true
+	gpgSign = false
 
 [tag]
 	gpgSign = true

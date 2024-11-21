@@ -20,11 +20,11 @@ end)
 local config = {
 	automatically_reload_config = true,
 	color_scheme = "Dracula",
-	font = wezterm.font("FiraMono Nerd Font Medium"),
+	font = wezterm.font("FiraMono Nerd Font", { weight = "Medium"}),
 	font_size = 13.0,
 	enable_tab_bar = false,
 	audible_bell = "Disabled",
-	window_decorations = "RESIZE",
+	window_decorations = "RESIZE|MACOS_FORCE_DISABLE_SHADOW",
 	window_close_confirmation = "NeverPrompt",
 	keys = {
 		{

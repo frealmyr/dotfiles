@@ -31,9 +31,9 @@
   services.jankyborders = {
     enable = true;
     hidpi = true;
-    active_color = "0xfff0e68c";
+    active_color = "0xffffdab9";
     inactive_color = "0x00000000";
     background_color = "0x00000000";
-    width = 6.0;
+    width = 10.0;
   };
 }
