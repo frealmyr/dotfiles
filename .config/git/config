@@ -1,7 +1,7 @@
 [alias]
   lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
   s = status
-  c = commit -vS
+  c = commit -v
   p = add -p
   co = checkout
   br = branch
@@ -41,15 +41,9 @@
 	changed = green
 	untracked = cyan
 
-[commit]
-	gpgSign = false
-
-[tag]
-	gpgSign = true
-
 [core]
 	editor = "nvim"
-	pager = "bat"
+	pager = delta --features "$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo dark-mode || echo light-mode)"
 
 [init]
   defaultBranch = main
@@ -58,26 +52,42 @@
 	helper = "osxkeychain"
 
 [delta]
-	features = "decorations"
+	features = decorations
 	whitespace-error-style = "22 reverse"
+  side-by-side = true
+  navigate = true
+  line-numbers = true
 
 [delta "decorations"]
 	commit-decoration-style = "bold yellow box ul"
 	file-decoration-style = "none"
-	file-style = "bold yellow ul"
+  file-style = "bold yellow ul"
+
+[delta "light-mode"]
+  light = true
+  syntax-theme = Coldark-Cold
+
+[delta "dark-mode"]
+  light = false
+  syntax-theme = Coldark-Dark
 
 [gpg]
-	program = "/run/current-system/sw/bin/gpg"
+	program = "gpg"
 
 [help]
 	autocorrect = 1
 
-# [interactive]
-	# diffFilter = "/nix/store/g0fhsklcygf121pzvg9b8ynq7yqnadrv-delta-0.18.2/bin/delta --color-only"
+[interactive]
+  diffFilter = "delta --color-only"
 
 [merge]
-	conflictstyle = "diff3"
+	conflictstyle = "zdiff3"
 
 [push]
 	default = "simple"
+
+[includeIf "gitdir:~/SCM/personal/"]
+  path = ./config-personal
+[includeIf "gitdir:~/SCM/work/"]
+  path = ~/.config/git/config-work
 

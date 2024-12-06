@@ -6,7 +6,8 @@
 
     keyboard = {
       enableKeyMapping = true;
-      remapCapsLockToControl = true;
+      # remapCapsLockToControl = true; # Non-VIM users things 
+      remapCapsLockToEscape = true; # VIM users things
     };
 
     defaults = {
@@ -51,7 +52,7 @@
       };
 
       NSGlobalDomain = {
-        "com.apple.keyboard.fnState" = true; # Use F1, F2, etc. keys as standard function keys.
+        "com.apple.keyboard.fnState" = false; # Use F1, F2, etc. keys as shortcuts.
         "com.apple.mouse.tapBehavior" = 1; # Enable tap-to-click for trackpad.
         "com.apple.sound.beep.feedback" = 0; # Disable feedback when changing volume.
         "com.apple.sound.beep.volume" = 0.0; # Disables beeps and boops sounds.
@@ -101,8 +102,10 @@
 
       trackpad = {
         Clicking = true; # enable tap to click
+        ActuationStrength = 0; # less vibration pls
+        FirstClickThreshold = 0; # 0 light, 1 medium, 2 firm.
+        SecondClickThreshold = 0; # 0 light, 1 medium, 2 firm.
         TrackpadRightClick = true; # enable two finger right click
-        TrackpadThreeFingerDrag = true;
       };
 
       universalaccess = {
@@ -113,6 +116,7 @@
       WindowManager = {
         EnableStandardClickToShowDesktop = false; # Disable dumb click on desktop to hide all windows gesture.
         StandardHideDesktopIcons = true; # Hide icons on desktop, so that I can clutter it as much as I want.
+        EnableTiledWindowMargins = false; # Disable MacOS provided margins for screen edges, we can configure that ourselfs thank you.
       };
 
       CustomUserPreferences = {

@@ -54,16 +54,16 @@ alt + ctrl - l : yabai -m window --insert east
 # cmd - right : yabai -m space --focus next
 
 ## Window - Navigate - Change current workspace
-cmd - 1 : yabai -m display --focus $(yabai -m query --displays --space 1 | jq '.index'); skhd -k "shift + ctrl + alt - 1"
-cmd - 2 : yabai -m display --focus $(yabai -m query --displays --space 2 | jq '.index'); skhd -k "shift + ctrl + alt - 2"
-cmd - 3 : yabai -m display --focus $(yabai -m query --displays --space 3 | jq '.index'); skhd -k "shift + ctrl + alt - 3"
-cmd - 4 : yabai -m display --focus $(yabai -m query --displays --space 4 | jq '.index'); skhd -k "shift + ctrl + alt - 4"
-cmd - 5 : yabai -m display --focus $(yabai -m query --displays --space 5 | jq '.index'); skhd -k "shift + ctrl + alt - 5"
-cmd - 6 : yabai -m display --focus $(yabai -m query --displays --space 6 | jq '.index'); skhd -k "shift + ctrl + alt - 6"
-cmd - 7 : yabai -m display --focus $(yabai -m query --displays --space 7 | jq '.index'); skhd -k "shift + ctrl + alt - 7"
-cmd - 8 : yabai -m display --focus $(yabai -m query --displays --space 8 | jq '.index'); skhd -k "shift + ctrl + alt - 8"
-cmd - 9 : yabai -m display --focus $(yabai -m query --displays --space 9 | jq '.index'); skhd -k "shift + ctrl + alt - 9"
-cmd - 0 : yabai -m display --focus $(yabai -m query --displays --space 10 | jq '.index'); skhd -k "shift + ctrl + alt - 0"
+cmd - 1 : skhd -k "shift + ctrl + alt - 1"; yabai -m display --focus $(yabai -m query --displays --space 1 | jq '.index')
+cmd - 2 : skhd -k "shift + ctrl + alt - 2"; yabai -m display --focus $(yabai -m query --displays --space 2 | jq '.index')
+cmd - 3 : skhd -k "shift + ctrl + alt - 3"; yabai -m display --focus $(yabai -m query --displays --space 3 | jq '.index')
+cmd - 4 : skhd -k "shift + ctrl + alt - 4"; yabai -m display --focus $(yabai -m query --displays --space 4 | jq '.index')
+cmd - 5 : skhd -k "shift + ctrl + alt - 5"; yabai -m display --focus $(yabai -m query --displays --space 5 | jq '.index')
+cmd - 6 : skhd -k "shift + ctrl + alt - 6"; yabai -m display --focus $(yabai -m query --displays --space 6 | jq '.index')
+cmd - 7 : skhd -k "shift + ctrl + alt - 7"; yabai -m display --focus $(yabai -m query --displays --space 7 | jq '.index')
+cmd - 8 : skhd -k "shift + ctrl + alt - 8"; yabai -m display --focus $(yabai -m query --displays --space 8 | jq '.index')
+cmd - 9 : skhd -k "shift + ctrl + alt - 9"; yabai -m display --focus $(yabai -m query --displays --space 9 | jq '.index')
+cmd - 0 : skhd -k "shift + ctrl + alt - 0"; yabai -m display --focus $(yabai -m query --displays --space 0 | jq '.index')
 
 ## Window - Navigate - Move focused window to workspace
 cmd + shift - 1 : yabai -m window --space 1
