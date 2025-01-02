@@ -5,19 +5,27 @@
     docker
     lima
     fastfetch
+    exiftool
   ];
 
   homebrew = {
     casks = [
       "actual"
+      "affinity-designer"
+      "affinity-photo"
+      "affinity-publisher"
+      "digikam"
       "discord"
+      "gog-galaxy"
       "moonlight"
       "netnewswire"
+      "netspot"
       "obs"
       "obsidian"
       "prusaslicer"
       "steam"
       "tailscale"
+      "topaz-denoise-ai"
       "utm"
     ];
   };
@@ -27,7 +35,7 @@
   };
 
   # Nix settings
-  nix.settings.trusted-users = [ "fredrick" ]; # Required for allowing to set substituters for cachix
+  nix.settings.trusted-users = [ "fredrick" ]; # Danger! https://github.com/NixOS/nix/issues/6672#issuecomment-2335184129
   nixpkgs.hostPlatform = "aarch64-darwin"; # Set the architecture to aarch64-darwin
   system.stateVersion = 4; # Read changelog before changing, darwin-rebuild changelog
 }

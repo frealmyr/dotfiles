@@ -20,7 +20,7 @@
       pkgs-unstable = nixpkgs-unstable.legacyPackages."aarch64-darwin";
     in {
     darwinConfigurations.FM-MBP = darwin.lib.darwinSystem {
-      specialArgs = { inherit self; };
+      specialArgs = { inherit self pkgs-unstable; };
       modules = [
         ./modules/common
         ./modules/darwin
