@@ -7,6 +7,7 @@ fi
 DISABLE_AUTO_UPDATE="true"
 COMPLETION_WAITING_DOTS="true"
 ZSH_AUTOSUGGEST_STRATEGY=(history)
+ZSH_CUSTOM=$HOME/.zsh_custom
 
 ## Oh-My-ZSH related things
 # Load zsh plugins
@@ -37,7 +38,7 @@ plugins=(
   tmux
   you-should-use
   zsh-autosuggestions
-  zsh-syntax-highlighting
+  fast-syntax-highlighting
 )
 
 # Set powerlevel10k as theme, needs to be done before sourcing oh-my-zsh

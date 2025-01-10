@@ -29,7 +29,7 @@ curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix 
 3. Clone this repository to root of home directory.
 
 ```bash
-git clone --bare https://github.com/frealmyr/dotfiles.git $HOME/.dotfiles/
+git clone --recurse-submodules -j8 --bare https://github.com/frealmyr/dotfiles.git $HOME/.dotfiles/
 
 alias dtf='git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" "$@"'
 dtf config status.showUntrackedFiles no
@@ -49,6 +49,11 @@ nix run nix-darwin -- switch --flake ~/nix-config
 <details>
 <summary>How to iterate?</summary>
 <br>
+
+First, use ssh instead of http for the dotfiles repo:
+```bash
+dtf remote set-url origin git@github.com:frealmyr/dotfiles.git
+```
 
 Dotfiles can be added to git using a alias:
 

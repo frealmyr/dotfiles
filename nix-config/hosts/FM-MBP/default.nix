@@ -14,19 +14,19 @@
       "affinity-designer"
       "affinity-photo"
       "affinity-publisher"
-      "digikam"
       "discord"
-      "gog-galaxy"
       "moonlight"
       "netnewswire"
       "netspot"
       "obs"
       "obsidian"
       "prusaslicer"
+      "starsector"
       "steam"
       "tailscale"
       "topaz-denoise-ai"
       "utm"
+      # "digikam" # waiting for 8.6.0 with non-rosettta installer
     ];
   };
 
@@ -62,7 +62,6 @@
       # RunAtLoad = true;
       StandardOutPath = "/var/log/streamingcheck.out.log";
       StandardErrorPath = "/var/log/streamingcheck.err.log";
-
     };
   };
 
