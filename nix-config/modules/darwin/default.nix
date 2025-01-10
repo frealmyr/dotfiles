@@ -1,6 +1,7 @@
 { self, ... }: {
   imports = [
     ./settings/homebrew.nix
+    ./settings/keybindings.nix
     ./settings/nix-daemon.nix
     ./settings/ollama.nix
     ./settings/pkgs.nix
