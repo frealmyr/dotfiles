@@ -22,6 +22,7 @@
       "obs"
       "obsidian"
       "prusaslicer"
+      "stats"
       "starsector"
       "steam"
       "tailscale"

@@ -1,0 +1,23 @@
+/* hides the native tabs */
+#TabsToolbar {
+  visibility: collapse !important;
+}
+
+#titlebar {
+  visibility: collapse !important;
+}
+
+#sidebar-header {
+  visibility: collapse !important;
+}
+
+#back-button, #forward-button {
+  display:none!important;
+}
+
+/* Shrinks sidebar splitter when using sudeberry  */
+#sidebar-box[sidebarcommand="_3c078156-979c-498b-8990-85f7987dd929_-sidebar-action"] + #sidebar-splitter {
+  /* display: none !important; */
+  max-width: 1px !important;
+}
+

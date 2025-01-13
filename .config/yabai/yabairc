@@ -34,7 +34,7 @@ yabai -m config left_padding 7
 yabai -m config right_padding 7
 yabai -m config window_gap 7
 yabai -m config window_shadow off
-yabai -m config insert_feedback_color 0xFFFFDAB9
+yabai -m config insert_feedback_color 0xFFE1D8EF
 
 ######################
 ## Floating Windows ##
