@@ -14,6 +14,7 @@
       "affinity-designer"
       "affinity-photo"
       "affinity-publisher"
+      "digikam"
       "discord"
       "moonlight"
       "netnewswire"
@@ -26,7 +27,6 @@
       "tailscale"
       "topaz-denoise-ai"
       "utm"
-      # "digikam" # waiting for 8.6.0 with non-rosettta installer
     ];
   };
 
