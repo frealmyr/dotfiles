@@ -3,6 +3,7 @@
   environment.systemPackages = with pkgs-unstable; [
     colima
     docker
+    docker-buildx
     k9s
     kubectl
     lima
@@ -10,6 +11,7 @@
 
   homebrew = {
     casks = [
+      "cameracontroller"
       "discord"
       "netnewswire"
       "obsidian"

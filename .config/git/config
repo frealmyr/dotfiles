@@ -90,4 +90,11 @@
   path = ./config-personal
 [includeIf "gitdir:~/SCM/work/"]
   path = ~/.config/git/config-work
-
+[includeIf "gitdir:~/SCM/work/gh/"]
+  path = ~/.config/git/config-work-gh
+[includeIf "gitdir:~/SCM/work/ghe/"]
+  path = ~/.config/git/config-work-ghe
+[includeIf "gitdir:~/SCM/work/gl/"]
+  path = ~/.config/git/config-work-gl
+[includeIf "gitdir:~/SCM/work/ado/"]
+  path = ~/.config/git/config-work-ado
