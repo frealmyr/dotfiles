@@ -14,6 +14,7 @@
       "affinity-designer"
       "affinity-photo"
       "affinity-publisher"
+      "battery"
       "digikam"
       "discord"
       "moonlight"
