@@ -62,6 +62,7 @@ yabai -m rule --add app='^Calendar$' manage=off
 
 ## Misc
 yabai -m rule --add app="^Steam$" manage=off
+yabai -m rule --add app="^RimWorld by Ludeon Studios$" manage=off
 
 ###################
 ## Event Exports ##

@@ -34,6 +34,7 @@ git clone --recurse-submodules -j8 --bare https://github.com/frealmyr/dotfiles.g
 alias dtf='git --git-dir="$HOME/.dotfiles" --work-tree="$HOME" "$@"'
 dtf config status.showUntrackedFiles no
 dtf config submodule.recurse true
+dtf submodule update --init --recursive
 dtf status
 ```
 
