@@ -31,6 +31,10 @@
     ];
   };
 
+  services.jankyborders = {
+    active_color = "0xffff70a6";
+  };
+
   environment.shellAliases = {
     nixswitch = "darwin-rebuild switch --flake ~/nix-config";
   };

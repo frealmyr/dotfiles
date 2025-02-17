@@ -22,6 +22,10 @@
     ];
   };
 
+  services.jankyborders = {
+    active_color = "0xfffe7f2d";
+  };
+
   environment.shellAliases = {
     nixswitch = "SSL_CERT_FILE=/opt/nix-and-zscaler.crt darwin-rebuild switch --flake ~/nix-config";
   };
