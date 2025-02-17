@@ -86,6 +86,8 @@
 [push]
 	default = "simple"
 
+[includeIf "gitdir:~/"]
+  path = ./config-personal
 [includeIf "gitdir:~/SCM/personal/"]
   path = ./config-personal
 [includeIf "gitdir:~/SCM/work/"]
