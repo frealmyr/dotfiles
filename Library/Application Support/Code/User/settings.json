@@ -101,4 +101,8 @@
   "window.autoDetectHighContrast": false,
   "workbench.preferredLightColorTheme": "Catppuccin Latte",
   "workbench.preferredDarkColorTheme": "Catppuccin Mocha",
+  "chatgpt.gpt3.model": "custom",
+  "chatgpt.gpt3.customModel": "deepseek-coder-v2:16b",
+  "chatgpt.gpt3.apiBaseUrl": "http://localhost:11434/v1/",
+  "chatgpt.gpt3.apiKey": "ollama",
 }

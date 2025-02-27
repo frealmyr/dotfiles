@@ -2,4 +2,4 @@
 # Used by brew --cask sleepwatcher, as a fix for battery draining overnight
 # Turn on Wi-Fi & Bluetooth when waking up from sleep
 networksetup -setairportpower en0 on 2>&1 | tee /tmp/sleep_logs
-blueutil -p on 2>&1 | tee /tmp/sleep_logs
+/run/current-system/sw/bin/blueutil -p on 2>&1 | tee /tmp/sleep_logs

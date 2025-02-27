@@ -5,7 +5,7 @@
 
   homebrew = {
     casks = [
-      "ollama"
+      "ollamac"
     ];
   };
 
