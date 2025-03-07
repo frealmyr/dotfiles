@@ -18,26 +18,26 @@
 
     package = pkgs.nix;
 
-    # # Garbage collect once a week
-    # gc = {
-    #   automatic = true;
-    #   interval = {
-    #     Hour = 8;
-    #     Minute = 30;
-    #     Day = 7;
-    #   };
-    #   options = "--delete-older-than 1d";
-    # };
+    # Garbage collect once a week
+    gc = {
+      automatic = true;
+      interval = {
+        Hour = 8;
+        Minute = 30;
+        Day = 7;
+      };
+      options = "--delete-older-than 1d";
+    };
 
-    # # Optimize store each morning
-    # optimise = {
-    #   automatic = true;
-    #   interval = lib.lists.genList (day: {
-    #     Hour = 8;
-    #     Minute = 45;
-    #     Day = day + 1;
-    #   }) 7;
-    # };
+    # Optimize store each morning
+    optimise = {
+      automatic = true;
+      interval = lib.lists.genList (day: {
+        Hour = 8;
+        Minute = 45;
+        Day = day + 1;
+      }) 7;
+    };
   };
 
   nixpkgs.config.allowUnfree = true;
