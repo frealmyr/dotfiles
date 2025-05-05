@@ -41,6 +41,13 @@
     "scminput": false,
     "yaml": true
   },
+  "github.copilot.advanced": {
+    "debug.useNodeFetcher": true
+  },
+  "http.proxyStrictSSL": false,
+  "http.proxyAuthorization": null,
+  "http.proxySupport": "override",
+  "http.systemCertificates": true,
   "gopls": {
     "ui.semanticTokens": true
   },
@@ -74,6 +81,10 @@
       "path": "/usr/bin/flatpak-spawn"
     }
   },
+  "terminal.integrated.fontFamily": "FiraMono Nerd Font",
+  "terminal.integrated.fontWeight": "500",
+  "terminal.integrated.defaultProfile.osx": "zsh",
+  "terminal.external.osxExec": "WezTerm.app",
   "typescript.suggest.paths": false,
   "vs-kubernetes": {
     "imageBuildTool": "Docker",
@@ -105,4 +116,10 @@
   "chatgpt.gpt3.customModel": "deepseek-coder-v2:16b",
   "chatgpt.gpt3.apiBaseUrl": "http://localhost:11434/v1/",
   "chatgpt.gpt3.apiKey": "ollama",
+  "github-enterprise.uri": "https://dnb.ghe.com",
+  "github.copilot.advanced.authProvider": "github-enterprise",
+  "[yaml]": {
+    "editor.defaultFormatter": "redhat.vscode-yaml"
+  },
+  "git.blame.editorDecoration.enabled": true,
 }

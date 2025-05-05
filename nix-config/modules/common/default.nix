@@ -5,7 +5,6 @@
     ./settings/fonts.nix
     ./settings/gnupg.nix
     ./settings/pkgs.nix
-    ./settings/nix.nix
     ./settings/vim.nix
     ./settings/zsh.nix
   ];

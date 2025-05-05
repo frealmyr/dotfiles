@@ -23,6 +23,7 @@
     tmux
     tree
     vim
+    watch
     wget
     xz
     yq

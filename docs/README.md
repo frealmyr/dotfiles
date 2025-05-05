@@ -23,7 +23,7 @@ xcode-select --install
 2. Install Nix using the [determinate system installer](https://github.com/DeterminateSystems/nix-installer).
 
 ```bash
-curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install
+curl --proto '=https' --tlsv1.2 -sSf -L https://install.determinate.systems/nix | sh -s -- install --extra-conf 'extra-trusted-substituters = https://nix-community.cachix.org' 'extra-trusted-public-keys = nix-community.cachix.org-1:mB9FSh9qf2dCimDSUo8Zy7bkq5CX+/rkCWyvRCYg3Fs='
 ```
 
 3. Clone this repository to root of home directory.
@@ -53,6 +53,7 @@ nix run nix-darwin -- switch --flake ~/nix-config
 <br>
 
 First, use ssh instead of http for the dotfiles repo:
+
 ```bash
 dtf remote set-url origin git@github.com:frealmyr/dotfiles.git
 ```
