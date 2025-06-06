@@ -23,7 +23,7 @@
   };
 
   services.jankyborders = {
-    active_color = "0xfffe7f2d";
+    active_color = "0xffdbc1ac";
   };
 
   environment.shellAliases = {
