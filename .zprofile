@@ -21,3 +21,8 @@ export TERM=xterm-256color # Alacritty will mess up SSH client input
 
 # Editors
 export EDITOR=nvim
+
+
+# Added by Toolbox App
+export PATH="$PATH:/Users/fredrick/Library/Application Support/JetBrains/Toolbox/scripts"
+

@@ -206,6 +206,12 @@ mounts:
   - location: $HOME/.ca-certificates
     mountPoint: /opt/ca-certificates
     writable: false
+  - location: $HOME
+    mountPoint: $HOME
+    writable: true
+  - location: /tmp/colima
+    mountPoint: /tmp/colima
+    writable: true
 
 # Environment variables for the virtual machine.
 #
