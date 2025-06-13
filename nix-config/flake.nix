@@ -2,11 +2,11 @@
   description = "Nix MacOS Workstation Configuration";
 
   inputs = {
-    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-24.11-darwin";
+    nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-25.05-darwin";
     nixpkgs-unstable.url = "github:nixos/nixpkgs/nixpkgs-unstable";
     nix.url = "https://flakehub.com/f/DeterminateSystems/nix/2.0";
     darwin = {
-      url = "github:lnl7/nix-darwin/nix-darwin-24.11";
+      url = "github:lnl7/nix-darwin/nix-darwin-25.05";
       inputs.nixpkgs.follows = "nixpkgs"; # Ensure that pkgs follows stable channel, paranoia since I'm also using unstable.
     };
   };

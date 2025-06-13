@@ -1,6 +1,6 @@
 { ... }: {
   system = {
-    activationScripts.postUserActivation.text = ''/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u''; # Activate most of the settings without restarting.
+    activationScripts.reloadde.text = ''/System/Library/PrivateFrameworks/SystemAdministration.framework/Resources/activateSettings -u''; # Activate most of the settings without restarting.
 
     startup.chime = false; # disables the woooaahhhmmm sound when powering on
 
