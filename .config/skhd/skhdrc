@@ -4,8 +4,8 @@
 
 fn - space : open -na wezterm
 fn + ctrl - space : open -na firefox
-# fn + shift - space : open -na 'Visual Studio Code' --args --new-window
-alt + ctrl + cmd - space : /usr/bin/osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to not dark mode'
+fn + alt - space : skhd -k "shift + ctrl + alt + cmd - j"; # Opens Jetbrains Toolbox
+fn + alt + ctrl + cmd - space : /usr/bin/osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to not dark mode'
 
 ################
 ## Blacklists ##
@@ -84,7 +84,6 @@ fn + cmd + shift - d : yabai -m window --resize right:-20:0
 
 # change layout of desktop
 fn - b : yabai -m space --layout bsp
-fn - s : yabai -m space --layout stack
 
 # enter fullscreen mode for the focused container
 fn - f : yabai -m window --toggle zoom-fullscreen
