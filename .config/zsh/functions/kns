@@ -1,7 +1,31 @@
-function kns() {
-  if [[ -z $argv[1] ]]; then
-    unset kns
+kns () {
+  if [[ -z $1 ]]; then
+    # Run kubectl and capture stdout and stderr
+    local namespaces errcode
+    namespaces=$(kubectl get ns --no-headers -o custom-columns=":metadata.name" 2> /tmp/kubectl_ns_error)
+    errcode=$?
+    if (( errcode != 0 )); then
+      echo "Error getting namespaces:" >&2
+      cat /tmp/kubectl_ns_error >&2
+      rm -f /tmp/kubectl_ns_error
+      unset kns
+      return $errcode
+    fi
+    rm -f /tmp/kubectl_ns_error
+
+    # Run fzf only if kubectl succeeded
+    local selected
+    selected=$(echo "$namespaces" | fzf)
+
+    if [[ -n $selected ]]; then
+      export kns="--namespace=$selected"
+      echo "Namespace set to: $selected"
+    else
+      echo "No namespace selected."
+      unset kns
+    fi
   else
-    kns=--namespace=$argv[1]
+    export kns="--namespace=$1"
+    echo "Namespace set to: $1"
   fi
 }

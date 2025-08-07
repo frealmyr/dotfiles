@@ -18,24 +18,14 @@ plugins=(
   direnv
   extract
   fluxcd
-  fluxcd
-  gcloud
-  gh
   git
   golang
   gpg-agent
   helm
   history
   history-substring-search
-  istioctl
-  jira
   kubectl
-  kubectx
-  man
-  opentofu
-  operator-sdk
   terraform
-  tmux
   you-should-use
   zsh-autosuggestions
   fast-syntax-highlighting
@@ -62,3 +52,4 @@ export K9S_CONFIG_DIR=~/.config/k9s
 ### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
 export PATH="/Users/fredrick/.rd/bin:$PATH"
 ### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+eval "$(mise activate zsh)"

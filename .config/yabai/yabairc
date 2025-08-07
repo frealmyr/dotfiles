@@ -53,20 +53,16 @@ yabai -m rule --add app='^Messages$' manage=off
 yabai -m rule --add app='^Stats$' manage=off
 
 ## Coding
-#yabai -m rule --add app='IntelliJ IDEA' title='^$' manage=off
-yabai -m rule --add app='IntelliJ IDEA' title='Project Structure' manage=off
-yabai -m rule --add app='IntelliJ IDEA' title='Preferences' manage=off
-yabai -m rule --add app='IntelliJ IDEA' title='Edit configuration' manage=off
+#yabai -m rule --add app='Goland' title='^$' manage=off
+yabai -m rule --add app='GoLand' title='(Settings|Rename|Update Project|Tip of the Day)' manage=off
 
 ## Office
 yabai -m rule --add app='^Calculator$' manage=off
 yabai -m rule --add app='^Calendar$' manage=off
 
 ## Misc
-yabai -m rule --add app="^Steam$" manage=off
-yabai -m rule --add app="^RimWorld by Ludeon Studios$" manage=off
-yabai -m rule --add app="^Scratchpad$" manage=off
 #yabai -m rule --add app="^RimWorld by Ludeon Studios$" manage=off
+yabai -m rule --add app="^Scratchpad$" manage=off
 
 ###################
 ## Event Exports ##

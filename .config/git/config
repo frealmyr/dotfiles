@@ -1,102 +1,94 @@
 [alias]
-  lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-  s = status
-  c = commit -v
-  p = add -p
-  co = checkout
-  br = branch
-  amend = commit -v --amend
-  conflicts = diff --name-only --diff-filter=U
-  commit = commit -v
-  last = log -1 HEAD
-  pull = pull --ff-only
-  rebase = rebase -v
-  staged = diff --staged
-  supdate = submodule foreach git pull -f origin master
-  undo = reset --soft HEAD~
-  unstage = reset HEAD --
-  url =! "open -u https://bitbucket.org/$(git remote show origin -n | grep h.URL | sed 's/.*://;s/.git$//') "
-  url-pr =! "open -u https://bitbucket.org/$(git remote show origin -n | grep h.URL | sed 's/.*://;s/.git$//')/pull-requests/new"
-  feature = 'git fetch; git checkout -b $1 ${2:-"origin/master"}'
-  publish = "git push -u origin $(git rev-parse --abbrev-ref HEAD) 2>&1 >/dev/null | awk '/pull request/{getline; print \\$2; fflush()}' | xargs open"
-  unpublish = "!sh -c 'git push --delete origin $(git rev-parse --abbrev-ref HEAD --)' -"
-  whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
+    lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+    s = status
+    c = commit -vS
+    p = add -p
+    co = checkout
+    br = branch
+    amend = commit -vS --amend
+    conflicts = diff --name-only --diff-filter=U
+    commit = commit -vS
+    last = log -1 HEAD
+    pull = pull --ff-only
+    rebase = rebase -v
+    staged = diff --staged
+    supdate = submodule foreach git pull -f origin master
+    undo = reset --soft HEAD~
+    unstage = reset HEAD --
+    url =! "open -u https://bitbucket.org/$(git remote show origin -n | grep h.URL | sed 's/.*://;s/.git$//') "
+    url-pr =! "open -u https://bitbucket.org/$(git remote show origin -n | grep h.URL | sed 's/.*://;s/.git$//')/pull-requests/new"
+    feature = 'git fetch; git checkout -b $1 ${2:-"origin/master"}'
+    publish = "git push -u origin $(git rev-parse --abbrev-ref HEAD) 2>&1 >/dev/null | awk '/pull request/{getline; print \\$2; fflush()}' | xargs open"
+    unpublish = "!sh -c 'git push --delete origin $(git rev-parse --abbrev-ref HEAD --)' -"
+    whois = "!sh -c 'git log -i -1 --pretty=\"format:%an <%ae>\n\" --author=\"$1\"' -"
 
 [color]
-	ui = true
+    ui = true
 
 [color "branch"]
-	current = yellow reverse
-	local = yellow
-	remote = green
+    current = yellow reverse
+    local = yellow
+    remote = green
 
 [color "diff"]
-	frag = magenta bold
-	meta = yellow bold
-	new = cyan
-	old = red
+    frag = magenta bold
+    meta = yellow bold
+    new = cyan
+    old = red
 
 [color "status"]
-	added = yellow
-	changed = green
-	untracked = cyan
+    added = yellow
+    changed = green
+    untracked = cyan
 
 [core]
-	editor = "nvim"
-	pager = delta --features "$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo dark-mode || echo light-mode)"
+    editor = "nvim"
+    pager = delta --features "$(defaults read -globalDomain AppleInterfaceStyle &> /dev/null && echo dark-mode || echo light-mode)"
 
 [init]
-  defaultBranch = main
+    defaultBranch = main
 
 [credential]
-	helper = "osxkeychain"
+    helper = "osxkeychain"
 
 [delta]
-	features = decorations
-	whitespace-error-style = "22 reverse"
-  side-by-side = true
-  navigate = true
-  line-numbers = true
+    features = decorations
+    whitespace-error-style = "22 reverse"
+    side-by-side = true
+    navigate = true
+    line-numbers = true
 
 [delta "decorations"]
-	commit-decoration-style = "bold yellow box ul"
-	file-decoration-style = "none"
-  file-style = "bold yellow ul"
+    commit-decoration-style = "bold yellow box ul"
+    file-decoration-style = "none"
+    file-style = "bold yellow ul"
 
 [delta "light-mode"]
-  light = true
-  syntax-theme = Coldark-Cold
+    light = true
+    syntax-theme = Coldark-Cold
 
 [delta "dark-mode"]
-  light = false
-  syntax-theme = Coldark-Dark
+    light = false
+    syntax-theme = Coldark-Dark
 
 [gpg]
-	program = "gpg"
+    program = "gpg"
 
 [help]
-	autocorrect = 1
+    autocorrect = 1
 
 [interactive]
-  diffFilter = "delta --color-only"
+    diffFilter = "delta --color-only"
 
 [merge]
-	conflictstyle = "zdiff3"
+    conflictstyle = "zdiff3"
 
 [push]
-	default = "simple"
+    default = "simple"
 
 [includeIf "gitdir:~/"]
-  path = ./config-personal
+    path = ./config-personal
 [includeIf "gitdir:~/SCM/personal/"]
-  path = ./config-personal
+    path = ./config-personal
 [includeIf "gitdir:~/SCM/work/"]
-  path = ~/.config/git/config-work
-[includeIf "gitdir:~/SCM/work/gh/"]
-  path = ~/.config/git/config-work-gh
-[includeIf "gitdir:~/SCM/work/ghe/"]
-  path = ~/.config/git/config-work-ghe
-[includeIf "gitdir:~/SCM/work/gl/"]
-  path = ~/.config/git/config-work-gl
-[includeIf "gitdir:~/SCM/work/ado/"]
-  path = ~/.config/git/config-work-ado
+    path = ~/.config/git/config-work

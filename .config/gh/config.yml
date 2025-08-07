@@ -1,7 +1,0 @@
-aliases:
-  co: pr checkout
-  pv: pr view
-editor: ''
-git_protocol: ssh
-prompt: enabled
-version: '1'

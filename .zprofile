@@ -14,15 +14,13 @@ export ZSH_CUSTOM="$ZSH/custom"
 # Ensure that UTF-8 is used
 export LC_ALL=en_US.UTF-8
 export LANG=en_US.UTF-8
-export TERM=xterm-256color # Alacritty will mess up SSH client input
+export TERM=xterm-256color
 
 # Make direnv output gray for less visual noise
-# export DIRENV_LOG_FORMAT=$'\033[2mdirenv: %s\033[0m'
+export DIRENV_LOG_FORMAT=$'\033[2mdirenv: %s\033[0m'
 
 # Editors
 export EDITOR=nvim
 
-
 # Added by Toolbox App
 export PATH="$PATH:/Users/fredrick/Library/Application Support/JetBrains/Toolbox/scripts"
-
