@@ -1,0 +1,38 @@
+---
+- hosts: localhost
+  become: yes
+  become_user: "{{ lookup('env', 'USER') }}"
+
+  tasks:
+
+    # YabaiIndicator, https://github.com/xiamaz/YabaiIndicator
+    # it has no brew cask, requires manual install
+    # however, it is way better than the alternatives
+    # so adding some custom tasks for this app is worth the hassle
+
+    - name: yabai-indicator - get latest url
+      shell: curl -s https://api.github.com/repos/xiamaz/YabaiIndicator/releases/latest | grep browser_download_url | cut -d '"' -f 4
+      register: yabai_indicator_url
+
+    - name: yabai-indicator - create temporary directory
+      tempfile:
+        state: directory
+      register: tempdir
+
+    - name: yabai-indicator - install to /Applications
+      unarchive:
+        remote_src: yes
+        src: "{{ yabai_indicator_url.stdout }}"
+        dest: "{{ tempdir.path }}"
+
+    - name: yabai-indicator - copy YabaiIndicator.app to target directory
+      copy:
+        src: "{{ tempdir.path }}/{{ yabai_indicator_url.stdout | basename | regex_replace('\\.zip$', '') }}/YabaiIndicator.app"
+        dest: /Applications
+        remote_src: yes
+        mode: preserve
+
+    - name: yabai-indicator - clean up temporary directory
+      file:
+        path: "{{ tempdir.path }}"
+        state: absent

@@ -1,0 +1,293 @@
+---
+- hosts: localhost
+  become: yes
+  become_user: "{{ lookup('env', 'USER') }}"
+  vars:
+    local_user: "{{ lookup('env', 'USER') }}"
+
+  tasks:
+    ###########
+    ## Shell ##
+    ###########
+
+    - name: shell - brew provided zsh as default shell
+      shell: "chsh -s /bin/zsh {{ local_user }}"
+      become_user: root
+
+    ##############
+    ## Services ##
+    ##############
+
+    - name: services - enable & start
+      shell: "{{ item }}"
+      with_items:
+        - "brew services start sleepwatcher"
+        - "yabai --start-service"
+        - "skhd --start-service"
+
+    ##################
+    ## OSX Defaults ##
+    ##################
+
+    - name: osx - quit system preferences
+      shell: osascript -e 'tell application "System Preferences" to quit'
+
+    - name: osx - disable boot sound effects
+      shell: nvram SystemAudioVolume=" "
+      become_user: root
+
+    - name: osx - NSGlobalDomain
+      community.general.osx_defaults:
+        domain: NSGlobalDomain
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        # Animations
+        - { key: "NSAutomaticWindowAnimationsEnabled", type: "bool", value: false } # Disable open/close animations for windows/popovers
+        - { key: "NSUseAnimatedFocusRing", type: "bool", value: false }
+        - { key: "com.apple.springing.enabled", type: "bool", value: true }
+        - { key: "com.apple.springing.delay", type: "float", value: 0 }
+        - { key: "NSScrollAnimationEnabled", type: "bool", value: false }
+        - { key: "NSWindowResizeTime", type: "float", value: 0 } # Speed of window resizing.
+        # Display
+        - { key: "AppleFontSmoothing", type: "int", value: 0 } # disable subpixel-rendering, more accurate and less bold fonts. Better for "non-retina" displays, as it does not blur pixels. https://www.fontsmoothingadjuster.com/
+        # Sound
+        - { key: "com.apple.sound.beep.flash", type: "int", value: 0 }
+        - { key: "com.apple.sound.beep.feedback", type: "int", value: 0 }
+        - { key: "com.apple.sound.beep.volume", type: "float", value: 0.0 }
+        # Input
+        - { key: "AppleMiniaturizeOnDoubleClick", type: "bool", value: false }
+        - { key: "ApplePressAndHoldEnabled", type: "bool", value: false }
+        - { key: "InitialKeyRepeat", type: "int", value: 15 }
+        - { key: "KeyRepeat", type: "int", value: 3 }
+        - { key: "AppleKeyboardUIMod", type: "int", value: 3 } # use keyboard for all things ui, e.g. use tab in modal dialogs
+        - { key: "NSAutomaticCapitalizationEnabled", type: "bool", value: false }
+        - { key: "NSAutomaticDashSubstitutionEnabled", type: "bool", value: false }
+        - { key: "NSAutomaticPeriodSubstitutionEnabled", type: "bool", value: false }
+        - { key: "NSAutomaticInlinePredictionEnabled", type: "bool", value: false }
+        - { key: "NSAutomaticQuoteSubstitutionEnabled", type: "bool", value: false }
+        - { key: "NSAutomaticSpellingCorrectionEnabled", type: "bool", value: false }
+        - { key: "com.apple.keyboard.fnState", type: "bool", value: false } # Use F1, F2, etc. keys as top-row on Apple keyboards
+        - { key: "com.apple.trackpad.forceClick", type: "bool", value: true }
+        - { key: "com.apple.trackpad.scaling", type: "float", value: 1.50 }
+        - { key: "AppleKeyboardUIMode", type: "int", value: 3 } # Enables keyboard control on prompts/windows.
+        - { key: "AppleScrollerPagingBehavior", type: "bool", value: true } # Enables click to jump on scrollbars.
+        - { key: "NSWindowShouldDragOnGesture", type: "bool", value: true } # Enable moving windows by holding it anywhere like on Linux.
+        # GUI
+        - { key: "AppleReduceDesktopTinting", type: "bool", value: true }
+        - { key: "AppleAccentColor", type: "int", value: 5 }
+        - { key: "AppleShowAllExtensions", type: "bool", value: true }
+        - { key: "AppleShowAllFiles", type: "bool", value: true }
+        - { key: "AppleShowScrollBars", type: "string", value: "Always" }
+        - { key: "AppleSpacesSwitchOnActivate", type: "bool", value: false }
+        - { key: "NSTableViewDefaultSizeMode", type: "int", value: 1 } # sidebar small icon size
+        - { key: "NSNavPanelExpandedStateForSaveMode", type: "bool", value: true }
+        - { key: "NSNavPanelExpandedStateForSaveMode2", type: "bool", value: true }
+        - { key: "AppleHighlightColor", type: "string", value: "0.968627 0.831373 1.000000 Purple" }
+        - { key: "NSStatusItemSpacing", type: "int", value: 6 } # Menu bar item padding
+        - { key: "PMPrintingExpandedStateForPrint", type: "bool", value: true }
+        - { key: "PMPrintingExpandedStateForPrint2", type: "bool", value: true }
+
+    - name: osx - trackpad
+      community.general.osx_defaults:
+        domain: com.apple.AppleMultitouchTrackpad
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "Clicking", type: "int", value: 1 } # enable tap to click
+        - { key: "ActuationStrength", type: "int", value: 0 } # less vibration pls
+        - { key: "FirstClickThreshold", type: "int", value: 0 } # 0 light, 1 medium, 2 firm.
+        - { key: "SecondClickThreshold", type: "int", value: 0 } # 0 light, 1 medium, 2 firm.
+        - { key: "TrackpadRightClick", type: "int", value: 1 } # enable two finger right click
+
+    - name: osx - window manager
+      community.general.osx_defaults:
+        domain: com.apple.WindowManager
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "EnableStandardClickToShowDesktop", type: "bool", value: false } # Disable dumb click on desktop to hide all windows gesture.
+        - { key: "StandardHideDesktopIcons", type: "bool", value: false } # Hide icons on desktop, so that I can clutter it as much as I want.
+        - { key: "EnableTiledWindowMargins", type: "bool", value: false } # Disable MacOS provided margins for screen edges, we can configure that ourselfs thank you.
+
+    - name: osx - screensaver
+      community.general.osx_defaults:
+        domain: com.apple.screensaver
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "askForPassword", type: "int", value: 1 }
+        - { key: "askForPasswordDelay", type: "int", value: 0 }
+
+    - name: osx - menuextra
+      community.general.osx_defaults:
+        domain: com.apple.menuextra
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "clock.DateFormat", type: "string", value: "dd.mm hh:mm" }
+        - { key: "battery", type: "string", value: "YES" } # wtf?
+
+    - name: osx - screencapture
+      community.general.osx_defaults:
+        domain: com.apple.screencapture
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "location", type: "string", value: "${HOME}/Desktop" }
+        - { key: "type", type: "string", value: "png" }
+        - { key: "disable-shadow", type: "bool", value: true }
+        - { key: "target", type: "string", value: "clipboard" } # Always default screencapture to clipboard on startup.
+
+    - name: osx - universalaccess
+      community.general.osx_defaults:
+        domain: com.apple.universalaccess
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "increaseContrast", type: "bool", value: true }
+        - { key: "reduceTransparency", type: "bool", value: true }
+        - { key: "reduceMotion", type: "bool", value: true }
+
+    - name: osx - desktopservices
+      community.general.osx_defaults:
+        domain: com.apple.desktopservices
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "DSDontWriteNetworkStores", type: "bool", value: true } # Disable .DS_Store for Network Shares.
+        - { key: "DSDontWriteUSBStores", type: "bool", value: true } # Disable .DS_Store for USB devices.
+
+    - name: osx - imagecapture
+      community.general.osx_defaults:
+        domain: com.apple.ImageCapture
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "disableHotPlug", type: "bool", value: true } # prevent photos popup on plugging in devices
+
+    - name: osx - timemachine
+      community.general.osx_defaults:
+        domain: com.apple.TimeMachine
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "DoNotOfferNewDisksForBackup", type: "bool", value: true } # disable prompt for new hard drives as backup volume
+
+    - name: osx - print
+      community.general.osx_defaults:
+        domain: com.apple.print
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "PrintingPrefs.Quit When Finished", type: "bool", value: true }
+
+    - name: osx - ads
+      community.general.osx_defaults:
+        domain: com.apple.AdLib
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "allowApplePersonalizedAdvertising", type: "bool", value: false }
+        - { key: "allowIdentifierForAdvertising", type: "bool", value: false }
+
+    - name: osx - mail
+      community.general.osx_defaults:
+        domain: com.apple.mail
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "AddressesIncludeNameOnPasteboard", type: "bool", value: false } # copy addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>`
+
+    - name: osx - dashboard
+      community.general.osx_defaults:
+        domain: com.apple.dashboard
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "mcx-disabled", type: "bool", value: true } # disable dashboard for some more ram
+
+    - name: osx - software updates
+      community.general.osx_defaults:
+        domain: com.apple.SoftwareUpdate
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "AutomaticCheckEnabled", type: "bool", value: true }
+        - { key: "ScheduleFrequency", type: "int", value: 1 }
+        - { key: "AutomaticDownload", type: "int", value: 1 }
+        - { key: "CriticalUpdateInstall", type: "int", value: 1 }
+
+    - name: osx - finder
+      community.general.osx_defaults:
+        domain: com.apple.finder
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "QuitMenuItem", type: "bool", value: true } # allow quitting via ⌘ + Q
+        - { key: "NewWindowTarget", type: "string", value: "PfDe" }
+        - { key: "NewWindowTargetPath", type: "string", value: "file://${HOME}/" }
+        # GUI
+        - { key: "DisableAllAnimations", type: "bool", value: true }
+        - { key: "ShowPathbar", type: "bool", value: true }
+        - { key: "howStatusBar", type: "bool", value: true }
+        - { key: "_FXShowPosixPathInTitle", type: "bool", value: true }
+        - { key: "_FXSortFoldersFirst", type: "bool", value: true }
+        - { key: "FXDefaultSearchScope", type: "string", value: "SCcf" } # search folder by default
+        - { key: "FXEnableExtensionChangeWarning", type: "bool", value: false }
+        - { key: "FXPreferredViewStyle", type: "string", value: "Nlsv" } # list view by default
+        - { key: "WarnOnEmptyTrash", type: "bool", value: false }
+        # Desktop Icons
+        - { key: "ShowExternalHardDrivesOnDesktop", type: "bool", value: false }
+        - { key: "ShowHardDrivesOnDesktop", type: "bool", value: false }
+        - { key: "ShowMountedServersOnDesktop", type: "bool", value: false }
+        - { key: "ShowRemovableMediaOnDesktop", type: "bool", value: false }
+
+    - name: osx - dock
+      community.general.osx_defaults:
+        domain: com.apple.dock
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "autohide", type: "bool", value: "true" }
+        - { key: "autohide-delay", type: "float", value: 0.0 }
+        - { key: "autohide-time-modifier", type: "float", value: 0.0 }
+        - { key: "expose-animation-duration", type: "float", value: 0.0 } # open mission control animation
+        - { key: "mru-spaces", type: "bool", value: false } # do not reorder Spaces based on recent use
+        - { key: "persistent-apps", type: "array", value: [] }
+        - { key: "persistent-others", type: "array", value: [] }
+        - { key: "show-process-indicators", type: "bool", value: false } # No need, as static-on is set.
+        - { key: "show-recents", type: "bool", value: "false" }
+        - { key: "static-only", type: "bool", value: true } # only display apps that are currently running
+        - { key: "tilesize", type: "float", value: 48 }
+        - { key: "wvous-bl-corner", type: "int", value: 0 }
+        - { key: "wvous-br-corner", type: "int", value: 0 }
+        - { key: "wvous-tl-corner", type: "int", value: 0 }
+        - { key: "wvous-tr-corner", type: "int", value: 0 } # disable hot corner
+
+    - name: osx - prompt for restart GUI server
+      pause:
+        prompt: "Do you want to logout and restart the WindowServer? (y/n)"
+      register: prompt
+
+    - name: osx - restart window server
+      shell: killall -HUP WindowServer
+      when: '"y" in prompt.user_input'
+      become_user: root

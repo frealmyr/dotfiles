@@ -1,0 +1,126 @@
+---
+- hosts: localhost
+  become: yes
+  become_user: "{{ lookup('env', 'USER') }}"
+
+  tasks:
+    - name: shell - check if brew is present
+      command: brew -v
+      register: brew_present
+      ignore_errors: true
+
+    - name: shell - install brew
+      shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+      when: brew_present is failed
+
+    ###########
+    ## Brews ##
+    ###########
+
+    - name: brew - cli tools (common)
+      homebrew:
+        name:
+          - bat
+          - blueutil
+          - borders
+          - btop
+          - coreutils
+          - curl
+          - direnv
+          - docker
+          - docker-buildx
+          - ed
+          - fastfetch
+          - fd
+          - findutils
+          - fzf
+          - gawk
+          - git
+          - git-delta
+          - gnu-sed
+          - gnu-tar
+          - gnupg
+          - gnuplot
+          - grep
+          - jq
+          - kind
+          - less
+          - make
+          - mise
+          - neovim
+          - parallel
+          - pinentry-mac # required for gnupg on macos
+          - skhd
+          - sleepwatcher
+          - tree
+          - vim
+          - watch
+          - wget
+          - xz
+          - yabai
+          - yq
+          - zsh
+        state: present
+
+    - name: brew - cli tools (work)
+      homebrew:
+        name:
+          - azure-cli
+          - Azure/kubelogin/kubelogin
+          - graphviz
+        state: present
+      when: ansible_hostname == "FM-WORK"
+
+    ###########
+    ## Casks ##
+    ###########
+
+    - name: brew - casks gui tools (common)
+      homebrew_cask:
+        name:
+          - betterdisplay
+          - breaktimer
+          - firefox
+          - font-fira-code-nerd-font
+          - font-fira-mono-nerd-font
+          - jetbrains-toolbox
+          - netnewswire
+          - obsidian
+          - ollamac
+          - rancher
+          - visual-studio-code
+          - wezterm
+        state: present
+        install_options: force
+
+    - name: brew - casks gui tools (personal)
+      homebrew_cask:
+        name:
+          - actual
+          - affinity-designer
+          - affinity-photo
+          - affinity-publisher
+          - calibre
+          - digikam
+          - google-chrome
+          - halloy
+          - keepassxc
+          - netspot
+          - starsector
+          - steam
+          - sweet-home3d
+          - synology-drive
+          - tailscale
+          - topaz-denoise-ai
+        state: present
+        install_options: force
+      when: ansible_hostname == "FM-MBP"
+
+    - name: brew - casks gui tools (work)
+      homebrew_cask:
+        name:
+          - jetbrains-toolbox
+          - slack
+        state: present
+        install_options: force
+      when: ansible_hostname == "FM-WORK"

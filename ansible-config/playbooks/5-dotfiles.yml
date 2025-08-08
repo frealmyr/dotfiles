@@ -1,0 +1,23 @@
+---
+- hosts: localhost
+  become: yes
+  become_user: "{{ lookup('env', 'USER') }}"
+
+  tasks:
+    - name: dotfiles - clone dotfiles as a bare repo to homefolder
+      ansible.builtin.git:
+        repo: https://github.com/frealmyr/dotfiles.git
+        dest: $HOME/.dotfiles/
+        bare: yes
+        recursive: true
+        track_submodules: true
+        version: main
+        force: true
+
+    - name: dotfiles - only show untracked files
+      ansible.builtin.git_config:
+        name: status.showUntrackedFiles
+        value: no
+        scope: local
+        repo: $HOME/.dotfiles/
+        state: present

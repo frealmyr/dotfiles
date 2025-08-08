@@ -1,0 +1,15 @@
+---
+- hosts: localhost
+  become: true
+  tasks:
+    - name: osx - prompt for restart GUI server
+      pause:
+        prompt: "\nHave you given terminal 'Full Disk Access' in settings? Without this, some playbooks will fail!\n"
+      register: prompt
+
+- import_playbook: playbooks/1-brew.yml
+- import_playbook: playbooks/2-rosetta.yml
+- import_playbook: playbooks/3-mise.yml
+- import_playbook: playbooks/4-binaries.yml
+- import_playbook: playbooks/5-dotfiles.yml
+- import_playbook: playbooks/6-configure.yml

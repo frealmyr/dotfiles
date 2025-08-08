@@ -1,0 +1,22 @@
+---
+- hosts: localhost
+  become: yes
+  become_user: "{{ lookup('env', 'USER') }}"
+
+  tasks:
+    - name: mise - add, install and set global versions (work)
+      shell: mise use --global "{{ item }}"
+      loop:
+        - argo
+        - argo-rollouts
+        - argocd
+        - azure-kubelogin
+        - cilium-cli
+        - helm
+        - krew
+        - kubectl
+        - stern
+        - terraform
+        - terraform-docs
+      register: mise_add_result
+      when: ansible_hostname == "FM-WORK"

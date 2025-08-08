@@ -1,0 +1,16 @@
+---
+- hosts: localhost
+  become: yes
+  become_user: "{{ lookup('env', 'USER') }}"
+
+  tasks:
+    - name: rosetta - check if installed
+      stat:
+        path: /Library/Apple/usr/libexec/oah
+      become_user: root
+      register: rosetta
+
+    - name: rosetta - install
+      command: softwareupdate --install-rosetta --agree-to-license
+      become_user: root
+      when: not rosetta.stat.exists
