@@ -1,17 +1,13 @@
 <div align="center">
     <img alt="NixOS" src="https://fmlab.no/assets/images/typing-anime.gif" width="240px"/>
-    <h1>dotfiles 💚</h1>
+    <h1>dotfiles 💙</h1>
 </div>
 
 - Root of this repository is the root of my home directory.
   - This is done using a [bare git repository](https://git-scm.com/book/en/v2/Git-on-the-Server-Getting-Git-on-a-Server), which sets the working directory to the home folder, and git directory to `~/.dotfiles`.
   - Using `showUntrackedFiles=false`, only tracked files will be visible in git commands for the dotfiles.
 - Ansible playbooks are placed under `~/ansible-config`.
-  - This is used for configuring my MacOS system, homebrew and git repo.
-
-This is where I keep all workstation configuration as code.
-
-It contains Ansible playbooks for configuring MacOS, that configures this dotfiles repsitory as a bare git repository to my home folder.
+  - This is used for configuring my MacOS system, packages and git repo.
 
 ### Fresh install
 
@@ -47,7 +43,6 @@ And `dtf add ./config/newapp` if the files are not tracked yet.
 
 #### Ansible
 
-Whenever I configure MacOS, I add more functionality to the playbooks in `playbooks/` and then re-run the individual playbook. Keeping the playbooks updated instead of configuring things manually on my machine.
+Whenever I configure MacOS, I add more functionality to the playbooks in `playbooks/` and then re-run the individual playbook. Keeping the playbooks updated.
 
-> A tip for adding `osx_defaults` configuration in Ansible for the first time, is to dump your existing configuration using the `defaults read -g` command.
-
+> Tip for adding `osx_defaults` tasks in playbook, is to dump your existing configuration using the `defaults read -g` command.
