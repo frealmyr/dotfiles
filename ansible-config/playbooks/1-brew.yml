@@ -69,7 +69,7 @@
           - Azure/kubelogin/kubelogin
           - graphviz
         state: present
-      when: ansible_hostname == "FM-WORK"
+      when: ansible_facts['hostname'] == "FM-WORK"
 
     ###########
     ## Casks ##
@@ -87,34 +87,51 @@
           - netnewswire
           - obsidian
           - ollamac
+          - the-unarchiver
           - rancher
           - visual-studio-code
           - wezterm
         state: present
-        install_options: force
 
     - name: brew - casks gui tools (personal)
       homebrew_cask:
         name:
-          - actual
           - affinity-designer
           - affinity-photo
           - affinity-publisher
+          - audacity
+          - balenaetcher
           - calibre
+          - darktable
           - digikam
           - google-chrome
           - halloy
+          - hyperbackupexplorer
+          - jellyfin-media-player
           - keepassxc
+          - krita
+          - musicbrainz-picard
           - netspot
+          - raspberry-pi-imager
+          - rawtherapee
           - starsector
           - steam
           - sweet-home3d
           - synology-drive
-          - tailscale
+          - tailscale-app
           - topaz-denoise-ai
+          - transmission
+          - utm
         state: present
-        install_options: force
-      when: ansible_hostname == "FM-MBP"
+      when: ansible_facts['host'] == "fm-macbook"
+
+    - name: brew - casks gui tools (personal) (no quaratine)
+      homebrew_cask:
+        name:
+          - heroic
+        state: present
+        install_options: no-quarantine
+      when: ansible_facts['host'] == "fm-macbook"
 
     - name: brew - casks gui tools (work)
       homebrew_cask:
@@ -122,5 +139,5 @@
           - jetbrains-toolbox
           - slack
         state: present
-        install_options: force
-      when: ansible_hostname == "FM-WORK"
+      when: ansible_facts['host'] == "FM-WORK"
+
