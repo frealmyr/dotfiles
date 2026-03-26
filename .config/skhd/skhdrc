@@ -3,6 +3,7 @@
 ##################
 
 fn - space : open -na wezterm
+fn - 0x32 : skhd -k "shift + ctrl + alt + cmd - 0x32"; # Dropdown iterm2
 fn + ctrl - space : open -na firefox
 fn + alt - space : skhd -k "shift + ctrl + alt + cmd - j"; # Opens Jetbrains Toolbox
 fn + alt + ctrl + cmd - space : /usr/bin/osascript -e 'tell application "System Events" to tell appearance preferences to set dark mode to not dark mode'

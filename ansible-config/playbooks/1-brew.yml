@@ -1,6 +1,6 @@
 ---
 - hosts: localhost
-  become: yes
+  become: true
   become_user: "{{ lookup('env', 'USER') }}"
 
   tasks:
@@ -26,11 +26,11 @@
           - btop
           - coreutils
           - curl
+          - cloc
           - direnv
           - docker
           - docker-buildx
           - ed
-          - fastfetch
           - fd
           - findutils
           - fzf
@@ -39,17 +39,19 @@
           - git-delta
           - gnu-sed
           - gnu-tar
+          - htop
           - gnupg
           - gnuplot
           - grep
           - jq
           - kind
+          - osx-cpu-temp # dependency for btop
           - less
           - make
           - mise
           - neovim
           - parallel
-          - pinentry-mac # required for gnupg on macos
+          - pinentry-mac # dependency for gnupg
           - skhd
           - sleepwatcher
           - tree
@@ -60,13 +62,23 @@
           - yabai
           - yq
           - zsh
+          - zoxide
         state: present
+
+    - name: brew - cli tools (personal)
+      homebrew:
+        name:
+          - fastfetch
+          - exiftool
+          - mlx-lm
+          - opencode
+        state: present
+      when: ansible_facts['hostname'] == "fm-macbook"
 
     - name: brew - cli tools (work)
       homebrew:
         name:
-          - azure-cli
-          - Azure/kubelogin/kubelogin
+          - opencode
           - graphviz
         state: present
       when: ansible_facts['hostname'] == "FM-WORK"
@@ -83,12 +95,10 @@
           - firefox
           - font-fira-code-nerd-font
           - font-fira-mono-nerd-font
-          - jetbrains-toolbox
-          - netnewswire
           - obsidian
-          - ollamac
+          - podman-desktop
+          - stats
           - the-unarchiver
-          - rancher
           - visual-studio-code
           - wezterm
         state: present
@@ -109,8 +119,8 @@
           - hyperbackupexplorer
           - jellyfin-media-player
           - keepassxc
-          - krita
           - musicbrainz-picard
+          - netnewswire
           - netspot
           - raspberry-pi-imager
           - rawtherapee
@@ -123,21 +133,14 @@
           - transmission
           - utm
         state: present
-      when: ansible_facts['host'] == "fm-macbook"
-
-    - name: brew - casks gui tools (personal) (no quaratine)
-      homebrew_cask:
-        name:
-          - heroic
-        state: present
-        install_options: no-quarantine
-      when: ansible_facts['host'] == "fm-macbook"
+      when: ansible_facts['hostname'] == "fm-macbook"
 
     - name: brew - casks gui tools (work)
       homebrew_cask:
         name:
           - jetbrains-toolbox
           - slack
+          - xbar
         state: present
-      when: ansible_facts['host'] == "FM-WORK"
+      when: ansible_facts['hostname'] == "FM-WORK"
 

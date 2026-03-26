@@ -14,7 +14,7 @@
 After installing a fresh instance of MacOS, I temporary clone this repository and run my ansible-playbooks:
 
 ```bash
-git clone --depth 1 https://github.com/frealmyr/dotfiles.git /tmp/dotfiles
+git clone --recurse-submodules https://github.com/frealmyr/dotfiles.git /tmp/dotfiles
 cd /tmp/dotfiles/ansible-config
 ./provision
 ```

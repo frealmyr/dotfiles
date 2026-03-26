@@ -1,6 +1,6 @@
 ---
 - hosts: localhost
-  become: yes
+  become: true
   become_user: "{{ lookup('env', 'USER') }}"
   vars:
     local_user: "{{ lookup('env', 'USER') }}"
@@ -68,8 +68,9 @@
         - { key: "NSAutomaticInlinePredictionEnabled", type: "bool", value: false }
         - { key: "NSAutomaticQuoteSubstitutionEnabled", type: "bool", value: false }
         - { key: "NSAutomaticSpellingCorrectionEnabled", type: "bool", value: false }
-        - { key: "com.apple.keyboard.fnState", type: "bool", value: false } # Use F1, F2, etc. keys as top-row on Apple keyboards
-        - { key: "com.apple.trackpad.forceClick", type: "bool", value: true }
+        - { key: "com.apple.keyboard.fnState", type: "bool", value: true } # Use F1, F2, etc. keys as top-row on Apple keyboards
+        - { key: "com.apple.mouse.tapBehavior", type: "int", value: 1 } # Enable tap-to-click for trackpad.
+        - { key: "com.apple.trackpad.forceClick", type: "bool", value: false }
         - { key: "com.apple.trackpad.scaling", type: "float", value: 1.50 }
         - { key: "AppleKeyboardUIMode", type: "int", value: 3 } # Enables keyboard control on prompts/windows.
         - { key: "AppleScrollerPagingBehavior", type: "bool", value: true } # Enables click to jump on scrollbars.
@@ -85,9 +86,10 @@
         - { key: "NSNavPanelExpandedStateForSaveMode", type: "bool", value: true }
         - { key: "NSNavPanelExpandedStateForSaveMode2", type: "bool", value: true }
         - { key: "AppleHighlightColor", type: "string", value: "0.968627 0.831373 1.000000 Purple" }
-        - { key: "NSStatusItemSpacing", type: "int", value: 6 } # Menu bar item padding
+        - { key: "NSStatusItemSelectionPadding", type: "int", value: 4 } # Padding around menu bar icons
+        - { key: "NSStatusItemSpacing", type: "int", value: 4 } # Menu bar item padding
         - { key: "PMPrintingExpandedStateForPrint", type: "bool", value: true }
-        - { key: "PMPrintingExpandedStateForPrint2", type: "bool", value: true }
+        - { key: "PMPrintingExpandedStateForPrint2", type: "int", value: 1 }
 
     - name: osx - trackpad
       community.general.osx_defaults:
@@ -100,7 +102,11 @@
         - { key: "ActuationStrength", type: "int", value: 0 } # less vibration pls
         - { key: "FirstClickThreshold", type: "int", value: 0 } # 0 light, 1 medium, 2 firm.
         - { key: "SecondClickThreshold", type: "int", value: 0 } # 0 light, 1 medium, 2 firm.
+        - { key: "TrackpadFourFingerPinchGesture", type: "int", value: 0 }
+        - { key: "TrackpadPinch", type: "int", value: 0 }
         - { key: "TrackpadRightClick", type: "int", value: 1 } # enable two finger right click
+        - { key: "TrackpadThreeFingerTapGesture", type: "int", value: 0 }
+        - { key: "TrackpadTwoFingerDoubleTapGesture", type: "int", value: 0 }
 
     - name: osx - window manager
       community.general.osx_defaults:
@@ -109,8 +115,10 @@
         type: "{{ item.type }}"
         value: "{{ item.value }}"
       with_items:
+        - { key: "AutoHide", type: "bool", value: false } # Disable recent apps.
         - { key: "EnableStandardClickToShowDesktop", type: "bool", value: false } # Disable dumb click on desktop to hide all windows gesture.
-        - { key: "StandardHideDesktopIcons", type: "bool", value: false } # Hide icons on desktop, so that I can clutter it as much as I want.
+        - { key: "StandardHideDesktopIcons", type: "bool", value: true } # Hide icons on desktop, so that I can clutter it as much as I want.
+        - { key: "StandardHideWidgets", type: "bool", value: true } # No need for widgets.
         - { key: "EnableTiledWindowMargins", type: "bool", value: false } # Disable MacOS provided margins for screen edges, we can configure that ourselfs thank you.
 
     - name: osx - screensaver
@@ -123,15 +131,14 @@
         - { key: "askForPassword", type: "int", value: 1 }
         - { key: "askForPasswordDelay", type: "int", value: 0 }
 
-    - name: osx - menuextra
+    - name: osx - menuextra (legacy)
       community.general.osx_defaults:
         domain: com.apple.menuextra
         key: "{{ item.key }}"
         type: "{{ item.type }}"
         value: "{{ item.value }}"
       with_items:
-        - { key: "clock.DateFormat", type: "string", value: "dd.mm hh:mm" }
-        - { key: "battery", type: "string", value: "YES" } # wtf?
+        - { key: "battery", type: "string", value: "YES" }
 
     - name: osx - screencapture
       community.general.osx_defaults:
@@ -140,9 +147,10 @@
         type: "{{ item.type }}"
         value: "{{ item.value }}"
       with_items:
-        - { key: "location", type: "string", value: "${HOME}/Desktop" }
-        - { key: "type", type: "string", value: "png" }
+        - { key: "location", type: "string", value: "~/Desktop" }
+        - { key: "type", type: "string", value: "jpg" }
         - { key: "disable-shadow", type: "bool", value: true }
+        - { key: "show-thumbnail", type: "bool", value: false } # Disable popup in lower left corner after screencapture.
         - { key: "target", type: "string", value: "clipboard" } # Always default screencapture to clipboard on startup.
 
     - name: osx - universalaccess
@@ -241,12 +249,16 @@
         value: "{{ item.value }}"
       with_items:
         - { key: "QuitMenuItem", type: "bool", value: true } # allow quitting via ⌘ + Q
-        - { key: "NewWindowTarget", type: "string", value: "PfDe" }
+        - { key: "NewWindowTarget", type: "string", value: "PfHm" }
         - { key: "NewWindowTargetPath", type: "string", value: "file://${HOME}/" }
         # GUI
+        - { key: "_FXEnableColumnAutoSizing", type: "bool", value: true }
+        - { key: "AppleShowAllExtensions", type: "bool", value: true }
+        - { key: "CreateDesktop", type: "bool", value: false } # Hide desktop icons
         - { key: "DisableAllAnimations", type: "bool", value: true }
+        - { key: "FXRemoveOldTrashItems", type: "bool", value: true } # Remove trashed items after 30 days
         - { key: "ShowPathbar", type: "bool", value: true }
-        - { key: "howStatusBar", type: "bool", value: true }
+        - { key: "ShowStatusBar", type: "bool", value: false }
         - { key: "_FXShowPosixPathInTitle", type: "bool", value: true }
         - { key: "_FXSortFoldersFirst", type: "bool", value: true }
         - { key: "FXDefaultSearchScope", type: "string", value: "SCcf" } # search folder by default
@@ -270,17 +282,130 @@
         - { key: "autohide-delay", type: "float", value: 0.0 }
         - { key: "autohide-time-modifier", type: "float", value: 0.0 }
         - { key: "expose-animation-duration", type: "float", value: 0.0 } # open mission control animation
+        - { key: "launchanim", type: "bool", value: false } # Disable launch animations
         - { key: "mru-spaces", type: "bool", value: false } # do not reorder Spaces based on recent use
+        - { key: "orientation", type: "string", value: "bottom" }
         - { key: "persistent-apps", type: "array", value: [] }
         - { key: "persistent-others", type: "array", value: [] }
         - { key: "show-process-indicators", type: "bool", value: false } # No need, as static-on is set.
         - { key: "show-recents", type: "bool", value: "false" }
         - { key: "static-only", type: "bool", value: true } # only display apps that are currently running
         - { key: "tilesize", type: "float", value: 48 }
-        - { key: "wvous-bl-corner", type: "int", value: 0 }
-        - { key: "wvous-br-corner", type: "int", value: 0 }
-        - { key: "wvous-tl-corner", type: "int", value: 0 }
-        - { key: "wvous-tr-corner", type: "int", value: 0 } # disable hot corner
+        - { key: "wvous-bl-corner", type: "int", value: 1 }
+        - { key: "wvous-br-corner", type: "int", value: 1 }
+        - { key: "wvous-tl-corner", type: "int", value: 1 }
+        - { key: "wvous-tr-corner", type: "int", value: 1 } # disable hot corner
+
+    - name: osx - control center
+      community.general.osx_defaults:
+        domain: com.apple.controlcenter
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "AirDrop", type: "bool", value: false }
+        - { key: "BatteryShowPercentage", type: "bool", value: true }
+        - { key: "Bluetooth", type: "bool", value: true }
+        - { key: "Display", type: "bool", value: false }
+        - { key: "NowPlaying", type: "bool", value: true }
+        - { key: "Sound", type: "bool", value: true }
+
+    - name: osx - hitoolbox
+      community.general.osx_defaults:
+        domain: com.apple.HIToolbox
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "AppleFnUsageType", type: "int", value: 0 } # Globe key does nothing by default
+
+    - name: osx - login window
+      community.general.osx_defaults:
+        domain: com.apple.loginwindow
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "GuestEnabled", type: "bool", value: false }
+        - { key: "SHOWFULLNAME", type: "bool", value: false }
+
+    - name: osx - menu extra clock
+      community.general.osx_defaults:
+        domain: com.apple.menuextra.clock
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "ShowDate", type: "int", value: 2 } # 0=whenspace,1=always,2=never
+        - { key: "ShowDayOfWeek", type: "bool", value: false }
+
+    - name: osx - spaces
+      community.general.osx_defaults:
+        domain: com.apple.spaces
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "spans-displays", type: "bool", value: false } # Displays have separate spaces
+
+    - name: osx - commerce
+      community.general.osx_defaults:
+        domain: com.apple.commerce
+        key: "{{ item.key }}"
+        type: "{{ item.type }}"
+        value: "{{ item.value }}"
+      with_items:
+        - { key: "AutoUpdate", type: "bool", value: true } # Turn on app auto-update
+
+    ###########################
+    ## Keyboard Shortcuts    ##
+    ###########################
+
+    - name: keyboard - configure symbolic hotkeys (Ctrl+1-10 for spaces, disable unused)
+      shell: |
+        defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add \
+          "80" '{ enabled = 1; value = { parameters = ( 65535, 123, 8781824 ); type = standard; }; }' \
+          "82" '{ enabled = 1; value = { parameters = ( 65535, 124, 8781824 ); type = standard; }; }' \
+          "118" '{ enabled = 1; value = { parameters = ( 49, 18, 1966080 ); type = standard; }; }' \
+          "119" '{ enabled = 1; value = { parameters = ( 50, 19, 1966080 ); type = standard; }; }' \
+          "120" '{ enabled = 1; value = { parameters = ( 51, 20, 1966080 ); type = standard; }; }' \
+          "121" '{ enabled = 1; value = { parameters = ( 52, 21, 1966080 ); type = standard; }; }' \
+          "122" '{ enabled = 1; value = { parameters = ( 53, 23, 1966080 ); type = standard; }; }' \
+          "123" '{ enabled = 1; value = { parameters = ( 54, 22, 1966080 ); type = standard; }; }' \
+          "124" '{ enabled = 1; value = { parameters = ( 55, 26, 1966080 ); type = standard; }; }' \
+          "125" '{ enabled = 1; value = { parameters = ( 56, 28, 1966080 ); type = standard; }; }' \
+          "126" '{ enabled = 1; value = { parameters = ( 57, 25, 1966080 ); type = standard; }; }' \
+          "127" '{ enabled = 1; value = { parameters = ( 48, 29, 1966080 ); type = standard; }; }'
+
+    - name: keyboard - disable unused symbolic hotkeys
+      shell: |
+        {% for key in [7,8,9,10,11,12,13,15,16,17,18,19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,36,52,53,54,57,59,60,61,65,79,81,98,159,162,164,175,184,190,215,216,217,218,219,222,223,224,225,226,227,228,229,230,231,232,233,235,237,238,239,240,241,242,243,244,245,246,247,248,249,250,251,256,257,258,260] %}
+        defaults write com.apple.symbolichotkeys AppleSymbolicHotKeys -dict-add "{{ key }}" '{ enabled = 0; }'
+        {% endfor %}
+
+    ##############
+    ## Security ##
+    ##############
+
+    - name: security - enable Touch ID for sudo
+      lineinfile:
+        path: /etc/pam.d/sudo_local
+        line: "auth       sufficient     pam_tid.so"
+        create: yes
+        mode: '0444'
+      become_user: root
+
+    - name: security - enable application firewall (personal)
+      shell: "{{ item }}"
+      with_items:
+        - "/usr/libexec/ApplicationFirewall/socketfilterfw --setglobalstate on"
+        - "/usr/libexec/ApplicationFirewall/socketfilterfw --setstealthmode on"
+      become_user: root
+      when: ansible_facts['hostname'] == "fm-macbook"
+
+    #######################
+    ## Environment Vars  ##
+    #######################
 
     - name: osx - prompt for restart GUI server
       pause:

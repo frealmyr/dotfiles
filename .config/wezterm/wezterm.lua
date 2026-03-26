@@ -35,7 +35,8 @@ wezterm.on("window-config-reloaded", function(window, pane)
 end)
 local config = {
 	automatically_reload_config = true,
--- 	font = wezterm.font("FiraMono Nerd Font", { weight = "Medium" }),
+  default_cwd = wezterm.home_dir .. "/SCM",
+  font = wezterm.font("FiraMono Nerd Font", { weight = "Medium" }),
 	font_size = 13.5,
 	enable_tab_bar = false,
 	audible_bell = "Disabled",

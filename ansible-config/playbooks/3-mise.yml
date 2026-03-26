@@ -1,6 +1,6 @@
 ---
 - hosts: localhost
-  become: yes
+  become: true
   become_user: "{{ lookup('env', 'USER') }}"
 
   tasks:
@@ -19,4 +19,4 @@
         - terraform
         - terraform-docs
       register: mise_add_result
-      when: ansible_hostname == "FM-WORK"
+      when: ansible_facts['hostname'] == "FM-WORK"

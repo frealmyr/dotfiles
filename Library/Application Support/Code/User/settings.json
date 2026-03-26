@@ -122,4 +122,9 @@
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
   "git.blame.editorDecoration.enabled": true,
+  "yaml.schemas": {
+    "file:///Users/fredrick/.vscode/extensions/continue.continue-1.2.18-darwin-arm64/config-yaml-schema.json": [
+      ".continue/**/*.yaml"
+    ]
+  },
 }

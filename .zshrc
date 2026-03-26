@@ -3,37 +3,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
 fi
 
-## ZSH Configuration
-DISABLE_AUTO_UPDATE="true"
-COMPLETION_WAITING_DOTS="true"
-ZSH_AUTOSUGGEST_STRATEGY=(history)
-ZSH_CUSTOM=$HOME/.zsh_custom
-
-## Oh-My-ZSH related things
-# Load zsh plugins
-plugins=(
-  aws
-  azure
-  docker
-  direnv
-  extract
-  fluxcd
-  git
-  golang
-  gpg-agent
-  helm
-  history
-  history-substring-search
-  kubectl
-  terraform
-  you-should-use
-  zsh-autosuggestions
-  fast-syntax-highlighting
-)
-
-# Set powerlevel10k as theme, needs to be done before sourcing oh-my-zsh
-ZSH_THEME="powerlevel10k/powerlevel10k"
-source $HOME/.oh-my-zsh/oh-my-zsh.sh
+source ~/.zsh_custom/themes/powerlevel10k/powerlevel10k.zsh-theme
 
 # Load zsh functions and aliases
 fpath=(~/.config/zsh/functions $fpath)
@@ -49,7 +19,18 @@ export K9S_CONFIG_DIR=~/.config/k9s
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
 
-### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
-export PATH="/Users/fredrick/.rd/bin:$PATH"
-### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
 eval "$(mise activate zsh)"
+
+autoload -U compinit; compinit
+source ~/.zsh_custom/plugins/fzf-tab/fzf-tab.plugin.zsh
+source ~/.zsh_custom/plugins/zsh-direnv/zsh-direnv.plugin.zsh
+source ~/.zsh_custom/plugins/git.plugin.zsh
+source ~/.zsh_custom/plugins/zsh-completion-waiting-dots.zsh
+source ~/.zsh_custom/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh
+source ~/.zsh_custom/plugins/zsh-you-should-use/zsh-you-should-use.plugin.zsh
+source ~/.zsh_custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
+source ~/.zsh_custom/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
+
+setopt autocd          # cd to a directory just by typing its name
+setopt histignoredups  # avoid duplicate history entries
+setopt sharehistory    # share history between terminals
