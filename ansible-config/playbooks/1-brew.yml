@@ -13,6 +13,12 @@
       shell: /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
       when: brew_present is failed
 
+    - name: brew - taps
+      homebrew_tap:
+        name:
+          - FelixKratz/formulae # borders, https://github.com/FelixKratz/JankyBorders
+          - asmvik/formulae # yabai, skhd, https://github.com/asmvik/yabai, https://github.com/asmvik/skhd
+
     ###########
     ## Brews ##
     ###########
@@ -81,7 +87,7 @@
           - opencode
           - graphviz
         state: present
-      when: ansible_facts['hostname'] == "FM-WORK"
+      when: ansible_facts['hostname'] == "K4W6XM73X6"
 
     ###########
     ## Casks ##
@@ -142,5 +148,4 @@
           - slack
           - xbar
         state: present
-      when: ansible_facts['hostname'] == "FM-WORK"
-
+      when: ansible_facts['hostname'] == "K4W6XM73X6"

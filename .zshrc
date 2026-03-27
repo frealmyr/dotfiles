@@ -23,7 +23,7 @@ eval "$(mise activate zsh)"
 
 autoload -U compinit; compinit
 source ~/.zsh_custom/plugins/fzf-tab/fzf-tab.plugin.zsh
-source ~/.zsh_custom/plugins/zsh-direnv/zsh-direnv.plugin.zsh
+# source ~/.zsh_custom/plugins/zsh-direnv/zsh-direnv.plugin.zsh
 source ~/.zsh_custom/plugins/git.plugin.zsh
 source ~/.zsh_custom/plugins/zsh-completion-waiting-dots.zsh
 source ~/.zsh_custom/plugins/zsh-history-substring-search/zsh-history-substring-search.zsh

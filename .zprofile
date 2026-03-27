@@ -17,5 +17,8 @@ export DIRENV_LOG_FORMAT=$'\033[2mdirenv: %s\033[0m'
 # Editors
 export EDITOR=nvim
 
+# Mise
+eval "$(mise activate zsh --shims)"
+
 # Added by Toolbox App
 export PATH="$PATH:/Users/fredrick/Library/Application Support/JetBrains/Toolbox/scripts"

@@ -19,4 +19,4 @@
         - terraform
         - terraform-docs
       register: mise_add_result
-      when: ansible_facts['hostname'] == "FM-WORK"
+      when: ansible_facts['hostname'] == "K4W6XM73X6"
