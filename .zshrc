@@ -34,3 +34,7 @@ source ~/.zsh_custom/plugins/fast-syntax-highlighting/fast-syntax-highlighting.p
 setopt autocd          # cd to a directory just by typing its name
 setopt histignoredups  # avoid duplicate history entries
 setopt sharehistory    # share history between terminals
+
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/Users/fredrick/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)

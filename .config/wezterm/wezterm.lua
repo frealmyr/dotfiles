@@ -15,11 +15,12 @@ end)
 
 function scheme_for_appearance(appearance)
 	if appearance:find("Dark") then
-		return "Dracula"
+		return "Catppuccin Mocha"
 	else
 		return "Catppuccin Latte"
 	end
 end
+
 wezterm.on("window-config-reloaded", function(window, pane)
 	local overrides = window:get_config_overrides() or {}
 	local appearance = window:get_appearance()
@@ -33,11 +34,13 @@ wezterm.on("window-config-reloaded", function(window, pane)
 		window:set_config_overrides(overrides)
 	end
 end)
+
 local config = {
 	automatically_reload_config = true,
   default_cwd = wezterm.home_dir .. "/SCM",
   font = wezterm.font("FiraMono Nerd Font", { weight = "Medium" }),
-	font_size = 13.5,
+	font_size = 13,
+  freetype_load_target = "Normal",
 	enable_tab_bar = false,
 	audible_bell = "Disabled",
 	window_decorations = "RESIZE|MACOS_FORCE_DISABLE_SHADOW",
@@ -59,4 +62,5 @@ local config = {
 	front_end = "WebGpu",
 	webgpu_power_preference = "LowPower",
 }
+
 return config

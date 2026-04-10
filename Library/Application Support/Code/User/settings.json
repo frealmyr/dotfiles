@@ -9,8 +9,8 @@
   "editor.bracketPairColorization.enabled": true,
   "editor.codeActionsOnSave": null,
   "editor.detectIndentation": false,
-  "editor.fontFamily": "'Fira Code Medium'",
-  "editor.fontSize": 12,
+  "editor.fontFamily": "FiraCode Nerd Font",
+  "editor.fontSize": 13,
   "editor.guides.bracketPairs": "active",
   "editor.inlineSuggest.enabled": true,
   "editor.insertSpaces": true,
@@ -36,10 +36,9 @@
   },
   "github.copilot.enable": {
     "*": false,
-    "plaintext": true,
     "markdown": false,
     "scminput": false,
-    "yaml": true
+    "yaml": false
   },
   "github.copilot.advanced": {
     "debug.useNodeFetcher": true
@@ -63,11 +62,6 @@
   "indentRainbow.errorColor": "rgba(255,0,0,0.25)",
   "javascript.suggest.paths": false,
   "redhat.telemetry.enabled": false,
-  "remote.SSH.remotePlatform": {
-    "10.0.0.21": "linux",
-    "10.7.0.11": "linux",
-    "10.10.0.10": "linux"
-  },
   "security.workspace.trust.untrustedFiles": "newWindow",
   "terminal.external.linuxExec": "/usr/bin/flatpak-spawn",
   "terminal.integrated.defaultProfile.linux": "flatpak",
@@ -90,34 +84,29 @@
     "imageBuildTool": "Docker",
     "logsDisplay": "webview",
     "vs-kubernetes.crd-code-completion": "disabled",
-    "vs-kubernetes.helm-path": "/home/fredrick/.asdf/shims/helm",
-    "vs-kubernetes.kubectl-path": "/home/fredrick/.asdf/shims/kubectl",
+    "vs-kubernetes.helm-path": "~/.local/share/mise/shims/helm",
+    "vs-kubernetes.kubectl-path": "~/.local/share/mise/shims/kubectl",
     "vs-kubernetes.kubectlVersioning": "user-provided",
     "vs-kubernetes.outputFormat": "yaml"
   },
-  "vscode-edge-devtools.webhint": false,
-  "window.commandCenter": false,
-  "window.menuBarVisibility": "toggle",
   "workbench.colorTheme": "Dracula",
   "workbench.iconTheme": "material-icon-theme",
-  "workbench.layoutControl.enabled": false,
   "workbench.preferredHighContrastColorTheme": "Catppuccin Mocha",
   "workbench.preferredHighContrastLightColorTheme": "Catppuccin Mocha",
   "workbench.statusBar.visible": true,
   "workbench.tips.enabled": false,
-  "go.toolsManagement.autoUpdate": true,
-  "go.gopath": "/home/fredrick/go",
-  "go.goroot": "/home/fredrick/.asdf/installs/golang/1.19.5/go",
+  "go.toolsManagement.autoUpdate": false,
+  "go.toolsManagement.checkForUpdates": "off",
+  "go.alternateTools": {
+    "go": "~/.local/share/mise/shims/go",
+    "gopls":  "~/.local/share/mise/shims/gopls"
+  },
   "window.autoDetectColorScheme": true,
   "window.autoDetectHighContrast": false,
   "workbench.preferredLightColorTheme": "Catppuccin Latte",
   "workbench.preferredDarkColorTheme": "Catppuccin Mocha",
-  "chatgpt.gpt3.model": "custom",
-  "chatgpt.gpt3.customModel": "deepseek-coder-v2:16b",
-  "chatgpt.gpt3.apiBaseUrl": "http://localhost:11434/v1/",
-  "chatgpt.gpt3.apiKey": "ollama",
-  "github-enterprise.uri": "https://dnb.ghe.com",
-  "github.copilot.advanced.authProvider": "github-enterprise",
+  // "github-enterprise.uri": "https://dnb.ghe.com",
+  // "github.copilot.advanced.authProvider": "github-enterprise",
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
@@ -125,6 +114,16 @@
   "yaml.schemas": {
     "file:///Users/fredrick/.vscode/extensions/continue.continue-1.2.18-darwin-arm64/config-yaml-schema.json": [
       ".continue/**/*.yaml"
+    ],
+    "file:///Users/fredrick/.vscode/extensions/continue.continue-1.2.22-darwin-arm64/config-yaml-schema.json": [
+      ".continue/**/*.yaml"
     ]
   },
+  "github.copilot.nextEditSuggestions.enabled": false,
+  "workbench.layoutControl.enabled": false,
+  "window.commandCenter": false,
+  "editor.fontWeight": "500",
+  "terminal.integrated.fontSize": 13,
+  "errorLens.fontWeight": "bold",
+  "html.completion.attributeDefaultValue": "singlequotes",
 }
