@@ -39,28 +39,42 @@ fn + ctrl - k : yabai -m window --insert north
 fn + ctrl - l : yabai -m window --insert east
 
 ## Window - Navigate - Change current workspace
-fn - 1 : skhd -k "shift + ctrl + alt + cmd - 1"; yabai -m display --focus $(yabai -m query --displays --space 1 | jq '.index')
-fn - 2 : skhd -k "shift + ctrl + alt + cmd - 2"; yabai -m display --focus $(yabai -m query --displays --space 2 | jq '.index')
-fn - 3 : skhd -k "shift + ctrl + alt + cmd - 3"; yabai -m display --focus $(yabai -m query --displays --space 3 | jq '.index')
-fn - 4 : skhd -k "shift + ctrl + alt + cmd - 4"; yabai -m display --focus $(yabai -m query --displays --space 4 | jq '.index')
-fn - 5 : skhd -k "shift + ctrl + alt + cmd - 5"; yabai -m display --focus $(yabai -m query --displays --space 5 | jq '.index')
-fn - 6 : skhd -k "shift + ctrl + alt + cmd - 6"; yabai -m display --focus $(yabai -m query --displays --space 6 | jq '.index')
-fn - 7 : skhd -k "shift + ctrl + alt + cmd - 7"; yabai -m display --focus $(yabai -m query --displays --space 7 | jq '.index')
-fn - 8 : skhd -k "shift + ctrl + alt + cmd - 8"; yabai -m display --focus $(yabai -m query --displays --space 8 | jq '.index')
-fn - 9 : skhd -k "shift + ctrl + alt + cmd - 9"; yabai -m display --focus $(yabai -m query --displays --space 9 | jq '.index')
-fn - 0 : skhd -k "shift + ctrl + alt + cmd - 0"; yabai -m display --focus $(yabai -m query --displays --space 0 | jq '.index')
+fn - 1 : /Applications/InstantSpaceSwitcher.app/Contents/MacOS/ISSCli index 1; yabai -m display --focus $(yabai -m query --displays --space 1 | jq '.index')
+fn - 2 : /Applications/InstantSpaceSwitcher.app/Contents/MacOS/ISSCli index 2; yabai -m display --focus $(yabai -m query --displays --space 2 | jq '.index')
+fn - 3 : /Applications/InstantSpaceSwitcher.app/Contents/MacOS/ISSCli index 3; yabai -m display --focus $(yabai -m query --displays --space 3 | jq '.index')
+fn - 4 : /Applications/InstantSpaceSwitcher.app/Contents/MacOS/ISSCli index 4; yabai -m display --focus $(yabai -m query --displays --space 4 | jq '.index')
+fn - 5 : /Applications/InstantSpaceSwitcher.app/Contents/MacOS/ISSCli index 5; yabai -m display --focus $(yabai -m query --displays --space 5 | jq '.index')
+fn - 6 : /Applications/InstantSpaceSwitcher.app/Contents/MacOS/ISSCli index 6; yabai -m display --focus $(yabai -m query --displays --space 6 | jq '.index')
+fn - 7 : /Applications/InstantSpaceSwitcher.app/Contents/MacOS/ISSCli index 7; yabai -m display --focus $(yabai -m query --displays --space 7 | jq '.index')
+fn - 8 : /Applications/InstantSpaceSwitcher.app/Contents/MacOS/ISSCli index 8; yabai -m display --focus $(yabai -m query --displays --space 8 | jq '.index')
+fn - 9 : /Applications/InstantSpaceSwitcher.app/Contents/MacOS/ISSCli index 9; yabai -m display --focus $(yabai -m query --displays --space 9 | jq '.index')
+fn - 0 : /Applications/InstantSpaceSwitcher.app/Contents/MacOS/ISSCli index 10; yabai -m display --focus $(yabai -m query --displays --space 0 | jq '.index')
 
+### todo: fallback when InstantSpaceSwitcher inevitably breaks
+## Window - Navigate - Change current workspace
+# fn - 1 : skhd -k "shift + ctrl + alt + cmd - 1"; yabai -m display --focus $(yabai -m query --displays --space 1 | jq '.index')
+# fn - 2 : skhd -k "shift + ctrl + alt + cmd - 2"; yabai -m display --focus $(yabai -m query --displays --space 2 | jq '.index')
+# fn - 3 : skhd -k "shift + ctrl + alt + cmd - 3"; yabai -m display --focus $(yabai -m query --displays --space 3 | jq '.index')
+# fn - 4 : skhd -k "shift + ctrl + alt + cmd - 4"; yabai -m display --focus $(yabai -m query --displays --space 4 | jq '.index')
+# fn - 5 : skhd -k "shift + ctrl + alt + cmd - 5"; yabai -m display --focus $(yabai -m query --displays --space 5 | jq '.index')
+# fn - 6 : skhd -k "shift + ctrl + alt + cmd - 6"; yabai -m display --focus $(yabai -m query --displays --space 6 | jq '.index')
+# fn - 7 : skhd -k "shift + ctrl + alt + cmd - 7"; yabai -m display --focus $(yabai -m query --displays --space 7 | jq '.index')
+# fn - 8 : skhd -k "shift + ctrl + alt + cmd - 8"; yabai -m display --focus $(yabai -m query --displays --space 8 | jq '.index')
+# fn - 9 : skhd -k "shift + ctrl + alt + cmd - 9"; yabai -m display --focus $(yabai -m query --displays --space 9 | jq '.index')
+# fn - 0 : skhd -k "shift + ctrl + alt + cmd - 0"; yabai -m display --focus $(yabai -m query --displays --space 0 | jq '.index')
+
+### todo: Broken due to Apple locked down API
 ## Window - Navigate - Move focused window to workspace
-fn + shift - 1 : yabai -m window --space 1
-fn + shift - 2 : yabai -m window --space 2
-fn + shift - 3 : yabai -m window --space 3
-fn + shift - 4 : yabai -m window --space 4
-fn + shift - 5 : yabai -m window --space 5
-fn + shift - 6 : yabai -m window --space 6
-fn + shift - 7 : yabai -m window --space 7
-fn + shift - 8 : yabai -m window --space 8
-fn + shift - 9 : yabai -m window --space 9
-fn + shift - 0 : yabai -m window --space 10
+# fn + shift - 1 : yabai -m window --space 1
+# fn + shift - 2 : yabai -m window --space 2
+# fn + shift - 3 : yabai -m window --space 3
+# fn + shift - 4 : yabai -m window --space 4
+# fn + shift - 5 : yabai -m window --space 5
+# fn + shift - 6 : yabai -m window --space 6
+# fn + shift - 7 : yabai -m window --space 7
+# fn + shift - 8 : yabai -m window --space 8
+# fn + shift - 9 : yabai -m window --space 9
+# fn + shift - 0 : yabai -m window --space 10
 
 # # mirror tree y-axis
 # alt + shift - y : yabai -m space --mirror y-axis

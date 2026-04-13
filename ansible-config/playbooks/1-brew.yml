@@ -18,6 +18,7 @@
         name:
           - FelixKratz/formulae # borders, https://github.com/FelixKratz/JankyBorders
           - asmvik/formulae # yabai, skhd, https://github.com/asmvik/yabai, https://github.com/asmvik/skhd
+          - jurplel/tap # instant-space-switcher
 
     ###########
     ## Brews ##
@@ -36,6 +37,7 @@
           - direnv
           - docker
           - docker-buildx
+          - docker-credential-helper
           - ed
           - fd
           - findutils
@@ -101,6 +103,8 @@
           - firefox
           - font-fira-code-nerd-font
           - font-fira-mono-nerd-font
+          - font-atkinson-hyperlegible
+          - instant-space-switcher
           - obsidian
           - podman-desktop
           - stats
