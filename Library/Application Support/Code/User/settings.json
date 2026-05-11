@@ -104,9 +104,9 @@
   "window.autoDetectColorScheme": true,
   "window.autoDetectHighContrast": false,
   "workbench.preferredLightColorTheme": "Catppuccin Latte",
-  "workbench.preferredDarkColorTheme": "Catppuccin Mocha",
-  // "github-enterprise.uri": "https://dnb.ghe.com",
-  // "github.copilot.advanced.authProvider": "github-enterprise",
+  "workbench.preferredDarkColorTheme": "Catppuccin Macchiato",
+  "github-enterprise.uri": "https://dnb.ghe.com",
+  "github.copilot.advanced.authProvider": "github-enterprise",
   "[yaml]": {
     "editor.defaultFormatter": "redhat.vscode-yaml"
   },
@@ -126,4 +126,18 @@
   "terminal.integrated.fontSize": 13,
   "errorLens.fontWeight": "bold",
   "html.completion.attributeDefaultValue": "singlequotes",
+  "azureTerraform.survey": {
+    "surveyPromptDate": "never",
+    "surveyPromptIgnoredCount": 0
+  },
+  "vim.statusBarColorControl": true,
+  "workbench.colorCustomizations": {
+    "statusBar.background": "#005f5f",
+    "statusBar.noFolderBackground": "#005f5f",
+    "statusBar.debuggingBackground": "#005f5f",
+    "statusBar.foreground": "#ffffff",
+    "statusBar.debuggingForeground": "#ffffff"
+  },
+  "chat.viewSessions.orientation": "stacked",
+  "continue.enableTabAutocomplete": false,
 }
