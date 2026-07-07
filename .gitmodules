@@ -10,9 +10,6 @@
 [submodule ".zsh_custom/plugins/fzf-tab"]
 	path = .zsh_custom/plugins/fzf-tab
 	url = https://github.com/Aloxaf/fzf-tab
-[submodule ".zsh_custom/plugins/zsh-direnv"]
-	path = .zsh_custom/plugins/zsh-direnv
-	url = https://github.com/ptavares/zsh-direnv
 [submodule ".zsh_custom/plugins/zsh-history-substring-search"]
 	path = .zsh_custom/plugins/zsh-history-substring-search
 	url = https://github.com/zsh-users/zsh-history-substring-search

@@ -37,10 +37,10 @@ end)
 
 local config = {
 	automatically_reload_config = true,
-  default_cwd = wezterm.home_dir .. "/SCM",
-  font = wezterm.font("FiraMono Nerd Font", { weight = "Medium" }),
+	default_cwd = wezterm.home_dir .. "/SCM",
+	font = wezterm.font("FiraMono Nerd Font", { weight = "Medium" }),
 	font_size = 13,
-  freetype_load_target = "Normal",
+	freetype_load_target = "Normal",
 	enable_tab_bar = false,
 	audible_bell = "Disabled",
 	window_decorations = "RESIZE|MACOS_FORCE_DISABLE_SHADOW",
@@ -60,6 +60,7 @@ local config = {
 		bottom = "0.5cell",
 	},
 	front_end = "WebGpu",
+	use_resize_increments = true,
 	webgpu_power_preference = "LowPower",
 }
 

@@ -1,0 +1,7 @@
+theme = dark:Catppuccin Mocha,light:Catppuccin Latte
+font-family = "FiraMono Nerd Font"
+font-size = 14
+window-decoration = none
+macos-option-as-alt = left
+keybind = cmd+w=close_window
+quit-after-last-window-closed = true

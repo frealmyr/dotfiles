@@ -139,5 +139,27 @@
     "statusBar.debuggingForeground": "#ffffff"
   },
   "chat.viewSessions.orientation": "stacked",
+
   "continue.enableTabAutocomplete": false,
+  "ollama.models": [
+    {
+      "name": "gemma4:e4b-nvfp4",
+      "model": "gemma4:e4b-nvfp4",
+      "title": "Gemma 4 E4B"
+    },
+    {
+      "name": "gemma4:e2b-nvfp4",
+      "model": "gemma4:e2b-nvfp4",
+      "title": "Gemma 4 E2B"
+    },
+    {
+      "name": "qwen3.6:27b-coding-nvfp4",
+      "model": "qwen3.6:27b-coding-nvfp4",
+      "title": "Qwen 3.6 27B Coding"
+    }
+  ],
+  "[plaintext]": {
+    "editor.unicodeHighlight.ambiguousCharacters": false,
+    "editor.unicodeHighlight.invisibleCharacters": false
+  },
 }

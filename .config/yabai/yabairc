@@ -64,6 +64,10 @@ yabai -m rule --add app='^Calendar$' manage=off
 #yabai -m rule --add app="^RimWorld by Ludeon Studios$" manage=off
 yabai -m rule --add app="^Scratchpad$" manage=off
 yabai -m rule --add app="^Ryujinx$" manage=off
+yabai -m rule --add app="^Zscaler$" --move abs:10000:0
+
+## Drop Down Terminal
+yabai -m rule --add app="Ghostty" title="ddterm" manage=off grid="10:1:0:0:1:4"
 
 ###################
 ## Event Exports ##
