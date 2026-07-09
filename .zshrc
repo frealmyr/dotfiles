@@ -30,6 +30,11 @@ source ~/.zsh_custom/plugins/zsh-you-should-use/zsh-you-should-use.plugin.zsh
 source ~/.zsh_custom/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
 source ~/.zsh_custom/plugins/fast-syntax-highlighting/fast-syntax-highlighting.plugin.zsh
 
+
+# Set zsh into emacs mode, for interpreting escape codes correctely
+# this fixes opt/cmd + arrow keybindings on macos
+bindkey -e
+
 # HISTORY
 export HISTSIZE=5000000
 export SAVEHIST=$HISTSIZE
