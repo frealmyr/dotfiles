@@ -1,0 +1,15 @@
+[bootstrap.hooks.pre-packages]
+run = '''
+[[ "$(uname)" != "Darwin" || -e /Library/Apple/usr/libexec/oah/libRosettaRuntime ]] || sudo softwareupdate --install-rosetta --agree-to-license
+'''
+
+[bootstrap.hooks.post-defaults]
+run = '''
+sudo nvram SystemAudioVolume=" "
+'''
+
+[bootstrap.files."/etc/pam.d/sudo_local"]
+content = "auth       sufficient     pam_tid.so\n"
+owner = "root"
+group = "wheel"
+mode = "0644"

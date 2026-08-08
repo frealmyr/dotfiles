@@ -1,0 +1,4 @@
+# [bootstrap.macos.launchd.agents.my-sync]
+# program = "~/.local/bin/my-sync"
+# args = ["--watch"]
+# run_at_load = true

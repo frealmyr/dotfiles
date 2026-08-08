@@ -1,0 +1,205 @@
+[bootstrap.macos.defaults]
+"NSGlobalDomain" = {
+  NSAutomaticWindowAnimationsEnabled = false,
+  NSUseAnimatedFocusRing = false,
+   "com.apple.springing.enabled" = true,
+   "com.apple.springing.delay" = 0.0,
+  NSScrollAnimationEnabled = false,
+  NSWindowResizeTime = 0.0, # Speed of window resizing.
+     # Display
+  AppleFontSmoothing = 0, # disable subpixel-rendering, more accurate and less bold fonts. Better for "non-retina" displays, as it does not blur pixels. https://www.fontsmoothingadjuster.com/
+     # Sound
+    "com.apple.sound.beep.flash" = 0,
+    "com.apple.sound.beep.feedback" = 0,
+    "com.apple.sound.beep.volume" = 0.0,
+     # Input
+    "AppleMiniaturizeOnDoubleClick" = false,
+    "ApplePressAndHoldEnabled" = false,
+    "InitialKeyRepeat" = 15,
+    "KeyRepeat" = 3,
+    "AppleKeyboardUIMod" = 3, # use keyboard for all things ui, e.g. use tab in modal dialogs
+    "NSAutomaticCapitalizationEnabled" = false,
+    "NSAutomaticDashSubstitutionEnabled" = false,
+    "NSAutomaticPeriodSubstitutionEnabled" = false,
+    "NSAutomaticInlinePredictionEnabled" = false,
+    "NSAutomaticQuoteSubstitutionEnabled" = false,
+    "NSAutomaticSpellingCorrectionEnabled" = false,
+    "com.apple.keyboard.fnState" = true, # Use F1, F2, etc. keys as top-row on Apple keyboards
+    "com.apple.mouse.tapBehavior" = 1, # Enable tap-to-click for trackpad.
+    "com.apple.trackpad.forceClick" = false,
+    "com.apple.trackpad.scaling" = 1.50,
+    "AppleKeyboardUIMode" = 3, # Enables keyboard control on prompts/windows.
+    "AppleScrollerPagingBehavior" = true, # Enables click to jump on scrollbars.
+    "NSWindowShouldDragOnGesture" = true, # Enable moving windows by holding it anywhere like on Linux.
+     # GUI
+    "AppleReduceDesktopTinting" = true,
+    "AppleAccentColor" = 5,
+    "AppleShowAllExtensions" = true,
+    "AppleShowAllFiles" = true,
+    "AppleShowScrollBars" = "Always",
+    "AppleSpacesSwitchOnActivate" = false,
+    "NSTableViewDefaultSizeMode" = 1, # sidebar small icon size
+    "NSNavPanelExpandedStateForSaveMode" = true,
+    "NSNavPanelExpandedStateForSaveMode2" = true,
+    "AppleHighlightColor" = "0.968627 0.831373 1.000000 Purple",
+    "NSStatusItemSelectionPadding" = 4, # Padding around menu bar icons
+    "NSStatusItemSpacing" = 2, # Menu bar item padding
+    "PMPrintingExpandedStateForPrint" = true,
+    "PMPrintingExpandedStateForPrint2" = true,
+}
+
+"com.apple.AppleMultitouchTrackpad" = {
+  Clicking = 1, # enable tap to click
+  ActuationStrength = 0, # less vibration pls
+  FirstClickThreshold = 0, # 0 light, 1 medium, 2 firm.
+  SecondClickThreshold = 0, # 0 light, 1 medium, 2 firm.
+  TrackpadFourFingerPinchGesture = 0,
+  TrackpadPinch = 0,
+  TrackpadRightClick = true, # enable two finger right click
+  TrackpadThreeFingerTapGesture = 0,
+  TrackpadTwoFingerDoubleTapGesture = 0,
+}
+
+"com.apple.WindowManager" = {
+  AutoHide = false, # Disable recent apps.
+  EnableStandardClickToShowDesktop = false, # Disable dumb click on desktop to hide all windows gesture.
+  StandardHideDesktopIcons = true, # Hide icons on desktop, so that I can clutter it as much as I want.
+  StandardHideWidgets = true, # No need for widgets.
+  EnableTiledWindowMargins = false, # Disable MacOS provided margins for screen edges, we can configure that ourselfs thank you.
+}
+
+"com.apple.screensaver" = {
+  askForPassword = 1,
+  askForPasswordDelay = 0,
+}
+
+"com.apple.menuextra" = {
+  battery = "YES"
+}
+
+"com.apple.screencapture" = {
+  location = "~/Desktop",
+  type = "png",
+  disable-shadow = true,
+  show-thumbnail = false, # Disable popup in lower left corner after screencapture.
+  target = "clipboard" # Always default screencapture to clipboard on startup.
+}
+
+"com.apple.universalaccess" = {
+  increaseContrast = true,
+  reduceTransparency = true,
+  reduceMotion = true,
+}
+
+"com.apple.desktopservices" = {
+  DSDontWriteNetworkStores = true, # Disable .DS_Store for Network Shares.
+  DSDontWriteUSBStores = true, # Disable .DS_Store for USB devices.
+}
+
+"com.apple.ImageCapture" = {
+  disableHotPlug = true
+}
+
+"com.apple.TimeMachine" = {
+  DoNotOfferNewDisksForBackup = true
+}
+
+"com.apple.print" = {
+   "PrintingPrefs.Quit When Finished" = true
+}
+
+"com.apple.AdLib" = {
+  allowApplePersonalizedAdvertising = false,
+  allowIdentifierForAdvertising = false
+}
+
+"com.apple.mail" = {
+  AddressesIncludeNameOnPasteboard = false # copy addresses as `foo@example.com` instead of `Foo Bar <foo@example.com>`
+}
+
+"com.apple.dashboard" = {
+  mcx-disabled = true # disable dashboard for some more ram
+}
+
+"com.apple.SoftwareUpdate" = {
+  AutomaticCheckEnabled = true,
+  ScheduleFrequency = 1,
+  AutomaticDownload = 1,
+  CriticalUpdateInstall = 1,
+}
+
+"com.apple.commerce" = {
+  AutoUpdate = true # Turn on store app auto-update
+}
+
+"com.apple.finder" = {
+  "QuitMenuItem" = true, # allow quitting via ⌘ + Q
+  "NewWindowTarget" = "PfHm",
+  "NewWindowTargetPath" = "file://${HOME}/",
+  # GUI
+  "_FXEnableColumnAutoSizing" = true,
+  "AppleShowAllExtensions" = true,
+  "CreateDesktop" = false, # Hide desktop icons
+  "DisableAllAnimations" = true,
+  "FXRemoveOldTrashItems" = true, # Remove trashed items after 30 days
+  "ShowPathbar" = true,
+  "ShowStatusBar" = false,
+  "_FXShowPosixPathInTitle" = true,
+  "_FXSortFoldersFirst" = true,
+  "FXDefaultSearchScope" = "SCcf", # search folder by default
+  "FXEnableExtensionChangeWarning" = false,
+  "FXPreferredViewStyle" = "Nlsv", # list view by default
+  "WarnOnEmptyTrash" = false,
+  # Desktop Icons
+  "ShowExternalHardDrivesOnDesktop" = false,
+  "ShowHardDrivesOnDesktop" = false,
+  "ShowMountedServersOnDesktop" = false,
+  "ShowRemovableMediaOnDesktop" = false,
+}
+
+"com.apple.dock" = {
+  "autohide" = true,
+  "autohide-delay" = 0.0,
+  "autohide-time-modifier" = 0.0,
+  "expose-animation-duration" = 0.0, # open mission control animation
+  "launchanim" = false, # Disable launch animations
+  "mru-spaces" = false, # do not reorder Spaces based on recent use
+  "orientation" = "bottom",
+  "persistent-apps" = "",
+  "persistent-others" = "",
+  "show-process-indicators" = false, # No need, as static-on is set.
+  "show-recents" = false,
+  "static-only" = true, # only display apps that are currently running
+  "tilesize" = 48,
+  "wvous-bl-corner" = 1,
+  "wvous-br-corner" = 1,
+  "wvous-tl-corner" = 1,
+  "wvous-tr-corner" = 1, # disable hot corner
+}
+
+"com.apple.controlcenter" = {
+  "AirDrop" = false,
+  "BatteryShowPercentage" = true,
+  "Bluetooth" = true,
+  "Display" = false,
+  "NowPlaying" = true,
+  "Sound" = true,
+}
+
+"com.apple.HIToolbox" = {
+  "AppleFnUsageType" = 0, # Globe key does nothing by default
+}
+
+"com.apple.loginwindow" = {
+  "GuestEnabled" = false,
+  "SHOWFULLNAME" = false,
+}
+
+"com.apple.menuextra.clock" = {
+  "ShowDate" = 2, # 0=whenspace,1=always,2=never
+  "ShowDayOfWeek" = false,
+}
+
+"com.apple.spaces" = {
+  "spans-displays" = false, # Displays have separate spaces
+}

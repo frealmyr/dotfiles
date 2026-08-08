@@ -1,0 +1,61 @@
+[bootstrap.brew.taps]
+"FelixKratz/formulae" = "https://github.com/FelixKratz/homebrew-formulae.git" # borders
+"asmvik/formulae" = "https://github.com/asmvik/homebrew-formulae.git" # yabai, skhd
+
+[bootstrap.packages]
+"brew:asmvik/formulae/skhd" = "latest"
+"brew:asmvik/formulae/yabai" = "latest"
+"brew:bat" = "latest"
+"brew:blueutil" = "latest"
+"brew:borders" = "latest"
+"brew:btop" = "latest"
+"brew:cloc" = "latest"
+"brew:coreutils" = "latest"
+"brew:curl" = "latest"
+"brew:direnv" = "latest"
+"brew:docker-buildx" = "latest"
+"brew:docker-credential-helper" = "latest"
+"brew:docker" = "latest"
+"brew:ed" = "latest"
+"brew:exiftool" = "latest"
+"brew:fastfetch" = "latest"
+"brew:fd" = "latest"
+"brew:FelixKratz/formulae/borders" = "latest"
+"brew:findutils" = "latest"
+"brew:fzf" = "latest"
+"brew:gawk" = "latest"
+"brew:git-delta" = "latest"
+"brew:git" = "latest"
+"brew:gnu-sed" = "latest"
+"brew:gnu-tar" = "latest"
+"brew:gnupg" = "latest"
+"brew:gnuplot" = "latest"
+"brew:grep" = "latest"
+"brew:htop" = "latest"
+"brew:jq" = "latest"
+"brew:kind" = "latest"
+"brew:less" = "latest"
+"brew:make" = "latest"
+"brew:mise" = "latest"
+"brew:neovim" = "latest"
+"brew:osx-cpu-temp" = "latest" # dependency for btop
+"brew:parallel" = "latest"
+"brew:pinentry-mac" = "latest" # dependency for gnupg
+"brew:skhd" = "latest"
+"brew:sleepwatcher" = "latest"
+"brew:tree" = "latest"
+"brew:vim" = "latest"
+"brew:watch" = "latest"
+"brew:wget" = "latest"
+"brew:xz" = "latest"
+"brew:yabai" = "latest"
+"brew:yq" = "latest"
+"brew:zoxide" = "latest"
+"brew:zsh" = "latest"
+
+[bootstrap.hooks.post-packages]
+run = '''
+brew services start sleepwatcher
+yabai --start-service
+skhd --start-service
+'''
