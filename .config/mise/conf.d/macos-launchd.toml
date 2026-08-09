@@ -1,4 +1,23 @@
-# [bootstrap.macos.launchd.agents.my-sync]
-# program = "~/.local/bin/my-sync"
-# args = ["--watch"]
-# run_at_load = true
+[bootstrap.macos.launchd.agents.yabai-indicator]
+program = "~/.local/share/mise/installs/github-xiamaz-yabai-indicator/latest/YabaiIndicator.app/Contents/MacOS/YabaiIndicatorc"
+keep_alive = true
+run_at_load = true
+stdout_path = "/tmp/yabai_indicator.out.log"
+stderr_path = "/tmp/yabai_indicator.err.log"
+
+[bootstrap.macos.launchd.agents.ollama]
+program = "/opt/homebrew/bin/ollama"
+args = ["serve"]
+environment = { OLLAMA_ORIGINS = "moz-extension://*,chrome-extension://*,safari-web-extension://*" }
+keep_alive = true
+run_at_load = true
+stdout_path = "/tmp/ollama.log"
+stderr_path = "/tmp/ollama.err"
+
+[bootstrap.macos.launchd.agents.streaming-check]
+program = "~/bin/streamingcheck.sh"
+keep_alive = true
+run_at_load = true
+start_interval = 300
+stdout_path = "/tmp/streamingcheck.out.log"
+stderr_path = "/tmp/streamingcheck.err.log"
