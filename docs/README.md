@@ -1,5 +1,5 @@
 <div align="center">
-    <img src="https://fmlab.no/assets/images/typing-anime.gif" width="240px"/>
+    <img src="https://blog.fmlab.no/typing-anime.gif" width="240px"/>
     <h1>dotfiles 💙</h1>
 </div>
 
@@ -14,7 +14,7 @@ dtf checkout
 
 #### Use Mise to configure MacOS
 
-> Grant Terminal Full Disk Access first, to allow changes to `defaults` command.
+> Grant Terminal Full Disk Access first, for allow changes with the `defaults` command.
 
 ```bash
 curl https://mise.run | sh
