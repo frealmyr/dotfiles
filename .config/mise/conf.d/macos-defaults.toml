@@ -6,13 +6,13 @@
    "com.apple.springing.delay" = 0.0,
   NSScrollAnimationEnabled = false,
   NSWindowResizeTime = 0.0, # Speed of window resizing.
-     # Display
+# Display
   AppleFontSmoothing = 0, # disable subpixel-rendering, more accurate and less bold fonts. Better for "non-retina" displays, as it does not blur pixels. https://www.fontsmoothingadjuster.com/
-     # Sound
+# Sound
     "com.apple.sound.beep.flash" = 0,
     "com.apple.sound.beep.feedback" = 0,
     "com.apple.sound.beep.volume" = 0.0,
-     # Input
+# Input
     "AppleMiniaturizeOnDoubleClick" = false,
     "ApplePressAndHoldEnabled" = false,
     "InitialKeyRepeat" = 15,
@@ -31,7 +31,7 @@
     "AppleKeyboardUIMode" = 3, # Enables keyboard control on prompts/windows.
     "AppleScrollerPagingBehavior" = true, # Enables click to jump on scrollbars.
     "NSWindowShouldDragOnGesture" = true, # Enable moving windows by holding it anywhere like on Linux.
-     # GUI
+# GUI
     "AppleReduceDesktopTinting" = true,
     "AppleAccentColor" = 5,
     "AppleShowAllExtensions" = true,
@@ -105,7 +105,7 @@
 }
 
 "com.apple.print" = {
-   "PrintingPrefs.Quit When Finished" = true
+  "PrintingPrefs.Quit When Finished" = true
 }
 
 "com.apple.AdLib" = {
@@ -136,7 +136,7 @@
   "QuitMenuItem" = true, # allow quitting via ⌘ + Q
   "NewWindowTarget" = "PfHm",
   "NewWindowTargetPath" = "file://${HOME}/",
-  # GUI
+# GUI
   "_FXEnableColumnAutoSizing" = true,
   "AppleShowAllExtensions" = true,
   "CreateDesktop" = false, # Hide desktop icons
@@ -150,7 +150,7 @@
   "FXEnableExtensionChangeWarning" = false,
   "FXPreferredViewStyle" = "Nlsv", # list view by default
   "WarnOnEmptyTrash" = false,
-  # Desktop Icons
+# Desktop Icons
   "ShowExternalHardDrivesOnDesktop" = false,
   "ShowHardDrivesOnDesktop" = false,
   "ShowMountedServersOnDesktop" = false,
