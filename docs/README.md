@@ -10,6 +10,7 @@ git clone --bare https://github.com/frealmyr/dotfiles.git $HOME/.dotfiles
 alias dtf='git --git-dir=$HOME/.dotfiles/ --work-tree=$HOME'
 dtf config --local status.showUntrackedFiles no
 dtf checkout
+dtf submodule update --init --recursive
 ```
 
 #### Use Mise to configure MacOS
@@ -41,4 +42,11 @@ Add untracked files directly
 
 ```bash
 dtf add ./config/newapp
+```
+
+If you want to pull changes instead
+
+```bash
+dtf pull
+dtf submodule update --init --recursive
 ```
