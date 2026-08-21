@@ -1,0 +1,13 @@
+{
+  "provider": ["exa", "duckduckgo"],
+  "fetchRouting": {
+    "providers": ["http"]
+  },
+  "workflow": "auto-summary",
+  "summaryGenerationDeadlineMs": 128000,
+  "githubClone": {
+    "enabled": true
+  },
+  "summaryModel": "ollama/gemma4:e4b-nvfp4:minimal"
+}
+

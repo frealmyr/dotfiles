@@ -1,0 +1,58 @@
+{
+  "default": "ollama/qwen3.6:27b-nvfp4",
+  "providers": {
+    "ollama": {
+      "api": "openai-completions",
+      "apiKey": "ollama",
+      "baseUrl": "http://127.0.0.1:11434/v1",
+      "models": [
+        {
+          "_launch": true,
+          "id": "qwen3.8:27b-nvfp4",
+          "input": [
+            "text",
+            "image"
+          ],
+          "samplingParams": {
+            "temperature": 1.0,
+            "top_p": 0.95,
+            "top_k": 20,
+            "min_p": 0.0
+          },
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "minimal": null,
+            "low": "low",
+            "medium": "medium",
+            "high": null,
+            "xhigh": "high",
+            "max": null
+          }
+        },
+        {
+          "_launch": true,
+          "id": "gemma4:e4b-nvfp4",
+          "input": [
+            "text",
+            "image"
+          ],
+          "samplingParams": {
+            "temperature": 1.0,
+            "top_p": 0.95,
+            "top_k": 64,
+            "min_p": 0.0
+          },
+          "reasoning": true,
+          "thinkingLevelMap": {
+            "MINIMAL": "minimal",
+            "low": null,
+            "medium": "medium",
+            "HIGH": "high",
+            "xhigh": null,
+            "max": null
+          }
+        }
+      ]
+    }
+  }
+}

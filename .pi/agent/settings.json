@@ -1,0 +1,23 @@
+{
+  "retry": {
+    "enabled": true,
+    "maxRetries": 3,
+    "baseDelayMs": 2000,
+    "provider": {
+      "timeoutMs": 86400000,
+      "maxRetries": 0,
+      "maxRetryDelayMs": 60000
+    }
+  },
+  "httpIdleTimeoutMs": 0,
+  "defaultModel": "qwen3.8:27b-nvfp4",
+  "defaultProvider": "ollama",
+  "defaultThinkingLevel": "low",
+  "lastChangelogVersion": "0.84.2",
+  "packages": [
+    "npm:@juicesharp/rpiv-ask-user-question",
+    "npm:pi-web-access",
+    "npm:pi-coding-agent"
+  ],
+  "theme": "light"
+}
